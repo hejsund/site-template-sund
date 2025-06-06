@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -29,7 +28,7 @@ export const Hero = () => {
 
         <div className="relative z-10">
           {/* Main heading */}
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 text-gradient leading-tight-heading font-display">
+          <h1 className="text-6xl md:text-8xl font-black mb-8 text-gradient leading-tight-heading font-display">
             Sommarboosten 2025
           </h1>
           
