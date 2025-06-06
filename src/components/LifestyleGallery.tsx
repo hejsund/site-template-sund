@@ -62,12 +62,12 @@ export const LifestyleGallery = () => {
   return (
     <section className="py-16 sm:py-20 md:py-24 px-3 sm:px-4 bg-gradient-to-br from-green-50 via-white to-green-100">
       <div className="max-w-7xl mx-auto">
-        {/* Mobile-optimized header with better contrast */}
+        {/* Mobile-optimized header with better contrast and fixed text clipping */}
         <div className="text-center mb-12 sm:mb-16 md:mb-20">
           <div className="inline-block bg-primary/10 text-primary px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-6">
             ✨ Så här kan din sommar se ut
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 md:mb-8 text-gradient leading-[1.1] font-display px-2">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 md:mb-8 text-gradient leading-[1.3] font-display px-2 py-2">
             Äkta ögonblick från vardagen
           </h2>
           <p className="text-base sm:text-lg md:text-2xl text-foreground/70 max-w-4xl mx-auto leading-relaxed font-text px-2">
