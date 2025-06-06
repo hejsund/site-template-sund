@@ -18,11 +18,11 @@ const AboutSommarboostenPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
+    <div className="min-h-screen bg-gradient-to-br from-coral-50 via-orange-50 to-purple-50">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 md:py-24 px-3 sm:px-4 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-coral/10 via-purple/5 to-orange/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-coral/20 via-purple/10 to-orange/20"></div>
           <Sun className="absolute top-10 right-10 text-orange opacity-20 animate-float" size={60} />
           <Heart className="absolute top-20 left-10 text-coral opacity-20 animate-float" size={40} style={{ animationDelay: '1s' }} />
           <Sparkles className="absolute bottom-20 right-20 text-purple opacity-20 animate-float" size={50} style={{ animationDelay: '2s' }} />
@@ -61,7 +61,7 @@ const AboutSommarboostenPage = () => {
               </p>
               <div className="bg-coral/10 border-l-4 border-coral p-4 rounded-lg">
                 <p className="text-sm sm:text-base text-coral font-medium font-text">
-                  ✨ "Det handlar inte om perfektion – det handlar om att hitta din egen väg till välmående."
+                  ✨ "Som fyrbarnsmamma med 15 års erfarenhet av att hjälpa familjer hitta balans, vet jag vad som fungerar i verkligheten - inte bara i teorin."
                 </p>
               </div>
             </div>
@@ -76,7 +76,7 @@ const AboutSommarboostenPage = () => {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gradient-to-br from-green-100 to-green-200 border border-green-300 p-6 rounded-2xl shadow-md">
+                <div className="bg-gradient-to-br from-green-200 to-emerald-300 border border-green-400 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
                     <Dumbbell className="text-green-800 w-6 h-6" />
                     <h3 className="text-lg font-bold text-green-800 font-display">Träning som inspirerar</h3>
@@ -87,7 +87,7 @@ const AboutSommarboostenPage = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-coral/20 to-coral/30 border border-coral/40 p-6 rounded-2xl shadow-md">
+                <div className="bg-gradient-to-br from-coral-200 to-orange-300 border border-coral-400 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
                     <Apple className="text-coral-dark w-6 h-6" />
                     <h3 className="text-lg font-bold text-coral-dark font-display">Supergoda recept</h3>
@@ -98,7 +98,7 @@ const AboutSommarboostenPage = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple/20 to-purple/30 border border-purple/40 p-6 rounded-2xl shadow-md">
+                <div className="bg-gradient-to-br from-purple-200 to-pink-300 border border-purple-400 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
                     <Users className="text-purple-contrast w-6 h-6" />
                     <h3 className="text-lg font-bold text-purple font-display">Gemenskap & stöd</h3>
@@ -109,7 +109,7 @@ const AboutSommarboostenPage = () => {
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-orange/20 to-orange/30 border border-orange/40 p-6 rounded-2xl shadow-md">
+                <div className="bg-gradient-to-br from-orange-200 to-yellow-300 border border-orange-400 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
                     <Heart className="text-orange w-6 h-6" />
                     <h3 className="text-lg font-bold text-orange font-display">Personlig coaching</h3>
@@ -130,7 +130,7 @@ const AboutSommarboostenPage = () => {
                   Vår filosofi
                 </h2>
               </div>
-              <div className="bg-gradient-to-r from-coral/5 via-purple/5 to-orange/5 p-6 sm:p-8 rounded-2xl border border-coral/20">
+              <div className="bg-gradient-to-r from-coral/10 via-purple/10 to-orange/15 p-6 sm:p-8 rounded-2xl border border-coral/30">
                 <p className="text-base sm:text-lg text-green-700 leading-relaxed font-text mb-6">
                   Vi tror på att hälsa ska vara lustfyllt, inte krångligt. Sommarboosten bygger på enkla, 
                   hållbara vanor som passar in i ditt verkliga liv. Inga extremer, inga omöjliga mål – 
@@ -186,7 +186,7 @@ const AboutSommarboostenPage = () => {
 
             {/* CTA Section */}
             <div className="text-center">
-              <div className="bg-gradient-to-r from-coral via-purple to-orange p-6 sm:p-8 rounded-2xl text-warm-contrast mb-8">
+              <div className="bg-gradient-to-r from-pink-400 via-coral to-orange-400 p-6 sm:p-8 rounded-2xl text-warm-contrast mb-8">
                 <h3 className="text-xl sm:text-2xl font-black mb-4 font-display">
                   Redo att börja din resa? 🌟
                 </h3>

@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Dumbbell, Apple, Target, ArrowRight, Clock, Eye } from 'lucide-react';
+import { Dumbbell, Apple, Target, ArrowRight, Clock, Eye, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ArticlesPage = () => {
@@ -13,9 +13,9 @@ const ArticlesPage = () => {
       icon: Dumbbell,
       image: '/lovable-uploads/b421d335-bc7b-4b5b-8e07-edd16ebbb404.png',
       readTime: '8 min',
-      gradient: 'from-primary/10 to-primary/20',
-      borderColor: 'border-primary/30',
-      iconColor: 'text-primary',
+      gradient: 'from-green-200 via-emerald-300 to-teal-200',
+      borderColor: 'border-green-400',
+      iconColor: 'text-green-700',
       path: '/artiklar/traning'
     },
     {
@@ -26,9 +26,9 @@ const ArticlesPage = () => {
       icon: Apple,
       image: '/lovable-uploads/8860c780-4dbb-4b43-b12f-770483b2f79f.png',
       readTime: '7 min',
-      gradient: 'from-coral/10 to-coral/20',
-      borderColor: 'border-coral/30',
-      iconColor: 'text-coral',
+      gradient: 'from-coral-200 via-orange-300 to-yellow-200',
+      borderColor: 'border-coral-400',
+      iconColor: 'text-coral-dark',
       path: '/artiklar/kost'
     },
     {
@@ -39,19 +39,32 @@ const ArticlesPage = () => {
       icon: Target,
       image: '/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png',
       readTime: '10 min',
-      gradient: 'from-purple/10 to-purple/20',
-      borderColor: 'border-purple/30',
-      iconColor: 'text-purple',
+      gradient: 'from-purple-200 via-pink-300 to-purple-200',
+      borderColor: 'border-purple-400',
+      iconColor: 'text-purple-700',
       path: '/artiklar/vanor'
+    },
+    {
+      id: 'forst',
+      title: 'Vi var först med Sommarboosten',
+      description: 'Upptäck historien bakom det allra första sommarträningsprogrammet i Sverige. En resa från galen idé till branschstandard.',
+      category: 'Historia',
+      icon: Trophy,
+      image: '/lovable-uploads/f60c9ef3-2146-4344-ba07-04c19de24beb.png',
+      readTime: '12 min',
+      gradient: 'from-orange-200 via-amber-300 to-yellow-200',
+      borderColor: 'border-orange-400',
+      iconColor: 'text-orange-700',
+      path: '/artiklar/forst'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-orange-50 to-purple-50">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 md:py-24 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-block bg-primary/10 text-primary px-6 py-3 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-gradient-to-r from-coral to-purple text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
             📖 Kunskap & inspiration
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-gradient mb-6 font-display leading-tight">
@@ -59,7 +72,7 @@ const ArticlesPage = () => {
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-green-700 max-w-4xl mx-auto leading-relaxed font-text mb-8">
             Djupdyk i ämnen som verkligen gör skillnad för din hälsa och ditt välmående. 
-            Evidensbaserade tips blandat med praktisk visdom från verkligheten.
+            Beprövade strategier från 15 års erfarenhet av att hjälpa människor må bättre.
           </p>
           <div className="text-3xl opacity-80">💡✨📚</div>
         </div>
@@ -68,7 +81,7 @@ const ArticlesPage = () => {
       {/* Articles Grid */}
       <section className="py-12 sm:py-16 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {articles.map((article, index) => (
               <article 
                 key={article.id}
@@ -79,7 +92,7 @@ const ArticlesPage = () => {
                   <img 
                     src={article.image} 
                     alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
                 
@@ -127,7 +140,7 @@ const ArticlesPage = () => {
       {/* CTA Section */}
       <section className="py-16 sm:py-20 px-3 sm:px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-r from-coral via-purple to-orange rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center text-warm-contrast shadow-2xl">
+          <div className="bg-gradient-to-r from-pink-400 via-coral to-orange-400 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center text-warm-contrast shadow-2xl">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 font-display">
               Vill du fördjupa dig mer? 🌟
             </h2>
