@@ -117,17 +117,17 @@ export const LifestyleGallery = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
           <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="text-2xl mb-2">🏃‍♀️</div>
-            <div className="text-3xl sm:text-4xl font-bold text-primary mb-2 font-display">15 min</div>
+            <div className="text-3xl sm:text-4xl font-black text-primary mb-2 font-display">15 min</div>
             <p className="text-sm sm:text-base text-foreground/70 font-text">Genomsnittlig träningstid per dag</p>
           </div>
           <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="text-2xl mb-2">🍽️</div>
-            <div className="text-3xl sm:text-4xl font-bold text-primary mb-2 font-display">10 min</div>
-            <p className="text-sm sm:text-base text-foreground/70 font-text">Snabba, enkla recept</p>
+            <div className="text-3xl sm:text-4xl font-black text-primary mb-2 font-display">Från 10 min</div>
+            <p className="text-sm sm:text-base text-foreground/70 font-text">Över 50 snabba, goda och somriga recept!</p>
           </div>
           <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300">
             <div className="text-2xl mb-2">😊</div>
-            <div className="text-3xl sm:text-4xl font-bold text-primary mb-2 font-display">100%</div>
+            <div className="text-3xl sm:text-4xl font-black text-primary mb-2 font-display">100%</div>
             <p className="text-sm sm:text-base text-foreground/70 font-text">Fokus på glädje och välmående</p>
           </div>
         </div>
