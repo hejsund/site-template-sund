@@ -116,9 +116,11 @@ export const Quiz = () => {
     }
 
     if (currentQuestion < questions.length - 1) {
-      setTimeout(() => setCurrentQuestion(currentQuestion + 1), 500);
+      // Reduced delay from 500ms to 150ms for snappier feel
+      setTimeout(() => setCurrentQuestion(currentQuestion + 1), 150);
     } else {
-      setTimeout(() => setShowResult(true), 500);
+      // Reduced delay from 500ms to 200ms
+      setTimeout(() => setShowResult(true), 200);
     }
   };
 
@@ -366,12 +368,12 @@ export const Quiz = () => {
           {questions[currentQuestion].question}
         </h2>
         
-        <div className="space-y-4">
+        <div className="space-y-3">
           {questions[currentQuestion].options.map((option) => (
             <button
               key={option.id}
               onClick={() => handleAnswer(questions[currentQuestion].id, option.id)}
-              className="w-full p-4 text-left bg-green-50 hover:bg-green-100 rounded-xl border border-green-200 hover:border-primary transition-all duration-200 font-text"
+              className="w-full p-4 text-left bg-green-50 hover:bg-green-100 rounded-xl border border-green-200 hover:border-primary transition-all duration-150 font-text hover:shadow-md transform hover:scale-[1.02] active:scale-[0.98]"
             >
               {option.text}
             </button>
