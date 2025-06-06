@@ -1,6 +1,7 @@
+
 import React, { useEffect } from 'react';
-import { ArrowLeft, Target, Calendar, CheckCircle } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Target, Calendar, CheckCircle, Repeat, TrendingUp, Star, Clock } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Footer } from '@/components/Footer';

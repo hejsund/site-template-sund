@@ -1,6 +1,7 @@
+
 import React, { useEffect } from 'react';
-import { ArrowLeft, Trophy, Target, Zap, Users, Clock, Calendar } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Trophy, Target, Zap, Users, Clock, Calendar, Dumbbell, Star, Heart } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
