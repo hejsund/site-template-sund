@@ -56,12 +56,16 @@ export const CharlotteIntro = () => {
               </p>
             </div>
 
-            <div className="bg-green-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border-l-4 border-primary shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.15)] transition-shadow duration-300">
-              <div className="text-lg sm:text-xl mb-2">🌊</div>
-              <p className="text-primary font-medium italic font-text text-sm sm:text-base">
-                "Sommaren handlar om att leva – och Sommarboosten handlar om att du äger dina val."
-              </p>
-              <p className="text-xs sm:text-sm text-green-700 mt-2 font-text">– Charlotte Steinwig</p>
+            <div className="bg-green-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border-l-4 border-primary shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.15)] transition-shadow duration-300 relative">
+              {/* White radius button background for better readability */}
+              <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg"></div>
+              <div className="relative z-10">
+                <div className="text-lg sm:text-xl mb-2">🌊</div>
+                <p className="text-primary font-medium italic font-text text-sm sm:text-base">
+                  "Sommaren handlar om att leva – och Sommarboosten handlar om att du äger dina val."
+                </p>
+                <p className="text-xs sm:text-sm text-green-700 mt-2 font-text">– Charlotte Steinwig</p>
+              </div>
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+
 export const LifestyleGallery = () => {
   const images = [
     {
@@ -75,7 +76,7 @@ export const LifestyleGallery = () => {
           <div className="text-2xl sm:text-3xl mt-4 opacity-80">🌻🌊☀️</div>
         </div>
 
-        {/* Instagram-style square grid with improved hover overlay and text contrast */}
+        {/* Instagram-style square grid with enhanced, snappier hover effects */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-12 sm:mb-16">
           {images.map((image, index) => (
             <div 
@@ -83,10 +84,10 @@ export const LifestyleGallery = () => {
               className="group cursor-pointer animate-fade-in aspect-square"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="relative overflow-hidden rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105 bg-white h-full">
-                <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10 flex items-center gap-1 sm:gap-2">
+              <div className="relative overflow-hidden rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-2xl transition-all duration-200 transform group-hover:scale-110 group-hover:-translate-y-2 bg-white h-full">
+                <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-20 flex items-center gap-1 sm:gap-2 transform group-hover:scale-110 transition-transform duration-200">
                   <span className="text-sm sm:text-lg">{image.summerEmoji}</span>
-                  <span className="bg-white/90 backdrop-blur-sm text-primary px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-semibold">
+                  <span className="bg-white/95 backdrop-blur-sm text-primary px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-semibold shadow-lg">
                     {image.category}
                   </span>
                 </div>
@@ -94,19 +95,22 @@ export const LifestyleGallery = () => {
                 <img 
                   src={image.src} 
                   alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-125"
                 />
                 
-                {/* Enhanced gradient overlay with better opacity and color coverage */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {/* Enhanced gradient overlay with snappier transition */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                 
-                {/* Text content in semi-transparent button-style container */}
-                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 sm:p-3 shadow-lg">
+                {/* Text content with snappier animation */}
+                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-200 ease-out">
+                  <div className="bg-white/98 backdrop-blur-sm rounded-lg p-2 sm:p-3 shadow-2xl border border-white/20">
                     <h3 className="font-black text-xs sm:text-sm mb-1 font-display leading-tight text-green-800">{image.caption}</h3>
                     <p className="text-xs text-green-600 font-text">Upptäck hur enkelt det kan vara</p>
                   </div>
                 </div>
+
+                {/* Additional hover highlight effect */}
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
               </div>
             </div>
           ))}
@@ -114,17 +118,17 @@ export const LifestyleGallery = () => {
 
         {/* Mobile-optimized stats section */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
-          <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 hover:-translate-y-1">
             <div className="text-2xl mb-2">🏃‍♀️</div>
             <div className="text-3xl sm:text-4xl font-black text-primary mb-2 font-display">15 min</div>
             <p className="text-sm sm:text-base text-foreground/70 font-text">Genomsnittlig träningstid per dag</p>
           </div>
-          <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 hover:-translate-y-1">
             <div className="text-2xl mb-2">🍽️</div>
             <div className="text-3xl sm:text-4xl font-black text-primary mb-2 font-display">Från 10 min</div>
             <p className="text-sm sm:text-base text-foreground/70 font-text">Över 50 snabba, goda och somriga recept!</p>
           </div>
-          <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="text-center p-6 sm:p-8 bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 hover:-translate-y-1">
             <div className="text-2xl mb-2">😊</div>
             <div className="text-3xl sm:text-4xl font-black text-primary mb-2 font-display">100%</div>
             <p className="text-sm sm:text-base text-foreground/70 font-text">Fokus på glädje och välmående</p>
@@ -132,7 +136,7 @@ export const LifestyleGallery = () => {
         </div>
 
         {/* Enhanced summer CTA section with improved text contrast */}
-        <div className="bg-gradient-to-r from-primary via-green-500 to-green-400 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center text-warm-contrast shadow-2xl relative overflow-hidden">
+        <div className="bg-gradient-to-r from-primary via-green-500 to-green-400 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center text-warm-contrast shadow-2xl relative overflow-hidden hover:shadow-3xl transition-all duration-300 hover:scale-[1.02]">
           {/* Summer background effects */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-4 right-4 text-4xl animate-float">☀️</div>
@@ -150,7 +154,7 @@ export const LifestyleGallery = () => {
               Där träning blir glädje och du vaknar med energi för varje ny dag.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-              <button className="bg-white text-primary hover:bg-green-50 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full sm:w-auto">
+              <button className="bg-white text-primary hover:bg-green-50 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg shadow-lg hover:shadow-2xl transition-all duration-200 transform hover:scale-110 hover:-translate-y-1 font-display w-full sm:w-auto">
                 Säkra din plats nu! 🌟
               </button>
               <p className="text-xs sm:text-sm opacity-80 font-text">Begränsat antal platser · Ingen bindning</p>
