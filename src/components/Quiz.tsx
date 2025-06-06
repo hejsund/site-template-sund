@@ -180,10 +180,20 @@ export const Quiz = () => {
         // Here you would redirect to Shopify checkout
         console.log('Quiz completed - redirect to checkout with discount');
       } else {
-        toast.info('Tack! Lycka till med din träningsresa! 💪');
+        toast.info('Tack! Vi skickar dig mer information om programmet! 📧');
       }
       console.log('Quiz results:', { userData, score, answers, flags, recommendation });
     }
+  };
+
+  const resetQuiz = () => {
+    setCurrentQuestion(0);
+    setAnswers({});
+    setScore(0);
+    setFlags([]);
+    setShowResult(false);
+    setEmailSubmitted(false);
+    setUserData({ email: '', age: '', gender: '' });
   };
 
   const progress = showResult ? 100 : ((currentQuestion + 1) / questions.length) * 100;
@@ -290,10 +300,45 @@ export const Quiz = () => {
                     <li>⚡ High-intensity träningsgrupper</li>
                   </ul>
                 </div>
+
+                {!emailSubmitted && (
+                  <div className="bg-blue-50 rounded-xl p-6 mb-6">
+                    <h3 className="text-lg font-semibold text-blue-800 mb-2 font-display">
+                      Vill du ändå ha mer information om programmet?
+                    </h3>
+                    <p className="text-blue-700 mb-4">
+                      Ange din e-post så skickar vi dig mer information om Sommarboosten.
+                    </p>
+                    
+                    <form onSubmit={handleEmailSubmit} className="space-y-4">
+                      <Input
+                        type="email"
+                        placeholder="Din e-postadress"
+                        value={userData.email}
+                        onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
+                        required
+                        className="text-center"
+                      />
+                      <Button type="submit" className="w-full">
+                        Ja, skicka mer information! 📧
+                      </Button>
+                    </form>
+                  </div>
+                )}
+
+                {emailSubmitted && (
+                  <div className="bg-blue-50 rounded-xl p-6 mb-6">
+                    <p className="text-blue-800 font-medium">
+                      Tack! Vi skickar dig mer information om programmet.
+                    </p>
+                  </div>
+                )}
                 
-                <Button variant="outline" className="w-full">
-                  Tack för rådet! 👍
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button onClick={resetQuiz} className="flex-1 cta-primary">
+                    Gör om quizet 🔄
+                  </Button>
+                </div>
               </div>
             )}
           </div>
