@@ -1,8 +1,7 @@
-
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Zap, ArrowLeft, Brain, Balance, Smile } from 'lucide-react';
+import { Zap, ArrowLeft, Brain, Scale, Smile } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -76,7 +75,7 @@ const StressManagementArticlePage = () => {
 
               <div className="bg-indigo-50 border-l-4 border-indigo-400 p-6 my-8 rounded-lg">
                 <div className="flex items-center gap-3 mb-3">
-                  <Balance className="w-6 h-6 text-indigo-600" />
+                  <Scale className="w-6 h-6 text-indigo-600" />
                   <h3 className="text-xl font-bold text-indigo-800">Det handlar om balans</h3>
                 </div>
                 <p className="text-indigo-700 mb-0">
