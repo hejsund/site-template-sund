@@ -142,7 +142,7 @@ export const LifestyleGallery = () => {
           
           <div className="relative z-10">
             <div className="text-3xl sm:text-4xl mb-4">🏖️✨🌻</div>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 sm:mb-6 font-display leading-tight opacity-90">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 font-display leading-tight text-white">
               Redo att skapa din bästa sommar?
             </h3>
             <p className="text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto font-text leading-relaxed px-2">
