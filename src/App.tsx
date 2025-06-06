@@ -16,6 +16,12 @@ import TrainingArticlePage from "./pages/articles/TrainingArticlePage";
 import NutritionArticlePage from "./pages/articles/NutritionArticlePage";
 import HabitsArticlePage from "./pages/articles/HabitsArticlePage";
 import FirstArticlePage from "./pages/articles/FirstArticlePage";
+import MentalHealthArticlePage from "./pages/articles/MentalHealthArticlePage";
+import VacationTrainingArticlePage from "./pages/articles/VacationTrainingArticlePage";
+import FamilyTrainingArticlePage from "./pages/articles/FamilyTrainingArticlePage";
+import After40ArticlePage from "./pages/articles/After40ArticlePage";
+import StressManagementArticlePage from "./pages/articles/StressManagementArticlePage";
+import SaHarBorjadeDetPage from "./pages/SaHarBorjadeDetPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,11 +45,17 @@ const App = () => (
               <Route path="/om-charlotte" element={<Index />} />
               <Route path="/team" element={<Index />} />
               <Route path="/om-sommarboosten" element={<AboutSommarboostenPage />} />
+              <Route path="/sa-har-borjade-det" element={<SaHarBorjadeDetPage />} />
               <Route path="/artiklar" element={<ArticlesPage />} />
               <Route path="/artiklar/traning" element={<TrainingArticlePage />} />
               <Route path="/artiklar/kost" element={<NutritionArticlePage />} />
               <Route path="/artiklar/vanor" element={<HabitsArticlePage />} />
               <Route path="/artiklar/forst" element={<FirstArticlePage />} />
+              <Route path="/artiklar/mental-halsa" element={<MentalHealthArticlePage />} />
+              <Route path="/artiklar/semestertraning" element={<VacationTrainingArticlePage />} />
+              <Route path="/artiklar/familjetraning" element={<FamilyTrainingArticlePage />} />
+              <Route path="/artiklar/efter-40" element={<After40ArticlePage />} />
+              <Route path="/artiklar/stresshantering" element={<StressManagementArticlePage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

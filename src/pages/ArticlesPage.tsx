@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Dumbbell, Apple, Target, ArrowRight, Clock, Eye, Trophy } from 'lucide-react';
+import { Dumbbell, Apple, Target, ArrowRight, Clock, Eye, Trophy, Brain, Plane, Users2, Heart, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ArticlesPage = () => {
@@ -56,6 +56,71 @@ const ArticlesPage = () => {
       borderColor: 'border-yellow-200',
       iconColor: 'text-yellow-600',
       path: '/artiklar/forst'
+    },
+    {
+      id: 'mental-halsa',
+      title: 'Sommarens mentala hälsa',
+      description: 'Upptäck kopplingen mellan rörelse och mental hälsa på sommaren. Lär dig hur enkla träningsvanor kan förbättra ditt mående.',
+      category: 'Mental hälsa',
+      icon: Brain,
+      image: '/lovable-uploads/393c1d8b-c123-455f-ae12-0005270f9bb2.png',
+      readTime: '9 min',
+      gradient: 'from-blue-50 to-blue-100',
+      borderColor: 'border-blue-200',
+      iconColor: 'text-blue-600',
+      path: '/artiklar/mental-halsa'
+    },
+    {
+      id: 'semestertraning',
+      title: 'Semesterträning som funkar',
+      description: 'Upptäck hur du håller igång träningen på semester utan stress. Enkla tips för hotellrum, camping och strand.',
+      category: 'Semester',
+      icon: Plane,
+      image: '/lovable-uploads/05193ae1-7600-4f69-b248-989af17f14bc.png',
+      readTime: '11 min',
+      gradient: 'from-teal-50 to-teal-100',
+      borderColor: 'border-teal-200',
+      iconColor: 'text-teal-600',
+      path: '/artiklar/semestertraning'
+    },
+    {
+      id: 'familjetraning',
+      title: 'Familjeträning på sommaren',
+      description: 'Upptäck roliga sätt att träna tillsammans som familj på sommaren. Tips för olika åldrar som engagerar alla.',
+      category: 'Familj',
+      icon: Users2,
+      image: '/lovable-uploads/2de3bc93-d7a5-4596-ad08-909252fa06c9.png',
+      readTime: '13 min',
+      gradient: 'from-pink-50 to-pink-100',
+      borderColor: 'border-pink-200',
+      iconColor: 'text-pink-600',
+      path: '/artiklar/familjetraning'
+    },
+    {
+      id: 'efter-40',
+      title: 'Efter 40 - sommarens möjligheter',
+      description: 'Upptäck varför sommaren är perfekt för att börja träna efter 40. Återfinna din styrka i medelåldern.',
+      category: 'Medelåldern',
+      icon: Heart,
+      image: '/lovable-uploads/040754bd-84eb-44e7-977f-3b1a600d8402.png',
+      readTime: '14 min',
+      gradient: 'from-red-50 to-red-100',
+      borderColor: 'border-red-200',
+      iconColor: 'text-red-600',
+      path: '/artiklar/efter-40'
+    },
+    {
+      id: 'stresshantering',
+      title: 'Stresshantering i sommartempo',
+      description: 'Lär dig hantera sommarens stress och krav på avkoppling. Balansera aktivitet med vila för en semester som laddar.',
+      category: 'Stresshantering',
+      icon: Zap,
+      image: '/lovable-uploads/beb03c50-e7f5-4672-9b76-966508f8fcbf.png',
+      readTime: '10 min',
+      gradient: 'from-indigo-50 to-indigo-100',
+      borderColor: 'border-indigo-200',
+      iconColor: 'text-indigo-600',
+      path: '/artiklar/stresshantering'
     }
   ];
 
@@ -81,57 +146,53 @@ const ArticlesPage = () => {
       {/* Articles Grid */}
       <section className="py-12 sm:py-16 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {articles.map((article, index) => (
-              <article 
-                key={article.id}
-                className={`group bg-gradient-to-br ${article.gradient} border ${article.borderColor} rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-500 transform hover:scale-[1.02] animate-fade-in`}
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <div className="aspect-[5/4] mb-6 rounded-xl overflow-hidden shadow-sm">
-                  <img 
-                    src={article.image} 
-                    alt={article.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                
-                <div className="flex items-center gap-3 mb-4">
-                  <article.icon className={`w-5 h-5 ${article.iconColor}`} />
-                  <span className={`text-sm font-semibold ${article.iconColor}`}>
-                    {article.category}
-                  </span>
-                  <div className="flex items-center gap-1 text-green-600 text-xs">
-                    <Clock className="w-3 h-3" />
-                    <span>{article.readTime}</span>
+              <Link key={article.id} to={article.path} className="block">
+                <article 
+                  className={`group bg-gradient-to-br ${article.gradient} border ${article.borderColor} rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-500 transform hover:scale-[1.02] animate-fade-in cursor-pointer h-full`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="aspect-[5/4] mb-6 rounded-xl overflow-hidden shadow-sm">
+                    <img 
+                      src={article.image} 
+                      alt={article.title}
+                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    />
                   </div>
-                </div>
-                
-                <h2 className="text-xl sm:text-2xl font-black text-green-800 mb-4 font-display leading-tight group-hover:text-green-700 transition-colors">
-                  {article.title}
-                </h2>
-                
-                <p className="text-sm sm:text-base text-green-700 mb-6 leading-relaxed font-text">
-                  {article.description}
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <Link to={article.path}>
-                    <Button 
-                      variant="ghost" 
-                      className={`${article.iconColor} hover:bg-white/70 font-semibold text-sm`}
-                    >
+                  
+                  <div className="flex items-center gap-3 mb-4">
+                    <article.icon className={`w-5 h-5 ${article.iconColor}`} />
+                    <span className={`text-sm font-semibold ${article.iconColor}`}>
+                      {article.category}
+                    </span>
+                    <div className="flex items-center gap-1 text-green-600 text-xs">
+                      <Clock className="w-3 h-3" />
+                      <span>{article.readTime}</span>
+                    </div>
+                  </div>
+                  
+                  <h2 className="text-xl sm:text-2xl font-black text-green-800 mb-4 font-display leading-tight group-hover:text-green-700 transition-colors">
+                    {article.title}
+                  </h2>
+                  
+                  <p className="text-sm sm:text-base text-green-700 mb-6 leading-relaxed font-text">
+                    {article.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className={`${article.iconColor} hover:bg-white/70 font-semibold text-sm flex items-center`}>
                       Läs mer
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                  
-                  <div className="flex items-center gap-1 text-green-600 text-xs">
-                    <Eye className="w-3 h-3" />
-                    <span>Populär</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-1 text-green-600 text-xs">
+                      <Eye className="w-3 h-3" />
+                      <span>Populär</span>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             ))}
           </div>
         </div>

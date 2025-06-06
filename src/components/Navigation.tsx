@@ -6,20 +6,9 @@ import { Link } from 'react-router-dom';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1;
-
-  // Get current phase based on date
-  const getCurrentPhase = () => {
-    if (currentMonth === 7) return 'registration-open';
-    if (currentMonth >= 9) return 'collect-interest';
-    if (currentMonth >= 6 && currentMonth < 7) return 'opening-soon';
-    if (currentMonth >= 5 && currentMonth < 6) return 'watch-out';
-    return 'collect-email';
-  };
 
   const menuItems = [
     {
@@ -49,6 +38,7 @@ export const Navigation = () => {
       items: [
         { name: 'Om Sommarboosten', href: '/om-sommarboosten', icon: Users },
         { name: 'Charlotte Steinwig', href: '/om-charlotte', icon: Users },
+        { name: 'Så här började det', href: '/sa-har-borjade-det', icon: Clock },
       ]
     }
   ];
