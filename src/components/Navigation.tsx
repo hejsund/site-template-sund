@@ -42,15 +42,13 @@ export const Navigation = () => {
       title: 'Quiz',
       items: [
         { name: 'Hitta din väg', href: '/quiz', icon: Users },
-        { name: 'Personlig rekommendation', href: '/quiz/rekommendation', icon: Trophy },
       ]
     },
     {
       title: 'Om oss',
       items: [
-        { name: 'Charlotte', href: '/om-charlotte', icon: Users },
-        { name: 'Vårt team', href: '/team', icon: Users },
         { name: 'Om Sommarboosten', href: '/om-sommarboosten', icon: Users },
+        { name: 'Charlotte Steinwig', href: '/om-charlotte', icon: Users },
       ]
     }
   ];
@@ -94,7 +92,7 @@ export const Navigation = () => {
             ))}
             
             <Link to="/quiz">
-              <Button className="bg-coral hover:bg-coral/90 text-white font-semibold">
+              <Button className="bg-primary hover:bg-primary/90 text-white font-semibold">
                 Gör vårt quiz
               </Button>
             </Link>
@@ -130,7 +128,7 @@ export const Navigation = () => {
             ))}
             <div className="px-2 mt-4">
               <Link to="/quiz">
-                <Button className="w-full bg-coral hover:bg-coral/90 text-white font-semibold">
+                <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold">
                   Gör vårt quiz
                 </Button>
               </Link>

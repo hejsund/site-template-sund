@@ -13,9 +13,9 @@ const ArticlesPage = () => {
       icon: Dumbbell,
       image: '/lovable-uploads/b421d335-bc7b-4b5b-8e07-edd16ebbb404.png',
       readTime: '8 min',
-      gradient: 'from-green-100 via-green-200 to-green-300',
-      borderColor: 'border-green-400',
-      iconColor: 'text-green-700',
+      gradient: 'from-green-50 to-green-100',
+      borderColor: 'border-green-200',
+      iconColor: 'text-green-600',
       path: '/artiklar/traning'
     },
     {
@@ -26,9 +26,9 @@ const ArticlesPage = () => {
       icon: Apple,
       image: '/lovable-uploads/8860c780-4dbb-4b43-b12f-770483b2f79f.png',
       readTime: '7 min',
-      gradient: 'from-orange-100 via-coral/30 to-orange-200',
-      borderColor: 'border-orange-300',
-      iconColor: 'text-orange-700',
+      gradient: 'from-orange-50 to-orange-100',
+      borderColor: 'border-orange-200',
+      iconColor: 'text-orange-600',
       path: '/artiklar/kost'
     },
     {
@@ -39,9 +39,9 @@ const ArticlesPage = () => {
       icon: Target,
       image: '/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png',
       readTime: '10 min',
-      gradient: 'from-purple-100 via-purple-200 to-purple-300',
-      borderColor: 'border-purple-300',
-      iconColor: 'text-purple-700',
+      gradient: 'from-purple-50 to-purple-100',
+      borderColor: 'border-purple-200',
+      iconColor: 'text-purple-600',
       path: '/artiklar/vanor'
     },
     {
@@ -52,29 +52,29 @@ const ArticlesPage = () => {
       icon: Trophy,
       image: '/lovable-uploads/f60c9ef3-2146-4344-ba07-04c19de24beb.png',
       readTime: '12 min',
-      gradient: 'from-yellow-100 via-yellow-200 to-amber-200',
-      borderColor: 'border-yellow-300',
-      iconColor: 'text-yellow-700',
+      gradient: 'from-yellow-50 to-yellow-100',
+      borderColor: 'border-yellow-200',
+      iconColor: 'text-yellow-600',
       path: '/artiklar/forst'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 md:py-24 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-block bg-primary/10 text-primary px-6 py-3 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-green-50 text-green-700 px-6 py-3 rounded-full text-sm font-semibold mb-6">
             📖 Kunskap & inspiration
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-primary mb-6 font-display leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-green-800 mb-6 font-display leading-tight">
             Artiklar & guider
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-green-700 max-w-4xl mx-auto leading-relaxed font-text mb-8">
             Djupdyk i ämnen som verkligen gör skillnad för din hälsa och ditt välmående. 
             Beprövade strategier från 15 års erfarenhet av att hjälpa människor må bättre.
           </p>
-          <div className="text-3xl opacity-80">💡✨📚</div>
+          <div className="text-3xl opacity-60">💡✨📚</div>
         </div>
       </section>
 
@@ -85,14 +85,14 @@ const ArticlesPage = () => {
             {articles.map((article, index) => (
               <article 
                 key={article.id}
-                className={`group bg-gradient-to-br ${article.gradient} border ${article.borderColor} rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in`}
+                className={`group bg-gradient-to-br ${article.gradient} border ${article.borderColor} rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-500 transform hover:scale-[1.02] animate-fade-in`}
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <div className="aspect-[5/4] mb-6 rounded-xl overflow-hidden shadow-md">
+                <div className="aspect-[5/4] mb-6 rounded-xl overflow-hidden shadow-sm">
                   <img 
                     src={article.image} 
                     alt={article.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 
@@ -107,7 +107,7 @@ const ArticlesPage = () => {
                   </div>
                 </div>
                 
-                <h2 className="text-xl sm:text-2xl font-black text-primary mb-4 font-display leading-tight group-hover:text-green-700 transition-colors">
+                <h2 className="text-xl sm:text-2xl font-black text-green-800 mb-4 font-display leading-tight group-hover:text-green-700 transition-colors">
                   {article.title}
                 </h2>
                 
@@ -119,7 +119,7 @@ const ArticlesPage = () => {
                   <Link to={article.path}>
                     <Button 
                       variant="ghost" 
-                      className={`${article.iconColor} hover:bg-white/50 font-semibold text-sm`}
+                      className={`${article.iconColor} hover:bg-white/70 font-semibold text-sm`}
                     >
                       Läs mer
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
@@ -140,8 +140,8 @@ const ArticlesPage = () => {
       {/* CTA Section */}
       <section className="py-16 sm:py-20 px-3 sm:px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center shadow-2xl border border-green-200">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 font-display text-primary">
+          <div className="bg-green-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center shadow-sm border border-green-100">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 font-display text-green-800">
               Vill du fördjupa dig mer? 🌟
             </h2>
             <p className="text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 text-green-700 max-w-2xl mx-auto font-text leading-relaxed">
@@ -149,14 +149,14 @@ const ArticlesPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
               <Link to="/quiz">
-                <Button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full sm:w-auto">
+                <Button className="bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 font-display w-full sm:w-auto">
                   Ta vårt quiz först 🚀
                 </Button>
               </Link>
               <Link to="/om-sommarboosten">
                 <Button 
                   variant="outline" 
-                  className="border-primary text-primary hover:bg-primary hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg font-display w-full sm:w-auto"
+                  className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg font-display w-full sm:w-auto"
                 >
                   Utforska Sommarboosten
                 </Button>
