@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,6 +47,8 @@
     --green-400: 155 50% 45%;
     --green-500: 155 70% 35%;
     --green-600: 155 85% 25%;
+    --green-700: 155 85% 15%;
+    --green-800: 155 100% 7%;
     
     /* Warm accent colors */
     --coral: 14 85% 70%;
@@ -90,11 +94,46 @@
   }
 
   body {
-    @apply bg-background text-foreground font-text;
+    @apply bg-background text-green-800 font-text;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+    @apply font-display text-green-800;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+  }
+
+  h4 {
+    font-size: 2rem;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+  }
+
+  h6 {
+    font-size: 1.25rem;
+  }
+
+  a {
+    @apply text-green-700;
+  }
+
+  a.alternate {
+    @apply text-white;
   }
 }
 
@@ -119,11 +158,33 @@
   }
 
   .cta-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display;
+    border-radius: 15px;
   }
 
   .cta-warm {
     background: linear-gradient(135deg, hsl(var(--coral)) 0%, hsl(var(--purple)) 100%);
-    @apply text-white hover:opacity-90 px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display;
+    @apply text-white hover:opacity-90 px-8 py-4 font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display;
+    border-radius: 15px;
+  }
+
+  .bg-primary-bg {
+    background-color: hsl(var(--green-50));
+  }
+
+  .text-primary-text {
+    color: hsl(var(--green-800));
+  }
+
+  .text-alternate {
+    color: white;
+  }
+
+  .text-primary-link {
+    color: hsl(var(--green-700));
+  }
+
+  .text-alternate-link {
+    color: white;
   }
 }

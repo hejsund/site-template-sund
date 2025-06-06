@@ -23,6 +23,21 @@ export default {
 				'display': ['Red Hat Display', 'sans-serif'],
 				'text': ['Red Hat Text', 'sans-serif'],
 			},
+			fontSize: {
+				'h1': '3.5rem',
+				'h2': '3rem',
+				'h3': '2.5rem',
+				'h4': '2rem',
+				'h5': '1.5rem',
+				'h6': '1.25rem',
+			},
+			lineHeight: {
+				'tight-heading': '1.1',
+				'body': '1.5',
+			},
+			borderRadius: {
+				'button': '15px',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -76,6 +91,8 @@ export default {
 					400: 'hsl(var(--green-400))',
 					500: 'hsl(var(--green-500))',
 					600: 'hsl(var(--green-600))',
+					700: 'hsl(var(--green-700))',
+					800: 'hsl(var(--green-800))',
 				},
 				coral: {
 					DEFAULT: 'hsl(var(--coral))',
