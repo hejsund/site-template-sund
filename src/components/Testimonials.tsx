@@ -45,10 +45,10 @@ export const Testimonials = () => {
     <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
-            Vad säger de som redan är med? 💚
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-800">
+            Vad säger de som redan varit med? 💚
           </h2>
-          <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
+          <p className="text-xl text-green-700 max-w-3xl mx-auto">
             Äkta berättelser från riktiga människor som skapat sin bästa sommar med Sund & Stark.
           </p>
         </div>
@@ -69,15 +69,15 @@ export const Testimonials = () => {
                   ))}
                 </div>
                 
-                <p className="text-foreground/80 leading-relaxed mb-4 italic">
+                <p className="text-green-700 leading-relaxed mb-4 italic">
                   "{testimonial.text}"
                 </p>
                 
                 <div className="flex items-center justify-between">
-                  <p className="font-semibold text-primary">
+                  <p className="font-semibold text-green-800">
                     – {testimonial.name}
                   </p>
-                  <span className="bg-green-50 text-primary px-3 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-green-50 text-green-800 px-3 py-1 rounded-full text-xs font-medium">
                     {testimonial.highlight}
                   </span>
                 </div>
@@ -86,27 +86,27 @@ export const Testimonials = () => {
           ))}
         </div>
 
-        {/* Social proof section */}
+        {/* Social proof section with improved contrast */}
         <div className="mt-16 text-center">
           <div className="gradient-warm rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white">
-            <h3 className="text-3xl font-bold mb-4">
-              Över 2,000 kvinnor har redan hittat sin glädje! 🌟
+            <h3 className="text-3xl font-bold mb-4 text-white">
+              Över 2 000 personer har redan hittat sin glädje! 🌟
             </h3>
-            <p className="text-lg opacity-90 mb-6">
+            <p className="text-lg text-white/95 mb-6">
               Bli en del av communityn som stöttar varandra att må bra, ha kul och skapa den sommar de drömmer om.
             </p>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <div className="text-center">
-                <div className="text-2xl font-bold">98%</div>
-                <div className="opacity-80">Skulle rekommendera</div>
+                <div className="text-2xl font-bold text-white">98%</div>
+                <div className="text-white/90">Skulle rekommendera</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold">4.9/5</div>
-                <div className="opacity-80">Genomsnittligt betyg</div>
+                <div className="text-2xl font-bold text-white">4.9/5</div>
+                <div className="text-white/90">Genomsnittligt betyg</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold">2,000+</div>
-                <div className="opacity-80">Nöjda deltagare</div>
+                <div className="text-2xl font-bold text-white">2,000+</div>
+                <div className="text-white/90">Nöjda deltagare</div>
               </div>
             </div>
           </div>

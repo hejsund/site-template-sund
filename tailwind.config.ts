@@ -82,7 +82,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Sund & Stark custom colors
+				// Sund & Stark custom colors with improved WCAG contrast
 				green: {
 					50: 'hsl(var(--green-50))',
 					100: 'hsl(var(--green-100))',
@@ -101,6 +101,10 @@ export default {
 				purple: {
 					DEFAULT: 'hsl(var(--purple))',
 					light: 'hsl(var(--purple-light))'
+				},
+				'neon-green': {
+					DEFAULT: 'hsl(var(--neon-green))',
+					light: 'hsl(var(--neon-green-light))'
 				}
 			},
 			borderRadius: {

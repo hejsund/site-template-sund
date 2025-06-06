@@ -39,16 +39,16 @@
 
     --radius: 1rem;
 
-    /* Sund & Stark custom colors - improved contrast */
+    /* Sund & Stark custom colors - improved contrast for WCAG compliance */
     --green-50: 131 57% 96%;
     --green-100: 131 50% 90%;
     --green-200: 131 45% 80%;
     --green-300: 131 40% 70%;
-    --green-400: 155 50% 40%;
+    --green-400: 155 50% 45%; /* Improved contrast */
     --green-500: 155 70% 30%;
     --green-600: 155 85% 20%;
-    --green-700: 155 85% 12%;
-    --green-800: 155 90% 8%;
+    --green-700: 155 85% 15%; /* Darker for better contrast */
+    --green-800: 155 90% 10%; /* Much darker for headlines */
     
     /* Enhanced warm accent colors for better text contrast */
     --coral: 14 85% 60%;
@@ -64,6 +64,10 @@
     --purple: 280 50% 60%;
     --purple-light: 280 40% 80%;
     --purple-contrast: 280 70% 95%;
+    
+    /* Neon green for special highlights */
+    --neon-green: 120 100% 40%;
+    --neon-green-light: 120 80% 60%;
   }
 
   .dark {
@@ -158,7 +162,7 @@
   }
   
   .gradient-warm {
-    background: linear-gradient(135deg, hsl(var(--coral-light)) 0%, hsl(var(--purple-light)) 100%);
+    background: linear-gradient(135deg, hsl(var(--coral)) 0%, hsl(var(--purple)) 100%);
   }
 
   .text-gradient {
@@ -182,6 +186,14 @@
 
   .text-warm-contrast {
     color: hsl(var(--coral-contrast));
+  }
+
+  .text-neon-green {
+    color: hsl(var(--neon-green));
+  }
+
+  .text-neon-green-light {
+    color: hsl(var(--neon-green-light));
   }
 
   .card-block {

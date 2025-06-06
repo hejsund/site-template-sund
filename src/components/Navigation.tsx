@@ -53,7 +53,7 @@ export const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Updated Logo - Text only */}
           <Link to="/" className="flex items-center space-x-2">
-            <span className="font-display font-black text-primary text-xl tracking-tight">
+            <span className="font-display font-black text-green-800 text-xl tracking-tight">
               Sommarboosten
             </span>
           </Link>
@@ -65,7 +65,7 @@ export const Navigation = () => {
                 key={menu.title}
                 className="relative group"
               >
-                <button className="flex items-center space-x-1 text-green-700 hover:text-primary font-medium transition-colors">
+                <button className="flex items-center space-x-1 text-green-800 hover:text-green-600 font-medium transition-colors">
                   <span>{menu.title}</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -75,7 +75,7 @@ export const Navigation = () => {
                     <Link
                       key={item.name}
                       to={item.href}
-                      className="flex items-center space-x-3 px-4 py-3 text-green-700 hover:bg-green-50 hover:text-primary transition-colors"
+                      className="flex items-center space-x-3 px-4 py-3 text-green-800 hover:bg-green-50 hover:text-green-600 transition-colors"
                     >
                       <item.icon className="w-5 h-5" />
                       <span>{item.name}</span>
@@ -86,8 +86,8 @@ export const Navigation = () => {
             ))}
             
             <Link to="/quiz">
-              <Button className="bg-coral hover:bg-coral/90 text-white">
-                Starta Quiz
+              <Button className="bg-coral hover:bg-coral/90 text-white font-semibold">
+                Gör vårt quiz
               </Button>
             </Link>
           </div>
@@ -95,7 +95,7 @@ export const Navigation = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-md text-green-700 hover:text-primary"
+            className="md:hidden p-2 rounded-md text-green-800 hover:text-green-600"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -106,12 +106,12 @@ export const Navigation = () => {
           <div className="md:hidden border-t border-green-200 py-4">
             {menuItems.map((menu) => (
               <div key={menu.title} className="mb-4">
-                <h3 className="font-semibold text-primary mb-2 px-2">{menu.title}</h3>
+                <h3 className="font-semibold text-green-800 mb-2 px-2">{menu.title}</h3>
                 {menu.items.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="flex items-center space-x-3 px-4 py-2 text-green-700 hover:bg-green-50 rounded-md mx-2"
+                    className="flex items-center space-x-3 px-4 py-2 text-green-800 hover:bg-green-50 rounded-md mx-2"
                     onClick={() => setIsOpen(false)}
                   >
                     <item.icon className="w-5 h-5" />
@@ -122,8 +122,8 @@ export const Navigation = () => {
             ))}
             <div className="px-2 mt-4">
               <Link to="/quiz">
-                <Button className="w-full bg-coral hover:bg-coral/90 text-white">
-                  Starta Quiz
+                <Button className="w-full bg-coral hover:bg-coral/90 text-white font-semibold">
+                  Gör vårt quiz
                 </Button>
               </Link>
             </div>

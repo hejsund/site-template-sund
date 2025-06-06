@@ -1,104 +1,89 @@
 
-import { Dumbbell, ChefHat, Target, Users, Smartphone, Sparkles } from 'lucide-react';
+import { Smartphone, Users, Clock, Shield, Heart, Zap } from 'lucide-react';
 
 const features = [
   {
-    icon: Dumbbell,
-    title: "Träning som blir av",
-    description: "30+ korta pass, anpassade till vardagen. Från 10-minuters morgonenergi till kvällsavslappning.",
-    highlight: "Inga timslånga pass!"
-  },
-  {
-    icon: ChefHat,
-    title: "Somriga recept",
-    description: "50+ rätter för grill, picknick och snabba middagar. Färgglatt, enkelt och helt utan dåligt samvete.",
-    highlight: "Från smoothie till grillparty"
-  },
-  {
-    icon: Target,
-    title: "Veckoutmaningar",
-    description: "Små steg som ger stor skillnad. Roliga utmaningar som passar ditt liv, inte tvärtom.",
-    highlight: "Bygger nya vanor naturligt"
+    icon: Smartphone,
+    title: "Beprövad webb-app för alla",
+    description: "Fungerar smidigt på alla enheter. Appen är testad och älskad av tusentals användare.",
+    color: "text-coral"
   },
   {
     icon: Users,
-    title: "Gemenskap",
-    description: "Du är inte ensam på denna resa! Stöttande community där vi peppar varandra framåt.",
-    highlight: "Inga dömande blickar"
+    title: "Gemenskap & stöd",
+    description: "Träffa likasinnade människor och få motivation i vår fantastiska community.",
+    color: "text-purple"
   },
   {
-    icon: Smartphone,
-    title: "Allt i vår app",
-    description: "Ingen stress, bara flow. All inspiration, alla recept och träningspass i fickan.",
-    highlight: "Fungerar offline också!"
+    icon: Clock,
+    title: "Bara 15 min/dag",
+    description: "Perfekt för dig med hektisk vardag. Små steg som gör stor skillnad över tid.",
+    color: "text-primary"
   },
   {
-    icon: Sparkles,
-    title: "Bonus: Mindset-stöd",
-    description: "Verktyg för att hantera vardagsstress och skapa mer glädje i din vardag.",
-    highlight: "Mental träning för livet"
+    icon: Shield,
+    title: "Evidensbaserat",
+    description: "Allt vi lär ut bygger på vetenskaplig forskning och beprövade metoder.",
+    color: "text-green-600"
+  },
+  {
+    icon: Heart,
+    title: "Hållbart & hälsosamt",
+    description: "Inga extremer eller snabba fixes. Vi fokuserar på långsiktiga, hälsosamma vanor.",
+    color: "text-coral"
+  },
+  {
+    icon: Zap,
+    title: "Mer energi direkt",
+    description: "Känn skillnad redan första veckan. Mer energi, bättre sömn och ökad välmående.",
+    color: "text-purple"
   }
 ];
 
 export const Features = () => {
   return (
-    <section className="py-20 px-4 gradient-green">
+    <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient">
-            Vad får du i Sommarboosten?
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-800">
+            Varför väljer tusentals Sommarboosten? 🌟
           </h2>
-          <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Allt du behöver för att skapa din bästa sommar – enkelt, roligt och på dina villkor.
+          <p className="text-xl text-green-700 max-w-3xl mx-auto">
+            Vi har skapat något som verkligen fungerar. Här är vad som gör oss unika.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => {
-            const IconComponent = feature.icon;
-            return (
-              <div 
-                key={index} 
-                className="card-block group hover:scale-105 transition-all duration-300"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary rounded-2xl p-3 group-hover:scale-110 transition-transform duration-300">
-                    <IconComponent className="text-primary-foreground" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-primary mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-foreground/70 mb-3 leading-relaxed">
-                      {feature.description}
-                    </p>
-                    <div className="inline-block bg-coral-light text-coral px-3 py-1 rounded-full text-sm font-medium">
-                      ✨ {feature.highlight}
-                    </div>
-                  </div>
-                </div>
+          {features.map((feature, index) => (
+            <div 
+              key={index}
+              className="card-block text-center group hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-50 mb-6 group-hover:bg-green-100 transition-colors ${feature.color}`}>
+                <feature.icon size={32} />
               </div>
-            );
-          })}
+              
+              <h3 className="text-xl font-bold mb-4 text-green-800">
+                {feature.title}
+              </h3>
+              
+              <p className="text-green-700 leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
 
-        {/* Additional value section */}
-        <div className="mt-16 text-center">
-          <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 max-w-4xl mx-auto shadow-xl">
-            <h3 className="text-3xl font-bold text-primary mb-4">
-              + Så mycket mer än bara träning och mat
+        {/* Call to action */}
+        <div className="text-center mt-16">
+          <div className="gradient-warm rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white">
+            <h3 className="text-3xl font-bold mb-4">
+              Redo att göra skillnad i ditt liv? 🚀
             </h3>
-            <p className="text-lg text-foreground/80 mb-6">
-              Det här är en helhetslösning för dig som vill må bra, ha energi och njuta av sommaren. 
-              Utan stress, utan skuld – bara glädje och resultat.
+            <p className="text-lg opacity-90 mb-6">
+              Över 2,000 personer har redan tagit steget. Nu är det din tur att skapa förändring som håller.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <span className="bg-green-100 text-primary px-4 py-2 rounded-full text-sm font-medium">🌞 Vardagsanpassat</span>
-              <span className="bg-green-100 text-primary px-4 py-2 rounded-full text-sm font-medium">💚 Hållbart</span>
-              <span className="bg-green-100 text-primary px-4 py-2 rounded-full text-sm font-medium">🎯 Resultatfokuserat</span>
-              <span className="bg-green-100 text-primary px-4 py-2 rounded-full text-sm font-medium">😄 Roligt</span>
-            </div>
           </div>
         </div>
       </div>
