@@ -58,7 +58,7 @@ export const LifestyleGallery = () => {
           <div className="inline-block bg-primary/10 text-primary px-6 py-3 rounded-full text-sm font-semibold mb-6">
             ✨ Så här kan din sommar se ut
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 text-gradient leading-tight font-display">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 text-gradient leading-tight font-display pb-4">
             Äkta ögonblick från vardagen
           </h2>
           <p className="text-xl md:text-2xl text-foreground/70 max-w-4xl mx-auto leading-relaxed font-text">
@@ -66,40 +66,71 @@ export const LifestyleGallery = () => {
           </p>
         </div>
 
-        {/* Masonry-style grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {images.map((image, index) => (
-            <div 
-              key={index}
-              className={`group cursor-pointer animate-fade-in ${
-                index === 0 || index === 3 ? 'lg:row-span-2' : ''
-              }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="relative overflow-hidden rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105 bg-white">
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="bg-white/90 backdrop-blur-sm text-primary px-3 py-1 rounded-full text-xs font-semibold">
-                    {image.category}
-                  </span>
-                </div>
-                
-                <img 
-                  src={image.src} 
-                  alt={image.alt}
-                  className={`w-full object-cover transition-transform duration-700 group-hover:scale-110 ${
-                    index === 0 || index === 3 ? 'h-80 lg:h-96' : 'h-64'
-                  }`}
-                />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="font-bold text-lg mb-2 font-display">{image.caption}</h3>
-                  <p className="text-sm opacity-90 font-text">Upptäck hur enkelt det kan vara</p>
+        {/* Improved grid layout with better stacking */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {/* First column - stacked images */}
+          <div className="space-y-6">
+            {images.slice(0, 4).map((image, index) => (
+              <div 
+                key={index}
+                className="group cursor-pointer animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="relative overflow-hidden rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105 bg-white">
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="bg-white/90 backdrop-blur-sm text-primary px-3 py-1 rounded-full text-xs font-semibold">
+                      {image.category}
+                    </span>
+                  </div>
+                  
+                  <img 
+                    src={image.src} 
+                    alt={image.alt}
+                    className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="font-bold text-lg mb-2 font-display">{image.caption}</h3>
+                    <p className="text-sm opacity-90 font-text">Upptäck hur enkelt det kan vara</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Second column - stacked images */}
+          <div className="space-y-6">
+            {images.slice(4, 8).map((image, index) => (
+              <div 
+                key={index + 4}
+                className="group cursor-pointer animate-fade-in"
+                style={{ animationDelay: `${(index + 4) * 0.1}s` }}
+              >
+                <div className="relative overflow-hidden rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105 bg-white">
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="bg-white/90 backdrop-blur-sm text-primary px-3 py-1 rounded-full text-xs font-semibold">
+                      {image.category}
+                    </span>
+                  </div>
+                  
+                  <img 
+                    src={image.src} 
+                    alt={image.alt}
+                    className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="font-bold text-lg mb-2 font-display">{image.caption}</h3>
+                    <p className="text-sm opacity-90 font-text">Upptäck hur enkelt det kan vara</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Stats section */}
