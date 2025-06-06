@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Target, Repeat, TrendingUp, Clock, Star } from 'lucide-react';
 import { Footer } from '@/components/Footer';
+import { CurvedDivider } from '@/components/CurvedDivider';
 
 const HabitsArticlePage = () => {
   return (
@@ -268,18 +269,7 @@ const HabitsArticlePage = () => {
       </article>
 
       {/* Curved divider before footer */}
-      <div className="relative">
-        <svg 
-          className="w-full h-12 text-green-100" 
-          viewBox="0 0 1200 120" 
-          preserveAspectRatio="none"
-        >
-          <path 
-            d="M0,60 C300,20 900,100 1200,60 L1200,120 L0,120 Z" 
-            fill="currentColor"
-          />
-        </svg>
-      </div>
+      <CurvedDivider color="text-primary" />
 
       <Footer />
     </div>
