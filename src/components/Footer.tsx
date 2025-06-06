@@ -20,16 +20,16 @@ export const Footer = () => {
           
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-8 mb-8 text-sm">
-            <a href="#" className="hover:opacity-75 transition-opacity font-text">
+            <a href="#" className="text-green-200 hover:text-green-100 transition-colors font-text">
               Om oss
             </a>
-            <a href="#" className="hover:opacity-75 transition-opacity font-text">
+            <a href="#" className="text-green-200 hover:text-green-100 transition-colors font-text">
               Kontakt
             </a>
-            <a href="#" className="hover:opacity-75 transition-opacity font-text">
+            <a href="#" className="text-green-200 hover:text-green-100 transition-colors font-text">
               Integritetspolicy
             </a>
-            <a href="#" className="hover:opacity-75 transition-opacity font-text">
+            <a href="#" className="text-green-200 hover:text-green-100 transition-colors font-text">
               Användarvillkor
             </a>
           </div>

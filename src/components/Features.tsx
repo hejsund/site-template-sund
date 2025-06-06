@@ -77,11 +77,11 @@ export const Features = () => {
 
         {/* Call to action */}
         <div className="text-center mt-16">
-          <div className="gradient-warm rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white">
-            <h3 className="text-3xl font-bold mb-4">
-              Redo att göra skillnad i ditt liv? 🚀
+          <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white shadow-2xl">
+            <h3 className="text-3xl font-bold mb-4 text-white">
+              Redo att göra skillnad i ditt liv?
             </h3>
-            <p className="text-lg opacity-90 mb-6">
+            <p className="text-lg text-green-100 mb-6">
               Över 2,000 personer har redan tagit steget. Nu är det din tur att skapa förändring som håller.
             </p>
           </div>

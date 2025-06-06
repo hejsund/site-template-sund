@@ -84,7 +84,7 @@ const ProgramYearPage = () => {
               />
               <div className="flex gap-3">
                 <Button type="submit" className="cta-primary h-12 flex-1 text-lg rounded-xl">
-                  Påminn mig ✨
+                  Påminn mig
                 </Button>
                 <Button type="button" className="cta-warm h-12 flex-1 text-lg rounded-xl">
                   Gör quiz först
