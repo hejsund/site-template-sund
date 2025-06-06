@@ -110,7 +110,7 @@ const SaHarBorjadeDetPage = () => {
               </p>
 
               <p>
-                Sommarboosten är resultatet av fem års forskning, testning och förfining tillsammans med tusentals familjer som alla ville samma sak: att må bra, ha energi och njuta av sommaren utan att känna att de "sabbade" något.
+                Sommarboosten är resultatet av fem års erfarenhet tillsammans med tusentals familjer som alla ville samma sak: att må bra, ha energi och njuta av sommaren utan att känna att de "sabbade" något.
               </p>
 
               <h2 className="flex items-center gap-3 text-green-800">
