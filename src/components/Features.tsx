@@ -45,7 +45,7 @@ export const Features = () => {
     <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-800">
+          <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800">
             Varför väljer tusentals Sommarboosten? 🌟
           </h2>
           <p className="text-xl text-green-700 max-w-3xl mx-auto">
@@ -77,8 +77,8 @@ export const Features = () => {
 
         {/* Call to action */}
         <div className="text-center mt-16">
-          <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white shadow-2xl">
-            <h3 className="text-3xl font-bold mb-4 text-white">
+          <div className="bg-gradient-to-br from-green-700 to-green-800 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white shadow-2xl">
+            <h3 className="text-3xl font-black mb-4 text-white">
               Redo att göra skillnad i ditt liv?
             </h3>
             <p className="text-lg text-green-100 mb-6">

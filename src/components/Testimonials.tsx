@@ -45,7 +45,7 @@ export const Testimonials = () => {
     <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-800">
+          <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800">
             Vad säger de som redan varit med? 💚
           </h2>
           <p className="text-xl text-green-700 max-w-3xl mx-auto">
@@ -89,7 +89,7 @@ export const Testimonials = () => {
         {/* Social proof section with improved contrast */}
         <div className="mt-16 text-center">
           <div className="gradient-warm rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white">
-            <h3 className="text-3xl font-bold mb-4 text-white">
+            <h3 className="text-3xl font-black mb-4 text-white">
               Över 2 000 personer har redan hittat sin glädje! 🌟
             </h3>
             <p className="text-lg text-white/95 mb-6">
