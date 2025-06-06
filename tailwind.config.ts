@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -175,6 +176,36 @@ export default {
 						opacity: '1',
 						transform: 'translateY(0) scale(1)'
 					}
+				},
+				'jumpingBounce': {
+					'0%': {
+						transform: 'translateY(-50px) scale(0.8)',
+						opacity: '0'
+					},
+					'15%': {
+						transform: 'translateY(-30px) scale(0.95)',
+						opacity: '0.7'
+					},
+					'30%': {
+						transform: 'translateY(0px) scale(1.1)',
+						opacity: '1'
+					},
+					'45%': {
+						transform: 'translateY(-15px) scale(0.98)'
+					},
+					'60%': {
+						transform: 'translateY(0px) scale(1.05)'
+					},
+					'75%': {
+						transform: 'translateY(-8px) scale(0.99)'
+					},
+					'90%': {
+						transform: 'translateY(0px) scale(1.02)'
+					},
+					'100%': {
+						transform: 'translateY(0px) scale(1)',
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
@@ -183,7 +214,8 @@ export default {
 				'fade-in': 'fade-in 0.6s ease-out',
 				'float': 'float 3s ease-in-out infinite',
 				'heartBeat': 'heartBeat 1.2s infinite cubic-bezier(.215, .61, .355, 1)',
-				'flyDown': 'flyDown 1.5s ease-out 0.5s both'
+				'flyDown': 'flyDown 1.5s ease-out 0.5s both',
+				'jumpingBounce': 'jumpingBounce 3s ease-out 0.5s both'
 			}
 		}
 	},
