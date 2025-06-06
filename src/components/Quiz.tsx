@@ -15,7 +15,6 @@ interface Question {
 }
 
 interface UserData {
-  name: string;
   email: string;
   age: string;
   gender: string;
@@ -90,12 +89,11 @@ export const Quiz = () => {
   const [flags, setFlags] = useState<string[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [userData, setUserData] = useState<UserData>({
-    name: '',
     email: '',
     age: '',
     gender: ''
   });
-  const [showPersonalInfo, setShowPersonalInfo] = useState(false);
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   const handleAnswer = (questionId: number, optionId: string) => {
     const option = questions[questionId - 1].options.find(opt => opt.id === optionId);
@@ -120,7 +118,7 @@ export const Quiz = () => {
     if (currentQuestion < questions.length - 1) {
       setTimeout(() => setCurrentQuestion(currentQuestion + 1), 500);
     } else {
-      setTimeout(() => setShowPersonalInfo(true), 500);
+      setTimeout(() => setShowResult(true), 500);
     }
   };
 
@@ -172,67 +170,23 @@ export const Quiz = () => {
     }
   };
 
-  const handlePersonalInfoSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (userData.name && userData.email) {
-      setShowResult(true);
+    if (userData.email) {
+      setEmailSubmitted(true);
+      const recommendation = getRecommendation();
+      if (recommendation.recommended) {
+        toast.success('Grattis! Du får en gratis shaker och 15% rabatt! 🎉');
+        // Here you would redirect to Shopify checkout
+        console.log('Quiz completed - redirect to checkout with discount');
+      } else {
+        toast.info('Tack! Lycka till med din träningsresa! 💪');
+      }
+      console.log('Quiz results:', { userData, score, answers, flags, recommendation });
     }
   };
 
-  const handleFinalSubmit = () => {
-    const recommendation = getRecommendation();
-    if (recommendation.recommended) {
-      toast.success(`Grattis ${userData.name}! Du får en gratis shaker och 15% rabatt! 🎉`);
-      // Here you would redirect to Shopify checkout
-      console.log('Quiz completed - redirect to checkout with discount');
-    } else {
-      toast.info(`Tack ${userData.name}! Lycka till med din träningsresa! 💪`);
-    }
-    console.log('Quiz results:', { userData, score, answers, flags, recommendation });
-  };
-
-  const progress = showPersonalInfo ? 100 : ((currentQuestion + 1) / questions.length) * 90;
-
-  if (showPersonalInfo && !showResult) {
-    return (
-      <div className="max-w-2xl mx-auto p-6">
-        <div className="mb-8">
-          <Progress value={95} className="h-2" />
-        </div>
-        <Card className="p-8">
-          <div className="text-center mb-8">
-            <div className="text-4xl mb-4">✨</div>
-            <h2 className="text-3xl font-bold text-primary mb-4 font-display">
-              Nästan klar! Bara lite info så får du ditt resultat
-            </h2>
-            <p className="text-lg text-green-700 font-text">
-              Plus en överraskning om programmet passar dig! 🎁
-            </p>
-          </div>
-
-          <form onSubmit={handlePersonalInfoSubmit} className="space-y-4">
-            <Input
-              type="text"
-              placeholder="Ditt namn"
-              value={userData.name}
-              onChange={(e) => setUserData(prev => ({ ...prev, name: e.target.value }))}
-              required
-            />
-            <Input
-              type="email"
-              placeholder="Din e-postadress"
-              value={userData.email}
-              onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
-              required
-            />
-            <Button type="submit" className="w-full cta-primary">
-              Se mitt resultat! 🌟
-            </Button>
-          </form>
-        </Card>
-      </div>
-    );
-  }
+  const progress = showResult ? 100 : ((currentQuestion + 1) / questions.length) * 100;
 
   if (showResult) {
     const recommendation = getRecommendation();
@@ -240,6 +194,9 @@ export const Quiz = () => {
     
     return (
       <div className="max-w-2xl mx-auto p-6">
+        <div className="mb-8">
+          <Progress value={100} className="h-2" />
+        </div>
         <Card className="p-8">
           <div className="text-center mb-8">
             <div className="text-4xl mb-4">{recommendation.recommended ? '🎉' : '🤔'}</div>
@@ -268,26 +225,42 @@ export const Quiz = () => {
               </p>
             </div>
 
-            {recommendation.recommended ? (
-              <div className="space-y-4">
-                <div className="bg-coral-50 rounded-xl p-6 text-center">
-                  <h3 className="text-xl font-bold text-coral-dark mb-2 font-display">
-                    🎁 Grattis! Du får en present! 
-                  </h3>
-                  <p className="text-coral-dark font-medium mb-4">
-                    Gratis shaker till proteinpulver och 15% rabatt om du registrerar dig inom 48h
-                  </p>
-                  <div className="text-2xl font-bold text-coral-dark">
-                    1695 kr <span className="text-lg line-through opacity-60">ord pris</span>
-                  </div>
-                  <div className="text-xl font-bold text-neon-green">
-                    Med 15% rabatt: 1441 kr
-                  </div>
+            {recommendation.recommended && !emailSubmitted && (
+              <div className="bg-coral-50 rounded-xl p-6 mb-6">
+                <h3 className="text-xl font-bold text-coral-dark mb-2 font-display">
+                  🎁 Få din present! 
+                </h3>
+                <p className="text-coral-dark font-medium mb-4">
+                  Ange din e-post för gratis shaker och 15% rabatt (gäller 48h)
+                </p>
+                <div className="text-2xl font-bold text-coral-dark mb-2">
+                  1695 kr <span className="text-lg line-through opacity-60">ord pris</span>
+                </div>
+                <div className="text-xl font-bold text-neon-green mb-4">
+                  Med 15% rabatt: 1441 kr
                 </div>
                 
+                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                  <Input
+                    type="email"
+                    placeholder="Din e-postadress"
+                    value={userData.email}
+                    onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
+                    required
+                    className="text-center"
+                  />
+                  <Button type="submit" className="w-full cta-primary text-lg py-4">
+                    Ja, jag vill ha min rabatt och börja! 🚀
+                  </Button>
+                </form>
+              </div>
+            )}
+
+            {recommendation.recommended && emailSubmitted && (
+              <div className="space-y-4">
                 <div className="bg-green-50 rounded-xl p-6">
                   <h4 className="text-lg font-semibold text-primary mb-3 font-display">
-                    Varför våra medlemmar älskar appen:
+                    Tack! Nu får du din rabatt. Varför våra medlemmar älskar appen:
                   </h4>
                   <ul className="text-left space-y-2 text-green-800">
                     <li>✨ Funkar offline - träna var du vill</li>
@@ -297,16 +270,14 @@ export const Quiz = () => {
                     <li>💬 Chatta med Charlotte när du behöver stöd</li>
                   </ul>
                 </div>
-
-                <Button onClick={handleFinalSubmit} className="w-full cta-primary text-lg py-4">
-                  Ja, jag vill ha min rabatt och börja! 🚀
-                </Button>
                 
                 <p className="text-sm text-green-600 opacity-80 font-text">
                   🕐 Erbjudandet gäller i 48 timmar från nu
                 </p>
               </div>
-            ) : (
+            )}
+
+            {!recommendation.recommended && (
               <div className="space-y-4">
                 <div className="bg-orange-50 rounded-xl p-6">
                   <h4 className="text-lg font-semibold text-orange-800 mb-3 font-display">
@@ -320,7 +291,7 @@ export const Quiz = () => {
                   </ul>
                 </div>
                 
-                <Button onClick={handleFinalSubmit} variant="outline" className="w-full">
+                <Button variant="outline" className="w-full">
                   Tack för rådet! 👍
                 </Button>
               </div>
