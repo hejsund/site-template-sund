@@ -42,6 +42,7 @@ export const Navigation = () => {
       items: [
         { name: 'Charlotte', href: '/om-charlotte', icon: Users },
         { name: 'Vårt team', href: '/team', icon: Users },
+        { name: 'Om Sommarboosten', href: '/om-sommarboosten', icon: Users },
       ]
     }
   ];
@@ -50,42 +51,37 @@ export const Navigation = () => {
     <nav className="bg-white/95 backdrop-blur-sm border-b border-green-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Updated Logo - Text only */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">S&S</span>
-            </div>
-            <span className="font-display font-bold text-primary text-lg">Sund & Stark</span>
+            <span className="font-display font-black text-primary text-xl tracking-tight">
+              Sommarboosten
+            </span>
           </Link>
 
-          {/* Desktop Menu */}
+          {/* Desktop Menu with improved dropdown behavior */}
           <div className="hidden md:flex items-center space-x-8">
             {menuItems.map((menu) => (
               <div
                 key={menu.title}
-                className="relative"
-                onMouseEnter={() => setActiveDropdown(menu.title)}
-                onMouseLeave={() => setActiveDropdown(null)}
+                className="relative group"
               >
                 <button className="flex items-center space-x-1 text-green-700 hover:text-primary font-medium transition-colors">
                   <span>{menu.title}</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 
-                {activeDropdown === menu.title && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-green-100 py-2 z-50">
-                    {menu.items.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className="flex items-center space-x-3 px-4 py-3 text-green-700 hover:bg-green-50 hover:text-primary transition-colors"
-                      >
-                        <item.icon className="w-5 h-5" />
-                        <span>{item.name}</span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-green-100 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  {menu.items.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className="flex items-center space-x-3 px-4 py-3 text-green-700 hover:bg-green-50 hover:text-primary transition-colors"
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.name}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             ))}
             

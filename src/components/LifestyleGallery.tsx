@@ -62,12 +62,12 @@ export const LifestyleGallery = () => {
   return (
     <section className="py-16 sm:py-20 md:py-24 px-3 sm:px-4 bg-gradient-to-br from-green-50 via-white to-green-100">
       <div className="max-w-7xl mx-auto">
-        {/* Mobile-optimized header */}
+        {/* Mobile-optimized header with better contrast */}
         <div className="text-center mb-12 sm:mb-16 md:mb-20">
           <div className="inline-block bg-primary/10 text-primary px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-semibold mb-4 sm:mb-6">
             ✨ Så här kan din sommar se ut
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-gradient leading-tight font-display px-2">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-6 md:mb-8 text-gradient leading-[1.1] font-display px-2">
             Äkta ögonblick från vardagen
           </h2>
           <p className="text-base sm:text-lg md:text-2xl text-foreground/70 max-w-4xl mx-auto leading-relaxed font-text px-2">
@@ -76,7 +76,7 @@ export const LifestyleGallery = () => {
           <div className="text-2xl sm:text-3xl mt-4 opacity-80">🌻🌊☀️</div>
         </div>
 
-        {/* Instagram-style square grid */}
+        {/* Instagram-style square grid with improved text contrast */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-12 sm:mb-16">
           {images.map((image, index) => (
             <div 
@@ -98,10 +98,10 @@ export const LifestyleGallery = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
-                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="font-bold text-xs sm:text-sm mb-1 font-display">{image.caption}</h3>
+                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-warm-contrast transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="font-black text-xs sm:text-sm mb-1 font-display leading-tight">{image.caption}</h3>
                   <p className="text-xs opacity-90 font-text">Upptäck hur enkelt det kan vara</p>
                 </div>
               </div>
@@ -128,8 +128,8 @@ export const LifestyleGallery = () => {
           </div>
         </div>
 
-        {/* Enhanced summer CTA section */}
-        <div className="bg-gradient-to-r from-primary via-green-500 to-green-400 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center text-white shadow-2xl relative overflow-hidden">
+        {/* Enhanced summer CTA section with improved text contrast */}
+        <div className="bg-gradient-to-r from-primary via-green-500 to-green-400 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center text-warm-contrast shadow-2xl relative overflow-hidden">
           {/* Summer background effects */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-4 right-4 text-4xl animate-float">☀️</div>
@@ -139,7 +139,7 @@ export const LifestyleGallery = () => {
           
           <div className="relative z-10">
             <div className="text-3xl sm:text-4xl mb-4">🏖️✨🌻</div>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 font-display">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 font-display leading-tight">
               Redo att skapa din bästa sommar?
             </h3>
             <p className="text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto font-text leading-relaxed px-2">

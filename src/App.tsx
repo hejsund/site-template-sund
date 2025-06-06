@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import QuizPage from "./pages/QuizPage";
 import ProgramYearPage from "./pages/ProgramYearPage";
 import PreviousYearsPage from "./pages/PreviousYearsPage";
+import AboutSommarboostenPage from "./pages/AboutSommarboostenPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
               <Route path="/versionshistorik" element={<PreviousYearsPage />} />
               <Route path="/om-charlotte" element={<Index />} />
               <Route path="/team" element={<Index />} />
+              <Route path="/om-sommarboosten" element={<AboutSommarboostenPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

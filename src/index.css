@@ -50,11 +50,20 @@
     --green-700: 155 85% 12%;
     --green-800: 155 90% 8%;
     
-    /* Warm accent colors - improved contrast */
+    /* Enhanced warm accent colors for better text contrast */
     --coral: 14 85% 60%;
     --coral-light: 14 75% 80%;
+    --coral-dark: 14 90% 45%;
+    --coral-contrast: 14 95% 95%;
+    --orange: 25 95% 65%;
+    --orange-light: 25 85% 80%;
+    --orange-contrast: 25 100% 98%;
+    --pink: 340 75% 65%;
+    --pink-light: 340 60% 80%;
+    --pink-contrast: 340 85% 95%;
     --purple: 280 50% 60%;
     --purple-light: 280 40% 80%;
+    --purple-contrast: 280 70% 95%;
   }
 
   .dark {
@@ -101,7 +110,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display text-green-800;
-    line-height: 1.1;
+    line-height: 1.2;
   }
 
   h1 {
@@ -157,6 +166,22 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .text-coral-contrast {
+    color: hsl(var(--coral-contrast));
+  }
+
+  .text-orange-contrast {
+    color: hsl(var(--orange-contrast));
+  }
+
+  .text-pink-contrast {
+    color: hsl(var(--pink-contrast));
+  }
+
+  .text-warm-contrast {
+    color: hsl(var(--coral-contrast));
   }
 
   .card-block {
@@ -249,10 +274,24 @@
   }
 }
 
+/* Float Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .animate-heartBeat {
   animation: heartBeat 1.2s infinite cubic-bezier(.215, .61, .355, 1);
 }
 
 .animate-jumpingBounce {
   animation: jumpingBounce 3s ease-out 0.5s both;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
