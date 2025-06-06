@@ -1,17 +1,29 @@
 
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import { Calendar, Clock, Users, Trophy } from 'lucide-react';
+import { Calendar, Clock, Users, Trophy, Smartphone } from 'lucide-react';
+import { toast } from 'sonner';
 
 const ProgramYearPage = () => {
   const { year } = useParams<{ year: string }>();
   const { currentPhase } = useTimePhase();
+  const [email, setEmail] = useState('');
   
   const programYear = year ? parseInt(year) : currentPhase.year;
   const isCurrentYear = programYear === new Date().getFullYear();
   const isPastYear = programYear < new Date().getFullYear();
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      toast.success(`Tack! Du kommer att höra från oss snart med mer information om Sommarboosten ${programYear}! 🌟`);
+      setEmail('');
+    }
+  };
 
   const features = [
     {
@@ -20,9 +32,9 @@ const ProgramYearPage = () => {
       description: "Anpassad efter din nivå och dina mål"
     },
     {
-      icon: Users,
-      title: "Community support",
-      description: "Träna tillsammans med andra i samma resa"
+      icon: Smartphone,
+      title: "Smart tränings-app",
+      description: "Allt du behöver samlade i en användarvänlig app"
     },
     {
       icon: Calendar,
@@ -40,7 +52,7 @@ const ProgramYearPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold text-primary mb-6 font-display">
+          <h1 className="text-5xl md:text-6xl font-black text-primary mb-6 font-display tracking-tight">
             Sommarboosten {programYear}
           </h1>
           
@@ -59,15 +71,27 @@ const ProgramYearPage = () => {
             }
           </p>
 
-          {currentPhase.isActive && isCurrentYear ? (
-            <Button className="cta-primary text-xl px-8 py-4">
-              {currentPhase.ctaText} - {programYear}
-            </Button>
-          ) : (
-            <Button className="cta-warm text-xl px-8 py-4">
-              {currentPhase.ctaText}
-            </Button>
-          )}
+          {/* Email signup form */}
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl max-w-lg mx-auto mb-8 border border-white/50">
+            <form onSubmit={handleEmailSubmit} className="space-y-4">
+              <Input
+                type="email"
+                placeholder="Din e-postadress..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-12 text-base rounded-xl border-2 border-border focus:border-primary font-text"
+                required
+              />
+              <div className="flex gap-3">
+                <Button type="submit" className="cta-primary h-12 flex-1 text-lg rounded-xl">
+                  Påminn mig ✨
+                </Button>
+                <Button type="button" className="cta-warm h-12 flex-1 text-lg rounded-xl">
+                  Gör quiz först
+                </Button>
+              </div>
+            </form>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
@@ -96,7 +120,7 @@ const ProgramYearPage = () => {
             <div className="space-y-4 text-left">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-green-700 font-text">8 veckors progressiv träningsplan</span>
+                <span className="text-green-700 font-text">4 veckors progressiv träningsplan</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
@@ -108,7 +132,7 @@ const ProgramYearPage = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-green-700 font-text">Privat community med likasinnade</span>
+                <span className="text-green-700 font-text">Allt samlat i en smart tränings-app</span>
               </div>
             </div>
           </div>
