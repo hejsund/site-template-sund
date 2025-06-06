@@ -19,19 +19,19 @@ const SaHarBorjadeDetPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-warm-50 via-orange-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-green-100 to-green-200">
       {/* Hero Section */}
-      <section className="py-16 sm:py-20 md:py-24 px-3 sm:px-4 relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-coral/20 via-purple/10 to-orange/20"></div>
-          <Sparkles className="absolute top-10 right-10 text-orange opacity-20 animate-float" size={60} />
+          <div className="absolute inset-0 bg-gradient-to-br from-coral/10 via-purple/5 to-green-300/20"></div>
+          <Sparkles className="absolute top-10 right-10 text-coral opacity-20 animate-float" size={60} />
           <Heart className="absolute top-20 left-10 text-coral opacity-20 animate-float" size={40} style={{ animationDelay: '1s' }} />
           <Calendar className="absolute bottom-20 right-20 text-purple opacity-20 animate-float" size={50} style={{ animationDelay: '2s' }} />
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="mb-8">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-gradient mb-6 font-display leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-gradient mb-6 font-display leading-tight">
               Vi skapade Sommarboosten
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-green-700 max-w-3xl mx-auto leading-relaxed font-text mb-8">
@@ -43,9 +43,9 @@ const SaHarBorjadeDetPage = () => {
       </section>
 
       {/* Charlotte's Introduction */}
-      <section className="py-12 px-3 sm:px-4">
+      <section className="py-8 sm:py-12 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
             <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
               <img 
                 src="/lovable-uploads/67cd34f1-1979-42e6-b2da-6f8f6f298078.png" 
@@ -72,12 +72,12 @@ const SaHarBorjadeDetPage = () => {
       </section>
 
       {/* Main Article Content */}
-      <section className="py-12 sm:py-16 px-3 sm:px-4">
+      <section className="py-8 sm:py-12 md:py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <article className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl">
+          <article className="bg-white/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl border border-green-200/50">
             
             <div className="prose prose-lg max-w-none">
-              <h2 className="text-3xl font-bold text-green-800 mb-6">Hej, jag heter Charlotte och tillsammans med mitt team på Sund & Stark skapade vi Sommarboosten</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-green-800 mb-6">Hej, jag heter Charlotte och tillsammans med mitt team på Sund & Stark skapade vi Sommarboosten</h2>
               
               <p className="lead text-green-700 font-text">
                 Som fyrbarnsmamma och grundare av <strong>Sund & Stark</strong> vet jag hur det känns när sommaren närmar sig och panikens påverkar sätter in. "Ska jag verkligen kunna hålla igång träningen när barnen är hemma?" "Hur ska jag få till hälsosamma vanor när allt är kaos och grillmys?"
@@ -214,13 +214,13 @@ const SaHarBorjadeDetPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-3 sm:px-4">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white border-2 border-primary p-6 sm:p-8 rounded-2xl text-primary mb-8 shadow-lg">
+          <div className="bg-white/90 border-2 border-green-300 p-6 sm:p-8 rounded-2xl text-primary mb-8 shadow-lg backdrop-blur-sm">
             <div className="text-center">
               <div className="text-4xl mb-4">🌞</div>
-              <h3 className="text-xl sm:text-2xl font-black mb-4 font-display text-primary">
-                VÄLKOMMEN TILL DIN BÄSTA SOMMAR
+              <h3 className="text-xl sm:text-2xl font-black mb-4 font-display text-green-800">
+                Välkommen till din bästa sommar
               </h3>
               <p className="text-sm sm:text-base mb-6 text-green-700 font-text">
                 Redo att börja? Anmäl ditt intresse så hör vi av oss när nästa kapitel börjar!
@@ -232,10 +232,10 @@ const SaHarBorjadeDetPage = () => {
                   placeholder="Din e-postadress..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 h-12 text-sm sm:text-base rounded-xl border-2 border-primary/30 bg-white text-green-800"
+                  className="flex-1 h-12 text-sm sm:text-base rounded-xl border-2 border-green-300 bg-white text-green-800"
                   required
                 />
-                <Button type="submit" className="bg-primary text-white hover:bg-primary/90 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold">
+                <Button type="submit" className="bg-green-600 text-white hover:bg-green-700 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold">
                   Anmäl intresse ✨
                 </Button>
               </form>
@@ -245,16 +245,16 @@ const SaHarBorjadeDetPage = () => {
       </section>
 
       {/* Navigation */}
-      <section className="py-16 px-3 sm:px-4">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="space-y-4">
             <Link to="/quiz" className="inline-block">
-              <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-xl font-semibold">
+              <Button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-semibold">
                 Ta vårt quiz för personlig vägledning
               </Button>
             </Link>
             <p className="text-sm text-green-600 opacity-80 font-text">
-              Eller utforska mer om <Link to="/om-sommarboosten" className="text-primary hover:underline font-medium">Sommarboosten</Link>
+              Eller utforska mer om <Link to="/om-sommarboosten" className="text-green-700 hover:underline font-medium">Sommarboosten</Link>
             </p>
           </div>
         </div>
