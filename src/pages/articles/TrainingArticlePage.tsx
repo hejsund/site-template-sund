@@ -1,12 +1,21 @@
-
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Heart, Dumbbell, Star, Clock, Users } from 'lucide-react';
+import { Heart, Dumbbell, Star, Clock, Users, ArrowLeft } from 'lucide-react';
 
 const TrainingArticlePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-      <article className="py-16 px-4">
+      {/* Header */}
+      <section className="py-8 sm:py-12 px-3 sm:px-4">
+        <div className="max-w-4xl mx-auto">
+          <Link to="/artiklar" className="inline-flex items-center text-primary hover:text-primary/80 mb-6 font-medium">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Tillbaka till artiklar
+          </Link>
+        </div>
+      </section>
+
+      <article className="py-8 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <header className="text-center mb-12">
@@ -14,7 +23,7 @@ const TrainingArticlePage = () => {
               <Dumbbell className="inline w-4 h-4 mr-2" />
               Träning & Motivation
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-gradient mb-6 font-display leading-tight">
+            <h1 className="text-4xl md:text-6xl font-black text-primary mb-6 font-display leading-tight">
               Sommarträning som du faktiskt längtar efter
             </h1>
             <p className="text-lg text-green-700 italic font-text mb-8">
@@ -179,8 +188,8 @@ const TrainingArticlePage = () => {
               
               <div className="text-center">
                 <Link to="/quiz">
-                  <Button className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 mr-4 mb-4">
-                    Hitta din träningsglädje
+                  <Button className="bg-primary hover:bg-primary/90 text-white font-semibold text-lg px-8 py-4 mr-4 mb-4">
+                    Ta vårt quiz - hitta din väg
                   </Button>
                 </Link>
                 <Link to="/om-sommarboosten">

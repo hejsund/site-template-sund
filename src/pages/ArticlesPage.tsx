@@ -13,7 +13,7 @@ const ArticlesPage = () => {
       icon: Dumbbell,
       image: '/lovable-uploads/b421d335-bc7b-4b5b-8e07-edd16ebbb404.png',
       readTime: '8 min',
-      gradient: 'from-green-200 via-emerald-300 to-teal-200',
+      gradient: 'from-green-100 via-green-200 to-green-300',
       borderColor: 'border-green-400',
       iconColor: 'text-green-700',
       path: '/artiklar/traning'
@@ -26,9 +26,9 @@ const ArticlesPage = () => {
       icon: Apple,
       image: '/lovable-uploads/8860c780-4dbb-4b43-b12f-770483b2f79f.png',
       readTime: '7 min',
-      gradient: 'from-coral-200 via-orange-300 to-yellow-200',
-      borderColor: 'border-coral-400',
-      iconColor: 'text-coral-dark',
+      gradient: 'from-orange-100 via-coral/30 to-orange-200',
+      borderColor: 'border-orange-300',
+      iconColor: 'text-orange-700',
       path: '/artiklar/kost'
     },
     {
@@ -39,8 +39,8 @@ const ArticlesPage = () => {
       icon: Target,
       image: '/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png',
       readTime: '10 min',
-      gradient: 'from-purple-200 via-pink-300 to-purple-200',
-      borderColor: 'border-purple-400',
+      gradient: 'from-purple-100 via-purple-200 to-purple-300',
+      borderColor: 'border-purple-300',
       iconColor: 'text-purple-700',
       path: '/artiklar/vanor'
     },
@@ -52,22 +52,22 @@ const ArticlesPage = () => {
       icon: Trophy,
       image: '/lovable-uploads/f60c9ef3-2146-4344-ba07-04c19de24beb.png',
       readTime: '12 min',
-      gradient: 'from-orange-200 via-amber-300 to-yellow-200',
-      borderColor: 'border-orange-400',
-      iconColor: 'text-orange-700',
+      gradient: 'from-yellow-100 via-yellow-200 to-amber-200',
+      borderColor: 'border-yellow-300',
+      iconColor: 'text-yellow-700',
       path: '/artiklar/forst'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-orange-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
       {/* Hero Section */}
       <section className="py-16 sm:py-20 md:py-24 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-block bg-gradient-to-r from-coral to-purple text-white px-6 py-3 rounded-full text-sm font-semibold mb-6">
+          <div className="inline-block bg-primary/10 text-primary px-6 py-3 rounded-full text-sm font-semibold mb-6">
             📖 Kunskap & inspiration
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-gradient mb-6 font-display leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-primary mb-6 font-display leading-tight">
             Artiklar & guider
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-green-700 max-w-4xl mx-auto leading-relaxed font-text mb-8">
@@ -88,7 +88,7 @@ const ArticlesPage = () => {
                 className={`group bg-gradient-to-br ${article.gradient} border ${article.borderColor} rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 animate-fade-in`}
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <div className="aspect-video mb-6 rounded-xl overflow-hidden shadow-md">
+                <div className="aspect-[5/4] mb-6 rounded-xl overflow-hidden shadow-md">
                   <img 
                     src={article.image} 
                     alt={article.title}
@@ -107,7 +107,7 @@ const ArticlesPage = () => {
                   </div>
                 </div>
                 
-                <h2 className="text-xl sm:text-2xl font-black text-green-800 mb-4 font-display leading-tight group-hover:text-primary transition-colors">
+                <h2 className="text-xl sm:text-2xl font-black text-primary mb-4 font-display leading-tight group-hover:text-green-700 transition-colors">
                   {article.title}
                 </h2>
                 
@@ -140,25 +140,25 @@ const ArticlesPage = () => {
       {/* CTA Section */}
       <section className="py-16 sm:py-20 px-3 sm:px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-r from-pink-400 via-coral to-orange-400 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center text-warm-contrast shadow-2xl">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 font-display">
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center shadow-2xl border border-green-200">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6 font-display text-primary">
               Vill du fördjupa dig mer? 🌟
             </h2>
-            <p className="text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto font-text leading-relaxed">
+            <p className="text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 text-green-700 max-w-2xl mx-auto font-text leading-relaxed">
               I Sommarboosten får du inte bara artiklar - du får ett komplett system för att omsätta kunskapen i praktiken.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-              <Link to="/om-sommarboosten">
-                <Button className="bg-white text-primary hover:bg-green-50 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full sm:w-auto">
-                  Utforska Sommarboosten 🚀
+              <Link to="/quiz">
+                <Button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full sm:w-auto">
+                  Ta vårt quiz först 🚀
                 </Button>
               </Link>
-              <Link to="/quiz">
+              <Link to="/om-sommarboosten">
                 <Button 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg font-display w-full sm:w-auto"
+                  className="border-primary text-primary hover:bg-primary hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-lg font-display w-full sm:w-auto"
                 >
-                  Ta vårt quiz
+                  Utforska Sommarboosten
                 </Button>
               </Link>
             </div>
