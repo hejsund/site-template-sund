@@ -45,11 +45,11 @@ export const LifestyleGallery = () => {
                   alt={image.alt}
                   className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent transition-opacity duration-200 group-hover:from-black/50"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-200 group-hover:from-black/60"></div>
               </div>
               
-              {/* White background overlay for better text readability */}
-              <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm p-4 sm:p-6 transform translate-y-0 transition-all duration-200 group-hover:translate-y-0">
+              {/* Enhanced white background overlay for better text readability */}
+              <div className="absolute bottom-0 left-0 right-0 bg-white/98 backdrop-blur-md p-4 sm:p-6 transform translate-y-0 transition-all duration-200 group-hover:translate-y-0 border-t border-white/20">
                 <h3 className="text-lg sm:text-xl font-bold text-primary mb-2 font-display">
                   {image.title}
                 </h3>
