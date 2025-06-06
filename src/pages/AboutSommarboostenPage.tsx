@@ -76,45 +76,45 @@ const AboutSommarboostenPage = () => {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gradient-to-br from-green-200 to-emerald-300 border border-green-400 p-6 rounded-2xl shadow-md">
+                <div className="bg-white border border-green-200 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
-                    <Dumbbell className="text-green-800 w-6 h-6" />
+                    <Dumbbell className="text-green-600 w-6 h-6" />
                     <h3 className="text-lg font-bold text-green-800 font-display">Träning som inspirerar</h3>
                   </div>
-                  <p className="text-sm text-green-800 font-text leading-relaxed">
+                  <p className="text-sm text-green-700 font-text leading-relaxed">
                     15-30 minuters effektiva träningspass som du kan göra hemma eller utomhus. 
                     Ingen utrustning krävs – bara din egen kropp och viljan att röra dig.
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-coral-200 to-orange-300 border border-coral-400 p-6 rounded-2xl shadow-md">
+                <div className="bg-white border border-coral/30 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
-                    <Apple className="text-coral-dark w-6 h-6" />
-                    <h3 className="text-lg font-bold text-coral-dark font-display">Supergoda recept</h3>
+                    <Apple className="text-coral w-6 h-6" />
+                    <h3 className="text-lg font-bold text-coral font-display">Supergoda recept</h3>
                   </div>
-                  <p className="text-sm text-green-800 font-text leading-relaxed">
+                  <p className="text-sm text-green-700 font-text leading-relaxed">
                     Näringsrika och smakrika recept som tar max 20 minuter att laga. 
                     Perfekta för upptagna dagar när du ändå vill äta hälsosamt och gott.
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple-200 to-pink-300 border border-purple-400 p-6 rounded-2xl shadow-md">
+                <div className="bg-white border border-purple/30 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
-                    <Users className="text-purple-contrast w-6 h-6" />
+                    <Users className="text-purple w-6 h-6" />
                     <h3 className="text-lg font-bold text-purple font-display">Gemenskap & stöd</h3>
                   </div>
-                  <p className="text-sm text-green-800 font-text leading-relaxed">
+                  <p className="text-sm text-green-700 font-text leading-relaxed">
                     En varm och uppmuntrande community där du kan dela din resa, 
                     ställa frågor och få inspiration från andra deltagare.
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-orange-200 to-yellow-300 border border-orange-400 p-6 rounded-2xl shadow-md">
+                <div className="bg-white border border-orange/30 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
                     <Heart className="text-orange w-6 h-6" />
                     <h3 className="text-lg font-bold text-orange font-display">Personlig coaching</h3>
                   </div>
-                  <p className="text-sm text-green-800 font-text leading-relaxed">
+                  <p className="text-sm text-green-700 font-text leading-relaxed">
                     Veckovis guidning från Charlotte med tips, motivation och svar på 
                     dina frågor. Du är aldrig ensam på din resa.
                   </p>
