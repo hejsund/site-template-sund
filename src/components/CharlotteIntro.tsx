@@ -6,16 +6,22 @@ export const CharlotteIntro = () => {
     <section className="py-20 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Video placeholder */}
+          {/* Charlotte's actual photo */}
           <div className="relative">
-            <div className="bg-green-100 rounded-3xl aspect-video flex items-center justify-center relative overflow-hidden">
-              {/* Placeholder for Charlotte's video */}
-              <div className="absolute inset-4 bg-gradient-to-br from-green-200 to-green-300 rounded-2xl flex items-center justify-center">
+            <div className="relative overflow-hidden rounded-3xl">
+              <img 
+                src="/lovable-uploads/0a9897c0-1dce-4db3-b5ee-b2a62d6f836b.png" 
+                alt="Charlotte Steinwig - grundare av Sund & Stark"
+                className="w-full h-auto object-cover rounded-3xl"
+              />
+              
+              {/* Video play overlay */}
+              <div className="absolute inset-0 bg-black/20 rounded-3xl flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                 <div className="text-center">
                   <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
                     <Play className="text-primary ml-1" size={32} />
                   </div>
-                  <p className="text-sm text-primary font-medium">Charlotte hälsar dig välkommen</p>
+                  <p className="text-sm text-white font-medium">Charlotte hälsar dig välkommen</p>
                 </div>
               </div>
               
@@ -31,11 +37,11 @@ export const CharlotteIntro = () => {
               💚 Ett personligt meddelande från Charlotte
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-primary leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary leading-tight font-display">
               Hej, härliga du! 
             </h2>
 
-            <div className="space-y-4 text-lg text-foreground/80 leading-relaxed">
+            <div className="space-y-4 text-lg text-foreground/80 leading-relaxed font-text">
               <p>
                 Jag vet hur det känns – sommaren kan vara både njutning och stress. Men jag tror att du kan få båda delarna att fungera tillsammans.
               </p>
@@ -50,10 +56,10 @@ export const CharlotteIntro = () => {
             </div>
 
             <div className="bg-green-50 rounded-2xl p-6 border-l-4 border-primary">
-              <p className="text-primary font-medium italic">
+              <p className="text-primary font-medium italic font-text">
                 "Sommaren handlar om att leva – och Sommarboosten handlar om att du äger dina val."
               </p>
-              <p className="text-sm text-foreground/60 mt-2">– Charlotte Steinwig</p>
+              <p className="text-sm text-foreground/60 mt-2 font-text">– Charlotte Steinwig</p>
             </div>
           </div>
         </div>

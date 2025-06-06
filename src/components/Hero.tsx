@@ -29,16 +29,16 @@ export const Hero = () => {
 
         <div className="relative z-10">
           {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient leading-tight font-display">
             🌿 Sommarboosten 2025
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-foreground/80 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl mb-8 text-foreground/80 max-w-3xl mx-auto leading-relaxed font-text">
             Vill du vara med på resan mot en sommar fylld av energi och glädje?
           </p>
 
           <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl max-w-2xl mx-auto mb-8">
-            <p className="text-lg mb-6 text-foreground/70">
+            <p className="text-lg mb-6 text-foreground/70 font-text">
               Fyll i din e-post här – så får du första nyheterna och tillgång till ett exklusivt förhandsmaterial om Sommarboosten. 
               <strong className="text-primary"> Inga måsten – bara inspiration och pepp!</strong>
             </p>
@@ -49,7 +49,7 @@ export const Hero = () => {
                 placeholder="Din e-postadress..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 h-14 text-lg rounded-xl border-2 border-border focus:border-primary"
+                className="flex-1 h-14 text-lg rounded-xl border-2 border-border focus:border-primary font-text"
                 required
               />
               <Button type="submit" className="cta-primary h-14 whitespace-nowrap">
@@ -60,7 +60,7 @@ export const Hero = () => {
 
           {/* Scroll indicator */}
           <div className="animate-bounce">
-            <p className="text-sm text-foreground/60 mb-2">Scrolla för att läsa mer</p>
+            <p className="text-sm text-foreground/60 mb-2 font-text">Scrolla för att läsa mer</p>
             <div className="w-6 h-10 border-2 border-primary rounded-full mx-auto relative">
               <div className="w-1 h-3 bg-primary rounded-full mx-auto mt-2 animate-bounce"></div>
             </div>
