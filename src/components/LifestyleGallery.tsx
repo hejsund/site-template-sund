@@ -76,18 +76,18 @@ export const LifestyleGallery = () => {
           <div className="text-2xl sm:text-3xl mt-4 opacity-80">🌻🌊☀️</div>
         </div>
 
-        {/* Mobile-first responsive grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
+        {/* Instagram-style square grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-12 sm:mb-16">
           {images.map((image, index) => (
             <div 
               key={index}
-              className="group cursor-pointer animate-fade-in"
+              className="group cursor-pointer animate-fade-in aspect-square"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-lg group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105 bg-white">
-                <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-10 flex items-center gap-2">
-                  <span className="text-lg sm:text-xl">{image.summerEmoji}</span>
-                  <span className="bg-white/90 backdrop-blur-sm text-primary px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">
+              <div className="relative overflow-hidden rounded-lg sm:rounded-xl shadow-lg group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105 bg-white h-full">
+                <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10 flex items-center gap-1 sm:gap-2">
+                  <span className="text-sm sm:text-lg">{image.summerEmoji}</span>
+                  <span className="bg-white/90 backdrop-blur-sm text-primary px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-semibold">
                     {image.category}
                   </span>
                 </div>
@@ -95,14 +95,14 @@ export const LifestyleGallery = () => {
                 <img 
                   src={image.src} 
                   alt={image.alt}
-                  className="w-full h-48 sm:h-56 md:h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="font-bold text-base sm:text-lg mb-1 sm:mb-2 font-display">{image.caption}</h3>
-                  <p className="text-xs sm:text-sm opacity-90 font-text">Upptäck hur enkelt det kan vara</p>
+                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="font-bold text-xs sm:text-sm mb-1 font-display">{image.caption}</h3>
+                  <p className="text-xs opacity-90 font-text">Upptäck hur enkelt det kan vara</p>
                 </div>
               </div>
             </div>

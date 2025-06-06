@@ -127,8 +127,10 @@ export const Hero = () => {
               </div>
               
               <p className="text-sm sm:text-base mb-4 sm:mb-6 text-green-700 font-text leading-relaxed text-center">
-                Få första nyheterna och exklusivt förhandsmaterial om Sommarboosten. 
-                <strong className="text-primary font-semibold block mt-1"> Inga måsten – bara inspiration och pepp!</strong>
+                Få första nyheterna och exklusivt förhandsmaterial om <strong className="text-primary font-semibold">smarta träningsvanor</strong>, 
+                <strong className="text-coral font-semibold"> supergoda recept</strong> och 
+                <strong className="text-purple font-semibold"> roliga aktiviteter</strong> som gör sommaren magisk! 🏃‍♀️🍓🎉
+                <span className="block mt-2 text-primary font-semibold">Inga måsten – bara inspiration och pepp!</span>
               </p>
 
               <form onSubmit={handleEmailSubmit} className="space-y-3 sm:space-y-0 sm:flex sm:gap-3">
@@ -146,7 +148,7 @@ export const Hero = () => {
               </form>
               
               <p className="text-xs sm:text-sm text-green-600 mt-3 text-center opacity-80 font-text">
-                🏖️ Begränsat antal platser · Ingen bindning · Bara sommarglädje
+                🏖️ Träning som känns som lek · Recept som smakar fantastiskt · Sommarglädje utan stress
               </p>
             </div>
           )}
