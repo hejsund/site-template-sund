@@ -4,52 +4,19 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Heart, Sparkles, Dumbbell, Sun, Waves } from 'lucide-react';
 import { toast } from 'sonner';
+import { useTimePhase } from '@/contexts/TimePhaseContext';
 
 export const Hero = () => {
   const [email, setEmail] = useState('');
-  
-  // Get current date and year for dynamic content
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1; // 0-based, so add 1
-  
-  // Determine display year and text based on current date
-  const getDisplayContent = () => {
-    // In July, show current year with "pågår" message
-    if (currentMonth === 7) {
-      return {
-        year: currentYear,
-        isActive: true,
-        message: "Sommarboosten pågår! Anmälan är stängd."
-      };
-    }
-    
-    // From September onwards, show next year and tease upcoming program
-    if (currentMonth >= 9) {
-      return {
-        year: currentYear + 1,
-        isActive: false,
-        message: `Vill du vara med på resan mot en sommar ${currentYear + 1} fylld av energi och glädje?`
-      };
-    }
-    
-    // January to August (except July), show current year
-    return {
-      year: currentYear,
-      isActive: false,
-      message: `Vill du vara med på resan mot en sommar ${currentYear} fylld av energi och glädje?`
-    };
-  };
-
-  const displayContent = getDisplayContent();
+  const { currentPhase } = useTimePhase();
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      if (displayContent.isActive) {
-        toast.success(`Tack för ditt intresse! Anmälan för Sommarboosten ${displayContent.year} är tyvärr stängd då programmet pågår. 🌟`);
+      if (currentPhase.isActive) {
+        toast.success(`Tack för ditt intresse! Anmälan för Sommarboosten ${currentPhase.year} är öppen nu! 🌟`);
       } else {
-        toast.success(`Tack! Du kommer att höra från oss snart med mer information om Sommarboosten ${displayContent.year}! 🌟`);
+        toast.success(`Tack! Du kommer att höra från oss snart med mer information om Sommarboosten ${currentPhase.year}! 🌟`);
       }
       setEmail('');
     }
@@ -66,12 +33,12 @@ export const Hero = () => {
           className="w-full h-full object-cover object-center sm:object-center"
           style={{ objectPosition: 'center 20%' }}
         />
-        {/* Summer overlay effects */}
+        {/* Season overlay effects */}
         <div className="absolute inset-0 bg-gradient-to-t from-yellow-100/20 via-transparent to-orange-100/10 z-10"></div>
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-20 w-full">
-        {/* Enhanced animated summer elements */}
+        {/* Enhanced animated elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Sun className="absolute top-12 sm:top-20 right-4 sm:right-10 text-yellow-500 opacity-40 animate-float" size={28} />
           <Heart className="absolute top-16 sm:top-24 left-6 sm:left-10 text-coral opacity-30 animate-float" size={24} />
@@ -86,13 +53,13 @@ export const Hero = () => {
         <div className="relative z-10 px-2 sm:px-0">
           {/* Mobile-optimized main heading */}
           <div className="mb-6 sm:mb-8 relative">
-            <h1 className="sr-only">Sommarboosten {displayContent.year}</h1>
+            <h1 className="sr-only">Sommarboosten {currentPhase.year}</h1>
             <div className="text-5xl sm:text-6xl md:text-8xl font-black leading-none font-display" aria-hidden="true">
               <span className="text-2xl sm:text-3xl md:text-5xl text-green-700 font-semibold opacity-90 block tracking-widest animate-jumpingBounce pb-3 sm:pb-6 md:pb-8">
-                {displayContent.year}
+                {currentPhase.year}
               </span>
               <span className="text-gradient block -mt-1 sm:-mt-2 md:-mt-4 leading-none">
-                {displayContent.isActive ? (
+                {currentPhase.isActive ? (
                   <>
                     <span className="block text-3xl sm:text-5xl md:text-7xl">Sommarboosten</span>
                     <span className="block text-2xl sm:text-3xl md:text-4xl mt-1 sm:mt-2">pågår!</span>
@@ -104,32 +71,32 @@ export const Hero = () => {
             </div>
           </div>
           
-          {/* Mobile-optimized subtitle with summer energy */}
+          {/* Mobile-optimized subtitle with seasonal adaptation */}
           <div className="mb-6 sm:mb-10 md:mb-12">
             <p className="text-base sm:text-lg md:text-2xl text-green-800 max-w-3xl mx-auto leading-relaxed font-text font-medium px-2">
-              {displayContent.message}
+              {currentPhase.description}
             </p>
-            {!displayContent.isActive && (
+            {!currentPhase.isActive && (
               <p className="text-sm sm:text-base text-green-700 mt-3 sm:mt-4 opacity-90 font-text">
-                ☀️ Gör denna sommar till din bästa någonsin! 🌊
+                ☀️ Gör denna {currentPhase.seasonText} till din bästa någonsin! 🌊
               </p>
             )}
           </div>
 
           {/* Enhanced email signup form for mobile */}
-          {!displayContent.isActive && (
+          {!currentPhase.isActive && (
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-12 shadow-xl max-w-lg sm:max-w-2xl mx-auto mb-6 sm:mb-10 md:mb-12 border border-white/50">
               <div className="text-center mb-4 sm:mb-6">
                 <div className="text-2xl sm:text-3xl mb-2">🌟✨🌻</div>
                 <h3 className="text-lg sm:text-xl font-bold text-primary mb-2 font-display">
-                  Din drömarsommar börjar här!
+                  Din drömresa börjar här!
                 </h3>
               </div>
               
               <p className="text-sm sm:text-base mb-4 sm:mb-6 text-green-700 font-text leading-relaxed text-center">
                 Få första nyheterna och exklusivt förhandsmaterial om <strong className="text-primary font-semibold">smarta träningsvanor</strong>, 
                 <strong className="text-coral font-semibold"> supergoda recept</strong> och 
-                <strong className="text-purple font-semibold"> roliga aktiviteter</strong> som gör sommaren magisk! 🏃‍♀️🍓🎉
+                <strong className="text-purple font-semibold"> roliga aktiviteter</strong> som gör {currentPhase.seasonText} magisk! 🏃‍♀️🍓🎉
                 <span className="block mt-2 text-primary font-semibold">Inga måsten – bara inspiration och pepp!</span>
               </p>
 
@@ -143,28 +110,27 @@ export const Hero = () => {
                   required
                 />
                 <Button type="submit" className="cta-primary h-12 sm:h-14 w-full sm:w-auto whitespace-nowrap text-sm sm:text-lg px-6 sm:px-8 rounded-xl">
-                  Ja, jag vill vara med! ✨
+                  {currentPhase.ctaText} ✨
                 </Button>
               </form>
               
               <p className="text-xs sm:text-sm text-green-600 mt-3 text-center opacity-80 font-text">
-                🏖️ Träning som känns som lek · Recept som smakar fantastiskt · Sommarglädje utan stress
+                🏖️ Träning som känns som lek · Recept som smakar fantastiskt · Glädje utan stress
               </p>
             </div>
           )}
 
           {/* Enhanced active program message */}
-          {displayContent.isActive && (
+          {currentPhase.isActive && (
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-12 shadow-xl max-w-lg sm:max-w-2xl mx-auto mb-6 sm:mb-10 md:mb-12 border border-orange-200">
               <div className="text-center">
                 <div className="text-3xl sm:text-4xl mb-3">🌺🌞🌊</div>
                 <p className="text-sm sm:text-base text-green-700 font-text leading-relaxed">
-                  <strong className="text-primary font-semibold text-base sm:text-lg">Anmälan är stängd</strong> 
-                  <span className="block mt-1">då programmet pågår just nu!</span>
+                  <strong className="text-primary font-semibold text-base sm:text-lg">{currentPhase.description}</strong> 
                 </p>
-                <p className="text-xs sm:text-sm text-green-600 mt-3 opacity-80 font-text">
-                  Följ oss för nästa års Sommarboosten! 🌟
-                </p>
+                <Button className="cta-primary mt-4">
+                  {currentPhase.ctaText} 🌟
+                </Button>
               </div>
             </div>
           )}
