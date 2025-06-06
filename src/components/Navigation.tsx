@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Menu, X, Calendar, Clock, Users, Trophy, ChevronDown } from 'lucide-react';
+import { Menu, X, Calendar, Clock, Users, Trophy, ChevronDown, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -27,6 +27,15 @@ export const Navigation = () => {
       items: [
         { name: `Sommarboosten ${currentYear}`, href: `/program/${currentYear}`, icon: Trophy },
         { name: 'Tidigare år', href: '/tidigare-ar', icon: Calendar },
+      ]
+    },
+    {
+      title: 'Artiklar',
+      items: [
+        { name: 'Alla artiklar', href: '/artiklar', icon: BookOpen },
+        { name: 'Träning & motivation', href: '/artiklar/traning', icon: Trophy },
+        { name: 'Kost & njutning', href: '/artiklar/kost', icon: Users },
+        { name: 'Vanor & förändringar', href: '/artiklar/vanor', icon: Clock },
       ]
     },
     {

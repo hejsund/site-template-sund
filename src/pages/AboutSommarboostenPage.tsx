@@ -34,7 +34,7 @@ const AboutSommarboostenPage = () => {
               Vad är Sommarboosten?
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-green-700 max-w-3xl mx-auto leading-relaxed font-text mb-8">
-              En 8-veckors resa mot en sundare, starkare och gladare version av dig själv. 
+              En 4-veckors resa mot en sundare, starkare och gladare version av dig själv. 
               Perfekt för att kickstarta din sommar med energi och glädje!
             </p>
             <div className="text-3xl opacity-80">🌻☀️🌊</div>
@@ -56,7 +56,7 @@ const AboutSommarboostenPage = () => {
               </div>
               <p className="text-base sm:text-lg text-green-700 leading-relaxed font-text mb-6">
                 Sommarboosten är inte bara ett träningsprogram – det är en komplett livsstilsförändring 
-                som gör hälsa till en naturlig del av din vardag. Under 8 veckor får du verktyg, 
+                som gör hälsa till en naturlig del av din vardag. Under 4 veckor får du verktyg, 
                 inspiration och stöd för att skapa varaktiga vanor som håller hela året.
               </p>
               <div className="bg-coral/10 border-l-4 border-coral p-4 rounded-lg">
@@ -76,45 +76,45 @@ const AboutSommarboostenPage = () => {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl">
+                <div className="bg-gradient-to-br from-green-100 to-green-200 border border-green-300 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
-                    <Dumbbell className="text-primary w-6 h-6" />
-                    <h3 className="text-lg font-bold text-primary font-display">Träning som inspirerar</h3>
+                    <Dumbbell className="text-green-800 w-6 h-6" />
+                    <h3 className="text-lg font-bold text-green-800 font-display">Träning som inspirerar</h3>
                   </div>
-                  <p className="text-sm text-green-700 font-text leading-relaxed">
+                  <p className="text-sm text-green-800 font-text leading-relaxed">
                     15-30 minuters effektiva träningspass som du kan göra hemma eller utomhus. 
                     Ingen utrustning krävs – bara din egen kropp och viljan att röra dig.
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-orange/10 to-coral/10 p-6 rounded-2xl">
+                <div className="bg-gradient-to-br from-coral/20 to-coral/30 border border-coral/40 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
-                    <Apple className="text-coral w-6 h-6" />
-                    <h3 className="text-lg font-bold text-coral font-display">Supergoda recept</h3>
+                    <Apple className="text-coral-dark w-6 h-6" />
+                    <h3 className="text-lg font-bold text-coral-dark font-display">Supergoda recept</h3>
                   </div>
-                  <p className="text-sm text-green-700 font-text leading-relaxed">
+                  <p className="text-sm text-green-800 font-text leading-relaxed">
                     Näringsrika och smakrika recept som tar max 20 minuter att laga. 
                     Perfekta för upptagna dagar när du ändå vill äta hälsosamt och gott.
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-purple/10 to-pink/10 p-6 rounded-2xl">
+                <div className="bg-gradient-to-br from-purple/20 to-purple/30 border border-purple/40 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
-                    <Users className="text-purple w-6 h-6" />
+                    <Users className="text-purple-contrast w-6 h-6" />
                     <h3 className="text-lg font-bold text-purple font-display">Gemenskap & stöd</h3>
                   </div>
-                  <p className="text-sm text-green-700 font-text leading-relaxed">
+                  <p className="text-sm text-green-800 font-text leading-relaxed">
                     En varm och uppmuntrande community där du kan dela din resa, 
                     ställa frågor och få inspiration från andra deltagare.
                   </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-coral/10 to-orange/10 p-6 rounded-2xl">
+                <div className="bg-gradient-to-br from-orange/20 to-orange/30 border border-orange/40 p-6 rounded-2xl shadow-md">
                   <div className="flex items-center gap-3 mb-4">
-                    <Heart className="text-coral w-6 h-6" />
-                    <h3 className="text-lg font-bold text-coral font-display">Personlig coaching</h3>
+                    <Heart className="text-orange w-6 h-6" />
+                    <h3 className="text-lg font-bold text-orange font-display">Personlig coaching</h3>
                   </div>
-                  <p className="text-sm text-green-700 font-text leading-relaxed">
+                  <p className="text-sm text-green-800 font-text leading-relaxed">
                     Veckovis guidning från Charlotte med tips, motivation och svar på 
                     dina frågor. Du är aldrig ensam på din resa.
                   </p>
@@ -160,20 +160,16 @@ const AboutSommarboostenPage = () => {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-6">
                 <Calendar className="text-primary w-8 h-8" />
-                <h2 className="text-2xl sm:text-3xl font-black text-gradient font-display">
-                  Din 8-veckors resa
+                <h2 className="text-2xl sm:text-3xl font-black text-warm-contrast font-display">
+                  Din 4-veckors resa
                 </h2>
               </div>
               <div className="space-y-4">
                 {[
                   { week: 1, title: "Grunderna", desc: "Lär dig de enkla baserna för hälsosam kost och rolig träning" },
                   { week: 2, title: "Rutiner", desc: "Bygg upp dina dagliga vanor och hitta din egen rytm" },
-                  { week: 3, title: "Energi", desc: "Känna hur kroppen börjar svara med mer energi och välmående" },
-                  { week: 4, title: "Balans", desc: "Hitta jämvikten mellan träning, vila och njutning" },
-                  { week: 5, title: "Styrka", desc: "Märk hur du blir både fysiskt och mentalt starkare" },
-                  { week: 6, title: "Glädje", desc: "Träning och hälsosam mat känns nu som självklara delar av livet" },
-                  { week: 7, title: "Reflektion", desc: "Se tillbaka på din resa och planera framåt" },
-                  { week: 8, title: "Framtid", desc: "Få verktyg för att fortsätta din hälsoresa på egen hand" }
+                  { week: 3, title: "Balans", desc: "Hitta jämvikten mellan träning, vila och njutning" },
+                  { week: 4, title: "Framtid", desc: "Få verktyg för att fortsätta din hälsoresa på egen hand" }
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-4 p-4 bg-white/50 rounded-xl border border-green-200">
                     <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold font-display">

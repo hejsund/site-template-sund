@@ -18,28 +18,72 @@ export const Footer = () => {
             Sund & Stark hjälper dig att skapa hållbara vanor för ett liv fyllt av energi och glädje.
           </p>
           
-          {/* Links */}
-          <div className="flex flex-wrap justify-center gap-8 mb-8 text-sm">
-            <a 
-              href="https://sundochstark.se" 
-              className="text-green-200 hover:text-green-100 transition-colors font-text"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Hemsida (sundochstark.se)
-            </a>
-            <a href="#" className="text-green-200 hover:text-green-100 transition-colors font-text">
-              Om oss
-            </a>
-            <a href="#" className="text-green-200 hover:text-green-100 transition-colors font-text">
-              Kontakt
-            </a>
-            <a href="#" className="text-green-200 hover:text-green-100 transition-colors font-text">
-              Integritetspolicy
-            </a>
-            <a href="#" className="text-green-200 hover:text-green-100 transition-colors font-text">
-              Användarvillkor
-            </a>
+          {/* Links organized by sections */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-sm w-full max-w-4xl">
+            <div>
+              <h4 className="font-semibold text-green-200 mb-3 font-display">Program</h4>
+              <div className="space-y-2">
+                <a href="/om-sommarboosten" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Om Sommarboosten
+                </a>
+                <a href="/tidigare-ar" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Tidigare år
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-green-200 mb-3 font-display">Artiklar</h4>
+              <div className="space-y-2">
+                <a href="/artiklar" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Alla artiklar
+                </a>
+                <a href="/artiklar/traning" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Träning
+                </a>
+                <a href="/artiklar/kost" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Kost
+                </a>
+                <a href="/artiklar/vanor" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Vanor
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-green-200 mb-3 font-display">Om oss</h4>
+              <div className="space-y-2">
+                <a href="/om-charlotte" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Charlotte
+                </a>
+                <a href="/team" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Vårt team
+                </a>
+                <a 
+                  href="https://sundochstark.se" 
+                  className="block text-green-200 hover:text-green-100 transition-colors font-text"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Hemsida
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-green-200 mb-3 font-display">Juridiskt</h4>
+              <div className="space-y-2">
+                <a href="#" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Integritetspolicy
+                </a>
+                <a href="#" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Användarvillkor
+                </a>
+                <a href="#" className="block text-green-200 hover:text-green-100 transition-colors font-text">
+                  Kontakt
+                </a>
+              </div>
+            </div>
           </div>
           
           {/* Copyright */}

@@ -11,6 +11,10 @@ import QuizPage from "./pages/QuizPage";
 import ProgramYearPage from "./pages/ProgramYearPage";
 import PreviousYearsPage from "./pages/PreviousYearsPage";
 import AboutSommarboostenPage from "./pages/AboutSommarboostenPage";
+import ArticlesPage from "./pages/ArticlesPage";
+import TrainingArticlePage from "./pages/articles/TrainingArticlePage";
+import NutritionArticlePage from "./pages/articles/NutritionArticlePage";
+import HabitsArticlePage from "./pages/articles/HabitsArticlePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +38,10 @@ const App = () => (
               <Route path="/om-charlotte" element={<Index />} />
               <Route path="/team" element={<Index />} />
               <Route path="/om-sommarboosten" element={<AboutSommarboostenPage />} />
+              <Route path="/artiklar" element={<ArticlesPage />} />
+              <Route path="/artiklar/traning" element={<TrainingArticlePage />} />
+              <Route path="/artiklar/kost" element={<NutritionArticlePage />} />
+              <Route path="/artiklar/vanor" element={<HabitsArticlePage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
