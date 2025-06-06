@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,10 +28,15 @@ export const Hero = () => {
         </div>
 
         <div className="relative z-10">
-          {/* Main heading */}
-          <h1 className="text-6xl md:text-8xl font-black mb-8 text-gradient leading-tight-heading font-display">
-            Sommarboosten 2025
-          </h1>
+          {/* Main heading with integrated logo effect */}
+          <div className="mb-8">
+            <h1 className="text-6xl md:text-8xl font-black leading-tight-heading font-display">
+              <span className="text-gradient block">Sommarboosten</span>
+              <span className="text-4xl md:text-5xl text-green-600 font-medium opacity-80 -mt-2 block tracking-widest">
+                2025
+              </span>
+            </h1>
+          </div>
           
           <p className="text-xl md:text-2xl mb-12 text-green-700 max-w-3xl mx-auto leading-body font-text font-medium">
             Vill du vara med på resan mot en sommar fylld av energi och glädje?
