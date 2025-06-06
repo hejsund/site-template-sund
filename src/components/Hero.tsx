@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart, Sparkles, Dumbbell } from 'lucide-react';
 import { toast } from 'sonner';
 
 export const Hero = () => {
@@ -19,20 +19,22 @@ export const Hero = () => {
   return (
     <section className="min-h-screen gradient-green flex items-center justify-center px-4 py-20">
       <div className="max-w-4xl mx-auto text-center">
-        {/* Animated hearts and sparkles */}
+        {/* Animated hearts, sparkles and training icons */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Heart className="absolute top-20 left-10 text-coral opacity-30 animate-float" size={24} />
           <Sparkles className="absolute top-32 right-20 text-purple opacity-30 animate-float" size={20} style={{ animationDelay: '1s' }} />
+          <Dumbbell className="absolute top-40 left-1/4 text-primary opacity-20 animate-float" size={18} style={{ animationDelay: '1.5s' }} />
           <Heart className="absolute bottom-40 right-10 text-coral opacity-30 animate-float" size={18} style={{ animationDelay: '2s' }} />
           <Sparkles className="absolute bottom-60 left-16 text-purple opacity-30 animate-float" size={22} style={{ animationDelay: '0.5s' }} />
+          <Dumbbell className="absolute bottom-32 right-1/4 text-primary opacity-20 animate-float" size={20} style={{ animationDelay: '2.5s' }} />
         </div>
 
         <div className="relative z-10">
           {/* Main heading with integrated logo effect */}
-          <div className="mb-8">
+          <div className="mb-8 relative">
             <h1 className="text-6xl md:text-8xl font-black leading-tight-heading font-display">
               <span className="text-gradient block">Sommarboosten</span>
-              <span className="text-4xl md:text-5xl text-green-600 font-medium opacity-80 -mt-2 block tracking-widest">
+              <span className="text-4xl md:text-5xl text-green-600 font-medium opacity-80 -mt-2 block tracking-widest animate-flyDown">
                 2025
               </span>
             </h1>
