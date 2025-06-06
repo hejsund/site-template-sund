@@ -76,7 +76,7 @@ export const LifestyleGallery = () => {
           <div className="text-2xl sm:text-3xl mt-4 opacity-80">🌻🌊☀️</div>
         </div>
 
-        {/* Instagram-style square grid with improved text contrast */}
+        {/* Instagram-style square grid with improved hover overlay and text contrast */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-12 sm:mb-16">
           {images.map((image, index) => (
             <div 
@@ -98,11 +98,15 @@ export const LifestyleGallery = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {/* Enhanced gradient overlay with better opacity and color coverage */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
-                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-warm-contrast transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                  <h3 className="font-black text-xs sm:text-sm mb-1 font-display leading-tight">{image.caption}</h3>
-                  <p className="text-xs opacity-90 font-text">Upptäck hur enkelt det kan vara</p>
+                {/* Text content in semi-transparent button-style container */}
+                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 sm:p-3 shadow-lg">
+                    <h3 className="font-black text-xs sm:text-sm mb-1 font-display leading-tight text-green-800">{image.caption}</h3>
+                    <p className="text-xs text-green-600 font-text">Upptäck hur enkelt det kan vara</p>
+                  </div>
                 </div>
               </div>
             </div>
