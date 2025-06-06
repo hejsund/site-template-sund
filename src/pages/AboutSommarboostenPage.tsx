@@ -186,11 +186,11 @@ const AboutSommarboostenPage = () => {
 
             {/* CTA Section */}
             <div className="text-center">
-              <div className="bg-gradient-to-r from-pink-400 via-coral to-orange-400 p-6 sm:p-8 rounded-2xl text-warm-contrast mb-8">
-                <h3 className="text-xl sm:text-2xl font-black mb-4 font-display">
+              <div className="bg-white border-2 border-primary p-6 sm:p-8 rounded-2xl text-primary mb-8 shadow-lg">
+                <h3 className="text-xl sm:text-2xl font-black mb-4 font-display text-primary">
                   Redo att börja din resa? 🌟
                 </h3>
-                <p className="text-sm sm:text-base mb-6 opacity-90 font-text">
+                <p className="text-sm sm:text-base mb-6 text-green-700 font-text">
                   Anmäl ditt intresse så hör vi av oss när nästa Sommarboosten startar!
                 </p>
                 
@@ -200,10 +200,10 @@ const AboutSommarboostenPage = () => {
                     placeholder="Din e-postadress..."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 h-12 text-sm sm:text-base rounded-xl border-2 border-white/30 bg-white/90 text-green-800"
+                    className="flex-1 h-12 text-sm sm:text-base rounded-xl border-2 border-primary/30 bg-white text-green-800"
                     required
                   />
-                  <Button type="submit" className="bg-white text-primary hover:bg-green-50 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold">
+                  <Button type="submit" className="bg-primary text-white hover:bg-primary/90 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold">
                     Anmäl intresse ✨
                   </Button>
                 </form>

@@ -22,11 +22,11 @@ const TrainingArticlePage = () => {
             </p>
             
             {/* Hero Image */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-8">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-8 aspect-[5/4]">
               <img 
                 src="/lovable-uploads/b421d335-bc7b-4b5b-8e07-edd16ebbb404.png" 
                 alt="Charlotte tränar utomhus med ett stort leende - sommarglädje och träning"
-                className="w-full h-96 object-cover"
+                className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
@@ -74,11 +74,13 @@ const TrainingArticlePage = () => {
             {/* More Sections */}
             <div className="grid md:grid-cols-2 gap-8 my-12">
               <div className="bg-gradient-to-br from-coral/10 to-coral/20 p-6 rounded-2xl border border-coral/30">
-                <img 
-                  src="/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png" 
-                  alt="Charlotte ler vid vattnet - naturlig sommarglädje och energi"
-                  className="w-full h-48 object-cover rounded-xl mb-4"
-                />
+                <div className="aspect-[5/4] mb-4">
+                  <img 
+                    src="/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png" 
+                    alt="Charlotte ler vid vattnet - naturlig sommarglädje och energi"
+                    className="w-full h-full object-cover object-top rounded-xl"
+                  />
+                </div>
                 <h3 className="font-bold text-coral mb-3 font-display">Träning som ger energi</h3>
                 <p className="text-sm text-green-700">
                   Träningsglädje hittar du när träning känns som energi IN istället för energi ut. När du kliver av din matta och tänker: "Fy fan vad bra jag mår nu!"
@@ -86,11 +88,13 @@ const TrainingArticlePage = () => {
               </div>
               
               <div className="bg-gradient-to-br from-purple/10 to-purple/20 p-6 rounded-2xl border border-purple/30">
-                <img 
-                  src="/lovable-uploads/fa62a6e9-56ca-4997-8b40-17604a32e215.png" 
-                  alt="Charlotte hemma i vardagen - träning som passar in i livet"
-                  className="w-full h-48 object-cover rounded-xl mb-4"
-                />
+                <div className="aspect-[5/4] mb-4">
+                  <img 
+                    src="/lovable-uploads/fa62a6e9-56ca-4997-8b40-17604a32e215.png" 
+                    alt="Charlotte hemma i vardagen - träning som passar in i livet"
+                    className="w-full h-full object-cover object-top rounded-xl"
+                  />
+                </div>
                 <h3 className="font-bold text-purple mb-3 font-display">Hemmaträning som funkar</h3>
                 <p className="text-sm text-green-700">
                   Med fyra barn är vårt hem inte direkt en träningsidyll. Men det är faktiskt en fördel - träning måste fungera i verkligheten.
@@ -150,11 +154,13 @@ const TrainingArticlePage = () => {
 
             {/* Beach Scene */}
             <div className="my-12">
-              <img 
-                src="/lovable-uploads/db3c75e8-d40b-4560-88c4-76cbd1a82f05.png" 
-                alt="Sommarkväll vid stranden med glass och choklad - balans och njutning"
-                className="w-full h-64 object-cover rounded-3xl shadow-xl"
-              />
+              <div className="aspect-[5/4] rounded-3xl overflow-hidden shadow-xl">
+                <img 
+                  src="/lovable-uploads/db3c75e8-d40b-4560-88c4-76cbd1a82f05.png" 
+                  alt="Sommarkväll vid stranden med glass och choklad - balans och njutning"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
               <p className="text-center text-sm text-green-600 mt-3 italic">
                 Träning och njutning behöver inte utesluta varandra - det här är sommarbalans på riktigt.
               </p>
