@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Heart, Brain, Zap, Users, Baby, Calendar } from 'lucide-react';
@@ -100,13 +99,13 @@ const ArticlesPage = () => {
   const getColorClasses = (color: string) => {
     switch (color) {
       case 'coral':
-        return 'bg-coral/10 text-coral border-coral/20';
+        return 'bg-coral text-white border-coral';
       case 'purple':
-        return 'bg-purple/10 text-purple border-purple/20';
+        return 'bg-purple text-white border-purple';
       case 'indigo':
-        return 'bg-indigo-100 text-indigo-600 border-indigo-200';
+        return 'bg-indigo-600 text-white border-indigo-600';
       default:
-        return 'bg-green-100 text-green-600 border-green-200';
+        return 'bg-green-600 text-white border-green-600';
     }
   };
 
@@ -160,11 +159,12 @@ const ArticlesPage = () => {
                         src={article.image} 
                         alt={article.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        style={{ objectPosition: '50% 20%' }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                       
-                      {/* Category badge */}
-                      <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs sm:text-sm font-medium border ${getColorClasses(article.color)}`}>
+                      {/* Category badge with solid colors */}
+                      <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${getColorClasses(article.color)}`}>
                         <IconComponent className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1" />
                         {article.category}
                       </div>
