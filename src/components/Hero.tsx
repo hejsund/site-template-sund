@@ -55,7 +55,7 @@ export const Hero = () => {
           <div className="mb-6 sm:mb-8 relative">
             <h1 className="sr-only">Sommarboosten {currentPhase.year}</h1>
             <div className="text-5xl sm:text-6xl md:text-8xl font-black leading-none font-display" aria-hidden="true">
-              <span className="text-2xl sm:text-3xl md:text-5xl text-green-700 font-semibold opacity-90 block tracking-widest animate-jumpingBounce pb-3 sm:pb-6 md:pb-8">
+              <span className="text-2xl sm:text-3xl md:text-5xl text-green-600 font-semibold opacity-90 block tracking-widest animate-jumpingBounce pb-3 sm:pb-6 md:pb-8">
                 {currentPhase.year}
               </span>
               <span className="text-gradient block -mt-1 sm:-mt-2 md:-mt-4 leading-none">
@@ -73,11 +73,11 @@ export const Hero = () => {
           
           {/* Mobile-optimized subtitle with seasonal adaptation */}
           <div className="mb-6 sm:mb-10 md:mb-12">
-            <p className="text-base sm:text-lg md:text-2xl text-green-800 max-w-3xl mx-auto leading-relaxed font-text font-medium px-2">
+            <p className="text-base sm:text-lg md:text-2xl text-green-600 max-w-3xl mx-auto leading-relaxed font-text font-medium px-2">
               {currentPhase.description}
             </p>
             {!currentPhase.isActive && (
-              <p className="text-sm sm:text-base text-green-700 mt-3 sm:mt-4 opacity-90 font-text">
+              <p className="text-sm sm:text-base text-green-600 mt-3 sm:mt-4 opacity-90 font-text">
                 ☀️ Gör denna {currentPhase.seasonText} till din bästa någonsin! 🌊
               </p>
             )}
@@ -88,12 +88,12 @@ export const Hero = () => {
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-12 shadow-xl max-w-lg sm:max-w-2xl mx-auto mb-6 sm:mb-10 md:mb-12 border border-white/50">
               <div className="text-center mb-4 sm:mb-6">
                 <div className="text-2xl sm:text-3xl mb-2">🌟✨🌻</div>
-                <h3 className="text-lg sm:text-xl font-bold text-primary mb-2 font-display">
+                <h3 className="text-lg sm:text-xl font-bold text-green-600 mb-2 font-display">
                   Din drömresa börjar här!
                 </h3>
               </div>
               
-              <p className="text-sm sm:text-base mb-4 sm:mb-6 text-green-700 font-text leading-relaxed text-center">
+              <p className="text-sm sm:text-base mb-4 sm:mb-6 text-green-600 font-text leading-relaxed text-center">
                 Få första nyheterna och exklusivt förhandsmaterial om <strong className="text-primary font-semibold">smarta träningsvanor</strong>, 
                 <strong className="text-coral font-semibold"> supergoda recept</strong> och 
                 <strong className="text-purple font-semibold"> roliga aktiviteter</strong> som gör {currentPhase.seasonText} magisk! 🏃‍♀️🍓🎉
@@ -114,7 +114,7 @@ export const Hero = () => {
                 </Button>
               </form>
               
-              <p className="text-xs sm:text-sm text-green-600 mt-3 text-center opacity-80 font-text">
+              <p className="text-xs sm:text-sm text-green-500 mt-3 text-center opacity-80 font-text">
                 🏖️ Träning som känns som lek · Recept som smakar fantastiskt · Glädje utan stress
               </p>
             </div>
@@ -125,7 +125,7 @@ export const Hero = () => {
             <div className="bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-12 shadow-xl max-w-lg sm:max-w-2xl mx-auto mb-6 sm:mb-10 md:mb-12 border border-orange-200">
               <div className="text-center">
                 <div className="text-3xl sm:text-4xl mb-3">🌺🌞🌊</div>
-                <p className="text-sm sm:text-base text-green-700 font-text leading-relaxed">
+                <p className="text-sm sm:text-base text-green-600 font-text leading-relaxed">
                   <strong className="text-primary font-semibold text-base sm:text-lg">{currentPhase.description}</strong> 
                 </p>
                 <Button className="cta-primary mt-4">
@@ -137,7 +137,7 @@ export const Hero = () => {
 
           {/* Mobile-optimized scroll indicator */}
           <div className="animate-bounce mt-8 sm:mt-0">
-            <p className="text-xs sm:text-sm text-green-700 mb-2 font-text opacity-80">Scrolla för att läsa mer</p>
+            <p className="text-xs sm:text-sm text-green-600 mb-2 font-text opacity-80">Scrolla för att läsa mer</p>
             <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-primary rounded-full mx-auto relative">
               <div className="w-0.5 h-2 sm:w-1 sm:h-3 bg-primary rounded-full mx-auto mt-1.5 sm:mt-2 animate-bounce"></div>
             </div>

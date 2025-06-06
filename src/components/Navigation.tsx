@@ -27,7 +27,6 @@ export const Navigation = () => {
       items: [
         { name: `Sommarboosten ${currentYear}`, href: `/program/${currentYear}`, icon: Trophy },
         { name: 'Tidigare år', href: '/tidigare-ar', icon: Calendar },
-        { name: 'Versionshistorik', href: '/versionshistorik', icon: Clock },
       ]
     },
     {
