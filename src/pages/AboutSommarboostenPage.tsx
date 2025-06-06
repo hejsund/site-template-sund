@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Heart, Sparkles, Sun, Calendar, Users, Target, Dumbbell, Apple } from 'lucide-react';
@@ -160,7 +159,7 @@ const AboutSommarboostenPage = () => {
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-6">
                 <Calendar className="text-primary w-8 h-8" />
-                <h2 className="text-2xl sm:text-3xl font-black text-warm-contrast font-display">
+                <h2 className="text-4xl md:text-5xl font-black mb-8 text-primary font-display">
                   Din 4-veckors resa
                 </h2>
               </div>

@@ -1,10 +1,11 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Sparkles, ArrowLeft, Heart, Calendar, Users } from 'lucide-react';
+import { Sparkles, ArrowLeft, Heart, Calendar, Users, Star, Trophy } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
+import { Footer } from '@/components/Footer';
 
 const SaHarBorjadeDetPage = () => {
   const [email, setEmail] = useState('');
@@ -31,17 +32,17 @@ const SaHarBorjadeDetPage = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="mb-8">
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-gradient mb-6 font-display leading-tight">
-              Så här började det
+              Vi skapade Sommarboosten
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-green-700 max-w-3xl mx-auto leading-relaxed font-text mb-8">
-              Historien bakom Sommarboosten och hur en enkel idé blev till en rörelse som förändrat tusentals familjer.
+              – för din bästa sommar någonsin
             </p>
             <div className="text-3xl opacity-80">🌟💫✨</div>
           </div>
         </div>
       </section>
 
-      {/* Image Gallery */}
+      {/* Charlotte's Introduction */}
       <section className="py-12 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -70,127 +71,175 @@ const SaHarBorjadeDetPage = () => {
         </div>
       </section>
 
-      {/* Article Content */}
+      {/* Main Article Content */}
       <section className="py-12 sm:py-16 px-3 sm:px-4">
         <div className="max-w-4xl mx-auto">
           <article className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl">
             
             <div className="prose prose-lg max-w-none">
+              <h2 className="text-3xl font-bold text-green-800 mb-6">Hej, jag heter Charlotte och tillsammans med mitt team på Sund & Stark skapade vi Sommarboosten</h2>
+              
               <p className="lead text-green-700 font-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Som fyrbarnsmamma och grundare av <strong>Sund & Stark</strong> vet jag hur det känns när sommaren närmar sig och panikens påverkar sätter in. "Ska jag verkligen kunna hålla igång träningen när barnen är hemma?" "Hur ska jag få till hälsosamma vanor när allt är kaos och grillmys?"
               </p>
               
               <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                För fem år sedan stod jag själv med samma frågor. Jag var trött på att se sommaren som den tid då "allt går åt helvete" hälsomässigt. Varför skulle den mest ljusa, energigivande tiden på året bli en period där vi kämpar istället för att blomstra?
+              </p>
+
+              <p className="text-coral font-semibold text-lg">
+                Det var då idén om <strong>Sommarboosten</strong> föddes.
               </p>
 
               <div className="bg-coral/10 border-l-4 border-coral p-6 my-8 rounded-lg">
                 <div className="flex items-center gap-3 mb-3">
                   <Heart className="w-6 h-6 text-coral" />
-                  <h3 className="text-xl font-bold text-coral">En dröm blir verklighet</h3>
+                  <h3 className="text-xl font-bold text-coral">Varför Sommarboosten blev till</h3>
                 </div>
                 <p className="text-coral font-medium font-text mb-0">
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.
+                  Sommarboosten skapades ur en enkel men kraftfull insikt: <strong>Sommaren ska ge dig energi, inte ta den från dig.</strong>
                 </p>
               </div>
 
-              <h2 className="flex items-center gap-3 text-green-800">
-                <Sparkles className="w-8 h-8 text-orange-500" />
-                Början av något större
-              </h2>
-
               <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.
+                Som licenserad personlig tränare, kostrådgivare och mamma mitt i livet förstår jag att hälsa inte kan vara något som bara funkar under perfekta omständigheter. Den måste fungera när livet är rörigt, när schema ändras, när barn är hemma, när spontana grillkvällar dyker upp.
+              </p>
+
+              <p className="text-primary font-semibold">
+                Vi skapade därför inte bara ett träningsprogram – vi skapade en livsstil som anpassar sig efter DIG.
               </p>
 
               <p>
-                Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                Sommarboosten är resultatet av fem års forskning, testning och förfining tillsammans med tusentals familjer som alla ville samma sak: att må bra, ha energi och njuta av sommaren utan att känna att de "sabbade" något.
+              </p>
+
+              <h2 className="flex items-center gap-3 text-green-800">
+                <Sparkles className="w-8 h-8 text-orange-500" />
+                Min personliga mission
+              </h2>
+
+              <p>
+                Som din guide genom Sommarboosten finns jag här av en enkel anledning: <strong className="text-coral">Jag brinner för att hjälpa människor hitta balansen mellan att ha kul och att må bra.</strong>
+              </p>
+
+              <p>
+                Efter 15 år som tränare har jag lärt mig att hållbar förändring inte kommer från perfekta planer eller järndisciplin. Den kommer från små, roliga steg som känns naturliga i DIN vardag.
               </p>
 
               <div className="bg-gradient-to-r from-purple-50 to-orange-50 p-6 rounded-xl my-8">
                 <h3 className="text-purple-800 mb-4 flex items-center gap-2">
                   <Users className="w-6 h-6" />
-                  De första stegen
+                  Genom Sommarboosten vill jag:
                 </h3>
-                <p className="text-green-700 leading-relaxed">
-                  Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-                </p>
+                <ul className="text-green-700 leading-relaxed space-y-2">
+                  <li>• Visa dig att träning kan vara något du längtar efter istället för något du måste genomlida</li>
+                  <li>• Hjälpa dig upptäcka att hälsosam mat kan vara både god och spontan</li>
+                  <li>• Guida dig till vanor som håller hela livet, inte bara sommaren</li>
+                  <li>• Bevisa att du kan njuta av glass, grillkvällar och after work SAMTIDIGT som du mår bättre än någonsin</li>
+                </ul>
               </div>
 
-              <h2>Utvecklingen genom åren</h2>
+              <p className="text-coral font-semibold text-lg">
+                Jag kommer vara med dig hela vägen – genom tips, pepp, svar på frågor och påminnelser om att du är mycket starkare än du tror.
+              </p>
+
+              <h2>Vad gör oss olika</h2>
+
+              <p>
+                <strong className="text-primary">Vi skapade originalet.</strong> Sommarboosten var det första dedikerade sommarträningsprogrammet i Sverige, och vi har fem års erfarenhet av att hjälpa människor genom just dessa utmaningar. Idag finns det många som erbjuder liknande program, vilket vi ser som något positivt - fler människor får hjälp att må bra på sommaren.
+              </p>
+
+              <p>
+                <strong className="text-coral">Vi förstår verkligheten.</strong> Det här är inte skapat av någon som lever i en bubble utan av en helt vanlig fyrbarnsmamma som jonglerar jobb, familj, hälsa och allt däremellan. Varje tips, varje recept, varje träningspass är testat i mitt eget kaotiska liv.
+              </p>
+
+              <p>
+                <strong className="text-purple">Vi tror på träningsglädje.</strong> Medan andra fokuserar på kaloriförbränning och perfekta resultat fokuserar vi på att hitta glädjen i rörelse. För när träning känns bra så fortsätter du. Enkelt.
+              </p>
+
+              <p>
+                <strong className="text-orange">Vi säger inga förbud.</strong> Du kommer aldrig höra oss säga att du inte får äta glass eller att grillkvällar är "fusk." Vi tror att allt har sin plats i en hälsosam livsstil – det handlar bara om balans.
+              </p>
+
+              <h2>Tillsammans skapar vi din bästa sommar</h2>
               
               <p>
-                Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+                När du går med i Sommarboosten blir du del av något större än ett träningsprogram. Du blir del av en community av människor som förstår att:
               </p>
 
-              <p>
-                Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
-              </p>
-
-              <h3>2019 - Första året</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-
-              <h3>2020-2023 - Tillväxt och utveckling</h3>
-              <p>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-
-              <h3>2024 och framåt</h3>
-              <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
+              <ul className="text-green-700 space-y-2">
+                <li>• Hälsa ska vara roligt, inte stressande</li>
+                <li>• Familjetid är viktigare än perfekta träningspass</li>
+                <li>• Små steg leder till stora förändringar</li>
+                <li>• Du förtjänar att må bra precis som du är</li>
+              </ul>
 
               <div className="bg-green-50 p-6 rounded-xl my-8">
-                <h3 className="text-green-800 mb-4">Idag</h3>
+                <h3 className="text-green-800 mb-4">Ett starkt team bakom kulisserna</h3>
                 <p className="text-green-700 leading-relaxed">
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.
+                  Tillsammans med mitt team på <strong>Sund & Stark</strong> - och framför allt min partner Rickard som ansvarar för all teknik bakom kulisserna - har vi skapat något som tusentals familjer nu ser fram emot varje år.
+                </p>
+                <p className="text-green-700 leading-relaxed mt-4">
+                  <strong>Våra roller är tydligt uppdelade:</strong> Jag sköter allt som rör träning, coaching och deltagarkontakt, medan Rickard säkerställer att all teknik, plattformar och system fungerar smidigt. Han är den som gör det möjligt för mig att fokusera helt på det jag brinner för - att hjälpa dig nå dina mål.
                 </p>
               </div>
 
-              <h2>Varför vi fortsätter</h2>
-              
-              <p>
-                Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-              </p>
-              
-              <p>
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+              <p className="text-primary font-semibold text-lg">
+                Tillsammans har vi bevisat att sommaren kan vara både den roligaste OCH den hälsosammaste tiden på året.
               </p>
 
-              <p className="font-semibold text-coral">
-                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt.
+              <h2>Redo för din bästa sommar?</h2>
+              
+              <p>
+                Jag tror på dig. Jag tror på din förmåga att skapa förändringar som håller. Jag tror på att du förtjänar en sommar där du både har kul OCH mår fantastisk.
               </p>
+              
+              <p className="text-coral font-semibold text-lg">
+                Sommarboosten väntar på dig. Och jag kommer vara där hela vägen för att peppa, stötta och påminna dig om hur stark du är.
+              </p>
+
+              <p className="text-green-800 text-xl font-medium">
+                Låt oss göra den här sommaren till din bästa någonsin – tillsammans.
+              </p>
+
+              <div className="text-center my-8 p-6 bg-gradient-to-r from-coral/10 to-purple/10 rounded-xl">
+                <p className="italic text-lg text-green-800 mb-2">Kram,</p>
+                <p className="font-bold text-xl text-primary">Charlotte</p>
+                <p className="text-sm text-green-600 mt-2">Grundare, Sund & Stark</p>
+                <p className="text-sm text-green-600">Skapare av Sommarboosten</p>
+              </div>
             </div>
           </article>
         </div>
       </section>
 
-      {/* Email Sign-up */}
+      {/* CTA Section */}
       <section className="py-16 px-3 sm:px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white border-2 border-primary p-6 sm:p-8 rounded-2xl text-primary mb-8 shadow-lg">
-            <h3 className="text-xl sm:text-2xl font-black mb-4 font-display text-primary text-center">
-              Vill du vara en del av fortsättningen? 🌟
-            </h3>
-            <p className="text-sm sm:text-base mb-6 text-green-700 font-text text-center">
-              Anmäl ditt intresse så hör vi av oss när nästa kapitel börjar!
-            </p>
-            
-            <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto space-y-3 sm:space-y-0 sm:flex sm:gap-3">
-              <Input
-                type="email"
-                placeholder="Din e-postadress..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 h-12 text-sm sm:text-base rounded-xl border-2 border-primary/30 bg-white text-green-800"
-                required
-              />
-              <Button type="submit" className="bg-primary text-white hover:bg-primary/90 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold">
-                Anmäl intresse ✨
-              </Button>
-            </form>
+            <div className="text-center">
+              <div className="text-4xl mb-4">🌞</div>
+              <h3 className="text-xl sm:text-2xl font-black mb-4 font-display text-primary">
+                VÄLKOMMEN TILL DIN BÄSTA SOMMAR
+              </h3>
+              <p className="text-sm sm:text-base mb-6 text-green-700 font-text">
+                Redo att börja? Anmäl ditt intresse så hör vi av oss när nästa kapitel börjar!
+              </p>
+              
+              <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto space-y-3 sm:space-y-0 sm:flex sm:gap-3">
+                <Input
+                  type="email"
+                  placeholder="Din e-postadress..."
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 h-12 text-sm sm:text-base rounded-xl border-2 border-primary/30 bg-white text-green-800"
+                  required
+                />
+                <Button type="submit" className="bg-primary text-white hover:bg-primary/90 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold">
+                  Anmäl intresse ✨
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -210,6 +259,8 @@ const SaHarBorjadeDetPage = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };
