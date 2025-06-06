@@ -29,18 +29,18 @@ export const Hero = () => {
 
         <div className="relative z-10">
           {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient leading-tight font-display">
-            🌿 Sommarboosten 2025
+          <h1 className="text-6xl md:text-8xl font-bold mb-8 text-gradient leading-tight-heading font-display">
+            Sommarboosten 2025
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-foreground/80 max-w-3xl mx-auto leading-relaxed font-text">
+          <p className="text-xl md:text-2xl mb-12 text-green-700 max-w-3xl mx-auto leading-body font-text font-medium">
             Vill du vara med på resan mot en sommar fylld av energi och glädje?
           </p>
 
-          <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl max-w-2xl mx-auto mb-8">
-            <p className="text-lg mb-6 text-foreground/70 font-text">
+          <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl max-w-2xl mx-auto mb-12">
+            <p className="text-lg mb-8 text-green-600 font-text leading-body">
               Fyll i din e-post här – så får du första nyheterna och tillgång till ett exklusivt förhandsmaterial om Sommarboosten. 
-              <strong className="text-primary"> Inga måsten – bara inspiration och pepp!</strong>
+              <strong className="text-primary font-semibold"> Inga måsten – bara inspiration och pepp!</strong>
             </p>
 
             <form onSubmit={handleEmailSubmit} className="flex flex-col md:flex-row gap-4">
@@ -49,10 +49,10 @@ export const Hero = () => {
                 placeholder="Din e-postadress..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 h-14 text-lg rounded-xl border-2 border-border focus:border-primary font-text"
+                className="flex-1 h-16 text-lg rounded-button border-2 border-border focus:border-primary font-text"
                 required
               />
-              <Button type="submit" className="cta-primary h-14 whitespace-nowrap">
+              <Button type="submit" className="cta-primary h-16 whitespace-nowrap text-xl px-10">
                 Ja, jag vill veta mer! ✨
               </Button>
             </form>
@@ -60,7 +60,7 @@ export const Hero = () => {
 
           {/* Scroll indicator */}
           <div className="animate-bounce">
-            <p className="text-sm text-foreground/60 mb-2 font-text">Scrolla för att läsa mer</p>
+            <p className="text-base text-green-600 mb-3 font-text">Scrolla för att läsa mer</p>
             <div className="w-6 h-10 border-2 border-primary rounded-full mx-auto relative">
               <div className="w-1 h-3 bg-primary rounded-full mx-auto mt-2 animate-bounce"></div>
             </div>
