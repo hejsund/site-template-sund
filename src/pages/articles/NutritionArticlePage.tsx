@@ -1,9 +1,16 @@
-
+import React, { useEffect } from 'react';
+import { ArrowLeft, Apple, Heart, Sun } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
-import { Apple, Heart, Utensils, Sun, Users } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const NutritionArticlePage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
       <article className="py-16 px-4">

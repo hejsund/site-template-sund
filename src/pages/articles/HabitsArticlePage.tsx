@@ -1,10 +1,18 @@
+import React, { useEffect } from 'react';
+import { ArrowLeft, Target, Calendar, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
-import { Target, Repeat, TrendingUp, Clock, Star } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 import { Footer } from '@/components/Footer';
 import { CurvedDivider } from '@/components/CurvedDivider';
 
 const HabitsArticlePage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
       <article className="py-16 px-4">

@@ -1,12 +1,4 @@
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-
 export const LifestyleGallery = () => {
   const images = [
     {
@@ -71,54 +63,28 @@ export const LifestyleGallery = () => {
           </p>
         </div>
 
-        <div className="relative">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {images.map((image, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                  <div className="group relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">
-                    <div className="aspect-[4/5] relative overflow-hidden">
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-300 group-hover:from-black/60"></div>
-                    </div>
-                    
-                    <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md p-4 sm:p-6 transform translate-y-0 transition-all duration-300 group-hover:translate-y-0 border-t border-white/20">
-                      <h3 className="text-lg sm:text-xl font-bold text-primary mb-2 font-display">
-                        {image.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-green-700 font-text leading-relaxed">
-                        {image.description}
-                      </p>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden sm:flex -left-12 lg:-left-16" />
-            <CarouselNext className="hidden sm:flex -right-12 lg:-right-16" />
-          </Carousel>
-        </div>
-
-        {/* Mobile dots indicator */}
-        <div className="flex justify-center mt-8 sm:hidden">
-          <div className="flex space-x-2">
-            {Array.from({ length: Math.ceil(images.length / 1) }).map((_, index) => (
-              <div
-                key={index}
-                className="w-2 h-2 rounded-full bg-green-300"
-              />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {images.map((image, index) => (
+            <div key={index} className="group relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">
+              <div className="aspect-[4/5] relative overflow-hidden">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-300 group-hover:from-black/60"></div>
+              </div>
+              
+              <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md p-4 sm:p-6 transform translate-y-0 transition-all duration-300 group-hover:translate-y-0 border-t border-white/20">
+                <h3 className="text-lg sm:text-xl font-bold text-primary mb-2 font-display">
+                  {image.title}
+                </h3>
+                <p className="text-sm sm:text-base text-green-700 font-text leading-relaxed">
+                  {image.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

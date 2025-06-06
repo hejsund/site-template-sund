@@ -1,8 +1,16 @@
+import React, { useEffect } from 'react';
+import { ArrowLeft, Trophy, Target, Zap, Users, Clock, Calendar } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
-import { Heart, Dumbbell, Star, Clock, Users, ArrowLeft } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const TrainingArticlePage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
       {/* Header */}
