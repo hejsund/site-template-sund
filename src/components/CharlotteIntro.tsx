@@ -6,13 +6,14 @@ export const CharlotteIntro = () => {
     <section className="py-16 sm:py-20 px-3 sm:px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
-          {/* Charlotte's photo with enhanced summer styling */}
+          {/* Charlotte's photo with enhanced summer styling and better face positioning */}
           <div className="relative order-2 md:order-1">
             <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl">
               <img 
                 src="/lovable-uploads/0a9897c0-1dce-4db3-b5ee-b2a62d6f836b.png" 
                 alt="Charlotte Steinwig - grundare av Sund & Stark"
                 className="w-full h-auto object-cover rounded-2xl sm:rounded-3xl"
+                style={{ objectPosition: '50% 20%' }}
               />
               
               {/* Enhanced video play overlay */}
@@ -70,13 +71,14 @@ export const CharlotteIntro = () => {
           </div>
         </div>
 
-        {/* Enhanced lifestyle image with summer vibes */}
+        {/* Enhanced lifestyle image with summer vibes and better face positioning */}
         <div className="mt-12 sm:mt-16 relative">
           <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
             <img 
               src="/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png" 
               alt="Kvinna tränar utomhus - en del av en aktiv livsstil med Sommarboosten"
               className="w-full h-64 sm:h-80 md:h-96 object-cover"
+              style={{ objectPosition: '50% 30%' }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-2xl sm:rounded-3xl"></div>
             <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">

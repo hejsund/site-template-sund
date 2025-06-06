@@ -1,7 +1,7 @@
-
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Target, Repeat, TrendingUp, Clock, Star } from 'lucide-react';
+import { Footer } from '@/components/Footer';
 
 const HabitsArticlePage = () => {
   return (
@@ -21,12 +21,13 @@ const HabitsArticlePage = () => {
               Av Charlotte Steinwig
             </p>
             
-            {/* Hero Image */}
+            {/* Hero Image with better positioning to avoid cropping face */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-8">
               <img 
                 src="/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png" 
                 alt="Charlotte vid vattnet med ett naturligt leende - representation av hållbara vanor"
-                className="w-full h-96 object-cover"
+                className="w-full h-96 object-cover object-center"
+                style={{ objectPosition: '50% 30%' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
@@ -265,6 +266,22 @@ const HabitsArticlePage = () => {
           </div>
         </div>
       </article>
+
+      {/* Curved divider before footer */}
+      <div className="relative">
+        <svg 
+          className="w-full h-12 text-green-100" 
+          viewBox="0 0 1200 120" 
+          preserveAspectRatio="none"
+        >
+          <path 
+            d="M0,60 C300,20 900,100 1200,60 L1200,120 L0,120 Z" 
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+
+      <Footer />
     </div>
   );
 };
