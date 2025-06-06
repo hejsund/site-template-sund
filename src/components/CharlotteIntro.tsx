@@ -15,13 +15,13 @@ export const CharlotteIntro = () => {
                 className="w-full h-auto object-cover rounded-3xl"
               />
               
-              {/* Video play overlay */}
-              <div className="absolute inset-0 bg-black/20 rounded-3xl flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+              {/* Video play overlay - always visible */}
+              <div className="absolute inset-0 bg-black/10 rounded-3xl flex items-center justify-center">
                 <div className="text-center">
-                  <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg">
+                  <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                     <Play className="text-primary ml-1" size={32} />
                   </div>
-                  <p className="text-sm text-white font-medium">Charlotte hälsar dig välkommen</p>
+                  <p className="text-sm text-white font-medium drop-shadow-lg">Charlotte hälsar dig välkommen</p>
                 </div>
               </div>
               
@@ -37,11 +37,11 @@ export const CharlotteIntro = () => {
               💚 Ett personligt meddelande från Charlotte
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold text-primary leading-tight font-display">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-primary leading-tight font-display">
               Hej, härliga du! 
             </h2>
 
-            <div className="space-y-4 text-lg text-foreground/80 leading-relaxed font-text">
+            <div className="space-y-4 text-lg text-green-800 leading-relaxed font-text">
               <p>
                 Jag vet hur det känns – sommaren kan vara både njutning och stress. Men jag tror att du kan få båda delarna att fungera tillsammans.
               </p>
@@ -59,7 +59,23 @@ export const CharlotteIntro = () => {
               <p className="text-primary font-medium italic font-text">
                 "Sommaren handlar om att leva – och Sommarboosten handlar om att du äger dina val."
               </p>
-              <p className="text-sm text-foreground/60 mt-2 font-text">– Charlotte Steinwig</p>
+              <p className="text-sm text-green-700 mt-2 font-text">– Charlotte Steinwig</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Added lifestyle image from image bank */}
+        <div className="mt-16 relative">
+          <div className="rounded-3xl overflow-hidden shadow-2xl">
+            <img 
+              src="/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png" 
+              alt="Kvinna tränar utomhus - en del av en aktiv livsstil med Sommarboosten"
+              className="w-full h-96 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-3xl"></div>
+            <div className="absolute bottom-6 left-6 text-white">
+              <p className="text-lg font-semibold font-display">Träning kan vara roligt och enkelt</p>
+              <p className="text-sm opacity-90 font-text">Hitta din egen väg till rörelse</p>
             </div>
           </div>
         </div>

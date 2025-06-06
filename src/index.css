@@ -10,51 +10,51 @@
 @layer base {
   :root {
     --background: 131 57% 96%;
-    --foreground: 155 35% 15%;
+    --foreground: 155 35% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 155 35% 15%;
+    --card-foreground: 155 35% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 155 35% 15%;
+    --popover-foreground: 155 35% 10%;
 
-    --primary: 155 85% 25%;
+    --primary: 155 85% 20%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 131 30% 90%;
-    --secondary-foreground: 155 35% 15%;
+    --secondary-foreground: 155 35% 10%;
 
     --muted: 131 30% 90%;
-    --muted-foreground: 155 25% 45%;
+    --muted-foreground: 155 25% 35%;
 
-    --accent: 155 70% 35%;
+    --accent: 155 70% 30%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 131 40% 85%;
-    --input: 131 40% 85%;
-    --ring: 155 85% 25%;
+    --border: 131 40% 80%;
+    --input: 131 40% 80%;
+    --ring: 155 85% 20%;
 
     --radius: 1rem;
 
-    /* Sund & Stark custom colors */
+    /* Sund & Stark custom colors - improved contrast */
     --green-50: 131 57% 96%;
     --green-100: 131 50% 90%;
     --green-200: 131 45% 80%;
     --green-300: 131 40% 70%;
-    --green-400: 155 50% 45%;
-    --green-500: 155 70% 35%;
-    --green-600: 155 85% 25%;
-    --green-700: 155 85% 15%;
-    --green-800: 155 100% 7%;
+    --green-400: 155 50% 40%;
+    --green-500: 155 70% 30%;
+    --green-600: 155 85% 20%;
+    --green-700: 155 85% 12%;
+    --green-800: 155 90% 8%;
     
-    /* Warm accent colors */
-    --coral: 14 85% 70%;
-    --coral-light: 14 75% 85%;
-    --purple: 280 50% 70%;
-    --purple-light: 280 40% 85%;
+    /* Warm accent colors - improved contrast */
+    --coral: 14 85% 60%;
+    --coral-light: 14 75% 80%;
+    --purple: 280 50% 60%;
+    --purple-light: 280 40% 80%;
   }
 
   .dark {
@@ -106,26 +106,32 @@
 
   h1 {
     font-size: 3.5rem;
+    font-weight: 900;
   }
 
   h2 {
     font-size: 3rem;
+    font-weight: 800;
   }
 
   h3 {
     font-size: 2.5rem;
+    font-weight: 700;
   }
 
   h4 {
     font-size: 2rem;
+    font-weight: 700;
   }
 
   h5 {
     font-size: 1.5rem;
+    font-weight: 600;
   }
 
   h6 {
     font-size: 1.25rem;
+    font-weight: 600;
   }
 
   a {

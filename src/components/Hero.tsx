@@ -30,22 +30,23 @@ export const Hero = () => {
         </div>
 
         <div className="relative z-10">
-          {/* Main heading with integrated logo effect */}
+          {/* Main heading with SEO-friendly structure but visual reordering */}
           <div className="mb-8 relative">
-            <h1 className="text-6xl md:text-8xl font-black leading-tight-heading font-display">
-              <span className="text-gradient block">Sommarboosten</span>
-              <span className="text-4xl md:text-5xl text-green-600 font-medium opacity-80 -mt-2 block tracking-widest animate-flyDown">
+            <h1 className="sr-only">Sommarboosten 2025</h1>
+            <div className="text-6xl md:text-8xl font-black leading-tight-heading font-display" aria-hidden="true">
+              <span className="text-4xl md:text-5xl text-green-700 font-semibold opacity-90 block tracking-widest animate-flyDown">
                 2025
               </span>
-            </h1>
+              <span className="text-gradient block -mt-4">Sommarboosten</span>
+            </div>
           </div>
           
-          <p className="text-xl md:text-2xl mb-12 text-green-700 max-w-3xl mx-auto leading-body font-text font-medium">
+          <p className="text-xl md:text-2xl mb-12 text-green-800 max-w-3xl mx-auto leading-body font-text font-medium">
             Vill du vara med på resan mot en sommar fylld av energi och glädje?
           </p>
 
           <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl max-w-2xl mx-auto mb-12">
-            <p className="text-lg mb-8 text-green-600 font-text leading-body">
+            <p className="text-lg mb-8 text-green-700 font-text leading-body">
               Fyll i din e-post här – så får du första nyheterna och tillgång till ett exklusivt förhandsmaterial om Sommarboosten. 
               <strong className="text-primary font-semibold"> Inga måsten – bara inspiration och pepp!</strong>
             </p>
@@ -67,7 +68,7 @@ export const Hero = () => {
 
           {/* Scroll indicator */}
           <div className="animate-bounce">
-            <p className="text-base text-green-600 mb-3 font-text">Scrolla för att läsa mer</p>
+            <p className="text-base text-green-700 mb-3 font-text">Scrolla för att läsa mer</p>
             <div className="w-6 h-10 border-2 border-primary rounded-full mx-auto relative">
               <div className="w-1 h-3 bg-primary rounded-full mx-auto mt-2 animate-bounce"></div>
             </div>
