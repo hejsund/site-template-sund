@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -44,10 +43,10 @@ const questions: Question[] = [
     id: 3,
     question: "Vad är ditt huvudmål med träning?",
     options: [
-      { id: "a", text: "Bygga extremt mycket muskler och bli så stor som möjligt", score: -1, flag: "muscle_obsessed" },
-      { id: "b", text: "Komma i form och känna mig starkare", score: 3 },
-      { id: "c", text: "Hitta balans mellan träning och vila", score: 3 },
-      { id: "d", text: "Öka min energi och välmående", score: 3 }
+      { id: "a", text: "Komma i form och känna mig starkare", score: 3 },
+      { id: "b", text: "Hitta balans mellan träning och vila", score: 3 },
+      { id: "c", text: "Öka min energi och välmående", score: 3 },
+      { id: "d", text: "Bygga extremt mycket muskler och bli så stor som möjligt", score: -1, flag: "muscle_obsessed" }
     ]
   },
   {
@@ -338,7 +337,7 @@ export const Quiz = () => {
                 
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button onClick={resetQuiz} className="flex-1 cta-primary">
-                    Gör om quizet 🔄
+                    Gör om quizet
                   </Button>
                 </div>
               </div>
