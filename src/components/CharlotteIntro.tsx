@@ -56,7 +56,7 @@ export const CharlotteIntro = () => {
               </p>
             </div>
 
-            <div className="bg-green-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border-l-4 border-primary shadow-lg shadow-green-100/50">
+            <div className="bg-green-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border-l-4 border-primary shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.15)] transition-shadow duration-300">
               <div className="text-lg sm:text-xl mb-2">🌊</div>
               <p className="text-primary font-medium italic font-text text-sm sm:text-base">
                 "Sommaren handlar om att leva – och Sommarboosten handlar om att du äger dina val."
