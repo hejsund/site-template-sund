@@ -9,7 +9,7 @@ export const FinalCTA = () => {
     "Daglig motivation och pepp direkt i appen",
     "Tillgång till en fantastisk gemenskap",
     "Verktyg för att följa din utveckling",
-    "Charlotte som personlig coach i fickan"
+    "Charlotte ger personlig inspiration i fickan"
   ];
 
   return (
