@@ -9,12 +9,14 @@ export const CharlotteIntro = () => {
           {/* Charlotte's photo with enhanced summer styling and better face positioning */}
           <div className="relative order-2 md:order-1">
             <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl">
-              <img 
-                src="/lovable-uploads/0a9897c0-1dce-4db3-b5ee-b2a62d6f836b.png" 
-                alt="Charlotte Steinwig - grundare av Sund & Stark"
-                className="w-full h-auto object-cover rounded-2xl sm:rounded-3xl"
-                style={{ objectPosition: '50% 20%' }}
-              />
+              <div className="aspect-[16/9] relative overflow-hidden">
+                <img 
+                  src="/lovable-uploads/0a9897c0-1dce-4db3-b5ee-b2a62d6f836b.png" 
+                  alt="Charlotte Steinwig - grundare av Sund & Stark"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: '50% 20%' }}
+                />
+              </div>
               
               {/* Enhanced video play overlay */}
               <div className="absolute inset-0 bg-black/10 rounded-2xl sm:rounded-3xl flex items-center justify-center">
@@ -72,12 +74,14 @@ export const CharlotteIntro = () => {
         {/* Lifestyle image with text below */}
         <div className="mt-12 sm:mt-16">
           <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
-            <img 
-              src="/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png" 
-              alt="Kvinna tränar utomhus - en del av en aktiv livsstil med Sommarboosten"
-              className="w-full h-auto object-cover"
-              style={{ objectPosition: '50% 30%' }}
-            />
+            <div className="aspect-[16/9] relative overflow-hidden">
+              <img 
+                src="/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png" 
+                alt="Kvinna tränar utomhus - en del av en aktiv livsstil med Sommarboosten"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: '50% 30%' }}
+              />
+            </div>
           </div>
           
           {/* Text content below the image */}
