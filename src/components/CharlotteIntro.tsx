@@ -73,18 +73,25 @@ export const CharlotteIntro = () => {
 
         {/* Enhanced lifestyle image with summer vibes and better face positioning */}
         <div className="mt-12 sm:mt-16 relative">
-          <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
-            <img 
-              src="/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png" 
-              alt="Kvinna tränar utomhus - en del av en aktiv livsstil med Sommarboosten"
-              className="w-full h-64 sm:h-80 md:h-96 object-cover"
-              style={{ objectPosition: '50% 30%' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-2xl sm:rounded-3xl"></div>
-            <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
+          <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group cursor-pointer">
+            <div className="relative overflow-hidden">
+              <img 
+                src="/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png" 
+                alt="Kvinna tränar utomhus - en del av en aktiv livsstil med Sommarboosten"
+                className="w-full h-64 sm:h-80 md:h-96 object-cover transition-transform duration-300 group-hover:scale-105"
+                style={{ objectPosition: '50% 30%' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-300 group-hover:from-black/60 rounded-2xl sm:rounded-3xl"></div>
+            </div>
+            
+            <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md p-4 sm:p-6 transform translate-y-0 transition-all duration-300 group-hover:translate-y-0 border-t border-white/20">
               <div className="text-2xl sm:text-3xl mb-2">🏃‍♀️</div>
-              <h3 className="text-base sm:text-lg font-medium font-display">Träning kan vara roligt och enkelt</h3>
-              <p className="text-xs sm:text-sm opacity-90 font-text">Hitta din egen väg till rörelse</p>
+              <h3 className="text-lg sm:text-xl font-bold text-primary mb-2 font-display">
+                Träning kan vara roligt och enkelt
+              </h3>
+              <p className="text-sm sm:text-base text-green-700 font-text leading-relaxed">
+                Hitta din egen väg till rörelse
+              </p>
             </div>
           </div>
         </div>
