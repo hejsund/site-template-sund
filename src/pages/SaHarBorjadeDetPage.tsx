@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sparkles, ArrowLeft, Heart, Calendar, Users, Star, Trophy } from 'lucide-react';
@@ -118,16 +117,6 @@ const SaHarBorjadeDetPage = () => {
                 <div className="flex items-center gap-4 mb-4">
                   <Heart className="w-8 h-8 text-coral" aria-hidden="true" />
                   <h3 className="text-2xl font-bold text-coral">Det var då idén om Sommarboosten föddes</h3>
-                </div>
-                <p className="text-coral font-medium font-text text-lg mb-0 leading-relaxed">
-                  Sommarboosten skapades ur en enkel men kraftfull insikt: <strong>Sommaren ska ge dig energi, inte ta den från dig.</strong>
-                </p>
-              </div>
-
-              <div className="bg-coral/10 border-l-4 border-coral p-8 my-12 rounded-2xl">
-                <div className="flex items-center gap-4 mb-4">
-                  <Heart className="w-8 h-8 text-coral" aria-hidden="true" />
-                  <h3 className="text-2xl font-bold text-coral">Varför Sommarboosten blev till</h3>
                 </div>
                 <p className="text-coral font-medium font-text text-lg mb-0 leading-relaxed">
                   Sommarboosten skapades ur en enkel men kraftfull insikt: <strong>Sommaren ska ge dig energi, inte ta den från dig.</strong>
