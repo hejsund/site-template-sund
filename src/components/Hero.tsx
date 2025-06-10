@@ -51,21 +51,21 @@ export const Hero = () => {
         </div>
 
         <div className="relative z-10 px-2 sm:px-0">
-          {/* Mobile-optimized main heading */}
+          {/* Mobile-optimized main heading with responsive text sizing */}
           <div className="mb-6 sm:mb-8 relative">
             <h1 className="sr-only">Sommarboosten {currentPhase.year}</h1>
-            <div className="text-5xl sm:text-6xl md:text-8xl font-black leading-none font-display" aria-hidden="true">
+            <div className="font-black leading-none font-display" aria-hidden="true">
               <span className="text-2xl sm:text-3xl md:text-5xl text-green-600 font-semibold opacity-90 block tracking-widest animate-jumpingBounce pb-3 sm:pb-6 md:pb-8">
                 {currentPhase.year}
               </span>
               <span className="text-gradient block -mt-1 sm:-mt-2 md:-mt-4 leading-none">
                 {currentPhase.isActive ? (
                   <>
-                    <span className="block text-3xl sm:text-5xl md:text-7xl">Sommarboosten</span>
+                    <span className="block text-[clamp(2rem,8vw,5rem)] sm:text-5xl md:text-7xl">Sommarboosten</span>
                     <span className="block text-2xl sm:text-3xl md:text-4xl mt-1 sm:mt-2">pågår!</span>
                   </>
                 ) : (
-                  'Sommarboosten'
+                  <span className="block text-[clamp(2.5rem,10vw,6rem)] sm:text-6xl md:text-8xl">Sommarboosten</span>
                 )}
               </span>
             </div>
