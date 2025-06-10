@@ -7,7 +7,7 @@ import { Testimonials } from '@/components/Testimonials';
 import { FAQ } from '@/components/FAQ';
 import { SommarboostenArticle } from '@/components/SommarboostenArticle';
 import { FinalCTA } from '@/components/FinalCTA';
-import { Footer } from '@/components/Footer';
+import { FooterSection } from '@/components/FooterSection';
 
 const Index = () => {
   return (
@@ -20,7 +20,7 @@ const Index = () => {
       <FAQ />
       <SommarboostenArticle />
       <FinalCTA />
-      <Footer />
+      <FooterSection />
     </div>
   );
 };

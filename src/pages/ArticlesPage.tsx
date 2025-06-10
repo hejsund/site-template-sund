@@ -1,8 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Heart, Brain, Zap, Users, Baby, Calendar } from 'lucide-react';
-import { Footer } from '@/components/Footer';
-import { CurvedDivider } from '@/components/CurvedDivider';
+import { FooterSection } from '@/components/FooterSection';
 
 const ArticlesPage = () => {
   const articles = [
@@ -221,10 +220,8 @@ const ArticlesPage = () => {
         </div>
       </section>
 
-      {/* Curved divider before footer */}
-      <CurvedDivider color="text-primary" />
-
-      <Footer />
+      {/* Use the consolidated FooterSection instead of separate components */}
+      <FooterSection />
     </div>
   );
 };

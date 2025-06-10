@@ -1,11 +1,10 @@
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sparkles, ArrowLeft, Heart, Calendar, Users, Star, Trophy } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
-import { Footer } from '@/components/Footer';
+import { FooterSection } from '@/components/FooterSection';
 
 const SaHarBorjadeDetPage = () => {
   const [email, setEmail] = useState('');
@@ -308,7 +307,7 @@ const SaHarBorjadeDetPage = () => {
         </div>
       </section>
 
-      <Footer />
+      <FooterSection />
     </div>
   );
 };
