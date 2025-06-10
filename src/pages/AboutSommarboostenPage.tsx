@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Heart, Sparkles, Sun, Calendar, Users, Target, Dumbbell, Apple } from 'lucide-react';
@@ -33,7 +34,7 @@ const AboutSommarboostenPage = () => {
               Vad är Sommarboosten?
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-green-700 max-w-3xl mx-auto leading-relaxed font-text mb-8">
-              En 4-veckors resa mot en sundare, starkare och gladare version av dig själv. 
+              En 6-veckors resa mot en sundare, starkare och gladare version av dig själv. 
               Perfekt för att kickstarta din sommar med energi och glädje!
             </p>
             <div className="text-3xl opacity-80">🌻☀️🌊</div>
@@ -55,7 +56,7 @@ const AboutSommarboostenPage = () => {
               </div>
               <p className="text-base sm:text-lg text-green-700 leading-relaxed font-text mb-6">
                 Sommarboosten är inte bara ett träningsprogram – det är en komplett livsstilsförändring 
-                som gör hälsa till en naturlig del av din vardag. Under 4 veckor får du verktyg, 
+                som gör hälsa till en naturlig del av din vardag. Under 6 veckor får du verktyg, 
                 inspiration och stöd för att skapa varaktiga vanor som håller hela året.
               </p>
               <div className="bg-coral/10 border-l-4 border-coral p-4 rounded-lg">
@@ -160,7 +161,7 @@ const AboutSommarboostenPage = () => {
               <div className="flex items-center gap-3 mb-6">
                 <Calendar className="text-primary w-8 h-8" />
                 <h2 className="text-4xl md:text-5xl font-black mb-8 text-primary font-display">
-                  Din 4-veckors resa
+                  Din 6-veckors resa
                 </h2>
               </div>
               <div className="space-y-4">
@@ -168,7 +169,9 @@ const AboutSommarboostenPage = () => {
                   { week: 1, title: "Grunderna", desc: "Lär dig de enkla baserna för hälsosam kost och rolig träning" },
                   { week: 2, title: "Rutiner", desc: "Bygg upp dina dagliga vanor och hitta din egen rytm" },
                   { week: 3, title: "Balans", desc: "Hitta jämvikten mellan träning, vila och njutning" },
-                  { week: 4, title: "Framtid", desc: "Få verktyg för att fortsätta din hälsoresa på egen hand" }
+                  { week: 4, title: "Fördjupning", desc: "Utveckla dina vanor och utmana dig själv på nya sätt" },
+                  { week: 5, title: "Integration", desc: "Integrera allt du lärt dig i din vardagsrutin" },
+                  { week: 6, title: "Framtid", desc: "Få verktyg för att fortsätta din hälsoresa på egen hand" }
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-4 p-4 bg-white/50 rounded-xl border border-green-200">
                     <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold font-display">
