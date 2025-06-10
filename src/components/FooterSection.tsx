@@ -33,7 +33,7 @@ export const FooterSection = () => {
               Sommarboosten
             </h3>
             <p className="text-sm text-green-100 mb-4 font-medium">
-              Skriv ett varumärke från Sund & Stark
+              Sommarboosten är ett varumärke från Sund & Stark
             </p>
             <p className="text-green-100 leading-relaxed mb-6 font-text">
               Vi hjälper dig att bygga hållbara hälsovanor som passar ditt liv. Ingen quick fix, 
