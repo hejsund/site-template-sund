@@ -4,8 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Zap, ArrowLeft, Brain, Scale, Smile } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { Footer } from '@/components/Footer';
-import { CurvedDivider } from '@/components/CurvedDivider';
+import { FooterSection } from '@/components/FooterSection';
 
 const StressManagementArticlePage = () => {
   const [email, setEmail] = useState('');
@@ -92,214 +91,194 @@ const StressManagementArticlePage = () => {
                 Media och sociala medier fylls av bilder på perfekta semestrar. Det skapar press på att din semester också ska vara magisk varje sekund.
               </p>
 
-              <h3 className="text-2xl font-bold text-green-700 mb-4 mt-8 font-display">FOMO (Fear of Missing Out)</h3>
+              <h3 className="text-2xl font-bold text-green-700 mb-4 mt-8 font-display">Rutiner försvinner</h3>
               <p className="text-lg mb-6 leading-relaxed">
-                "Vi borde åka dit," "vi borde göra det," "alla andra verkar ha mer kul." Sommaren kan bli en enda lång lista med saker du "borde" göra.
+                Plötsligt är allt annorlunda. Andra tider för mat, sömn och aktiviteter. För många skapar detta mer stress än avkoppling.
               </p>
 
-              <h3 className="text-2xl font-bold text-green-700 mb-4 mt-8 font-display">Oregelbundna rutiner</h3>
+              <h3 className="text-2xl font-bold text-green-700 mb-4 mt-8 font-display">Social press att "koppla av"</h3>
               <p className="text-lg mb-8 leading-relaxed">
-                För många av oss är rutiner trygghet. När allting ändras kan hjärnan börja stressa.
+                "Du ska väl bara vila nu!" säger alla. Men för någon som mår bra av struktur kan total avkoppling faktiskt vara stressande.
               </p>
 
               <div className="bg-green-50 border-2 border-green-200 p-8 my-12 rounded-xl shadow-sm">
-                <h3 className="text-green-800 mb-6 flex items-center gap-3 text-2xl font-bold font-display">
-                  <Brain className="w-8 h-8 flex-shrink-0" />
-                  Forskningen om vila vs aktivitet:
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="bg-white p-6 rounded-lg shadow-sm border border-green-100">
-                    <h4 className="font-bold text-green-700 mb-3 text-lg">Passiv vila (bara ligga still)</h4>
-                    <p className="text-green-700 leading-relaxed">Hjälper kortsiktigt, men efter några dagar börjar kroppen må sämre.</p>
+                <div className="flex items-center gap-4 mb-4">
+                  <Brain className="w-8 h-8 text-green-600 flex-shrink-0" />
+                  <h3 className="text-2xl font-bold text-green-800 font-display m-0">Vad din hjärna behöver</h3>
+                </div>
+                <p className="text-lg text-green-700 m-0 leading-relaxed">
+                  Din hjärna behöver faktiskt en viss mängd stimulans för att må bra. Total brist på utmaningar kan leda till letargi och depression.
+                </p>
+              </div>
+
+              <h2 className="text-3xl font-bold text-green-800 mb-8 mt-12 font-display">Hitta din balans</h2>
+
+              <div className="grid md:grid-cols-2 gap-8 my-12">
+                <div className="bg-blue-50 border border-blue-200 p-6 rounded-xl">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Smile className="w-6 h-6 text-blue-600" />
+                    <h4 className="text-xl font-bold text-blue-800 font-display m-0">Om du mår bra av struktur</h4>
                   </div>
-                  <div className="bg-white p-6 rounded-lg shadow-sm border border-green-100">
-                    <h4 className="font-bold text-green-700 mb-3 text-lg">Aktiv vila (lätt rörelse)</h4>
-                    <p className="text-green-700 leading-relaxed">15-30 minuter/dag håller kroppens system igång utan stress.</p>
+                  <ul className="text-blue-700 space-y-2 text-sm">
+                    <li>Behåll några fasta punkter i dagen</li>
+                    <li>Planera in aktiviteter du ser fram emot</li>
+                    <li>Sätt mål för semestern (men håll dem enkla)</li>
+                    <li>Skapa nya rutiner för semesterlivet</li>
+                  </ul>
+                </div>
+
+                <div className="bg-purple-50 border border-purple-200 p-6 rounded-xl">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Scale className="w-6 h-6 text-purple-600" />
+                    <h4 className="text-xl font-bold text-purple-800 font-display m-0">Om du behöver vila</h4>
                   </div>
+                  <ul className="text-purple-700 space-y-2 text-sm">
+                    <li>Tillåt dig att sova längre vissa dagar</li>
+                    <li>Säg nej till aktiviteter som känns påtvingade</li>
+                    <li>Gör saker i ditt eget tempo</li>
+                    <li>Lyssna på vad din kropp behöver varje dag</li>
+                  </ul>
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold text-green-800 mb-8 mt-12 font-display">Sommarboosten-metoden för stresshantering</h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-12">
-                <div className="bg-white border-2 border-indigo-200 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
-                  <h3 className="font-bold text-indigo-800 mb-4 text-xl font-display">70% vila, 30% aktivitet</h3>
-                  <p className="text-green-700 leading-relaxed">De flesta dagar ska vara mestadels vila och spontanitet, med lite strukturerad rörelse.</p>
-                </div>
-
-                <div className="bg-white border-2 border-indigo-200 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
-                  <h3 className="font-bold text-indigo-800 mb-4 text-xl font-display">En rutin per dag</h3>
-                  <p className="text-green-700 leading-relaxed">Välj EN sak som du gör varje dag: morgonpromenad, kvällsyoga, vattenintag.</p>
-                </div>
-
-                <div className="bg-white border-2 border-indigo-200 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
-                  <h3 className="font-bold text-indigo-800 mb-4 text-xl font-display">Flexibla pass-längder</h3>
-                  <p className="text-green-700 leading-relaxed">5 minuter vissa dagar, 45 andra. Anpassa efter energi och humör.</p>
-                </div>
-
-                <div className="bg-white border-2 border-indigo-200 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200">
-                  <h3 className="font-bold text-indigo-800 mb-4 text-xl font-display">Aktivitet som ger energi</h3>
-                  <p className="text-green-700 leading-relaxed">Om träningen känns som en börda gör du fel typ eller för mycket.</p>
-                </div>
-              </div>
-
-              {/* Keep existing content sections with improved spacing and typography */}
-              <h2 className="text-3xl font-bold text-green-800 mb-8 mt-12 font-display">Aktiviteter som minskar stress</h2>
+              <h2 className="text-3xl font-bold text-green-800 mb-8 mt-12 font-display">Praktiska verktyg för sommaren</h2>
 
               <div className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-bold text-green-700 mb-4 font-display">Naturpromenader</h3>
-                  <p className="text-lg leading-relaxed">Forskning visar att 15 minuter i naturen sänker kortisol (stresshormon) drastiskt.</p>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold text-green-700 mb-4 font-display">Vattenaktiviteter</h3>
-                  <p className="text-lg leading-relaxed">Simning, paddling, till och med att bara sitta vid vatten har lugnande effekt på nervsystemet.</p>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold text-green-700 mb-4 font-display">Yoga/stretching</h3>
-                  <p className="text-lg leading-relaxed">Aktiv avslappning som sänker puls och blodtryck samtidigt som den håller kroppen mjuk.</p>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl font-bold text-green-700 mb-4 font-display">Dans</h3>
-                  <p className="text-lg leading-relaxed">Frigjör endorfiner och låter dig uttrycka känslor genom kroppen.</p>
-                </div>
-              </div>
-
-              {/* Warning and info boxes with improved accessibility */}
-              <div className="bg-yellow-50 border-2 border-yellow-200 p-8 my-12 rounded-xl shadow-sm">
-                <h3 className="text-yellow-800 mb-6 flex items-center gap-3 text-2xl font-bold font-display">
-                  <Smile className="w-8 h-8 flex-shrink-0" />
-                  Tecken på att du behöver mer vila:
-                </h3>
-                <ul className="text-yellow-700 space-y-3 leading-relaxed text-lg list-disc list-inside">
-                  <li>Du känner dig irriterad på familjen</li>
-                  <li>Du har svårt att njuta av roliga aktiviteter</li>
-                  <li>Du sover dåligt trots att du är "trött"</li>
-                  <li>Du längtar efter att komma hem redan första veckan</li>
-                </ul>
-                <p className="text-yellow-700 mt-6 font-semibold text-lg bg-yellow-100 p-4 rounded-lg">
-                  När du känner dessa tecken: Minska aktiviteten, öka vilan.
-                </p>
-              </div>
-
-              <div className="bg-blue-50 border-2 border-blue-200 p-8 my-12 rounded-xl shadow-sm">
-                <h3 className="text-blue-800 mb-6 flex items-center gap-3 text-2xl font-bold font-display">
-                  <Zap className="w-8 h-8 flex-shrink-0" />
-                  Tecken på att du behöver mer aktivitet:
-                </h3>
-                <ul className="text-blue-700 space-y-3 leading-relaxed text-lg list-disc list-inside">
-                  <li>Du känner dig rastlös trots att du "vilar"</li>
-                  <li>Energin är lägre än vanligt</li>
-                  <li>Du mår sämre mentalt trots "avkoppling"</li>
-                  <li>Du sover sämre än hemma</li>
-                  <li>Du känner dig stel och opig</li>
-                </ul>
-                <p className="text-blue-700 mt-6 font-semibold text-lg bg-blue-100 p-4 rounded-lg">
-                  När du känner dessa tecken: Lägg till lite mer rörelse.
-                </p>
-              </div>
-
-              {/* Rest of the content with improved spacing and typography */}
-              <h2 className="text-3xl font-bold text-green-800 mb-8 mt-12 font-display">Praktiska stresshanteringsverktyg</h2>
-
-              <div className="space-y-10">
-                <div className="bg-white border-2 border-green-200 p-8 rounded-xl shadow-sm">
-                  <h3 className="text-2xl font-bold text-green-700 mb-4 font-display">Morgonrutinen (5 minuter):</h3>
-                  <ul className="text-lg leading-relaxed space-y-2 list-disc list-inside text-green-700">
-                    <li>10 djupa andetag när du vaknar</li>
-                    <li>Känn i kroppen: vad behöver jag idag?</li>
-                    <li>Bestäm aktivitetsnivå för dagen</li>
+                <div className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg">
+                  <h4 className="text-xl font-bold text-orange-800 mb-3 font-display">Morgonrutinen som anpassar sig</h4>
+                  <p className="text-orange-700 mb-4">Skapa en flexibel morgonrutin som funkar oavsett var du är:</p>
+                  <ul className="text-orange-700 space-y-1 text-sm">
+                    <li>5 minuters andning eller stretching</li>
+                    <li>Ett glas vatten</li>
+                    <li>Tänk på tre saker du ser fram emot idag</li>
                   </ul>
                 </div>
 
-                <div className="bg-white border-2 border-green-200 p-8 rounded-xl shadow-sm">
-                  <h3 className="text-2xl font-bold text-green-700 mb-4 font-display">Middagsrutinen (10 minuter):</h3>
-                  <ul className="text-lg leading-relaxed space-y-2 list-disc list-inside text-green-700">
-                    <li>Kort promenad eller stretching</li>
-                    <li>Reflektion: vad var bra med dagen?</li>
-                    <li>Förberedelse för kvällen: aktivitet eller vila?</li>
+                <div className="bg-teal-50 border-l-4 border-teal-400 p-6 rounded-lg">
+                  <h4 className="text-xl font-bold text-teal-800 mb-3 font-display">Kvällsreflektion</h4>
+                  <p className="text-teal-700 mb-4">Avsluta dagen med att reflektera istället för att scrolla:</p>
+                  <ul className="text-teal-700 space-y-1 text-sm">
+                    <li>Vad var bäst med dagens?</li>
+                    <li>Vad lärde jag mig?</li>
+                    <li>Vad ser jag fram emot imorgon?</li>
                   </ul>
                 </div>
 
-                <div className="bg-white border-2 border-green-200 p-8 rounded-xl shadow-sm">
-                  <h3 className="text-2xl font-bold text-green-700 mb-4 font-display">Kvällsrutinen (5 minuter):</h3>
-                  <ul className="text-lg leading-relaxed space-y-2 list-disc list-inside text-green-700">
-                    <li>Andningsövningar</li>
-                    <li>Reflektion över dagen</li>
-                    <li>Planering för imorgon (utan press)</li>
+                <div className="bg-pink-50 border-l-4 border-pink-400 p-6 rounded-lg">
+                  <h4 className="text-xl font-bold text-pink-800 mb-3 font-display">Energigivande aktiviteter</h4>
+                  <p className="text-pink-700 mb-4">Aktiviteter som ger dig energi istället för att ta den:</p>
+                  <ul className="text-pink-700 space-y-1 text-sm">
+                    <li>Promenader utan mål</li>
+                    <li>Läsa något som inspirerar dig</li>
+                    <li>Lyssna på musik som får dig på gott humör</li>
+                    <li>Korta träningspass som känns som lek</li>
                   </ul>
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold text-green-800 mb-8 mt-12 font-display">Att komma hem balanserad</h2>
-              
-              <p className="text-lg leading-relaxed mb-6">Det ultimata målet med stresshantering på semestern är att komma hem och känna:</p>
+              <h2 className="text-3xl font-bold text-green-800 mb-8 mt-12 font-display">När semestern känns överväldigande</h2>
 
-              <ul className="text-lg leading-relaxed space-y-3 list-disc list-inside text-green-700 bg-green-50 p-8 rounded-xl border-2 border-green-200">
-                <li>Du fick verklig vila och återhämtning</li>
-                <li>Du behöll eller utvecklade hälsosamma vanor</li>
-                <li>Du skapade positiva minnen med familjen</li>
-                <li>Du har energi för att ta itu med vardagen igen</li>
-                <li>Du längtar efter nästa semester utan att vara utmattad</li>
-              </ul>
-
-              <p className="font-semibold text-indigo-600 text-xl mt-8 bg-indigo-50 p-6 rounded-xl border-2 border-indigo-200">
-                Det är skillnaden mellan semester som flyr och semester som faktiskt laddar batterierna.
+              <p className="text-lg mb-6 leading-relaxed">
+                Ibland kan även semester kännas stressigt. Här är strategier för olika situationer:
               </p>
+
+              <div className="bg-red-50 border border-red-200 p-6 rounded-xl mb-8">
+                <h4 className="text-lg font-bold text-red-800 mb-3">Om du känner dig rastlös</h4>
+                <p className="text-red-700 text-sm">
+                  Du är van vid att vara aktiv och nu känns det konstigt att "bara" vila. Lägg till mjuk struktur - promenader, lätt träning, kreativa projekt.
+                </p>
+              </div>
+
+              <div className="bg-yellow-50 border border-yellow-200 p-6 rounded-xl mb-8">
+                <h4 className="text-lg font-bold text-yellow-800 mb-3">Om du känner dig skyldig för att vila</h4>
+                <p className="text-yellow-700 text-sm">
+                  Kom ihåg att vila är produktivt. Din hjärna och kropp behöver återhämtning för att fungera optimalt när du kommer tillbaka.
+                </p>
+              </div>
+
+              <div className="bg-indigo-50 border border-indigo-200 p-6 rounded-xl mb-8">
+                <h4 className="text-lg font-bold text-indigo-800 mb-3">Om du känner FOMO (fear of missing out)</h4>
+                <p className="text-indigo-700 text-sm">
+                  Sociala medier visar bara höjdpunkterna. Kom ihåg att alla behöver olika saker för att må bra, och din semester behöver inte se ut som någon annans.
+                </p>
+              </div>
+
+              <h2 className="text-3xl font-bold text-green-800 mb-8 mt-12 font-display">Komma hem starkare</h2>
+
+              <p className="text-lg mb-8 leading-relaxed">
+                Målet med sommaren är inte att komma hem perfekt avslappnad (vad nu det skulle betyda). Målet är att komma hem som en starkare, gladare version av dig själv.
+              </p>
+
+              <div className="bg-gradient-to-r from-green-100 to-blue-100 p-8 rounded-xl border border-green-200">
+                <h3 className="text-2xl font-bold text-green-800 mb-4 font-display text-center">Din perfekta sommar innehåller:</h3>
+                <div className="grid md:grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-3xl mb-2">⚖️</div>
+                    <h4 className="font-bold text-green-700 mb-2">Balans</h4>
+                    <p className="text-sm text-green-600">Mellan aktivitet och vila</p>
+                  </div>
+                  <div>
+                    <div className="text-3xl mb-2">❤️</div>
+                    <h4 className="font-bold text-green-700 mb-2">Självkännedom</h4>
+                    <p className="text-sm text-green-600">Du vet vad DU behöver</p>
+                  </div>
+                  <div>
+                    <div className="text-3xl mb-2">🌟</div>
+                    <h4 className="font-bold text-green-700 mb-2">Flexibilitet</h4>
+                    <p className="text-sm text-green-600">Anpassa efter situationen</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </article>
 
-      {/* Email Signup with improved accessibility */}
+      {/* Email Signup */}
       <section className="py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white border-2 border-indigo-200 p-8 sm:p-10 rounded-2xl shadow-lg">
             <h3 className="text-2xl sm:text-3xl font-black mb-6 font-display text-indigo-800 text-center">
-              Få tips för stressfri sommarbalans! 🧘‍♀️✨
+              Stresshanteringstips för sommaren! 🌊✨
             </h3>
-            <p className="text-base sm:text-lg mb-8 text-green-700 font-text text-center leading-relaxed max-w-2xl mx-auto">
-              Lär dig hantera sommarens utmaningar med verktyg som verkligen fungerar.
+            <p className="text-base sm:text-lg mb-8 text-green-700 font-text text-center leading-relaxed">
+              Få våra bästa strategier för att hantera sommaren på ditt sätt - oavsett om du behöver mer struktur eller mer vila.
             </p>
             
-            <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto space-y-4 sm:space-y-0 sm:flex sm:gap-4">
+            <form onSubmit={handleEmailSubmit} className="max-w-lg mx-auto space-y-4 sm:space-y-0 sm:flex sm:gap-4">
               <Input
                 type="email"
                 placeholder="Din e-postadress..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 h-12 text-base rounded-xl border-2 border-indigo-300 bg-white text-green-800 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="flex-1 h-12 text-base rounded-xl border-2 border-indigo-300 bg-white text-green-800 focus:border-indigo-500 focus:ring-indigo-500"
                 required
-                aria-label="E-postadress för nyhetsbrev"
               />
               <Button 
                 type="submit" 
-                className="bg-indigo-600 text-white hover:bg-indigo-700 focus:bg-indigo-700 h-12 w-full sm:w-auto text-base px-8 rounded-xl font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="bg-indigo-600 text-white hover:bg-indigo-700 h-12 w-full sm:w-auto text-base px-8 rounded-xl font-semibold transition-colors"
               >
-                Skicka tips! 🌟
+                Skicka tips! 📧
               </Button>
             </form>
           </div>
         </div>
       </section>
 
-      {/* CTA with improved spacing */}
+      {/* CTA */}
       <section className="py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-8 text-green-800 font-display">
-            Redo för en semester som verkligen laddar batterierna? 🔋
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-8 text-green-800 font-display leading-tight">
+            Redo för en sommar i perfekt balans? 🌸
           </h2>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/quiz">
-              <Button className="bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <Button className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors">
                 Ta vårt quiz
               </Button>
             </Link>
             <Link to="/om-sommarboosten">
-              <Button variant="outline" className="border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <Button variant="outline" className="border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors">
                 Läs mer om Sommarboosten
               </Button>
             </Link>
@@ -307,10 +286,8 @@ const StressManagementArticlePage = () => {
         </div>
       </section>
 
-      {/* Curved divider before footer */}
-      <CurvedDivider color="text-primary" />
-
-      <Footer />
+      {/* Use the new consolidated FooterSection */}
+      <FooterSection />
     </div>
   );
 };

@@ -1,11 +1,9 @@
-
 import React, { useEffect } from 'react';
 import { ArrowLeft, Target, Calendar, CheckCircle, Repeat, TrendingUp, Star, Clock } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Footer } from '@/components/Footer';
-import { CurvedDivider } from '@/components/CurvedDivider';
+import { FooterSection } from '@/components/FooterSection';
 
 const HabitsArticlePage = () => {
   const navigate = useNavigate();
@@ -277,10 +275,8 @@ const HabitsArticlePage = () => {
         </div>
       </article>
 
-      {/* Curved divider before footer */}
-      <CurvedDivider color="text-primary" />
-
-      <Footer />
+      {/* Use the new consolidated FooterSection */}
+      <FooterSection />
     </div>
   );
 };
