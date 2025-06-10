@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
@@ -8,6 +7,7 @@ import { Card } from '@/components/ui/card';
 import { Calendar, Clock, Users, Trophy, Smartphone } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import { FooterSection } from '@/components/FooterSection';
 
 const ProgramYearPage = () => {
   const { year } = useParams<{ year: string }>();
@@ -178,6 +178,7 @@ const ProgramYearPage = () => {
           </div>
         </div>
       </div>
+      <FooterSection />
     </div>
   );
 };
