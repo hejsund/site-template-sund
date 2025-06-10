@@ -81,8 +81,12 @@ const AboutCharlottePage = () => {
 
             {/* Image */}
             <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-coral/20 rounded-3xl flex items-center justify-center">
-                <div className="text-6xl">👩‍🦰</div>
+              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/lovable-uploads/6bb7e8eb-6f49-4320-b6f0-0eff7cd5f49a.png" 
+                  alt="Charlotte Steinwig"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
