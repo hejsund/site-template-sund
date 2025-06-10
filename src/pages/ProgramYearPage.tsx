@@ -1,28 +1,59 @@
 
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { Calendar, Clock, Users, Trophy, Smartphone } from 'lucide-react';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 const ProgramYearPage = () => {
   const { year } = useParams<{ year: string }>();
+  const navigate = useNavigate();
   const { currentPhase } = useTimePhase();
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const programYear = year ? parseInt(year) : currentPhase.year;
   const isCurrentYear = programYear === new Date().getFullYear();
   const isPastYear = programYear < new Date().getFullYear();
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // Save email to Supabase
+      const { error } = await supabase
+        .from('sb_home_page_leads')
+        .insert({
+          email: email,
+          source: `program_year_${programYear}`,
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving email:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
+      }
+
       toast.success(`Tack! Du kommer att höra från oss snart med mer information om Sommarboosten ${programYear}! 🌟`);
       setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+  const handleQuizRedirect = () => {
+    navigate('/quiz');
   };
 
   const features = [
@@ -81,12 +112,21 @@ const ProgramYearPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="h-12 text-base rounded-xl border-2 border-border focus:border-primary font-text"
                 required
+                disabled={isSubmitting}
               />
               <div className="flex gap-3">
-                <Button type="submit" className="cta-primary h-12 flex-1 text-lg rounded-xl">
-                  Påminn mig
+                <Button 
+                  type="submit" 
+                  className="cta-primary h-12 flex-1 text-lg rounded-xl"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Skickar...' : 'Påminn mig'}
                 </Button>
-                <Button type="button" className="cta-warm h-12 flex-1 text-lg rounded-xl">
+                <Button 
+                  type="button" 
+                  className="cta-warm h-12 flex-1 text-lg rounded-xl"
+                  onClick={handleQuizRedirect}
+                >
                   Gör quiz först
                 </Button>
               </div>

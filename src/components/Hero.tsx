@@ -5,20 +5,47 @@ import { Input } from '@/components/ui/input';
 import { Heart, Sparkles, Dumbbell, Sun, Waves } from 'lucide-react';
 import { toast } from 'sonner';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
+import { supabase } from '@/integrations/supabase/client';
 
 export const Hero = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { currentPhase } = useTimePhase();
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // Save email to Supabase
+      const { error } = await supabase
+        .from('sb_home_page_leads')
+        .insert({
+          email: email,
+          ip_address: null, // Could be added with additional logic
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving email:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
+      }
+
+      // Show success message
       if (currentPhase.isActive) {
         toast.success(`Tack för ditt intresse! Anmälan för Sommarboosten ${currentPhase.year} är öppen nu! 🌟`);
       } else {
         toast.success(`Tack! Du kommer att höra från oss snart med mer information om Sommarboosten ${currentPhase.year}! 🌟`);
       }
       setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -108,9 +135,14 @@ export const Hero = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="flex-1 h-12 sm:h-14 text-sm sm:text-base rounded-xl border-2 border-border focus:border-primary font-text"
                   required
+                  disabled={isSubmitting}
                 />
-                <Button type="submit" className="cta-primary h-12 sm:h-14 w-full sm:w-auto whitespace-nowrap text-sm sm:text-lg px-6 sm:px-8 rounded-xl">
-                  {currentPhase.ctaText} ✨
+                <Button 
+                  type="submit" 
+                  className="cta-primary h-12 sm:h-14 w-full sm:w-auto whitespace-nowrap text-sm sm:text-lg px-6 sm:px-8 rounded-xl"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Skickar...' : `${currentPhase.ctaText} ✨`}
                 </Button>
               </form>
               

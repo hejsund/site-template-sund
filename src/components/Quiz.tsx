@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -6,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 interface Question {
   id: number;
@@ -93,6 +95,7 @@ export const Quiz = () => {
     gender: ''
   });
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleAnswer = (questionId: number, optionId: string) => {
     const option = questions[questionId - 1].options.find(opt => opt.id === optionId);
@@ -134,6 +137,7 @@ export const Quiz = () => {
         description: "Baserat på dina svar verkar du söka något mer intensivt än vad Sommarboosten erbjuder. Vårt program fokuserar på glädje, balans och hållbara vanor - inte extremträning eller muskelbyggande.",
         program: "Vi rekommenderar att du utforskar andra alternativ",
         recommended: false,
+        type: "not_recommended",
         advice: flags.includes('muscle_obsessed') 
           ? "Du vill bygga extremt mycket muskler, men Sommarboosten handlar om välmående och balans." 
           : flags.includes('gym_obsessed') || flags.includes('overtraining')
@@ -146,6 +150,7 @@ export const Quiz = () => {
         description: "Du är redo att ta nästa steg i din hälsoresan med glädje och balans. Sommarboosten kommer ge dig precis den struktur och motivation du behöver.",
         program: "Sommarboosten 2025 - Du kommer älska det!",
         recommended: true,
+        type: "perfect_match",
         advice: answers[4] === 'a' 
           ? "Du sa att träning ska vara kul som lek - det är EXAKT vad Sommarboosten handlar om!" 
           : "Din inställning till balans och välmående matchar perfekt med vår filosofi."
@@ -156,6 +161,7 @@ export const Quiz = () => {
         description: "Du har en bra grund att stå på. Sommarboosten hjälper dig att förfina dina vanor och hitta den rätta balansen mellan träning och liv.",
         program: "Sommarboosten 2025 - Starkt rekommenderat",
         recommended: true,
+        type: "good_match",
         advice: answers[6] === 'a' 
           ? "Du sa att du har en hektisk livsstil - våra korta, effektiva pass är perfekta för dig!" 
           : "Du verkar redan ha bra vanor, Sommarboosten hjälper dig att optimera dem."
@@ -166,24 +172,56 @@ export const Quiz = () => {
         description: "Du står i början av din resa mot bättre hälsa. Sommarboosten ger dig en mjuk start med enkla, hållbara förändringar som växer med dig.",
         program: "Sommarboosten 2025 - Perfekt för nybörjare",
         recommended: true,
+        type: "beginner_match",
         advice: "Du verkar vara ny till träning - vår app guidar dig steg för steg på ett kul sätt!"
       };
     }
   };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (userData.email) {
-      setEmailSubmitted(true);
+    if (!userData.email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    
+    try {
       const recommendation = getRecommendation();
+      
+      // Save quiz result to Supabase
+      const { error } = await supabase
+        .from('sb_quiz_leads')
+        .insert({
+          email: userData.email,
+          age: userData.age,
+          gender: userData.gender,
+          quiz_score: score,
+          quiz_answers: answers,
+          recommendation_type: recommendation.type,
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving quiz result:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
+      }
+
+      setEmailSubmitted(true);
+      
       if (recommendation.recommended) {
         toast.success('Grattis! Du får en gratis shaker och 15% rabatt! 🎉');
         // Here you would redirect to Shopify checkout
         console.log('Quiz completed - redirect to checkout with discount');
       } else {
-        toast.info('Tack! Vi skickar dig mer information om programmet! 📧');
+        toast.success('Tack! Vi skickar dig mer information om programmet! 📧');
       }
-      console.log('Quiz results:', { userData, score, answers, flags, recommendation });
+      
+      console.log('Quiz results saved successfully');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -259,9 +297,14 @@ export const Quiz = () => {
                     onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
                     required
                     className="text-center"
+                    disabled={isSubmitting}
                   />
-                  <Button type="submit" className="w-full cta-primary text-lg py-4">
-                    Ja, jag vill ha min rabatt och börja! 🚀
+                  <Button 
+                    type="submit" 
+                    className="w-full cta-primary text-lg py-4"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Skickar...' : 'Ja, jag vill ha min rabatt och börja! 🚀'}
                   </Button>
                 </form>
               </div>
@@ -319,9 +362,14 @@ export const Quiz = () => {
                         onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
                         required
                         className="text-center"
+                        disabled={isSubmitting}
                       />
-                      <Button type="submit" className="w-full">
-                        Ja, skicka mer information! 📧
+                      <Button 
+                        type="submit" 
+                        className="w-full"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? 'Skickar...' : 'Ja, skicka mer information! 📧'}
                       </Button>
                     </form>
                   </div>

@@ -81,6 +81,87 @@ export type Database = {
         }
         Relationships: []
       }
+      sb_home_page_leads: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          ip_address: unknown | null
+          source: string | null
+          updated_at: string
+          user_agent: string | null
+          year: number
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          ip_address?: unknown | null
+          source?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          year?: number
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          ip_address?: unknown | null
+          source?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          year?: number
+        }
+        Relationships: []
+      }
+      sb_quiz_leads: {
+        Row: {
+          age: string | null
+          created_at: string
+          email: string
+          gender: string | null
+          id: string
+          ip_address: unknown | null
+          quiz_answers: Json | null
+          quiz_score: number | null
+          recommendation_type: string | null
+          source: string | null
+          updated_at: string
+          user_agent: string | null
+          year: number
+        }
+        Insert: {
+          age?: string | null
+          created_at?: string
+          email: string
+          gender?: string | null
+          id?: string
+          ip_address?: unknown | null
+          quiz_answers?: Json | null
+          quiz_score?: number | null
+          recommendation_type?: string | null
+          source?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          year?: number
+        }
+        Update: {
+          age?: string | null
+          created_at?: string
+          email?: string
+          gender?: string | null
+          id?: string
+          ip_address?: unknown | null
+          quiz_answers?: Json | null
+          quiz_score?: number | null
+          recommendation_type?: string | null
+          source?: string | null
+          updated_at?: string
+          user_agent?: string | null
+          year?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
