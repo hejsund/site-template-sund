@@ -27,20 +27,19 @@ export const CharlotteIntro = () => {
               </div>
               
               {/* Summer decorative elements */}
-              <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-8 h-8 sm:w-12 sm:h-12 bg-coral rounded-full opacity-60 flex items-center justify-center text-white text-xs sm:text-base">☀️</div>
-              <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 w-6 h-6 sm:w-8 sm:h-8 bg-purple rounded-full opacity-60 flex items-center justify-center text-white text-xs">🌺</div>
+              <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-8 h-8 sm:w-12 sm:h-12 bg-coral rounded-full opacity-60"></div>
+              <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 w-6 h-6 sm:w-8 sm:h-8 bg-purple rounded-full opacity-60"></div>
             </div>
           </div>
 
           {/* Content with mobile optimization */}
           <div className="space-y-4 sm:space-y-6 order-1 md:order-2">
             <div className="inline-block bg-green-100 text-primary px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium">
-              💚 Ett personligt meddelande från Charlotte
+              Ett personligt meddelande från Charlotte
             </div>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-primary leading-tight font-display">
-              Hej, härliga du! 
-              <span className="block text-xl sm:text-2xl md:text-3xl mt-2 opacity-80">🌞</span>
+              Hej, härliga du!
             </h2>
 
             <div className="space-y-3 sm:space-y-4 text-sm sm:text-base md:text-lg text-green-800 leading-relaxed font-text">
@@ -49,7 +48,7 @@ export const CharlotteIntro = () => {
               </p>
               
               <p>
-                Jag har själv provat mig fram genom åren, och i <strong className="text-primary">Sommarboosten</strong> får du det bästa av det jag lärt mig. Allt på ett enkelt sätt, med glädje i fokus! 🌻
+                Jag har själv provat mig fram genom åren, och i <strong className="text-primary">Sommarboosten</strong> får du det bästa av det jag lärt mig. Allt på ett enkelt sätt, med glädje i fokus!
               </p>
               
               <p>
@@ -61,7 +60,6 @@ export const CharlotteIntro = () => {
               {/* White radius button background for better readability */}
               <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg"></div>
               <div className="relative z-10">
-                <div className="text-lg sm:text-xl mb-2">🌊</div>
                 <p className="text-primary font-medium italic font-text text-sm sm:text-base">
                   "Sommaren handlar om att leva – och Sommarboosten handlar om att du äger dina val."
                 </p>
@@ -71,28 +69,25 @@ export const CharlotteIntro = () => {
           </div>
         </div>
 
-        {/* Enhanced lifestyle image with summer vibes and better face positioning */}
-        <div className="mt-12 sm:mt-16 relative">
-          <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group cursor-pointer">
-            <div className="relative overflow-hidden">
-              <img 
-                src="/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png" 
-                alt="Kvinna tränar utomhus - en del av en aktiv livsstil med Sommarboosten"
-                className="w-full h-64 sm:h-80 md:h-96 object-cover transition-transform duration-300 group-hover:scale-105"
-                style={{ objectPosition: '50% 30%' }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-300 group-hover:from-black/60 rounded-2xl sm:rounded-3xl"></div>
-            </div>
-            
-            <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md p-4 sm:p-6 transform translate-y-0 transition-all duration-300 group-hover:translate-y-0 border-t border-white/20">
-              <div className="text-2xl sm:text-3xl mb-2">🏃‍♀️</div>
-              <h3 className="text-lg sm:text-xl font-bold text-primary mb-2 font-display">
-                Träning kan vara roligt och enkelt
-              </h3>
-              <p className="text-sm sm:text-base text-green-700 font-text leading-relaxed">
-                Hitta din egen väg till rörelse
-              </p>
-            </div>
+        {/* Lifestyle image with text below */}
+        <div className="mt-12 sm:mt-16">
+          <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
+            <img 
+              src="/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png" 
+              alt="Kvinna tränar utomhus - en del av en aktiv livsstil med Sommarboosten"
+              className="w-full h-auto object-cover"
+              style={{ objectPosition: '50% 30%' }}
+            />
+          </div>
+          
+          {/* Text content below the image */}
+          <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 mt-6 shadow-lg">
+            <h3 className="text-xl sm:text-2xl font-bold text-primary mb-3 font-display">
+              Träning kan vara roligt och enkelt
+            </h3>
+            <p className="text-base sm:text-lg text-green-700 font-text leading-relaxed">
+              Hitta din egen väg till rörelse
+            </p>
           </div>
         </div>
       </div>
