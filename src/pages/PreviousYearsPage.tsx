@@ -2,24 +2,21 @@
 import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Calendar, Users, Star } from 'lucide-react';
+import { Calendar, Star } from 'lucide-react';
 
 const PreviousYearsPage = () => {
-  const currentYear = new Date().getFullYear();
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
   const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
 
-  const getYearStats = (year: number) => {
-    // Mock data - in real app this would come from backend
-    const baseParticipants = 1000;
-    const yearsSince2020 = year - 2020;
+  const getYearInfo = (year: number) => {
     return {
-      participants: baseParticipants + (yearsSince2020 * 200),
       rating: 4.8 + (Math.random() * 0.2),
       highlights: [
         `${year === currentYear ? 'Pågående' : 'Genomförd'} sommarboosten`,
-        `Över ${baseParticipants + (yearsSince2020 * 200)} deltagare`,
         'Nya roliga recept varje vecka',
-        '95% slutförde hela programmet'
+        'Fokus på hållbara vanor',
+        'Personlig coaching och stöd'
       ]
     };
   };
@@ -32,14 +29,14 @@ const PreviousYearsPage = () => {
             Tidigare års Sommarboosten
           </h1>
           <p className="text-xl text-green-700 max-w-3xl mx-auto font-text leading-relaxed">
-            Se hur tusentals personer har förändrat sina liv genom åren. 
-            Varje år blir programmet bättre baserat på deltagarnas feedback!
+            Se hur programmet har utvecklats genom åren. 
+            Varje år blir Sommarboosten bättre baserat på deltagarnas feedback!
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {years.map((year) => {
-            const stats = getYearStats(year);
+            const info = getYearInfo(year);
             const isCurrent = year === currentYear;
             
             return (
@@ -60,17 +57,13 @@ const PreviousYearsPage = () => {
 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
-                    <Users className="w-5 h-5 text-green-600" />
-                    <span className="text-green-700 font-text">{stats.participants} deltagare</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
                     <Star className="w-5 h-5 text-yellow-500" />
-                    <span className="text-green-700 font-text">{stats.rating.toFixed(1)}/5.0 betyg</span>
+                    <span className="text-green-700 font-text">{info.rating.toFixed(1)}/5.0 betyg</span>
                   </div>
                 </div>
 
                 <div className="space-y-3 mb-8">
-                  {stats.highlights.map((highlight, index) => (
+                  {info.highlights.map((highlight, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
                       <span className="text-sm text-green-700 font-text">{highlight}</span>

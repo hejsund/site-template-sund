@@ -83,12 +83,12 @@ export const FooterSection = () => {
               © 2025 Sommarboosten - Sund och Stark. Alla rättigheter förbehållna.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-green-200 hover:text-white transition-colors duration-200 font-text">
+              <Link to="/integritetspolicy" className="text-green-200 hover:text-white transition-colors duration-200 font-text">
                 Integritetspolicy
-              </a>
-              <a href="#" className="text-green-200 hover:text-white transition-colors duration-200 font-text">
+              </Link>
+              <Link to="/villkor" className="text-green-200 hover:text-white transition-colors duration-200 font-text">
                 Villkor
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -22,6 +22,8 @@ import FamilyTrainingArticlePage from "./pages/articles/FamilyTrainingArticlePag
 import After40ArticlePage from "./pages/articles/After40ArticlePage";
 import StressManagementArticlePage from "./pages/articles/StressManagementArticlePage";
 import SaHarBorjadeDetPage from "./pages/SaHarBorjadeDetPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsPage from "./pages/TermsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
