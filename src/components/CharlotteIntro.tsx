@@ -83,8 +83,8 @@ export const CharlotteIntro = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-2xl sm:rounded-3xl"></div>
             <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
               <div className="text-2xl sm:text-3xl mb-2">🏃‍♀️</div>
-              <h3 className="text-base sm:text-lg font-medium font-display">Träning kan vara roligt och enkelt</h3>
-              <p className="text-xs sm:text-sm opacity-90 font-text">Hitta din egen väg till rörelse</p>
+              <h3 className="text-base sm:text-lg font-medium font-display text-white drop-shadow-lg">Träning kan vara roligt och enkelt</h3>
+              <p className="text-xs sm:text-sm opacity-90 font-text text-white drop-shadow-md">Hitta din egen väg till rörelse</p>
             </div>
           </div>
         </div>
