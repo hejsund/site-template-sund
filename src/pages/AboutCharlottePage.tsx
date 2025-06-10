@@ -195,7 +195,7 @@ const AboutCharlottePage = () => {
               <div className="bg-orange/10 p-6 rounded-xl border border-orange/30">
                 <p className="text-green-700 font-text leading-relaxed mb-4">
                   När jag inte hjälper andra familjer hitta sin hälsobalans, tillbringar jag tid med 
-                  mina fyra barn (8, 11, 14 och 16 år) och min man. Vi älskar att vara utomhus, 
+                  mina fyra barn (3, 7, 9 och 12 år) och min man. Vi älskar att vara utomhus, 
                   laga mat tillsammans och upptäcka nya aktiviteter som hela familjen kan njuta av.
                 </p>
                 <p className="text-green-700 font-text leading-relaxed">
