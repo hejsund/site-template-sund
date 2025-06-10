@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,7 +24,7 @@ const PreviousYearsPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100">
       <div className="max-w-6xl mx-auto px-6 py-20">
         <div className="text-center mb-20">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-8 font-display">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-primary mb-8 font-display">
             Tidigare års Sommarboosten
           </h1>
           <p className="text-xl text-green-700 max-w-3xl mx-auto font-text leading-relaxed">
