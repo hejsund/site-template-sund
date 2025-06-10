@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -5,15 +6,42 @@ import { Zap, ArrowLeft, Brain, Scale, Smile } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { FooterSection } from '@/components/FooterSection';
+import { supabase } from '@/integrations/supabase/client';
 
 const StressManagementArticlePage = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // Save email to Supabase
+      const { error } = await supabase
+        .from('sb_home_page_leads')
+        .insert({
+          email: email,
+          source: 'stress_management_article',
+          ip_address: null,
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving email:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
+      }
+
       toast.success('Tack! Du kommer att höra från oss snart! 🌟');
       setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -253,12 +281,14 @@ const StressManagementArticlePage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 h-12 text-base rounded-xl border-2 border-indigo-300 bg-white text-green-800 focus:border-indigo-500 focus:ring-indigo-500"
                 required
+                disabled={isSubmitting}
               />
               <Button 
                 type="submit" 
                 className="bg-indigo-600 text-white hover:bg-indigo-700 h-12 w-full sm:w-auto text-base px-8 rounded-xl font-semibold transition-colors"
+                disabled={isSubmitting}
               >
-                Skicka tips! 📧
+                {isSubmitting ? 'Skickar...' : 'Skicka tips! 📧'}
               </Button>
             </form>
           </div>

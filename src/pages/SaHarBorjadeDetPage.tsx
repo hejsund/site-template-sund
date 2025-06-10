@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sparkles, ArrowLeft, Heart, Calendar, Users, Star, Trophy } from 'lucide-react';
@@ -5,15 +6,42 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 import { FooterSection } from '@/components/FooterSection';
+import { supabase } from '@/integrations/supabase/client';
 
 const SaHarBorjadeDetPage = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // Save email to Supabase
+      const { error } = await supabase
+        .from('sb_home_page_leads')
+        .insert({
+          email: email,
+          source: 'sa_har_borjade_det',
+          ip_address: null,
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving email:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
+      }
+
       toast.success('Tack! Du kommer att höra från oss snart med mer information! 🌟');
       setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -280,10 +308,15 @@ const SaHarBorjadeDetPage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   className="flex-1 h-14 text-lg rounded-2xl border-2 border-green-300 bg-white text-green-800 focus:border-green-500 focus:ring-green-500"
                   required
+                  disabled={isSubmitting}
                   aria-label="E-postadress för intresseanmälan"
                 />
-                <Button type="submit" className="bg-green-600 text-white hover:bg-green-700 h-14 w-full sm:w-auto text-lg px-8 rounded-2xl font-semibold transition-all duration-300 hover:scale-105">
-                  Anmäl intresse ✨
+                <Button 
+                  type="submit" 
+                  className="bg-green-600 text-white hover:bg-green-700 h-14 w-full sm:w-auto text-lg px-8 rounded-2xl font-semibold transition-all duration-300 hover:scale-105"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Skickar...' : 'Anmäl intresse ✨'}
                 </Button>
               </form>
             </div>

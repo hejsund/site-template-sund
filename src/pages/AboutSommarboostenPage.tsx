@@ -5,15 +5,42 @@ import { Heart, Sparkles, Sun, Calendar, Users, Target, Dumbbell, Apple } from '
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 
 const AboutSommarboostenPage = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // Save email to Supabase
+      const { error } = await supabase
+        .from('sb_home_page_leads')
+        .insert({
+          email: email,
+          source: 'about_sommarboosten',
+          ip_address: null,
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving email:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
+      }
+
       toast.success('Tack! Du kommer att höra från oss snart med mer information! 🌟');
       setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -204,9 +231,14 @@ const AboutSommarboostenPage = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     className="flex-1 h-12 text-sm sm:text-base rounded-xl border-2 border-primary/30 bg-white text-green-800"
                     required
+                    disabled={isSubmitting}
                   />
-                  <Button type="submit" className="bg-primary text-white hover:bg-primary/90 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold">
-                    Anmäl intresse ✨
+                  <Button 
+                    type="submit" 
+                    className="bg-primary text-white hover:bg-primary/90 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Skickar...' : 'Anmäl intresse ✨'}
                   </Button>
                 </form>
               </div>

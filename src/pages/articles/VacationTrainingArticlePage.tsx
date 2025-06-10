@@ -5,15 +5,42 @@ import { Input } from '@/components/ui/input';
 import { Plane, ArrowLeft, MapPin, Hotel, Tent } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 const VacationTrainingArticlePage = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // Save email to Supabase
+      const { error } = await supabase
+        .from('sb_home_page_leads')
+        .insert({
+          email: email,
+          source: 'vacation_training_article',
+          ip_address: null,
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving email:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
+      }
+
       toast.success('Tack! Du kommer att höra från oss snart! 🌟');
       setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -201,9 +228,14 @@ const VacationTrainingArticlePage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 h-12 text-sm sm:text-base rounded-xl border-2 border-teal-300 bg-white text-green-800"
                 required
+                disabled={isSubmitting}
               />
-              <Button type="submit" className="bg-teal-600 text-white hover:bg-teal-700 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold">
-                Skicka tips! 📧
+              <Button 
+                type="submit" 
+                className="bg-teal-600 text-white hover:bg-teal-700 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Skickar...' : 'Skicka tips! 📧'}
               </Button>
             </form>
           </div>
