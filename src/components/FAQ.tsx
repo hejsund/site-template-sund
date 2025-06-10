@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -26,10 +25,6 @@ const faqs = [
   {
     question: "Kan jag träna utomhus?",
     answer: "Självklart! Många av träningspassen är perfekta för utomhusträning. Vi har pass för park, strand, trädgård – var du än befinner dig. Sommaren är ju till för att vara ute!"
-  },
-  {
-    question: "Vad kostar det och hur länge gäller erbjudandet?",
-    answer: "När vi öppner upp för Sommarboosten 2025 får du 50% rabatt i 48 timmar. Ordinarie pris kommer att vara 997 kr, men tidiga anmälningar får det för 497 kr. Plus massa bonusar!"
   }
 ];
 
