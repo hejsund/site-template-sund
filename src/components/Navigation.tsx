@@ -28,9 +28,9 @@ export const Navigation = () => {
       title: 'Artiklar',
       items: [
         { name: 'Alla artiklar', href: '/artiklar', icon: BookOpen },
-        { name: 'Träning & motivation', href: '/artiklar/traning', icon: Trophy },
-        { name: 'Kost & njutning', href: '/artiklar/kost', icon: Users },
-        { name: 'Vanor & förändringar', href: '/artiklar/vanor', icon: Clock },
+        { name: 'Träning & motivation', href: '/artiklar?category=Träning', icon: Trophy },
+        { name: 'Kost & njutning', href: '/artiklar?category=Kost', icon: Users },
+        { name: 'Vanor & förändringar', href: '/artiklar?category=Vanor', icon: Clock },
       ]
     },
     {
