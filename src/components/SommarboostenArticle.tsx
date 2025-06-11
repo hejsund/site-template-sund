@@ -144,14 +144,14 @@ export const SommarboostenArticle = () => {
             <h2 className="text-3xl font-bold text-primary mb-8 font-display">
               Redo för din bästa sommar hittills?
             </h2>
-            <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/quiz" onClick={handleLinkClick}>
-                <Button className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 mr-4">
+                <Button className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 w-full sm:w-auto">
                   Gör vårt quiz och hitta din väg
                 </Button>
               </Link>
               <Link to="/om-sommarboosten" onClick={handleLinkClick}>
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold text-lg px-8 py-4">
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold text-lg px-8 py-4 w-full sm:w-auto">
                   Läs mer om Sommarboosten
                 </Button>
               </Link>
