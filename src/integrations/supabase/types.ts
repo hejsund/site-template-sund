@@ -159,6 +159,45 @@ export type Database = {
         }
         Relationships: []
       }
+      sb_images: {
+        Row: {
+          alt: string
+          category: string | null
+          created_at: string
+          description: string
+          display_order: number | null
+          id: string
+          is_active: boolean | null
+          src: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          alt: string
+          category?: string | null
+          created_at?: string
+          description: string
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          src: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          alt?: string
+          category?: string | null
+          created_at?: string
+          description?: string
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          src?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       sb_quiz_leads: {
         Row: {
           age: string | null
