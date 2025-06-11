@@ -68,7 +68,7 @@ export const CharlotteIntro = () => {
               </p>
               
               <p>
-                <span className="text-coral font-medium">Inget pekpinne, inga förbud</span> – bara verktyg som hjälper dig att skapa den sommar DU vill ha.
+                <span className="text-coral font-medium">Inga pekpinne, inga förbud</span> – bara verktyg som hjälper dig att skapa den sommar DU vill ha.
               </p>
             </div>
 
