@@ -9,6 +9,7 @@ interface LifestyleImage {
   title: string;
   description: string;
   display_order: number;
+  tags: string[] | null;
 }
 
 export const useLifestyleImages = () => {
@@ -19,7 +20,7 @@ export const useLifestyleImages = () => {
       
       const { data, error } = await supabase
         .from('sb_images')
-        .select('id, src, alt, title, description, display_order')
+        .select('id, src, alt, title, description, display_order, tags')
         .eq('is_active', true)
         .eq('category', 'lifestyle')
         .order('display_order', { ascending: true });

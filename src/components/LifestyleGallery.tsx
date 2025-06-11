@@ -71,6 +71,12 @@ export const LifestyleGallery = () => {
                 <p className="text-sm sm:text-base text-green-700 font-text leading-relaxed">
                   {image.description}
                 </p>
+                {/* Display tags if available - for debugging/admin purposes */}
+                {image.tags && image.tags.length > 0 && process.env.NODE_ENV === 'development' && (
+                  <div className="mt-2 text-xs text-gray-500">
+                    Tags: {image.tags.join(', ')}
+                  </div>
+                )}
               </div>
             </div>
           ))}
