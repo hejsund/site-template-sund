@@ -1,8 +1,14 @@
 
+import { useEffect } from 'react';
 import { Quiz } from '@/components/Quiz';
 import { FooterSection } from '@/components/FooterSection';
 
 const QuizPage = () => {
+  useEffect(() => {
+    // Ensure page starts at the top when component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100">
       <div className="py-16">
