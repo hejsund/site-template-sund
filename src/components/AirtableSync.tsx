@@ -1,9 +1,9 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, RefreshCw, CheckCircle, AlertCircle, Clock } from 'lucide-react';
+import { Loader2, RefreshCw, CheckCircle, AlertCircle, Clock, Zap } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -20,10 +20,75 @@ interface SyncResult {
   };
 }
 
+interface ListenerStatus {
+  isConnected: boolean;
+  lastHeartbeat: string;
+  uptime: number;
+}
+
 export const AirtableSync = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [listenerStatus, setListenerStatus] = useState<ListenerStatus | null>(null);
+  const [isCheckingStatus, setIsCheckingStatus] = useState(false);
   const [lastSync, setLastSync] = useState<Date | null>(null);
   const [syncResult, setSyncResult] = useState<SyncResult | null>(null);
+
+  // Check listener status on component mount
+  useEffect(() => {
+    checkListenerStatus();
+    
+    // Check status every 30 seconds
+    const statusInterval = setInterval(() => {
+      checkListenerStatus();
+    }, 30000);
+    
+    return () => clearInterval(statusInterval);
+  }, []);
+
+  const checkListenerStatus = async () => {
+    setIsCheckingStatus(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('listener-service', {
+        method: 'GET',
+        query: { action: 'status' }
+      });
+
+      if (error) {
+        console.error('Error checking listener status:', error);
+        setListenerStatus(null);
+      } else {
+        setListenerStatus(data.status);
+      }
+    } catch (error) {
+      console.error('Error checking listener status:', error);
+      setListenerStatus(null);
+    } finally {
+      setIsCheckingStatus(false);
+    }
+  };
+
+  const startListener = async () => {
+    setIsCheckingStatus(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('listener-service', {
+        method: 'GET',
+        query: { action: 'start' }
+      });
+
+      if (error) {
+        console.error('Error starting listener:', error);
+        toast.error('Failed to start event-driven sync');
+      } else {
+        toast.success('Event-driven sync started successfully');
+        await checkListenerStatus();
+      }
+    } catch (error) {
+      console.error('Error starting listener:', error);
+      toast.error('An unexpected error occurred');
+    } finally {
+      setIsCheckingStatus(false);
+    }
+  };
 
   const handleSync = async () => {
     setIsLoading(true);
@@ -58,26 +123,141 @@ export const AirtableSync = () => {
     }
   };
 
+  const formatTime = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleTimeString();
+    } catch (e) {
+      return "Unknown";
+    }
+  };
+
+  const formatUptime = (ms: number) => {
+    const seconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    
+    if (hours > 0) {
+      return `${hours}h ${minutes % 60}m`;
+    } else if (minutes > 0) {
+      return `${minutes}m ${seconds % 60}s`;
+    } else {
+      return `${seconds}s`;
+    }
+  };
+
   return (
     <div className="space-y-6">
-      {/* Automated Sync Status */}
+      {/* Event-Driven Sync Status */}
       <Card className="w-full max-w-2xl mx-auto border-green-200 bg-green-50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-800">
-            <Clock className="w-5 h-5 text-green-600" />
-            Automated Sync Active
+            <Zap className="w-5 h-5 text-green-600" />
+            Event-Driven Sync
           </CardTitle>
           <CardDescription className="text-green-700">
-            Your lead data is automatically synced to Airtable every hour at the top of the hour (e.g., 1:00, 2:00, 3:00).
+            New leads are automatically synced to Airtable in real-time when they are added to the database.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                {listenerStatus ? (
+                  <Badge variant="outline" className={`${listenerStatus.isConnected ? 'bg-green-100 text-green-800 border-green-300' : 'bg-yellow-100 text-yellow-800 border-yellow-300'}`}>
+                    {listenerStatus.isConnected ? (
+                      <>
+                        <CheckCircle className="w-3 h-3 mr-1" />
+                        Active
+                      </>
+                    ) : (
+                      <>
+                        <AlertCircle className="w-3 h-3 mr-1" />
+                        Inactive
+                      </>
+                    )}
+                  </Badge>
+                ) : (
+                  <Badge variant="outline" className="bg-gray-100 text-gray-800 border-gray-300">
+                    <Clock className="w-3 h-3 mr-1" />
+                    Checking...
+                  </Badge>
+                )}
+                
+                {listenerStatus && listenerStatus.isConnected && (
+                  <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300">
+                    <Clock className="w-3 h-3 mr-1" />
+                    Uptime: {formatUptime(listenerStatus.uptime)}
+                  </Badge>
+                )}
+
+                {listenerStatus && (
+                  <div className="text-xs text-muted-foreground">
+                    Last heartbeat: {formatTime(listenerStatus.lastHeartbeat)}
+                  </div>
+                )}
+              </div>
+              
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={checkListenerStatus}
+                  disabled={isCheckingStatus}
+                >
+                  {isCheckingStatus ? (
+                    <>
+                      <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+                      Checking...
+                    </>
+                  ) : (
+                    <>
+                      <RefreshCw className="w-3 h-3 mr-1" />
+                      Check Status
+                    </>
+                  )}
+                </Button>
+                
+                {!listenerStatus?.isConnected && (
+                  <Button
+                    size="sm"
+                    onClick={startListener}
+                    disabled={isCheckingStatus}
+                  >
+                    <Zap className="w-3 h-3 mr-1" />
+                    Start Sync
+                  </Button>
+                )}
+              </div>
+            </div>
+            
+            <div className="text-xs text-muted-foreground space-y-1">
+              <p>• New leads are automatically synced when added to either table</p>
+              <p>• Database triggers notify the sync service which sends data to Airtable</p>
+              <p>• No duplicate checking needed - each lead is synced exactly once</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Automated Sync Status */}
+      <Card className="w-full max-w-2xl mx-auto border-blue-200 bg-blue-50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-800">
+            <Clock className="w-5 h-5 text-blue-600" />
+            Automated Hourly Sync
+          </CardTitle>
+          <CardDescription className="text-blue-700">
+            Your lead data is also automatically synced to Airtable every hour at the top of the hour as a fallback mechanism.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
+            <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300">
               <Clock className="w-3 h-3 mr-1" />
               Next sync: Top of the hour
             </Badge>
-            <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
+            <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300">
               Schedule: Hourly
             </Badge>
           </div>
@@ -167,10 +347,10 @@ export const AirtableSync = () => {
           )}
 
           <div className="text-xs text-muted-foreground space-y-1">
-            <p>• Automated sync runs every hour and syncs all new and existing leads</p>
-            <p>• Manual sync allows you to trigger an immediate sync without waiting</p>
-            <p>• Email and source fields are synced from both sb_home_page_leads and sb_quiz_leads tables</p>
-            <p>• Duplicate emails are automatically filtered out during sync</p>
+            <p>• Three sync methods ensure reliable data transfer</p>
+            <p>• Real-time event-driven sync for instant updates</p>
+            <p>• Hourly automated sync as a fallback mechanism</p>
+            <p>• Manual sync for on-demand control</p>
           </div>
         </CardContent>
       </Card>
