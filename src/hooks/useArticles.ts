@@ -15,6 +15,18 @@ export interface Article {
   slug: string;
   created_at?: string;
   updated_at?: string;
+  theme_color?: string;
+  secondary_color?: string;
+  hero_image_alt?: string;
+  lead_text?: string;
+  email_signup_title?: string;
+  email_signup_description?: string;
+  email_signup_button_text?: string;
+  cta_title?: string;
+  cta_primary_button_text?: string;
+  cta_secondary_button_text?: string;
+  custom_sections?: any;
+  has_custom_layout?: boolean;
 }
 
 export const useArticles = () => {

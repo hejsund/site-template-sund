@@ -87,12 +87,24 @@ export type Database = {
           color: string
           content: string | null
           created_at: string
+          cta_primary_button_text: string | null
+          cta_secondary_button_text: string | null
+          cta_title: string | null
+          custom_sections: Json | null
+          email_signup_button_text: string | null
+          email_signup_description: string | null
+          email_signup_title: string | null
           excerpt: string | null
+          has_custom_layout: boolean | null
+          hero_image_alt: string | null
           icon: string
           id: string
           image_url: string
+          lead_text: string | null
           read_time: string
+          secondary_color: string | null
           slug: string
+          theme_color: string | null
           title: string
           updated_at: string
         }
@@ -101,12 +113,24 @@ export type Database = {
           color: string
           content?: string | null
           created_at?: string
+          cta_primary_button_text?: string | null
+          cta_secondary_button_text?: string | null
+          cta_title?: string | null
+          custom_sections?: Json | null
+          email_signup_button_text?: string | null
+          email_signup_description?: string | null
+          email_signup_title?: string | null
           excerpt?: string | null
+          has_custom_layout?: boolean | null
+          hero_image_alt?: string | null
           icon: string
           id?: string
           image_url: string
+          lead_text?: string | null
           read_time: string
+          secondary_color?: string | null
           slug: string
+          theme_color?: string | null
           title: string
           updated_at?: string
         }
@@ -115,12 +139,24 @@ export type Database = {
           color?: string
           content?: string | null
           created_at?: string
+          cta_primary_button_text?: string | null
+          cta_secondary_button_text?: string | null
+          cta_title?: string | null
+          custom_sections?: Json | null
+          email_signup_button_text?: string | null
+          email_signup_description?: string | null
+          email_signup_title?: string | null
           excerpt?: string | null
+          has_custom_layout?: boolean | null
+          hero_image_alt?: string | null
           icon?: string
           id?: string
           image_url?: string
+          lead_text?: string | null
           read_time?: string
+          secondary_color?: string | null
           slug?: string
+          theme_color?: string | null
           title?: string
           updated_at?: string
         }
