@@ -71,37 +71,6 @@ const DynamicArticlePage = () => {
     }
   };
 
-  const getRichContent = (article: any) => {
-    // Use database content if available and substantial
-    if (article?.content && article.content.length > 100) {
-      return <div dangerouslySetInnerHTML={{ __html: article.content }} />;
-    }
-
-    // Fallback content for articles without rich content in database
-    return (
-      <div>
-        <p className="lead text-green-700 font-text mb-6">
-          Denna artikel innehåller värdefull information om {article?.category?.toLowerCase()}.
-        </p>
-        
-        <p className="mb-4">
-          Vi på Sommarboosten har samlat de bästa tipsen och strategierna för att hjälpa dig att nå dina mål.
-        </p>
-
-        <div className="bg-orange-50 border-l-4 border-orange-400 p-6 my-8 rounded-lg">
-          <h3 className="text-xl font-bold text-orange-800 mb-3">Viktiga punkter:</h3>
-          <p className="text-orange-700 mb-0">
-            Denna artikel är del av vårt omfattande innehåll som hjälper familjer att leva hälsosamt och aktivt.
-          </p>
-        </div>
-
-        <p className="mb-4">
-          För mer detaljerad information och personliga råd, ta gärna vårt quiz eller läs mer om Sommarboosten.
-        </p>
-      </div>
-    );
-  };
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center">
@@ -181,7 +150,30 @@ const DynamicArticlePage = () => {
         <div className="max-w-4xl mx-auto">
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl">
             <div className="prose prose-lg max-w-none">
-              {getRichContent(article)}
+              {article.content ? (
+                <div dangerouslySetInnerHTML={{ __html: article.content }} />
+              ) : (
+                <div>
+                  <p className="lead text-green-700 font-text mb-6">
+                    Denna artikel innehåller värdefull information om {article.category.toLowerCase()}.
+                  </p>
+                  
+                  <p className="mb-4">
+                    Vi på Sommarboosten har samlat de bästa tipsen och strategierna för att hjälpa dig att nå dina mål.
+                  </p>
+
+                  <div className="bg-orange-50 border-l-4 border-orange-400 p-6 my-8 rounded-lg">
+                    <h3 className="text-xl font-bold text-orange-800 mb-3">Viktiga punkter:</h3>
+                    <p className="text-orange-700 mb-0">
+                      Denna artikel är del av vårt omfattande innehåll som hjälper familjer att leva hälsosamt och aktivt.
+                    </p>
+                  </div>
+
+                  <p className="mb-4">
+                    För mer detaljerad information och personliga råd, ta gärna vårt quiz eller läs mer om Sommarboosten.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

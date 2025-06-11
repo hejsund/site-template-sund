@@ -1,6 +1,6 @@
 
 import { Button } from '@/components/ui/button';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Clock, Heart, Brain, Zap, Users, Baby, Calendar } from 'lucide-react';
 import { FooterSection } from '@/components/FooterSection';
 import { scrollToTop } from '@/utils/scrollToTop';
@@ -8,16 +8,16 @@ import { useArticles } from '@/hooks/useArticles';
 import { HeartLoader } from '@/components/HeartLoader';
 
 const ArticlesPage = () => {
-  const location = useLocation();
-  const currentPath = location.pathname;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedCategory = searchParams.get('category');
   const { data: articles, isLoading, error } = useArticles();
 
   const categories = [
-    { name: 'Alla artiklar', path: '/artiklar' },
-    { name: 'Träning', path: '/artiklar/traning' },
-    { name: 'Kost', path: '/artiklar/kost' },
-    { name: 'Vanor', path: '/artiklar/vanor' },
-    { name: 'Mental hälsa', path: '/artiklar/mental-halsa' }
+    { name: 'Alla artiklar', value: null },
+    { name: 'Träning', value: 'Träning' },
+    { name: 'Kost', value: 'Kost' },
+    { name: 'Vanor', value: 'Vanor' },
+    { name: 'Mental hälsa', value: 'Mental hälsa' }
   ];
 
   // Icon mapping
@@ -32,27 +32,15 @@ const ArticlesPage = () => {
     return iconMap[iconName] || Heart;
   };
 
-  // Filter articles based on current path
+  // Filter articles based on selected category
   const getFilteredArticles = () => {
     if (!articles) return [];
     
-    if (currentPath === '/artiklar') {
+    if (!selectedCategory) {
       return articles;
     }
     
-    const categoryMap: { [key: string]: string } = {
-      '/artiklar/traning': 'Träning',
-      '/artiklar/kost': 'Kost',
-      '/artiklar/vanor': 'Vanor',
-      '/artiklar/mental-halsa': 'Mental hälsa'
-    };
-    
-    const selectedCategory = categoryMap[currentPath];
-    if (selectedCategory) {
-      return articles.filter(article => article.category === selectedCategory);
-    }
-    
-    return articles;
+    return articles.filter(article => article.category === selectedCategory);
   };
 
   const filteredArticles = getFilteredArticles();
@@ -70,7 +58,12 @@ const ArticlesPage = () => {
     }
   };
 
-  const handleCategoryClick = () => {
+  const handleCategoryClick = (categoryValue: string | null) => {
+    if (categoryValue) {
+      setSearchParams({ category: categoryValue });
+    } else {
+      setSearchParams({});
+    }
     scrollToTop();
   };
 
@@ -116,20 +109,20 @@ const ArticlesPage = () => {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {categories.map((category) => {
-              const isActive = currentPath === category.path;
+              const isActive = selectedCategory === category.value;
               return (
-                <Link key={category.name} to={category.path} onClick={handleCategoryClick}>
-                  <Button
-                    variant={isActive ? "default" : "outline"}
-                    className={`rounded-full px-4 sm:px-6 py-2 text-sm sm:text-base font-medium transition-all duration-200 ${
-                      isActive
-                        ? 'bg-primary text-white hover:bg-primary/90' 
-                        : 'border-primary/20 text-primary hover:bg-primary/10'
-                    }`}
-                  >
-                    {category.name}
-                  </Button>
-                </Link>
+                <Button
+                  key={category.name}
+                  onClick={() => handleCategoryClick(category.value)}
+                  variant={isActive ? "default" : "outline"}
+                  className={`rounded-full px-4 sm:px-6 py-2 text-sm sm:text-base font-medium transition-all duration-200 ${
+                    isActive
+                      ? 'bg-primary text-white hover:bg-primary/90' 
+                      : 'border-primary/20 text-primary hover:bg-primary/10'
+                  }`}
+                >
+                  {category.name}
+                </Button>
               );
             })}
           </div>
@@ -202,12 +195,12 @@ const ArticlesPage = () => {
             Ta vårt quiz och få personliga rekommendationer för din hälsoresa.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/quiz" onClick={handleCategoryClick}>
+            <Link to="/quiz" onClick={() => scrollToTop()}>
               <Button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten" onClick={handleCategoryClick}>
+            <Link to="/om-sommarboosten" onClick={() => scrollToTop()}>
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
                 Läs om Sommarboosten
               </Button>
@@ -216,7 +209,6 @@ const ArticlesPage = () => {
         </div>
       </section>
 
-      {/* Use the consolidated FooterSection instead of separate components */}
       <FooterSection />
     </div>
   );

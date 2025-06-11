@@ -44,7 +44,7 @@ function App() {
                   <Route path="/integritetspolicy" element={<PrivacyPolicyPage />} />
                   <Route path="/villkor" element={<TermsPage />} />
                   
-                  {/* Dynamic article route - this will handle ALL articles from the database */}
+                  {/* Dynamic article route - this handles ALL articles from the database */}
                   <Route path="/artiklar/:slug" element={<DynamicArticlePage />} />
                   
                   <Route path="*" element={<NotFound />} />
