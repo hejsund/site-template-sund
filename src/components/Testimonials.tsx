@@ -34,9 +34,9 @@ const testimonials = [
   },
   {
     name: "Petra",
-    text: "Gemenskapen i gruppen är guld värd. Vi stöttar varandra utan att döma – precis som Charlotte lovar.",
+    text: "Det är så enkelt att få till träningen med appen – precis som det ska vara!.",
     rating: 5,
-    highlight: "Fantastisk gemenskap"
+    highlight: "Fantastisk app"
   }
 ];
 
