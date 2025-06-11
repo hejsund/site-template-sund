@@ -81,6 +81,51 @@ export type Database = {
         }
         Relationships: []
       }
+      sb_content_sub_pages: {
+        Row: {
+          category: string
+          color: string
+          content: string | null
+          created_at: string
+          excerpt: string | null
+          icon: string
+          id: string
+          image_url: string
+          read_time: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          color: string
+          content?: string | null
+          created_at?: string
+          excerpt?: string | null
+          icon: string
+          id?: string
+          image_url: string
+          read_time: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          color?: string
+          content?: string | null
+          created_at?: string
+          excerpt?: string | null
+          icon?: string
+          id?: string
+          image_url?: string
+          read_time?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       sb_home_page_leads: {
         Row: {
           created_at: string
