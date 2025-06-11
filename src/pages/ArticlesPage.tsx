@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Clock, Heart, Brain, Zap, Users, Baby, Calendar } from 'lucide-react';
@@ -249,12 +248,12 @@ const ArticlesPage = () => {
             Ta vårt quiz och få personliga rekommendationer för din hälsoresa.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/quiz" onClick={handleLinkClick}>
+            <Link to="/quiz" onClick={handleCategoryClick}>
               <Button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten" onClick={handleLinkClick}>
+            <Link to="/om-sommarboosten" onClick={handleCategoryClick}>
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
                 Läs om Sommarboosten
               </Button>
