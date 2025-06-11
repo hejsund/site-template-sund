@@ -57,7 +57,7 @@ export const useArticleBySlug = (slug: string) => {
       try {
         const response = await fetch(`https://ttidnpncifqtetnhcdhq.supabase.co/rest/v1/sb_content_sub_pages?slug=eq.${slug}&limit=1`, {
           headers: {
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0aWRucG5jaWZxdGV0bmhjZGhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MDk1OTksImV4cCI6MjA2NDA4NTU5OX0.G4K878G5nU__YxCobhIhivH5JQimGTLOzFvm12BQ7_g`,
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0aWRucG5jaWZxdGV0bmhjZGhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MDk1OTksImV4cCI6MjA2NDA4NTU5OX0.G4K878G5nU__YxCobhIhivH5JQimGTLOzFvm12BQ7_g',
             'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR0aWRucG5jaWZxdGV0bmhjZGhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MDk1OTksImV4cCI6MjA2NDA4NTU5OX0.G4K878G5nU__YxCobhIhivH5JQimGTLOzFvm12BQ7_g`,
             'Content-Type': 'application/json',
           },
