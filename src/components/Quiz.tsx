@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -133,17 +134,15 @@ const Quiz = () => {
         recommendationType = 'intermediate';
       }
 
-      // Save to Supabase
-      const { error } = await supabase.from('sb_quiz_leads').insert([
-        {
-          email,
-          quiz_score: Math.round(score),
-          quiz_answers: answers,
-          recommendation_type: recommendationType,
-          ip_address: null, // Collected server-side
-          user_agent: navigator.userAgent
-        }
-      ]);
+      // Save to Supabase - fix the insert to pass a single object instead of array
+      const { error } = await supabase.from('sb_quiz_leads').insert({
+        email,
+        quiz_score: Math.round(score),
+        quiz_answers: answers as any, // Cast to any to handle the JSON type
+        recommendation_type: recommendationType,
+        ip_address: null, // Collected server-side
+        user_agent: navigator.userAgent
+      });
 
       if (error) throw error;
 
@@ -210,6 +209,14 @@ const Quiz = () => {
                   <span>Få stöd och motivation från en gemenskap</span>
                 </li>
               </ul>
+            </div>
+
+            <div className="mb-6 p-4 bg-purple-100 rounded-lg">
+              <div className="text-center">
+                <div className="text-sm text-purple-600 mb-1">Begränsad tid - 29% rabatt!</div>
+                <div className="text-2xl font-bold text-purple-700">1 199 kr</div>
+                <div className="text-sm text-purple-500 line-through">1 689 kr</div>
+              </div>
             </div>
             
             <div className="mb-6">
@@ -293,6 +300,14 @@ const Quiz = () => {
                 </li>
               </ul>
             </div>
+
+            <div className="mb-6 p-4 bg-green-100 rounded-lg">
+              <div className="text-center">
+                <div className="text-sm text-green-600 mb-1">Begränsad tid - 29% rabatt!</div>
+                <div className="text-2xl font-bold text-green-700">1 199 kr</div>
+                <div className="text-sm text-green-500 line-through">1 689 kr</div>
+              </div>
+            </div>
             
             <div className="mb-6">
               <label htmlFor="email" className="block text-sm font-medium mb-2">
@@ -373,6 +388,14 @@ const Quiz = () => {
                 <span>Inspirera andra och dela dina framgångar</span>
               </li>
             </ul>
+          </div>
+
+          <div className="mb-6 p-4 bg-coral-100 rounded-lg">
+            <div className="text-center">
+              <div className="text-sm text-coral-600 mb-1">Begränsad tid - 29% rabatt!</div>
+              <div className="text-2xl font-bold text-coral-700">1 199 kr</div>
+              <div className="text-sm text-coral-500 line-through">1 689 kr</div>
+            </div>
           </div>
           
           <div className="mb-6">
