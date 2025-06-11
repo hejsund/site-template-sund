@@ -15,7 +15,7 @@ export const VideoModal = ({ isOpen, onClose }: VideoModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogOverlay className="bg-black/50 backdrop-blur-sm" />
-      <DialogContent className="max-w-sm sm:max-w-md w-[90vw] sm:w-[400px] h-auto p-0 border-none bg-transparent shadow-none">
+      <DialogContent className="max-w-md w-[90vw] sm:w-[400px] h-auto p-0 border-none bg-transparent shadow-none">
         <div className="relative w-full">
           {/* Close button */}
           <button
@@ -26,11 +26,11 @@ export const VideoModal = ({ isOpen, onClose }: VideoModalProps) => {
             <X className="w-6 h-6" />
           </button>
           
-          {/* Video container - new video ID */}
+          {/* Video container - square format 1:1 */}
           <div className="w-full bg-black rounded-lg overflow-hidden">
-            <div className="relative w-full" style={{ paddingTop: '177.77777777777777%' }}>
+            <div className="relative w-full" style={{ paddingTop: '100%' }}>
               <iframe
-                src="https://customer-cb54xmjlmqvsgehg.cloudflarestream.com/87d695c2111bf7e2d4beddcc23b61b8a/iframe?preload=true&autoplay=true"
+                src="https://customer-cb54xmjlmqvsgehg.cloudflarestream.com/316b2c4692a6b96004349ad4407d5fda/iframe?preload=true&autoplay=true"
                 loading="lazy"
                 className="absolute top-0 left-0 w-full h-full border-none"
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
