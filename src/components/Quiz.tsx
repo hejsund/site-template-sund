@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -233,6 +232,9 @@ export const Quiz = () => {
     setShowResult(false);
     setEmailSubmitted(false);
     setUserData({ email: '', age: '', gender: '' });
+    
+    // Scroll to top of page when quiz resets
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const progress = showResult ? 100 : ((currentQuestion + 1) / questions.length) * 100;
