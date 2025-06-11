@@ -160,7 +160,7 @@ const ProgramYearPage = () => {
             <div className="space-y-4 text-left">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-green-700 font-text">4 veckors progressiv träningsplan</span>
+                <span className="text-green-700 font-text">6 veckors träningsprogram online</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-primary rounded-full"></div>

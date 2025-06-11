@@ -24,7 +24,7 @@ export const FooterSection = () => {
             {/* Social Links */}
             <div className="flex space-x-4">
               <a 
-                href="https://instagram.com/sundochstark" 
+                href="https://instagram.com/sundochstark.se" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-green-200 hover:text-white transition-colors duration-200 p-2 rounded-full hover:bg-green-600"
@@ -33,7 +33,7 @@ export const FooterSection = () => {
                 <Instagram size={20} />
               </a>
               <a 
-                href="https://facebook.com/sundochstark" 
+                href="https://facebook.com/sundochstark.se" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-green-200 hover:text-white transition-colors duration-200 p-2 rounded-full hover:bg-green-600"
