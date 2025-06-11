@@ -13,10 +13,10 @@ const PreviousYearsPage = () => {
     return {
       rating: 4.8 + (Math.random() * 0.2),
       highlights: [
-        `${year === currentYear ? 'Pågående' : 'Genomförd'} sommarboosten`,
+        `${year === currentYear ? 'Pågående' : 'Genomförd'} Sommarboosten`,
         'Nya roliga recept varje vecka',
         'Fokus på hållbara vanor',
-        'Personlig coaching och stöd'
+        'Inspiration och stöd'
       ]
     };
   };
