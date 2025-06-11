@@ -116,7 +116,7 @@ export const Hero = () => {
               <div className="text-center mb-4 sm:mb-6">
                 <div className="text-2xl sm:text-3xl mb-2">🌟✨🌻</div>
                 <h3 className="text-lg sm:text-xl font-bold text-green-600 mb-2 font-display">
-                  Din drömresa börjar här!
+                  Hej fina du! Din drömresa börjar här!
                 </h3>
               </div>
               
@@ -124,7 +124,7 @@ export const Hero = () => {
                 Få första nyheterna och exklusivt förhandsmaterial om <strong className="text-primary font-semibold">smarta träningsvanor</strong>, 
                 <strong className="text-coral font-semibold"> supergoda recept</strong> och 
                 <strong className="text-purple font-semibold"> roliga aktiviteter</strong> som gör {currentPhase.seasonText} magisk! 🏃‍♀️🍓🎉
-                <span className="block mt-2 text-primary font-semibold">Inga måsten – bara inspiration och pepp!</span>
+                <span className="block mt-2 text-primary font-semibold">Inga pekpinnar, inga förbud – bara inspiration och pepp!</span>
               </p>
 
               <form onSubmit={handleEmailSubmit} className="space-y-3 sm:space-y-0 sm:flex sm:gap-3">

@@ -239,7 +239,7 @@ export const Quiz = () => {
 
   if (showResult) {
     const recommendation = getRecommendation();
-    const genderText = userData.gender === 'Kvinna' ? 'Hej söta!' : userData.gender === 'Man' ? 'Hej!' : 'Hej där!';
+    const genderText = 'Hej fina du!';
     
     return (
       <div className="max-w-2xl mx-auto p-6">
@@ -301,7 +301,7 @@ export const Quiz = () => {
                   />
                   <Button 
                     type="submit" 
-                    className="w-full cta-primary text-lg py-4"
+                    className="w-full cta-primary text-base sm:text-lg py-4 leading-tight whitespace-nowrap"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Skickar...' : 'Ja, jag vill ha min rabatt och börja! 🚀'}

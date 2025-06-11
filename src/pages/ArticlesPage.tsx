@@ -1,7 +1,9 @@
+
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock, Heart, Brain, Zap, Users, Baby, Calendar } from 'lucide-react';
 import { FooterSection } from '@/components/FooterSection';
+import { scrollToTop } from '@/utils/scrollToTop';
 
 const ArticlesPage = () => {
   const articles = [
@@ -108,6 +110,14 @@ const ArticlesPage = () => {
     }
   };
 
+  const handleCategoryClick = () => {
+    scrollToTop();
+  };
+
+  const handleLinkClick = () => {
+    scrollToTop();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50">
       {/* Header */}
@@ -127,7 +137,7 @@ const ArticlesPage = () => {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
             {categories.map((category) => (
-              <Link key={category.name} to={category.path}>
+              <Link key={category.name} to={category.path} onClick={handleCategoryClick}>
                 <Button
                   variant={category.active ? "default" : "outline"}
                   className={`rounded-full px-4 sm:px-6 py-2 text-sm sm:text-base font-medium transition-all duration-200 ${
@@ -151,7 +161,7 @@ const ArticlesPage = () => {
             {articles.map((article) => {
               const IconComponent = article.icon;
               return (
-                <Link key={article.id} to={`/artiklar/${article.id}`}>
+                <Link key={article.id} to={`/artiklar/${article.id}`} onClick={handleLinkClick}>
                   <article className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">
                     <div className="aspect-[16/10] relative overflow-hidden">
                       <img 
@@ -206,12 +216,12 @@ const ArticlesPage = () => {
             Ta vårt quiz och få personliga rekommendationer för din hälsoresa.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/quiz">
+            <Link to="/quiz" onClick={handleLinkClick}>
               <Button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten">
+            <Link to="/om-sommarboosten" onClick={handleLinkClick}>
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
                 Läs om Sommarboosten
               </Button>

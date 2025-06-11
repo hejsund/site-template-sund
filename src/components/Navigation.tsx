@@ -3,12 +3,18 @@ import { useState } from 'react';
 import { Menu, X, Calendar, Clock, Users, Trophy, ChevronDown, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { scrollToTop } from '@/utils/scrollToTop';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+    scrollToTop();
+  };
 
   const menuItems = [
     {
@@ -48,7 +54,7 @@ export const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Updated Logo - Text only */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2" onClick={handleLinkClick}>
             <span className="font-display font-black text-green-800 text-xl tracking-tight">
               Sommarboosten
             </span>
@@ -72,6 +78,7 @@ export const Navigation = () => {
                       key={item.name}
                       to={item.href}
                       className="flex items-center space-x-3 px-4 py-3 text-green-800 hover:bg-green-50 hover:text-green-600 transition-colors"
+                      onClick={handleLinkClick}
                     >
                       <item.icon className="w-5 h-5" />
                       <span>{item.name}</span>
@@ -81,7 +88,7 @@ export const Navigation = () => {
               </div>
             ))}
             
-            <Link to="/quiz">
+            <Link to="/quiz" onClick={handleLinkClick}>
               <Button className="bg-primary hover:bg-primary/90 text-white font-semibold">
                 Gör vårt quiz
               </Button>
@@ -92,6 +99,7 @@ export const Navigation = () => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-md text-green-800 hover:text-green-600"
+            aria-label={isOpen ? 'Stäng meny' : 'Öppna meny'}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -108,7 +116,7 @@ export const Navigation = () => {
                     key={item.name}
                     to={item.href}
                     className="flex items-center space-x-3 px-4 py-2 text-green-800 hover:bg-green-50 rounded-md mx-2"
-                    onClick={() => setIsOpen(false)}
+                    onClick={handleLinkClick}
                   >
                     <item.icon className="w-5 h-5" />
                     <span>{item.name}</span>
@@ -117,7 +125,7 @@ export const Navigation = () => {
               </div>
             ))}
             <div className="px-2 mt-4">
-              <Link to="/quiz">
+              <Link to="/quiz" onClick={handleLinkClick}>
                 <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold">
                   Gör vårt quiz
                 </Button>

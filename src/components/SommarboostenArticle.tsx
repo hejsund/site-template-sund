@@ -2,8 +2,13 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Heart, CheckCircle, Sparkles } from 'lucide-react';
+import { scrollToTop } from '@/utils/scrollToTop';
 
 export const SommarboostenArticle = () => {
+  const handleLinkClick = () => {
+    scrollToTop();
+  };
+
   return (
     <article className="py-20 px-4 bg-gradient-to-br from-green-50 to-white">
       <div className="max-w-4xl mx-auto">
@@ -18,7 +23,7 @@ export const SommarboostenArticle = () => {
 
         <div className="prose prose-lg max-w-none font-text text-green-800 space-y-6">
           <div className="text-xl mb-8">
-            <p>Hej kära vän! 💫</p>
+            <p>Hej fina du! 💫</p>
           </div>
 
           <p>
@@ -68,7 +73,7 @@ export const SommarboostenArticle = () => {
           <p>
             Vi tror inte på att göra radikala förändringar på sommaren. Istället handlar Sommarboosten om att 
             skapa <strong>goda kostvanor</strong> och fokusera på <strong>träning som blir av</strong> - 
-            oavsett var du är eller vad som händer.
+            oavsett var du är eller vad som händer. Folk älskar helt enkelt detta program!
           </p>
 
           <section className="bg-coral/10 rounded-2xl p-8 my-12 border border-coral/20">
@@ -140,12 +145,12 @@ export const SommarboostenArticle = () => {
               Redo för din bästa sommar hittills?
             </h2>
             <div className="space-y-4">
-              <Link to="/quiz">
+              <Link to="/quiz" onClick={handleLinkClick}>
                 <Button className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 mr-4">
                   Gör vårt quiz och hitta din väg
                 </Button>
               </Link>
-              <Link to="/om-sommarboosten">
+              <Link to="/om-sommarboosten" onClick={handleLinkClick}>
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold text-lg px-8 py-4">
                   Läs mer om Sommarboosten
                 </Button>
