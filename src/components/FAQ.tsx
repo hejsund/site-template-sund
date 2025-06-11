@@ -7,8 +7,8 @@ const faqs = [
     answer: "Nej! Det finns träningspass som kan göras med bara kroppen som motstånd. I programmet ingår även träning med kettlebell, battlerope, miniband och löpning. Utrustningen ingår ej."
   },
   {
-    question: "Passar programmet mig som nybörjare?",D
-        answer: "Absolut! Sommarboosten är designad för alla nivåer. Det finns träningspass både för dig som är nybörjare och för dig med stor träningsvana. Du bestämmer själv din träningsmängd varje vecka."
+    question: "Passar programmet mig som nybörjare?",
+    answer: "Absolut! Sommarboosten är designad för alla nivåer. Det finns träningspass både för dig som är nybörjare och för dig med stor träningsvana. Du bestämmer själv din träningsmängd varje vecka."
   },
   {
     question: "Hur mycket tid behöver jag avsätta?",
