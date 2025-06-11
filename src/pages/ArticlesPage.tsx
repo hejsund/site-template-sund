@@ -1,11 +1,14 @@
 
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Clock, Heart, Brain, Zap, Users, Baby, Calendar } from 'lucide-react';
 import { FooterSection } from '@/components/FooterSection';
 import { scrollToTop } from '@/utils/scrollToTop';
 
 const ArticlesPage = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const articles = [
     {
       id: 'stresshantering',
@@ -90,12 +93,35 @@ const ArticlesPage = () => {
   ];
 
   const categories = [
-    { name: 'Alla artiklar', path: '/artiklar', active: true },
+    { name: 'Alla artiklar', path: '/artiklar' },
     { name: 'Träning', path: '/artiklar/traning' },
     { name: 'Kost', path: '/artiklar/kost' },
     { name: 'Vanor', path: '/artiklar/vanor' },
     { name: 'Mental hälsa', path: '/artiklar/mental-halsa' }
   ];
+
+  // Filter articles based on current path
+  const getFilteredArticles = () => {
+    if (currentPath === '/artiklar') {
+      return articles;
+    }
+    
+    const categoryMap = {
+      '/artiklar/traning': 'Träning',
+      '/artiklar/kost': 'Kost',
+      '/artiklar/vanor': 'Vanor',
+      '/artiklar/mental-halsa': 'Mental hälsa'
+    };
+    
+    const selectedCategory = categoryMap[currentPath];
+    if (selectedCategory) {
+      return articles.filter(article => article.category === selectedCategory);
+    }
+    
+    return articles;
+  };
+
+  const filteredArticles = getFilteredArticles();
 
   const getColorClasses = (color: string) => {
     switch (color) {
@@ -136,20 +162,23 @@ const ArticlesPage = () => {
       <nav className="px-3 sm:px-4 mb-12">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            {categories.map((category) => (
-              <Link key={category.name} to={category.path} onClick={handleCategoryClick}>
-                <Button
-                  variant={category.active ? "default" : "outline"}
-                  className={`rounded-full px-4 sm:px-6 py-2 text-sm sm:text-base font-medium transition-all duration-200 ${
-                    category.active 
-                      ? 'bg-primary text-white hover:bg-primary/90' 
-                      : 'border-primary/20 text-primary hover:bg-primary/10'
-                  }`}
-                >
-                  {category.name}
-                </Button>
-              </Link>
-            ))}
+            {categories.map((category) => {
+              const isActive = currentPath === category.path;
+              return (
+                <Link key={category.name} to={category.path} onClick={handleCategoryClick}>
+                  <Button
+                    variant={isActive ? "default" : "outline"}
+                    className={`rounded-full px-4 sm:px-6 py-2 text-sm sm:text-base font-medium transition-all duration-200 ${
+                      isActive
+                        ? 'bg-primary text-white hover:bg-primary/90' 
+                        : 'border-primary/20 text-primary hover:bg-primary/10'
+                    }`}
+                  >
+                    {category.name}
+                  </Button>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>
@@ -158,7 +187,7 @@ const ArticlesPage = () => {
       <main className="px-3 sm:px-4 pb-16">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {articles.map((article) => {
+            {filteredArticles.map((article) => {
               const IconComponent = article.icon;
               return (
                 <Link key={article.id} to={`/artiklar/${article.id}`} onClick={handleLinkClick}>
