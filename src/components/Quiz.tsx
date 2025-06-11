@@ -1,459 +1,432 @@
-import React, { useState } from 'react';
+
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Heart, Sparkles, Target, Zap } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
-import { HeartLoader } from '@/components/HeartLoader';
-import { scrollToTop } from '@/utils/scrollToTop';
 
-interface QuizQuestion {
+interface Question {
+  id: number;
   question: string;
-  options: string[];
+  options: { id: string; text: string; score: number; flag?: string }[];
 }
 
-interface QuizAnswer {
-  questionIndex: number;
-  answerIndex: number;
+interface UserData {
+  email: string;
+  age: string;
+  gender: string;
 }
 
-const quizQuestions: QuizQuestion[] = [
+const questions: Question[] = [
   {
-    question: "Hur skulle du beskriva din nuvarande livsstil?",
+    id: 1,
+    question: "Hur gammal är du?",
     options: [
-      "Jag är aktiv och tränar regelbundet",
-      "Jag rör mig ibland men har ingen rutin",
-      "Jag är mest stillasittande"
+      { id: "a", text: "16-25 år", score: 2 },
+      { id: "b", text: "26-35 år", score: 3 },
+      { id: "c", text: "36-45 år", score: 3 },
+      { id: "d", text: "46+ år", score: 2 }
     ]
   },
   {
-    question: "Vad är din största utmaning med träning?",
+    id: 2,
+    question: "Vad beskriver dig bäst?",
     options: [
-      "Att hitta tid i vardagen",
-      "Att hålla motivationen uppe",
-      "Att veta vad jag ska göra"
+      { id: "a", text: "Kvinna", score: 0 },
+      { id: "b", text: "Man", score: 0 },
+      { id: "c", text: "Vill inte svara", score: 0 }
     ]
   },
   {
-    question: "Hur ser dina matvanor ut?",
+    id: 3,
+    question: "Vad är ditt huvudmål med träning?",
     options: [
-      "Jag äter mestadels hälsosamt och planerar mina måltider",
-      "Det varierar, ibland bra och ibland sämre",
-      "Jag äter ofta snabbt och enkelt, inte alltid så nyttigt"
+      { id: "a", text: "Komma i form och känna mig starkare", score: 3 },
+      { id: "b", text: "Hitta balans mellan träning och vila", score: 3 },
+      { id: "c", text: "Öka min energi och välmående", score: 3 },
+      { id: "d", text: "Bygga extremt mycket muskler och bli så stor som möjligt", score: -1, flag: "muscle_obsessed" }
     ]
   },
   {
-    question: "Vad är viktigast för dig i sommar?",
+    id: 4,
+    question: "Hur mycket tid vill du helst träna per dag?",
     options: [
-      "Att känna mig stark och energifylld",
-      "Att hitta balans och må bra",
-      "Att komma igång med hälsosammare vanor"
+      { id: "a", text: "15-30 minuter är perfekt", score: 4 },
+      { id: "b", text: "30-45 minuter passar bra", score: 3 },
+      { id: "c", text: "1 timme eller mer", score: 1 },
+      { id: "d", text: "2+ timmar, jag vill leva på gymmet", score: -1, flag: "gym_obsessed" }
     ]
   },
   {
-    question: "Hur mycket tid kan du lägga på träning per dag?",
+    id: 5,
+    question: "Vad tänker du om träning?",
     options: [
-      "30 minuter eller mer",
-      "15-20 minuter",
-      "Max 10 minuter"
+      { id: "a", text: "Det ska vara kul och kännas som lek", score: 4 },
+      { id: "b", text: "Viktigt men får inte ta över livet", score: 3 },
+      { id: "c", text: "Träning är träning, det behöver inte vara roligt", score: 1 },
+      { id: "d", text: "Jag vill ha en PT som skriker åt mig att träna hårdare", score: -2, flag: "intense_training" }
     ]
   },
   {
-    question: "Vad motiverar dig mest?",
+    id: 6,
+    question: "Hur ser din nuvarande livsstil ut?",
     options: [
-      "Att se resultat och förbättringar",
-      "Att må bättre och ha mer energi",
-      "Gemenskap och att få stöd från andra"
+      { id: "a", text: "Hektisk med lite tid för mig själv", score: 4 },
+      { id: "b", text: "Balanserad men vill förbättra vanorna", score: 3 },
+      { id: "c", text: "Aktiv men saknar struktur", score: 2 },
+      { id: "d", text: "Tränar redan 6-7 dagar i veckan intensivt", score: -1, flag: "overtraining" }
     ]
   }
 ];
 
-const Quiz = () => {
+export const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<QuizAnswer[]>([]);
-  const [showResult, setShowResult] = useState(false);
+  const [answers, setAnswers] = useState<Record<number, string>>({});
   const [score, setScore] = useState(0);
-  const [email, setEmail] = useState('');
+  const [flags, setFlags] = useState<string[]>([]);
+  const [showResult, setShowResult] = useState(false);
+  const [userData, setUserData] = useState<UserData>({
+    email: '',
+    age: '',
+    gender: ''
+  });
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
 
-  const handleStartOver = () => {
-    setCurrentQuestion(0);
-    setAnswers([]);
-    setShowResult(false);
-    setScore(0);
-    setIsSubmitting(false);
-    scrollToTop();
-  };
+  const handleAnswer = (questionId: number, optionId: string) => {
+    const option = questions[questionId - 1].options.find(opt => opt.id === optionId);
+    if (!option) return;
 
-  const handleAnswer = (answerIndex: number) => {
-    const newAnswers = [...answers, { questionIndex: currentQuestion, answerIndex }];
+    const newAnswers = { ...answers, [questionId]: optionId };
     setAnswers(newAnswers);
+    setScore(score + option.score);
     
-    // Calculate score based on answers (lower index = higher score)
-    // This is a simple scoring system where option 0 = 1 point, option 1 = 0.5 points, option 2 = 0 points
-    let newScore = 0;
-    newAnswers.forEach(answer => {
-      if (answer.answerIndex === 0) newScore += 1;
-      else if (answer.answerIndex === 1) newScore += 0.5;
-    });
-    
-    setScore(newScore);
-    
-    if (currentQuestion < quizQuestions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+    if (option.flag) {
+      setFlags(prev => [...prev, option.flag!]);
+    }
+
+    // Store age and gender for personalization
+    if (questionId === 1) {
+      setUserData(prev => ({ ...prev, age: option.text }));
+    }
+    if (questionId === 2) {
+      setUserData(prev => ({ ...prev, gender: option.text }));
+    }
+
+    if (currentQuestion < questions.length - 1) {
+      // Reduced delay from 500ms to 150ms for snappier feel
+      setTimeout(() => setCurrentQuestion(currentQuestion + 1), 150);
     } else {
-      setShowResult(true);
+      // Reduced delay from 500ms to 200ms
+      setTimeout(() => setShowResult(true), 200);
     }
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const getRecommendation = () => {
+    const hasNegativeFlags = flags.some(flag => 
+      ['muscle_obsessed', 'gym_obsessed', 'intense_training', 'overtraining'].includes(flag)
+    );
+
+    if (hasNegativeFlags || score < 0) {
+      return {
+        title: "Sommarboosten kanske inte är rätt för dig just nu 🤔",
+        description: "Baserat på dina svar verkar du söka något mer intensivt än vad Sommarboosten erbjuder. Vårt program fokuserar på glädje, balans och hållbara vanor - inte extremträning eller muskelbyggande.",
+        program: "Vi rekommenderar att du utforskar andra alternativ",
+        recommended: false,
+        type: "not_recommended",
+        advice: flags.includes('muscle_obsessed') 
+          ? "Du vill bygga extremt mycket muskler, men Sommarboosten handlar om välmående och balans." 
+          : flags.includes('gym_obsessed') || flags.includes('overtraining')
+          ? "Du verkar redan träna mycket intensivt. Sommarboosten är för dig som vill ha roliga, korta pass."
+          : "Du söker intensiv träning med hård coaching - det är inte vår stil. Vi tror på glädje!"
+      };
+    } else if (score >= 12) {
+      return {
+        title: "Perfekt match för Sommarboosten! 🌟",
+        description: "Du är redo att ta nästa steg i din hälsoresan med glädje och balans. Sommarboosten kommer ge dig precis den struktur och motivation du behöver.",
+        program: "Sommarboosten 2025 - Du kommer älska det!",
+        recommended: true,
+        type: "perfect_match",
+        advice: answers[4] === 'a' 
+          ? "Du sa att träning ska vara kul som lek - det är EXAKT vad Sommarboosten handlar om!" 
+          : "Din inställning till balans och välmående matchar perfekt med vår filosofi."
+      };
+    } else if (score >= 8) {
+      return {
+        title: "Sommarboosten passar dig utmärkt! 🌱",
+        description: "Du har en bra grund att stå på. Sommarboosten hjälper dig att förfina dina vanor och hitta den rätta balansen mellan träning och liv.",
+        program: "Sommarboosten 2025 - Starkt rekommenderat",
+        recommended: true,
+        type: "good_match",
+        advice: answers[6] === 'a' 
+          ? "Du sa att du har en hektisk livsstil - våra korta, effektiva pass är perfekta för dig!" 
+          : "Du verkar redan ha bra vanor, Sommarboosten hjälper dig att optimera dem."
+      };
+    } else {
+      return {
+        title: "Sommarboosten kan vara en bra start! 🌿",
+        description: "Du står i början av din resa mot bättre hälsa. Sommarboosten ger dig en mjuk start med enkla, hållbara förändringar som växer med dig.",
+        program: "Sommarboosten 2025 - Perfekt för nybörjare",
+        recommended: true,
+        type: "beginner_match",
+        advice: "Du verkar vara ny till träning - vår app guidar dig steg för steg på ett kul sätt!"
+      };
+    }
   };
 
-  const handleEmailSubmit = async () => {
-    if (!email || !email.includes('@')) {
-      toast({
-        title: "Ogiltig e-postadress",
-        description: "Vänligen ange en giltig e-postadress.",
-        variant: "destructive",
-      });
-      return;
-    }
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userData.email || isSubmitting) return;
 
     setIsSubmitting(true);
-
+    
     try {
-      // Determine recommendation type based on score
-      let recommendationType = 'beginner';
-      if (score > 4) {
-        recommendationType = 'advanced';
-      } else if (score > 2) {
-        recommendationType = 'intermediate';
+      const recommendation = getRecommendation();
+      
+      // Save quiz result to Supabase
+      const { error } = await supabase
+        .from('sb_quiz_leads')
+        .insert({
+          email: userData.email,
+          age: userData.age,
+          gender: userData.gender,
+          quiz_score: score,
+          quiz_answers: answers,
+          recommendation_type: recommendation.type,
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving quiz result:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
       }
 
-      // Save to Supabase
-      const { error } = await supabase.from('sb_quiz_leads').insert([
-        {
-          email,
-          quiz_score: Math.round(score),
-          quiz_answers: answers,
-          recommendation_type: recommendationType,
-          ip_address: null, // Collected server-side
-          user_agent: navigator.userAgent
-        }
-      ]);
-
-      if (error) throw error;
-
-      toast({
-        title: "Tack för ditt svar!",
-        description: "Vi har skickat dina personliga tips till din e-post.",
-      });
-
-      // Clear email field
-      setEmail('');
+      setEmailSubmitted(true);
+      
+      if (recommendation.recommended) {
+        toast.success('Grattis! Du får en gratis shaker och 15% rabatt! 🎉');
+        // Here you would redirect to Shopify checkout
+        console.log('Quiz completed - redirect to checkout with discount');
+      } else {
+        toast.success('Tack! Vi skickar dig mer information om programmet! 📧');
+      }
+      
+      console.log('Quiz results saved successfully');
     } catch (error) {
-      console.error('Error submitting quiz:', error);
-      toast({
-        title: "Något gick fel",
-        description: "Vi kunde inte spara ditt svar just nu. Försök igen senare.",
-        variant: "destructive",
-      });
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const renderResults = () => {
-    // Calculate percentage for visual representation
-    const percentage = Math.round((score / 6) * 100);
-    
-    if (score <= 2) {
-      return (
-        <Card className="w-full max-w-2xl mx-auto bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-2xl font-bold text-purple-700">
-              <Sparkles className="inline-block mr-2 text-purple" />
-              Nybörjarens Väg
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-6">
-              <p className="text-lg mb-4">
-                Du är i början av din hälsoresa och det är en perfekt plats att starta! 
-                Sommarboosten kommer ge dig enkla, tydliga steg för att bygga hållbara vanor.
-              </p>
-              <div className="mb-4">
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Nybörjare</span>
-                  <span>{percentage}%</span>
-                </div>
-                <Progress value={percentage} className="h-2 bg-purple-100" />
-              </div>
-            </div>
-            
-            <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-2">Perfekt för dig som vill:</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Heart className="mr-2 h-5 w-5 text-purple shrink-0 mt-0.5" />
-                  <span>Komma igång med enkla, korta träningspass</span>
-                </li>
-                <li className="flex items-start">
-                  <Heart className="mr-2 h-5 w-5 text-purple shrink-0 mt-0.5" />
-                  <span>Lära dig grunderna i hälsosam kost utan krångel</span>
-                </li>
-                <li className="flex items-start">
-                  <Heart className="mr-2 h-5 w-5 text-purple shrink-0 mt-0.5" />
-                  <span>Få stöd och motivation från en gemenskap</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Få personliga tips för nybörjare:
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Din e-postadress"
-                  className="flex-1 px-3 py-2 border rounded-md"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button 
-                onClick={handleStartOver}
-                variant="outline" 
-                className="flex-1 text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
-              >
-                Gör quizet igen
-              </Button>
-              <Button 
-                onClick={handleEmailSubmit}
-                disabled={isSubmitting}
-                className="flex-1 bg-coral hover:bg-coral/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
-              >
-                {isSubmitting ? (
-                  <HeartLoader size="sm" className="mr-2" />
-                ) : null}
-                {isSubmitting ? "Skickar..." : "Få tips direkt"}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      );
-    }
-
-    if (score <= 4) {
-      return (
-        <Card className="w-full max-w-2xl mx-auto bg-gradient-to-br from-green-50 to-teal-50 border-green-200">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-2xl font-bold text-green-700">
-              <Target className="inline-block mr-2 text-neon-green" />
-              Balanserade Vägen
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-6">
-              <p className="text-lg mb-4">
-                Du har redan grunderna på plats och är redo att ta nästa steg! 
-                Sommarboosten kommer hjälpa dig att hitta balans och bygga vidare på dina vanor.
-              </p>
-              <div className="mb-4">
-                <div className="flex justify-between text-sm mb-1">
-                  <span>Medel</span>
-                  <span>{percentage}%</span>
-                </div>
-                <Progress value={percentage} className="h-2 bg-green-100" />
-              </div>
-            </div>
-            
-            <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-2">Perfekt för dig som vill:</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <Target className="mr-2 h-5 w-5 text-neon-green shrink-0 mt-0.5" />
-                  <span>Förbättra din träningsrutin med effektiva pass</span>
-                </li>
-                <li className="flex items-start">
-                  <Target className="mr-2 h-5 w-5 text-neon-green shrink-0 mt-0.5" />
-                  <span>Optimera din kost för mer energi och välmående</span>
-                </li>
-                <li className="flex items-start">
-                  <Target className="mr-2 h-5 w-5 text-neon-green shrink-0 mt-0.5" />
-                  <span>Hitta balans mellan träning, kost och återhämtning</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Få personliga tips för din nivå:
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Din e-postadress"
-                  className="flex-1 px-3 py-2 border rounded-md"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button 
-                onClick={handleStartOver}
-                variant="outline" 
-                className="flex-1 text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
-              >
-                Gör quizet igen
-              </Button>
-              <Button 
-                onClick={handleEmailSubmit}
-                disabled={isSubmitting}
-                className="flex-1 bg-neon-green hover:bg-neon-green/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
-              >
-                {isSubmitting ? (
-                  <HeartLoader size="sm" className="mr-2" />
-                ) : null}
-                {isSubmitting ? "Skickar..." : "Få personliga tips"}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      );
-    }
-
-    return (
-      <Card className="w-full max-w-2xl mx-auto bg-gradient-to-br from-coral-50 to-orange-50 border-coral-200">
-        <CardHeader className="pb-2">
-          <CardTitle className="text-2xl font-bold text-coral-700">
-            <Zap className="inline-block mr-2 text-coral" />
-            Avancerade Vägen
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="mb-6">
-            <p className="text-lg mb-4">
-              Wow! Du har redan en stark grund och är redo för nästa nivå. 
-              Sommarboosten kommer ge dig utmaningar och strategier för att maximera dina resultat.
-            </p>
-            <div className="mb-4">
-              <div className="flex justify-between text-sm mb-1">
-                <span>Avancerad</span>
-                <span>{percentage}%</span>
-              </div>
-              <Progress value={percentage} className="h-2 bg-coral-100" />
-            </div>
-          </div>
-          
-          <div className="mb-6">
-            <h3 className="font-semibold text-lg mb-2">Perfekt för dig som vill:</h3>
-            <ul className="space-y-2">
-              <li className="flex items-start">
-                <Zap className="mr-2 h-5 w-5 text-coral shrink-0 mt-0.5" />
-                <span>Ta din träning till nästa nivå med utmanande pass</span>
-              </li>
-              <li className="flex items-start">
-                <Zap className="mr-2 h-5 w-5 text-coral shrink-0 mt-0.5" />
-                <span>Finjustera din kost för optimala resultat</span>
-              </li>
-              <li className="flex items-start">
-                <Zap className="mr-2 h-5 w-5 text-coral shrink-0 mt-0.5" />
-                <span>Inspirera andra och dela dina framgångar</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="mb-6">
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Få avancerade tips för din nivå:
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                id="email"
-                placeholder="Din e-postadress"
-                className="flex-1 px-3 py-2 border rounded-md"
-                value={email}
-                onChange={handleEmailChange}
-              />
-            </div>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button 
-              onClick={handleStartOver}
-              variant="outline" 
-              className="flex-1 text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
-            >
-              Gör quizet igen
-            </Button>
-            <Button 
-              onClick={handleEmailSubmit}
-              disabled={isSubmitting}
-              className="flex-1 bg-coral hover:bg-coral/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
-            >
-              {isSubmitting ? (
-                <HeartLoader size="sm" className="mr-2" />
-              ) : null}
-              {isSubmitting ? "Skickar..." : "Bli först att veta"}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    );
+  const resetQuiz = () => {
+    setCurrentQuestion(0);
+    setAnswers({});
+    setScore(0);
+    setFlags([]);
+    setShowResult(false);
+    setEmailSubmitted(false);
+    setUserData({ email: '', age: '', gender: '' });
   };
 
+  const progress = showResult ? 100 : ((currentQuestion + 1) / questions.length) * 100;
+
   if (showResult) {
-    return renderResults();
+    const recommendation = getRecommendation();
+    const genderText = 'Hej fina du!';
+    
+    return (
+      <div className="max-w-2xl mx-auto p-6">
+        <div className="mb-8">
+          <Progress value={100} className="h-2" />
+        </div>
+        <Card className="p-8">
+          <div className="text-center mb-8">
+            <div className="text-4xl mb-4">{recommendation.recommended ? '🎉' : '🤔'}</div>
+            <h2 className="text-3xl font-bold text-primary mb-4 font-display">
+              {genderText} {recommendation.title}
+            </h2>
+            <p className="text-lg text-green-700 mb-6 font-text">
+              {recommendation.description}
+            </p>
+            
+            {recommendation.advice && (
+              <div className="bg-blue-50 rounded-xl p-6 mb-6">
+                <h3 className="text-lg font-semibold text-blue-800 mb-2 font-display">
+                  Reflektion från dina svar:
+                </h3>
+                <p className="text-blue-700">{recommendation.advice}</p>
+              </div>
+            )}
+
+            <div className={`rounded-xl p-6 mb-8 ${recommendation.recommended ? 'bg-green-50' : 'bg-orange-50'}`}>
+              <h3 className="text-xl font-semibold text-primary mb-2 font-display">
+                {recommendation.recommended ? 'Vår rekommendation:' : 'Vårt råd:'}
+              </h3>
+              <p className={`font-medium ${recommendation.recommended ? 'text-green-800' : 'text-orange-800'}`}>
+                {recommendation.program}
+              </p>
+            </div>
+
+            {recommendation.recommended && !emailSubmitted && (
+              <div className="bg-coral-50 rounded-xl p-6 mb-6">
+                <h3 className="text-xl font-bold text-coral-dark mb-2 font-display">
+                  🎁 Få din present! 
+                </h3>
+                <p className="text-coral-dark font-medium mb-4">
+                  Ange din e-post för gratis shaker och 15% rabatt (gäller 48h)
+                </p>
+                <div className="text-2xl font-bold text-coral-dark mb-2">
+                  1695 kr <span className="text-lg line-through opacity-60">ord pris</span>
+                </div>
+                <div className="text-xl font-bold text-neon-green mb-4">
+                  Med 15% rabatt: 1441 kr
+                </div>
+                
+                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                  <Input
+                    type="email"
+                    placeholder="Din e-postadress"
+                    value={userData.email}
+                    onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
+                    required
+                    className="text-center"
+                    disabled={isSubmitting}
+                  />
+                  <Button 
+                    type="submit" 
+                    className="w-full cta-primary text-base sm:text-lg py-4 leading-tight whitespace-nowrap"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Skickar...' : 'Ja, jag vill ha min rabatt och börja! 🚀'}
+                  </Button>
+                </form>
+              </div>
+            )}
+
+            {recommendation.recommended && emailSubmitted && (
+              <div className="space-y-4">
+                <div className="bg-green-50 rounded-xl p-6">
+                  <h4 className="text-lg font-semibold text-primary mb-3 font-display">
+                    Tack! Nu får du din rabatt. Varför våra medlemmar älskar appen:
+                  </h4>
+                  <ul className="text-left space-y-2 text-green-800">
+                    <li>✨ Funkar offline - träna var du vill</li>
+                    <li>📱 Alla pass direkt i mobilen</li>
+                    <li>⏰ Påminnelser som faktiskt motiverar</li>
+                    <li>📊 Se din utveckling dag för dag</li>
+                    <li>💬 Chatta med Charlotte när du behöver stöd</li>
+                  </ul>
+                </div>
+                
+                <p className="text-sm text-green-600 opacity-80 font-text">
+                  🕐 Erbjudandet gäller i 48 timmar från nu
+                </p>
+              </div>
+            )}
+
+            {!recommendation.recommended && (
+              <div className="space-y-4">
+                <div className="bg-orange-50 rounded-xl p-6">
+                  <h4 className="text-lg font-semibold text-orange-800 mb-3 font-display">
+                    Andra alternativ som kan passa dig bättre:
+                  </h4>
+                  <ul className="text-left space-y-2 text-orange-800">
+                    <li>💪 Traditionella gym med tunga vikter</li>
+                    <li>🔥 Intensiva PT-program</li>
+                    <li>🏋️‍♀️ Bodybuilding-fokuserade program</li>
+                    <li>⚡ High-intensity träningsgrupper</li>
+                  </ul>
+                </div>
+
+                {!emailSubmitted && (
+                  <div className="bg-blue-50 rounded-xl p-6 mb-6">
+                    <h3 className="text-lg font-semibold text-blue-800 mb-2 font-display">
+                      Vill du ändå ha mer information om programmet?
+                    </h3>
+                    <p className="text-blue-700 mb-4">
+                      Ange din e-post så skickar vi dig mer information om Sommarboosten.
+                    </p>
+                    
+                    <form onSubmit={handleEmailSubmit} className="space-y-4">
+                      <Input
+                        type="email"
+                        placeholder="Din e-postadress"
+                        value={userData.email}
+                        onChange={(e) => setUserData(prev => ({ ...prev, email: e.target.value }))}
+                        required
+                        className="text-center"
+                        disabled={isSubmitting}
+                      />
+                      <Button 
+                        type="submit" 
+                        className="w-full"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? 'Skickar...' : 'Ja, skicka mer information! 📧'}
+                      </Button>
+                    </form>
+                  </div>
+                )}
+
+                {emailSubmitted && (
+                  <div className="bg-blue-50 rounded-xl p-6 mb-6">
+                    <p className="text-blue-800 font-medium">
+                      Tack! Vi skickar dig mer information om programmet.
+                    </p>
+                  </div>
+                )}
+                
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button onClick={resetQuiz} className="flex-1 cta-primary">
+                    Gör om quizet
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+        </Card>
+      </div>
+    );
   }
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader className="pb-2">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-muted-foreground">
-            Fråga {currentQuestion + 1} av {quizQuestions.length}
+    <div className="max-w-2xl mx-auto p-6">
+      <div className="mb-8">
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-sm text-green-600 font-text">
+            Fråga {currentQuestion + 1} av {questions.length}
           </span>
-          <span className="text-sm font-medium">
-            {Math.round(((currentQuestion) / quizQuestions.length) * 100)}%
+          <span className="text-sm text-green-600 font-text">
+            {Math.round(progress)}% klar
           </span>
         </div>
-        <Progress 
-          value={((currentQuestion) / quizQuestions.length) * 100} 
-          className="h-2"
-        />
-      </CardHeader>
-      <CardContent>
-        <h2 className="text-xl font-semibold mb-6 mt-4">
-          {quizQuestions[currentQuestion].question}
+        <Progress value={progress} className="h-2" />
+      </div>
+
+      <Card className="p-8">
+        <h2 className="text-2xl font-bold text-primary mb-6 font-display">
+          {questions[currentQuestion].question}
         </h2>
+        
         <div className="space-y-3">
-          {quizQuestions[currentQuestion].options.map((option, index) => (
-            <Button
-              key={index}
-              variant="outline"
-              className="w-full justify-start text-left h-auto py-4 px-4 border-gray-200 hover:border-primary hover:bg-primary/5"
-              onClick={() => handleAnswer(index)}
+          {questions[currentQuestion].options.map((option) => (
+            <button
+              key={option.id}
+              onClick={() => handleAnswer(questions[currentQuestion].id, option.id)}
+              className="w-full p-4 text-left bg-green-50 hover:bg-green-100 rounded-xl border border-green-200 hover:border-primary transition-all duration-150 font-text hover:shadow-md transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              {option}
-            </Button>
+              {option.text}
+            </button>
           ))}
         </div>
-      </CardContent>
-    </Card>
+      </Card>
+    </div>
   );
 };
-
-export { Quiz };
