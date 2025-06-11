@@ -4,93 +4,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Clock, Heart, Brain, Zap, Users, Baby, Calendar } from 'lucide-react';
 import { FooterSection } from '@/components/FooterSection';
 import { scrollToTop } from '@/utils/scrollToTop';
+import { useArticles } from '@/hooks/useArticles';
+import { HeartLoader } from '@/components/HeartLoader';
 
 const ArticlesPage = () => {
   const location = useLocation();
   const currentPath = location.pathname;
-
-  const articles = [
-    {
-      id: 'stresshantering',
-      title: 'Stresshantering i sommartempo',
-      excerpt: 'Lär dig hantera sommarens stress och krav på avkoppling. Balansera aktivitet med vila för en semester som verkligen laddar batterierna.',
-      category: 'Mental hälsa',
-      readTime: '10 min',
-      image: '/lovable-uploads/beb03c50-e7f5-4672-9b76-966508f8fcbf.png',
-      icon: Zap,
-      color: 'indigo'
-    },
-    {
-      id: 'sommartraning',
-      title: 'Träning som känns som semester',
-      excerpt: 'Upptäck hur du kan hålla dig aktiv utan att träningen känns som en börda under sommaren.',
-      category: 'Träning',
-      readTime: '8 min',
-      image: '/lovable-uploads/0920abf0-6baa-45af-b26d-95485ad33852.png',
-      icon: Heart,
-      color: 'coral'
-    },
-    {
-      id: 'kost',
-      title: 'Sommarmys utan dåligt samvete',
-      excerpt: 'Njut av glass, grillkvällar och semester-godis utan att känna att du saboterar dina hälsomål.',
-      category: 'Kost',
-      readTime: '12 min',
-      image: '/lovable-uploads/cb1cd869-a091-4612-b282-44d8a6771b89.png',
-      icon: Heart,
-      color: 'green'
-    },
-    {
-      id: 'vanor',
-      title: 'Hållbara vanor som överlever semestern',
-      excerpt: 'Skapa rutiner som funkar året runt, även när livet blir oförutsägbart.',
-      category: 'Vanor',
-      readTime: '15 min',
-      image: '/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png',
-      icon: Brain,
-      color: 'purple'
-    },
-    {
-      id: 'mental-halsa',
-      title: 'Mental hälsa på semester',
-      excerpt: 'Varför "total avkoppling" inte alltid är det bästa för din mentala hälsa.',
-      category: 'Mental hälsa',
-      readTime: '10 min',
-      image: '/lovable-uploads/dd9c854e-5f3a-4e94-b87a-5db173a99705.png',
-      icon: Brain,
-      color: 'indigo'
-    },
-    {
-      id: 'semestertraning',
-      title: 'Träning på semester: Enkelt och roligt',
-      excerpt: 'Praktiska tips för att hålla kroppen i rörelse utan att stressa.',
-      category: 'Träning',
-      readTime: '7 min',
-      image: '/lovable-uploads/617bd669-c316-43bc-b203-4a8d32228528.png',
-      icon: Heart,
-      color: 'coral'
-    },
-    {
-      id: 'familjetraning',
-      title: 'Familjeträning som alla vill vara med på',
-      excerpt: 'Skapa roliga aktiviteter som får hela familjen att röra sig tillsammans.',
-      category: 'Träning',
-      readTime: '8 min',
-      image: '/lovable-uploads/5f369290-4679-4086-8f9a-0d8720545743.png',
-      icon: Users,
-      color: 'green'
-    },
-    {
-      id: 'efter-40',
-      title: 'Träning efter 40: Det här behöver du veta',
-      excerpt: 'Hur kroppen förändras och vad du kan göra för att må bra i alla åldrar.',
-      category: 'Träning',
-      readTime: '12 min',
-      image: '/lovable-uploads/393c1d8b-c123-455f-ae12-0005270f9bb2.png',
-      icon: Calendar,
-      color: 'purple'
-    }
-  ];
+  const { data: articles, isLoading, error } = useArticles();
 
   const categories = [
     { name: 'Alla artiklar', path: '/artiklar' },
@@ -100,13 +20,27 @@ const ArticlesPage = () => {
     { name: 'Mental hälsa', path: '/artiklar/mental-halsa' }
   ];
 
+  // Icon mapping
+  const getIconComponent = (iconName: string) => {
+    const iconMap: { [key: string]: any } = {
+      'Zap': Zap,
+      'Heart': Heart,
+      'Brain': Brain,
+      'Users': Users,
+      'Calendar': Calendar
+    };
+    return iconMap[iconName] || Heart;
+  };
+
   // Filter articles based on current path
   const getFilteredArticles = () => {
+    if (!articles) return [];
+    
     if (currentPath === '/artiklar') {
       return articles;
     }
     
-    const categoryMap = {
+    const categoryMap: { [key: string]: string } = {
       '/artiklar/traning': 'Träning',
       '/artiklar/kost': 'Kost',
       '/artiklar/vanor': 'Vanor',
@@ -143,6 +77,25 @@ const ArticlesPage = () => {
   const handleArticleClick = () => {
     scrollToTop();
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center">
+        <HeartLoader />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-primary mb-4">Något gick fel</h2>
+          <p className="text-green-700">Kunde inte ladda artiklarna. Försök igen senare.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50">
@@ -188,17 +141,17 @@ const ArticlesPage = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredArticles.map((article) => {
-              const IconComponent = article.icon;
+              const IconComponent = getIconComponent(article.icon);
               return (
                 <article key={article.id} className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
                   <Link 
-                    to={`/artiklar/${article.id}`} 
+                    to={`/artiklar/${article.slug}`} 
                     onClick={handleArticleClick}
                     className="block w-full h-full cursor-pointer"
                   >
                     <div className="aspect-[16/10] relative overflow-hidden">
                       <img 
-                        src={article.image} 
+                        src={article.image_url} 
                         alt={article.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                         style={{ objectPosition: '50% 20%' }}
@@ -215,7 +168,7 @@ const ArticlesPage = () => {
                     <div className="p-4 sm:p-6">
                       <div className="flex items-center text-xs sm:text-sm text-green-600 mb-3 font-text">
                         <Clock className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                        {article.readTime}
+                        {article.read_time}
                       </div>
                       
                       <h2 className="text-lg sm:text-xl font-bold text-primary mb-3 font-display group-hover:text-primary/80 transition-colors line-clamp-2">
