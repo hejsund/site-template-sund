@@ -113,9 +113,17 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Parse the URL to get path and query parameters
-  const url = new URL(req.url);
-  const action = url.searchParams.get('action');
+  // Parse the request body to get the action
+  let action = null;
+  try {
+    if (req.method === 'POST') {
+      const body = await req.json();
+      action = body.action;
+    }
+  } catch (error) {
+    // If no body or invalid JSON, continue without action
+    console.log('No action provided in request body');
+  }
 
   try {
     // Handle different actions

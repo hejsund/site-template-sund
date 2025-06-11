@@ -49,8 +49,7 @@ export const AirtableSync = () => {
     setIsCheckingStatus(true);
     try {
       const { data, error } = await supabase.functions.invoke('listener-service', {
-        method: 'GET',
-        query: { action: 'status' }
+        body: { action: 'status' }
       });
 
       if (error) {
@@ -71,8 +70,7 @@ export const AirtableSync = () => {
     setIsCheckingStatus(true);
     try {
       const { data, error } = await supabase.functions.invoke('listener-service', {
-        method: 'GET',
-        query: { action: 'start' }
+        body: { action: 'start' }
       });
 
       if (error) {
