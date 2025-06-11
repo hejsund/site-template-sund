@@ -1,14 +1,29 @@
 
 import { Play } from 'lucide-react';
+import { useState } from 'react';
+import { VideoModal } from './VideoModal';
 
 export const CharlotteIntro = () => {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+
+  const handleVideoClick = () => {
+    setIsVideoModalOpen(true);
+  };
+
+  const handleCloseVideo = () => {
+    setIsVideoModalOpen(false);
+  };
+
   return (
     <section className="py-16 sm:py-20 px-3 sm:px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Charlotte's photo with enhanced summer styling and better face positioning */}
           <div className="relative order-2 md:order-1">
-            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl">
+            <div 
+              className="relative overflow-hidden rounded-2xl sm:rounded-3xl cursor-pointer" 
+              onClick={handleVideoClick}
+            >
               <img 
                 src="/lovable-uploads/0a9897c0-1dce-4db3-b5ee-b2a62d6f836b.png" 
                 alt="Charlotte Steinwig - grundare av Sund & Stark"
@@ -89,6 +104,9 @@ export const CharlotteIntro = () => {
           </div>
         </div>
       </div>
+
+      {/* Video Modal */}
+      <VideoModal isOpen={isVideoModalOpen} onClose={handleCloseVideo} />
     </section>
   );
 };
