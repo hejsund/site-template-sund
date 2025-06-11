@@ -132,7 +132,7 @@ export const SommarboostenArticle = () => {
             </p>
             <p>
               Men just därför älskar jag Sommarboosten så mycket. Det är skapat av någon (mig!) som lever mitt 
-              i kaoset och förstår att hälsa inte kan vara ännu en sak som stresar.
+              i kaoset och förstår att hälsa inte kan vara ännu en sak som stressar.
             </p>
             <p>
               Jag har själv gjort resan från "allt eller inget"-tänket till att förstå att balans inte är 
@@ -158,7 +158,7 @@ export const SommarboostenArticle = () => {
             </div>
             <p className="text-sm text-green-600 mt-6 font-text">
               Vill du vara första att veta när Sommarboosten öppnar anmälan? 
-              Följ oss på Instagram @sundochstark eller anmäl dig till vårt nyhetsbrev.
+              Följ oss på Instagram @sundochstark.se eller anmäl dig till vårt nyhetsbrev.
             </p>
           </div>
 
