@@ -209,7 +209,7 @@ export const Quiz = () => {
       setEmailSubmitted(true);
       
       if (recommendation.recommended) {
-        toast.success('Grattis! Du får en gratis shaker och 15% rabatt! 🎉');
+        toast.success('Grattis! Du kan få en rabattkod med 30% rabatt! 🎉');
         // Here you would redirect to Shopify checkout
         console.log('Quiz completed - redirect to checkout with discount');
       } else {
@@ -280,13 +280,13 @@ export const Quiz = () => {
                   🎁 Få din present! 
                 </h3>
                 <p className="text-coral-dark font-medium mb-4">
-                  Ange din e-post för gratis shaker och 15% rabatt (gäller 48h)
+                  Ange din e-post för rabattkoden och 30% rabatt (gäller 48h)
                 </p>
                 <div className="text-2xl font-bold text-coral-dark mb-2">
                   1695 kr <span className="text-lg line-through opacity-60">ord pris</span>
                 </div>
                 <div className="text-xl font-bold text-neon-green mb-4">
-                  Med 15% rabatt: 1441 kr
+                  Med 30% rabatt: 1199 kr
                 </div>
                 
                 <form onSubmit={handleEmailSubmit} className="space-y-4">
@@ -304,7 +304,7 @@ export const Quiz = () => {
                     className="w-full cta-primary text-base sm:text-lg py-4 leading-tight whitespace-nowrap"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Skickar...' : 'Ja, jag vill ha min rabatt och börja! 🚀'}
+                    {isSubmitting ? 'Skickar...' : 'Ja, få rabatt! 🚀'}
                   </Button>
                 </form>
               </div>
@@ -317,11 +317,11 @@ export const Quiz = () => {
                     Tack! Nu får du din rabatt. Varför våra medlemmar älskar appen:
                   </h4>
                   <ul className="text-left space-y-2 text-green-800">
-                    <li>✨ Funkar offline - träna var du vill</li>
+                    <li>✨ Brett utbud - träna var du vill</li>
                     <li>📱 Alla pass direkt i mobilen</li>
                     <li>⏰ Påminnelser som faktiskt motiverar</li>
-                    <li>📊 Se din utveckling dag för dag</li>
-                    <li>💬 Chatta med Charlotte när du behöver stöd</li>
+                    <li>📊 Känn att du blir starkare</li>
+                    <li>💬 Inspo med Charlotte när du behöver stöd</li>
                   </ul>
                 </div>
                 
@@ -369,7 +369,7 @@ export const Quiz = () => {
                         className="w-full"
                         disabled={isSubmitting}
                       >
-                        {isSubmitting ? 'Skickar...' : 'Ja, skicka mer information! 📧'}
+                        {isSubmitting ? 'Skickar...' : 'Ja, skicka info! 📧'}
                       </Button>
                     </form>
                   </div>
