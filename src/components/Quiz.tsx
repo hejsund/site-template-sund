@@ -21,51 +21,51 @@ interface QuizAnswer {
 
 const quizQuestions: QuizQuestion[] = [
   {
-    question: "Hur skulle du beskriva din nuvarande livsstil?",
+    question: "What's your current activity level?",
     options: [
-      "Jag är aktiv och tränar regelbundet",
-      "Jag rör mig ibland men har ingen rutin",
-      "Jag är mest stillasittande"
+      "I exercise regularly and have a solid routine",
+      "I'm somewhat active but inconsistent",
+      "I'm mostly sedentary and want to start moving more"
     ]
   },
   {
-    question: "Vad är din största utmaning med träning?",
+    question: "What's your biggest challenge with staying healthy?",
     options: [
-      "Att hitta tid i vardagen",
-      "Att hålla motivationen uppe",
-      "Att veta vad jag ska göra"
+      "Finding time in my busy schedule",
+      "Staying motivated and consistent",
+      "Knowing what exercises or foods are best for me"
     ]
   },
   {
-    question: "Hur ser dina matvanor ut?",
+    question: "How would you describe your current eating habits?",
     options: [
-      "Jag äter mestadels hälsosamt och planerar mina måltider",
-      "Det varierar, ibland bra och ibland sämre",
-      "Jag äter ofta snabbt och enkelt, inte alltid så nyttigt"
+      "I eat mostly healthy and plan my meals",
+      "It varies - sometimes good, sometimes not so much",
+      "I often eat on-the-go and struggle with healthy choices"
     ]
   },
   {
-    question: "Vad är viktigast för dig i sommar?",
+    question: "What matters most to you this summer?",
     options: [
-      "Att känna mig stark och energifylld",
-      "Att hitta balans och må bra",
-      "Att komma igång med hälsosammare vanor"
+      "Feeling strong, energized, and confident",
+      "Finding balance and feeling good in my body",
+      "Building healthy habits that actually stick"
     ]
   },
   {
-    question: "Hur mycket tid kan du lägga på träning per dag?",
+    question: "How much time can you realistically dedicate to exercise daily?",
     options: [
-      "30 minuter eller mer",
-      "15-20 minuter",
-      "Max 10 minuter"
+      "30 minutes or more",
+      "15-20 minutes",
+      "10 minutes max"
     ]
   },
   {
-    question: "Vad motiverar dig mest?",
+    question: "What motivates you most?",
     options: [
-      "Att se resultat och förbättringar",
-      "Att må bättre och ha mer energi",
-      "Gemenskap och att få stöd från andra"
+      "Seeing tangible results and improvements",
+      "Feeling better and having more energy",
+      "Having support and accountability from others"
     ]
   }
 ];
@@ -116,8 +116,8 @@ const Quiz = () => {
   const handleEmailSubmit = async () => {
     if (!email || !email.includes('@')) {
       toast({
-        title: "Ogiltig e-postadress",
-        description: "Vänligen ange en giltig e-postadress.",
+        title: "Invalid email address",
+        description: "Please enter a valid email address.",
         variant: "destructive",
       });
       return;
@@ -147,8 +147,8 @@ const Quiz = () => {
       if (error) throw error;
 
       toast({
-        title: "Tack för ditt svar!",
-        description: "Vi har skickat dina personliga tips till din e-post.",
+        title: "Thanks for your answers!",
+        description: "We've sent your personalized recommendations to your email.",
       });
 
       // Clear email field
@@ -156,8 +156,8 @@ const Quiz = () => {
     } catch (error) {
       console.error('Error submitting quiz:', error);
       toast({
-        title: "Något gick fel",
-        description: "Vi kunde inte spara ditt svar just nu. Försök igen senare.",
+        title: "Something went wrong",
+        description: "We couldn't save your response right now. Please try again later.",
         variant: "destructive",
       });
     } finally {
@@ -175,18 +175,18 @@ const Quiz = () => {
           <CardHeader className="pb-2">
             <CardTitle className="text-2xl font-bold text-purple-700">
               <Sparkles className="inline-block mr-2 text-purple" />
-              Nybörjarens Väg
+              The Beginner's Path
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="mb-6">
               <p className="text-lg mb-4">
-                Du är i början av din hälsoresa och det är en perfekt plats att starta! 
-                Sommarboosten kommer ge dig enkla, tydliga steg för att bygga hållbara vanor.
+                You're at the beginning of your health journey and that's the perfect place to start! 
+                The Summer Boost will give you simple, clear steps to build sustainable habits.
               </p>
               <div className="mb-4">
                 <div className="flex justify-between text-sm mb-1">
-                  <span>Nybörjare</span>
+                  <span>Beginner</span>
                   <span>{percentage}%</span>
                 </div>
                 <Progress value={percentage} className="h-2 bg-purple-100" />
@@ -194,40 +194,32 @@ const Quiz = () => {
             </div>
             
             <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-2">Perfekt för dig som vill:</h3>
+              <h3 className="font-semibold text-lg mb-2">Perfect if you want to:</h3>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <Heart className="mr-2 h-5 w-5 text-purple shrink-0 mt-0.5" />
-                  <span>Komma igång med enkla, korta träningspass</span>
+                  <span>Start with simple, short workouts that fit your schedule</span>
                 </li>
                 <li className="flex items-start">
                   <Heart className="mr-2 h-5 w-5 text-purple shrink-0 mt-0.5" />
-                  <span>Lära dig grunderna i hälsosam kost utan krångel</span>
+                  <span>Learn the basics of healthy eating without overwhelm</span>
                 </li>
                 <li className="flex items-start">
                   <Heart className="mr-2 h-5 w-5 text-purple shrink-0 mt-0.5" />
-                  <span>Få stöd och motivation från en gemenskap</span>
+                  <span>Get support and motivation from a community</span>
                 </li>
               </ul>
-            </div>
-
-            <div className="mb-6 p-4 bg-purple-100 rounded-lg">
-              <div className="text-center">
-                <div className="text-sm text-purple-600 mb-1">Begränsad tid - 29% rabatt!</div>
-                <div className="text-2xl font-bold text-purple-700">1 199 kr</div>
-                <div className="text-sm text-purple-500 line-through">1 689 kr</div>
-              </div>
             </div>
             
             <div className="mb-6">
               <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Få personliga tips för nybörjare:
+                Get personalized beginner tips:
               </label>
               <div className="flex gap-2">
                 <input
                   type="email"
                   id="email"
-                  placeholder="Din e-postadress"
+                  placeholder="Your email address"
                   className="flex-1 px-3 py-2 border rounded-md"
                   value={email}
                   onChange={handleEmailChange}
@@ -241,17 +233,17 @@ const Quiz = () => {
                 variant="outline" 
                 className="flex-1 text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
               >
-                Gör quizet igen
+                Take Quiz Again
               </Button>
               <Button 
                 onClick={handleEmailSubmit}
                 disabled={isSubmitting}
-                className="flex-1 bg-coral hover:bg-coral/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
+                className="flex-1 bg-coral hover:bg-coral/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px] focus:ring-2 focus:ring-coral focus:ring-offset-2 focus:outline-none"
               >
                 {isSubmitting ? (
                   <HeartLoader size="sm" className="mr-2" />
                 ) : null}
-                {isSubmitting ? "Skickar..." : "Få tips direkt"}
+                {isSubmitting ? "Sending..." : "Get Tips Now"}
               </Button>
             </div>
           </CardContent>
@@ -265,18 +257,18 @@ const Quiz = () => {
           <CardHeader className="pb-2">
             <CardTitle className="text-2xl font-bold text-green-700">
               <Target className="inline-block mr-2 text-neon-green" />
-              Balanserade Vägen
+              The Balanced Path
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="mb-6">
               <p className="text-lg mb-4">
-                Du har redan grunderna på plats och är redo att ta nästa steg! 
-                Sommarboosten kommer hjälpa dig att hitta balans och bygga vidare på dina vanor.
+                You already have the basics in place and are ready for the next step! 
+                The Summer Boost will help you find balance and build on your existing habits.
               </p>
               <div className="mb-4">
                 <div className="flex justify-between text-sm mb-1">
-                  <span>Medel</span>
+                  <span>Intermediate</span>
                   <span>{percentage}%</span>
                 </div>
                 <Progress value={percentage} className="h-2 bg-green-100" />
@@ -284,40 +276,32 @@ const Quiz = () => {
             </div>
             
             <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-2">Perfekt för dig som vill:</h3>
+              <h3 className="font-semibold text-lg mb-2">Perfect if you want to:</h3>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <Target className="mr-2 h-5 w-5 text-neon-green shrink-0 mt-0.5" />
-                  <span>Förbättra din träningsrutin med effektiva pass</span>
+                  <span>Improve your workout routine with effective sessions</span>
                 </li>
                 <li className="flex items-start">
                   <Target className="mr-2 h-5 w-5 text-neon-green shrink-0 mt-0.5" />
-                  <span>Optimera din kost för mer energi och välmående</span>
+                  <span>Optimize your nutrition for more energy and wellbeing</span>
                 </li>
                 <li className="flex items-start">
                   <Target className="mr-2 h-5 w-5 text-neon-green shrink-0 mt-0.5" />
-                  <span>Hitta balans mellan träning, kost och återhämtning</span>
+                  <span>Find balance between exercise, nutrition, and recovery</span>
                 </li>
               </ul>
-            </div>
-
-            <div className="mb-6 p-4 bg-green-100 rounded-lg">
-              <div className="text-center">
-                <div className="text-sm text-green-600 mb-1">Begränsad tid - 29% rabatt!</div>
-                <div className="text-2xl font-bold text-green-700">1 199 kr</div>
-                <div className="text-sm text-green-500 line-through">1 689 kr</div>
-              </div>
             </div>
             
             <div className="mb-6">
               <label htmlFor="email" className="block text-sm font-medium mb-2">
-                Få personliga tips för din nivå:
+                Get personalized tips for your level:
               </label>
               <div className="flex gap-2">
                 <input
                   type="email"
                   id="email"
-                  placeholder="Din e-postadress"
+                  placeholder="Your email address"
                   className="flex-1 px-3 py-2 border rounded-md"
                   value={email}
                   onChange={handleEmailChange}
@@ -331,17 +315,17 @@ const Quiz = () => {
                 variant="outline" 
                 className="flex-1 text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
               >
-                Gör quizet igen
+                Take Quiz Again
               </Button>
               <Button 
                 onClick={handleEmailSubmit}
                 disabled={isSubmitting}
-                className="flex-1 bg-neon-green hover:bg-neon-green/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
+                className="flex-1 bg-neon-green hover:bg-neon-green/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px] focus:ring-2 focus:ring-neon-green focus:ring-offset-2 focus:outline-none"
               >
                 {isSubmitting ? (
                   <HeartLoader size="sm" className="mr-2" />
                 ) : null}
-                {isSubmitting ? "Skickar..." : "Få personliga tips"}
+                {isSubmitting ? "Sending..." : "Get Personal Tips"}
               </Button>
             </div>
           </CardContent>
@@ -354,18 +338,18 @@ const Quiz = () => {
         <CardHeader className="pb-2">
           <CardTitle className="text-2xl font-bold text-coral-700">
             <Zap className="inline-block mr-2 text-coral" />
-            Avancerade Vägen
+            The Advanced Path
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-6">
             <p className="text-lg mb-4">
-              Wow! Du har redan en stark grund och är redo för nästa nivå. 
-              Sommarboosten kommer ge dig utmaningar och strategier för att maximera dina resultat.
+              Wow! You already have a strong foundation and are ready for the next level. 
+              The Summer Boost will give you challenges and strategies to maximize your results.
             </p>
             <div className="mb-4">
               <div className="flex justify-between text-sm mb-1">
-                <span>Avancerad</span>
+                <span>Advanced</span>
                 <span>{percentage}%</span>
               </div>
               <Progress value={percentage} className="h-2 bg-coral-100" />
@@ -373,40 +357,32 @@ const Quiz = () => {
           </div>
           
           <div className="mb-6">
-            <h3 className="font-semibold text-lg mb-2">Perfekt för dig som vill:</h3>
+            <h3 className="font-semibold text-lg mb-2">Perfect if you want to:</h3>
             <ul className="space-y-2">
               <li className="flex items-start">
                 <Zap className="mr-2 h-5 w-5 text-coral shrink-0 mt-0.5" />
-                <span>Ta din träning till nästa nivå med utmanande pass</span>
+                <span>Take your workouts to the next level with challenging sessions</span>
               </li>
               <li className="flex items-start">
                 <Zap className="mr-2 h-5 w-5 text-coral shrink-0 mt-0.5" />
-                <span>Finjustera din kost för optimala resultat</span>
+                <span>Fine-tune your nutrition for optimal results</span>
               </li>
               <li className="flex items-start">
                 <Zap className="mr-2 h-5 w-5 text-coral shrink-0 mt-0.5" />
-                <span>Inspirera andra och dela dina framgångar</span>
+                <span>Inspire others and share your success</span>
               </li>
             </ul>
-          </div>
-
-          <div className="mb-6 p-4 bg-coral-100 rounded-lg">
-            <div className="text-center">
-              <div className="text-sm text-coral-600 mb-1">Begränsad tid - 29% rabatt!</div>
-              <div className="text-2xl font-bold text-coral-700">1 199 kr</div>
-              <div className="text-sm text-coral-500 line-through">1 689 kr</div>
-            </div>
           </div>
           
           <div className="mb-6">
             <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Få avancerade tips för din nivå:
+              Get advanced tips for your level:
             </label>
             <div className="flex gap-2">
               <input
                 type="email"
                 id="email"
-                placeholder="Din e-postadress"
+                placeholder="Your email address"
                 className="flex-1 px-3 py-2 border rounded-md"
                 value={email}
                 onChange={handleEmailChange}
@@ -420,17 +396,17 @@ const Quiz = () => {
               variant="outline" 
               className="flex-1 text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
             >
-              Gör quizet igen
+              Take Quiz Again
             </Button>
             <Button 
               onClick={handleEmailSubmit}
               disabled={isSubmitting}
-              className="flex-1 bg-coral hover:bg-coral/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px]"
+              className="flex-1 bg-coral hover:bg-coral/90 text-white text-sm sm:text-base px-3 py-2 h-auto min-h-[44px] focus:ring-2 focus:ring-coral focus:ring-offset-2 focus:outline-none"
             >
               {isSubmitting ? (
                 <HeartLoader size="sm" className="mr-2" />
               ) : null}
-              {isSubmitting ? "Skickar..." : "Bli först att veta"}
+              {isSubmitting ? "Sending..." : "Be First to Know"}
             </Button>
           </div>
         </CardContent>
@@ -447,7 +423,7 @@ const Quiz = () => {
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm font-medium text-muted-foreground">
-            Fråga {currentQuestion + 1} av {quizQuestions.length}
+            Question {currentQuestion + 1} of {quizQuestions.length}
           </span>
           <span className="text-sm font-medium">
             {Math.round(((currentQuestion) / quizQuestions.length) * 100)}%
@@ -467,7 +443,7 @@ const Quiz = () => {
             <Button
               key={index}
               variant="outline"
-              className="w-full justify-start text-left h-auto py-4 px-4 border-gray-200 hover:border-primary hover:bg-primary/5"
+              className="w-full justify-start text-left h-auto py-4 px-4 border-gray-200 hover:border-primary hover:bg-primary/5 focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-none transition-colors"
               onClick={() => handleAnswer(index)}
             >
               {option}
