@@ -82,7 +82,7 @@ export const SommarboostenArticle = () => {
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {[
-                "Över 40 träningspass - både med och utan utrustning",
+                "Över 50 träningspass - både med och utan utrustning",
                 "Över 60 smarriga somriga recept - perfekta för hela familjen",
                 "Träningspass som verkligen blir gjorda - inga ursäkter här!",
                 "Mat helt utan förbud - njut av sommaren utan dåligt samvete",
