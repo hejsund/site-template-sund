@@ -4,11 +4,11 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 const faqs = [
   {
     question: "Måste jag ha redskap för att träna?",
-    answer: "Nej! Alla träningspass kan göras med bara din egen kropp. Om du vill kan du använda vardagsföremål som vattenflaskor eller böcker, men det är inget krav. Vi visar alltid alternativ för alla nivåer."
+    answer: "Nej! Det finns träningspass som kan göras med bara kroppen som motstånd. I programmet ingår även träning med kettlebell, battlerope, miniband och löpning. Utrustningen ingår ej."
   },
   {
-    question: "Passar programmet mig som nybörjare?",
-    answer: "Absolut! Sommarboosten är designad för alla nivåer. Vi börjar där du är och bygger upp gradvis. Charlotte visar alltid enklare alternativ, och du bestämmer takten själv."
+    question: "Passar programmet mig som nybörjare?",D
+        answer: "Absolut! Sommarboosten är designad för alla nivåer. Det finns träningspass både för dig som är nybörjare och för dig med stor träningsvana. Du bestämmer själv din träningsmängd varje vecka."
   },
   {
     question: "Hur mycket tid behöver jag avsätta?",
@@ -16,11 +16,11 @@ const faqs = [
   },
   {
     question: "Vad händer om jag missar några dagar?",
-    answer: "Inget problem alls! Det här är inte en strikt kur utan en livsstil. Du hoppar bara in där du är. Vi har förstått att livet ibland kommer emellan – och det är helt okej."
+    answer: "Inget problem alls! Det här är inte ett strikt program utan handlar om livsstil och glädje. Du hoppar bara in där du är."
   },
   {
-    question: "Finns det några kostnadsfria delar?",
-    answer: "Ja! När du registrerar din e-post får du direkt tillgång till förhandsmaterial med tips, recept och träningspass. Sedan kan du välja om du vill vara med på hela resan."
+    question: "Vad kostar programmet?",
+    answer: "Programmet kostar 1 695 kr vilket motsvarar ca 40 kr per dag."
   },
   {
     question: "Kan jag träna utomhus?",
