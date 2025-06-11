@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -27,6 +26,7 @@ import VacationTrainingArticlePage from "./pages/articles/VacationTrainingArticl
 import FamilyTrainingArticlePage from "./pages/articles/FamilyTrainingArticlePage";
 import After40ArticlePage from "./pages/articles/After40ArticlePage";
 import StressManagementArticlePage from "./pages/articles/StressManagementArticlePage";
+import VacationNutritionArticlePage from "./pages/articles/VacationNutritionArticlePage";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +63,7 @@ function App() {
                   <Route path="/artiklar/vanor" element={<HabitsArticlePage />} />
                   <Route path="/artiklar/mental-halsa" element={<MentalHealthArticlePage />} />
                   <Route path="/artiklar/semestertraning" element={<VacationTrainingArticlePage />} />
+                  <Route path="/artiklar/semesterkost" element={<VacationNutritionArticlePage />} />
                   <Route path="/artiklar/familjetraning" element={<FamilyTrainingArticlePage />} />
                   <Route path="/artiklar/efter-40" element={<After40ArticlePage />} />
                   
