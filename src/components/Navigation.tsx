@@ -67,7 +67,7 @@ export const Navigation = () => {
                 key={menu.title}
                 className="relative group"
               >
-                <button className="flex items-center space-x-1 text-green-800 hover:text-green-600 font-medium transition-colors">
+                <button className="flex items-center space-x-1 text-green-800 hover:text-green-600 font-medium transition-colors text-base">
                   <span>{menu.title}</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -77,7 +77,7 @@ export const Navigation = () => {
                     <Link
                       key={item.name}
                       to={item.href}
-                      className="flex items-center space-x-3 px-4 py-3 text-green-800 hover:bg-green-50 hover:text-green-600 transition-colors"
+                      className="flex items-center space-x-3 px-4 py-3 text-green-800 hover:bg-green-50 hover:text-green-600 transition-colors text-base"
                       onClick={handleLinkClick}
                     >
                       <item.icon className="w-5 h-5" />
@@ -89,7 +89,7 @@ export const Navigation = () => {
             ))}
             
             <Link to="/quiz" onClick={handleLinkClick}>
-              <Button className="bg-primary hover:bg-primary/90 text-white font-semibold">
+              <Button className="bg-primary hover:bg-primary/90 text-white font-semibold text-base">
                 Gör vårt quiz
               </Button>
             </Link>
@@ -98,38 +98,52 @@ export const Navigation = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-md text-green-800 hover:text-green-600"
+            className="md:hidden p-2 rounded-md text-green-800 hover:text-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
             aria-label={isOpen ? 'Stäng meny' : 'Öppna meny'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu with improved accessibility */}
         {isOpen && (
-          <div className="md:hidden border-t border-green-200 py-4">
-            {menuItems.map((menu) => (
-              <div key={menu.title} className="mb-4">
-                <h3 className="font-semibold text-green-800 mb-2 px-2">{menu.title}</h3>
-                {menu.items.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="flex items-center space-x-3 px-4 py-2 text-green-800 hover:bg-green-50 rounded-md mx-2"
-                    onClick={handleLinkClick}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                  </Link>
-                ))}
+          <div 
+            id="mobile-menu"
+            className="md:hidden border-t border-green-200 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto"
+            role="navigation"
+            aria-label="Huvudmeny"
+          >
+            <div className="space-y-6 pb-4">
+              {menuItems.map((menu, index) => (
+                <div key={menu.title} className="space-y-2">
+                  <h3 className="font-semibold text-green-800 text-lg px-4 border-b border-green-100 pb-2">
+                    {menu.title}
+                  </h3>
+                  <div className="space-y-1">
+                    {menu.items.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.href}
+                        className="flex items-center space-x-3 px-6 py-3 text-green-800 hover:bg-green-50 rounded-md mx-2 text-base font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                        onClick={handleLinkClick}
+                        tabIndex={0}
+                      >
+                        <item.icon className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
+                        <span>{item.name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div className="px-4 pt-4 border-t border-green-100">
+                <Link to="/quiz" onClick={handleLinkClick} className="block">
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold text-base py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                    Gör vårt quiz
+                  </Button>
+                </Link>
               </div>
-            ))}
-            <div className="px-2 mt-4">
-              <Link to="/quiz" onClick={handleLinkClick}>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold">
-                  Gör vårt quiz
-                </Button>
-              </Link>
             </div>
           </div>
         )}
