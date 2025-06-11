@@ -116,7 +116,7 @@ export const Hero = () => {
               <div className="text-center mb-4 sm:mb-6">
                 <div className="text-2xl sm:text-3xl mb-2">🌟✨🌻</div>
                 <h3 className="text-lg sm:text-xl font-bold text-green-600 mb-2 font-display">
-                  Hej fina du! Din drömresa börjar här!
+                  Din drömresa börjar här!
                 </h3>
               </div>
               

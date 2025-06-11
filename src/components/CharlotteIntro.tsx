@@ -39,7 +39,7 @@ export const CharlotteIntro = () => {
             </div>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-primary leading-tight font-display">
-              Hej, härliga du! 
+              Hej, fina du! 
               <span className="block text-xl sm:text-2xl md:text-3xl mt-2 opacity-80">🌞</span>
             </h2>
 
