@@ -58,7 +58,7 @@ function App() {
                   
                   {/* Article routes */}
                   <Route path="/artiklar/stresshantering" element={<StressManagementArticlePage />} />
-                  <Route path="/artiklar/traning" element={<TrainingArticlePage />} />
+                  <Route path="/artiklar/sommartraning" element={<TrainingArticlePage />} />
                   <Route path="/artiklar/kost" element={<NutritionArticlePage />} />
                   <Route path="/artiklar/vanor" element={<HabitsArticlePage />} />
                   <Route path="/artiklar/mental-halsa" element={<MentalHealthArticlePage />} />

@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Clock, Heart, Brain, Zap, Users, Baby, Calendar } from 'lucide-react';
@@ -20,7 +21,7 @@ const ArticlesPage = () => {
       color: 'indigo'
     },
     {
-      id: 'traning',
+      id: 'sommartraning',
       title: 'Träning som känns som semester',
       excerpt: 'Upptäck hur du kan hålla dig aktiv utan att träningen känns som en börda under sommaren.',
       category: 'Träning',
