@@ -140,7 +140,7 @@ const ArticlesPage = () => {
     scrollToTop();
   };
 
-  const handleLinkClick = () => {
+  const handleArticleClick = () => {
     scrollToTop();
   };
 
@@ -190,8 +190,12 @@ const ArticlesPage = () => {
             {filteredArticles.map((article) => {
               const IconComponent = article.icon;
               return (
-                <Link key={article.id} to={`/artiklar/${article.id}`} onClick={handleLinkClick}>
-                  <article className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] cursor-pointer">
+                <article key={article.id} className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+                  <Link 
+                    to={`/artiklar/${article.id}`} 
+                    onClick={handleArticleClick}
+                    className="block w-full h-full cursor-pointer"
+                  >
                     <div className="aspect-[16/10] relative overflow-hidden">
                       <img 
                         src={article.image} 
@@ -227,8 +231,8 @@ const ArticlesPage = () => {
                         <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
-                  </article>
-                </Link>
+                  </Link>
+                </article>
               );
             })}
           </div>
