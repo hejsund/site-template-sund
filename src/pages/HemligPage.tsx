@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Clock, CheckCircle, XCircle, Play, ArrowRight, Timer, Gift, Heart, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -37,7 +38,7 @@ const HemligPage = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Check if current date is June 14 or later (for logic section 8)
+  // Check if current date is June 14 or later
   const currentDate = new Date();
   const cutoffDate = new Date('2025-06-14T00:00:00');
   const showExpiredContent = currentDate >= cutoffDate;
@@ -49,143 +50,252 @@ const HemligPage = () => {
         <meta name="robots" content="noindex, nofollow" />
       </div>
       
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-        {/* Section 1: Hero with Early Buy Button */}
-        <section className="py-20 px-6" role="main">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-black text-green-800 mb-8 font-display leading-tight">
-              Tack för att du var med – det här är bara för dig som sett föreläsningen eller visat intresse.
+      {/* Sticky Timer Header */}
+      {!showExpiredContent && (
+        <div className="sticky top-0 z-50 bg-gradient-to-r from-amber-400 to-orange-400 text-white py-3 px-4 shadow-lg">
+          <div className="max-w-7xl mx-auto flex items-center justify-center gap-4">
+            <Timer className="w-5 h-5" />
+            <span className="font-bold text-sm md:text-base">
+              Erbjudandet löper ut om: {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
+            </span>
+            <div className="hidden md:block text-sm bg-white/20 px-3 py-1 rounded-full">
+              50% RABATT - Endast 48h kvar!
+            </div>
+          </div>
+        </div>
+      )}
+      
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
+        {/* Section 1: Hero with Headline and Immediate Offer */}
+        <section className="py-12 px-6" role="main">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-black text-slate-800 mb-6 font-display leading-tight">
+              Tack för att du var med
             </h1>
             
-            {/* Early Buy Button */}
+            <p className="text-xl md:text-2xl text-slate-600 mb-12 font-text leading-relaxed max-w-3xl mx-auto">
+              Det här är bara för dig som sett föreläsningen eller visat intresse för Sommarboosten på vår lista
+            </p>
+
+            {/* Immediate Pricing Offer */}
             {!showExpiredContent && (
-              <div className="bg-gradient-to-r from-coral/10 to-green-100 rounded-2xl p-8 mb-12 border border-coral/20">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <Gift className="w-8 h-8 text-coral" aria-hidden="true" />
-                  <h2 className="text-2xl font-bold text-green-800 font-display">Exklusivt erbjudande – 50% rabatt</h2>
+              <div className="bg-gradient-to-r from-amber-100 to-orange-100 rounded-3xl p-8 mb-12 border-2 border-amber-200 shadow-xl">
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <Gift className="w-10 h-10 text-orange-600" />
+                  <h2 className="text-3xl font-black text-slate-800 font-display">Exklusivt erbjudande</h2>
                 </div>
-                <p className="text-green-700 font-text mb-6 text-lg">
-                  Som tack för att du var med på föreläsningen får du denna begränsade rabatt
-                </p>
+                
+                <div className="bg-white rounded-2xl p-6 mb-6 shadow-lg">
+                  <div className="flex items-center justify-center gap-4 mb-4">
+                    <div className="text-center">
+                      <div className="text-sm text-slate-500 mb-1">Ordinarie pris:</div>
+                      <div className="text-2xl font-bold text-slate-400 line-through">1 695 kr</div>
+                    </div>
+                    <div className="text-4xl text-orange-500">→</div>
+                    <div className="text-center">
+                      <div className="text-sm text-slate-500 mb-1">Ditt pris:</div>
+                      <div className="text-4xl font-black text-orange-600">847,50 kr</div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-orange-100 rounded-xl p-4 mb-4">
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <span className="bg-orange-500 text-white px-4 py-2 rounded-full font-bold text-xl">50% RABATT</span>
+                    </div>
+                    <p className="text-orange-800 font-semibold text-center">
+                      Gäller endast i <span className="font-black">48 timmar</span> från att du klickade dig hit
+                    </p>
+                  </div>
+                </div>
+                
                 <Button 
-                  className="bg-coral hover:bg-coral/90 text-white font-bold text-xl px-10 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4"
+                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-12 py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4"
                   onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                 >
                   Säkra din plats nu – 50% rabatt
-                  <ArrowRight className="ml-2 w-6 h-6" aria-hidden="true" />
+                  <ArrowRight className="ml-3 w-6 h-6" />
                 </Button>
-                <p className="text-sm text-green-600 font-semibold">
-                  Använd koden <span className="text-coral font-bold">TACK50</span> i kassan
+                <p className="text-sm text-slate-600 font-semibold">
+                  Använd koden <span className="text-orange-600 font-bold bg-orange-100 px-2 py-1 rounded">TACK50</span> i kassan
                 </p>
               </div>
             )}
 
-            <div className="bg-coral/10 border border-coral/20 rounded-xl p-6" role="note">
-              <p className="text-green-800 font-text leading-relaxed">
-                Det här är en personlig länk. Sidan är inte publik och kommer att stängas när nedräkningen når noll. 
-                Erbjudandet gäller i 48 timmar från att du kom hit – eller tills 15 juni kl. 23:59, vad som än kommer först.
+            <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-6">
+              <p className="text-slate-700 font-text leading-relaxed">
+                <strong>Viktigt:</strong> Den här sidan är personlig och stängs när nedräkningen når noll. 
+                Erbjudandet gäller max 48 timmar från att du kom hit – eller tills 15 juni kl. 23:59.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Section 2: Video + Countdown */}
-        <section className="py-16 px-6" role="region">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Video Section */}
-            <div className="mb-12">
-              {showExpiredContent ? (
-                <div className="aspect-video bg-gray-300 rounded-xl flex items-center justify-center mb-6" role="img" aria-label="Video är inte längre tillgänglig">
-                  <div className="text-center text-gray-600">
-                    <Play className="w-16 h-16 mx-auto mb-4 opacity-50" aria-hidden="true" />
-                    <p className="text-lg font-semibold">🎥 Videon är inte längre tillgänglig.</p>
-                  </div>
-                </div>
-              ) : (
-                <div className="aspect-video rounded-xl overflow-hidden shadow-lg mb-6">
-                  <iframe
-                    src="https://www.youtube.com/embed/ieq8A_WLACo"
-                    title="Exklusiv video för föreläsningsdeltagare"
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              )}
-            </div>
-
-            {/* Countdown Timer */}
-            {!showExpiredContent && (
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-green-200 mb-8" role="timer" aria-live="polite">
-                <div className="flex items-center justify-center gap-2 mb-6">
-                  <Clock className="w-6 h-6 text-green-600" aria-hidden="true" />
-                  <h2 className="text-2xl font-bold text-green-800 font-display">Tid kvar</h2>
-                </div>
-                
-                <div className="grid grid-cols-4 gap-4 mb-6">
-                  <div className="text-center">
-                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.days} dagar kvar`}>
-                      <span className="text-3xl font-bold">{timeLeft.days}</span>
-                    </div>
-                    <span className="text-sm text-green-700 font-semibold">Dagar</span>
-                  </div>
-                  <div className="text-center">
-                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.hours} timmar kvar`}>
-                      <span className="text-3xl font-bold">{timeLeft.hours}</span>
-                    </div>
-                    <span className="text-sm text-green-700 font-semibold">Timer</span>
-                  </div>
-                  <div className="text-center">
-                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.minutes} minuter kvar`}>
-                      <span className="text-3xl font-bold">{timeLeft.minutes}</span>
-                    </div>
-                    <span className="text-sm text-green-700 font-semibold">Minuter</span>
-                  </div>
-                  <div className="text-center">
-                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.seconds} sekunder kvar`}>
-                      <span className="text-3xl font-bold">{timeLeft.seconds}</span>
-                    </div>
-                    <span className="text-sm text-green-700 font-semibold">Sekunder</span>
-                  </div>
+        {/* Section 2: Video Placement (between specified lines) */}
+        <section className="py-16 px-6 bg-gradient-to-r from-blue-50 to-indigo-50" role="region">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-slate-800 mb-8 font-display">
+              Här är videon jag lovade dig
+            </h2>
+            
+            {showExpiredContent ? (
+              <div className="aspect-video bg-slate-200 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                <div className="text-center text-slate-600">
+                  <Play className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg font-semibold">🎥 Videon är inte längre tillgänglig.</p>
                 </div>
               </div>
+            ) : (
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl mb-8 border-4 border-white">
+                <iframe
+                  src="https://www.youtube.com/embed/ieq8A_WLACo"
+                  title="Exklusiv video för föreläsningsdeltagare"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             )}
+            
+            <p className="text-lg text-slate-600 font-text">
+              I den här videon delar jag de viktigaste insikterna om varför just <strong>sommaren</strong> är den perfekta tiden att investera i din hälsa.
+            </p>
           </div>
         </section>
 
-        {/* Section 3: Vad händer om du väntar? - MOVED BELOW VIDEO */}
-        <section className="py-20 px-6 bg-gradient-to-r from-orange-50 to-coral/10" role="region" aria-labelledby="waiting-heading">
+        {/* Section 3: Problem Agitation - Känner du igen dig? */}
+        <section className="py-16 px-6" role="region">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-3xl p-10 shadow-2xl border-l-8 border-coral relative overflow-hidden">
-              {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-coral/10 rounded-full -mr-16 -mt-16 opacity-50"></div>
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-100 rounded-full -ml-12 -mb-12 opacity-50"></div>
+            <div className="bg-white rounded-3xl p-10 shadow-2xl border border-slate-200">
+              <h2 className="text-4xl font-bold text-slate-800 mb-10 font-display text-center">
+                Känner du igen dig i detta?
+              </h2>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="flex items-start gap-4 p-6 bg-amber-50 rounded-2xl border border-amber-200">
+                  <div className="text-3xl">😰</div>
+                  <p className="text-slate-700 font-text font-medium">
+                    Du är rädd att allt ditt resultat från våren rinner ut i sanden i sommar
+                  </p>
+                </div>
+                
+                <div className="flex items-start gap-4 p-6 bg-orange-50 rounded-2xl border border-orange-200">
+                  <div className="text-3xl">🍦</div>
+                  <p className="text-slate-700 font-text font-medium">
+                    Du vill njuta av glass, grill och ledighet – men utan att känna att du sviker dig själv
+                  </p>
+                </div>
+                
+                <div className="flex items-start gap-4 p-6 bg-blue-50 rounded-2xl border border-blue-200">
+                  <div className="text-3xl">💪</div>
+                  <p className="text-slate-700 font-text font-medium">
+                    Du har tränat – men vet att rutinerna lätt försvinner när vardagen pausas
+                  </p>
+                </div>
+                
+                <div className="flex items-start gap-4 p-6 bg-indigo-50 rounded-2xl border border-indigo-200">
+                  <div className="text-3xl">😤</div>
+                  <p className="text-slate-700 font-text font-medium">
+                    Du orkar inte fler "kom igång i augusti"-försök
+                  </p>
+                </div>
+              </div>
+              
+              <div className="text-center bg-gradient-to-r from-amber-100 to-orange-100 p-6 rounded-2xl">
+                <p className="text-lg text-slate-700 font-semibold">
+                  <strong>Om du nickade ja till något av detta</strong> – då är Sommarboosten skapad för dig.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 4: Solution - Vad är Sommarboosten? */}
+        <section className="py-16 px-6 bg-gradient-to-r from-indigo-50 to-purple-50">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-3xl p-10 shadow-2xl">
+              <h2 className="text-4xl font-bold text-slate-800 mb-8 font-display text-center">
+                Din lösning: Sommarboosten
+              </h2>
+              
+              <p className="text-xl text-slate-600 text-center mb-10 font-text leading-relaxed">
+                Ett sommarprogram för dig som vill fortsätta ta hand om dig – utan att offra livets goda.
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-10">
+                <div className="flex items-start gap-4 p-6 bg-indigo-50 rounded-2xl">
+                  <CheckCircle className="w-8 h-8 text-indigo-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-bold text-slate-800 font-display text-lg mb-2">💪 60 träningspass</h3>
+                    <p className="text-slate-600">Styrka, puls, yoga, stretch – allt du behöver</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-6 bg-purple-50 rounded-2xl">
+                  <CheckCircle className="w-8 h-8 text-purple-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-bold text-slate-800 font-display text-lg mb-2">🍓 50+ somriga recept</h3>
+                    <p className="text-slate-600">Näringsrikt men utan förbud eller kaloriräkning</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-6 bg-amber-50 rounded-2xl">
+                  <CheckCircle className="w-8 h-8 text-amber-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-bold text-slate-800 font-display text-lg mb-2">🏖️ Fungerar var du än är</h3>
+                    <p className="text-slate-600">Hemma, i stugan, på stranden – ingen utrustning krävs</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-6 bg-orange-50 rounded-2xl">
+                  <CheckCircle className="w-8 h-8 text-orange-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-bold text-slate-800 font-display text-lg mb-2">📱 Allt i vår app</h3>
+                    <p className="text-slate-600">Enkelt, överskådligt och alltid tillgängligt</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-slate-600 font-text mb-6">
+                  Vill du läsa mer om upplägget? <a href="https://sommarboosten.se" className="text-indigo-600 underline hover:no-underline font-semibold" target="_blank" rel="noopener noreferrer">Läs mer på sommarboosten.se</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 5: Urgency - Vad händer om du väntar? */}
+        <section className="py-20 px-6 bg-gradient-to-r from-red-50 to-pink-50">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-3xl p-10 shadow-2xl border-l-8 border-red-400 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-pink-100 rounded-full -ml-12 -mb-12 opacity-50"></div>
               
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="bg-coral text-white rounded-full p-4">
-                    <Timer className="w-8 h-8" aria-hidden="true" />
+                  <div className="bg-red-400 text-white rounded-full p-4">
+                    <Timer className="w-8 h-8" />
                   </div>
-                  <h2 id="waiting-heading" className="text-4xl font-black text-green-800 font-display">
+                  <h2 className="text-4xl font-black text-slate-800 font-display">
                     Vad händer om du väntar?
                   </h2>
                 </div>
                 
                 <div className="space-y-6 mb-8">
-                  <div className="bg-orange-50 border-l-4 border-orange-300 p-6 rounded-r-xl">
-                    <p className="text-orange-800 font-text leading-relaxed text-lg">
+                  <div className="bg-red-50 border-l-4 border-red-300 p-6 rounded-r-xl">
+                    <p className="text-red-800 font-text leading-relaxed text-lg">
                       <strong>Sanningen?</strong> Det är lätt att tänka "jag gör det senare" – men just sommaren är den period då små val får störst effekt.
                     </p>
                   </div>
                   
-                  <div className="bg-coral/10 border-l-4 border-coral/50 p-6 rounded-r-xl">
-                    <p className="text-green-800 font-text leading-relaxed text-lg">
+                  <div className="bg-pink-50 border-l-4 border-pink-300 p-6 rounded-r-xl">
+                    <p className="text-slate-800 font-text leading-relaxed text-lg">
                       <strong>Varför nu?</strong> Sommarboosten är byggt för att fungera även när rutinerna är lösa – just då det brukar vara som svårast.
                     </p>
                   </div>
                   
-                  <div className="bg-gradient-to-r from-coral to-green-600 text-white p-8 rounded-2xl text-center">
-                    <Gift className="w-12 h-12 mx-auto mb-4" aria-hidden="true" />
+                  <div className="bg-gradient-to-r from-red-400 to-pink-500 text-white p-8 rounded-2xl text-center">
+                    <Gift className="w-12 h-12 mx-auto mb-4" />
                     <p className="font-bold text-xl mb-2">
                       Det här är din chans att ta ett steg
                     </p>
@@ -195,21 +305,19 @@ const HemligPage = () => {
                   </div>
                 </div>
 
-                {/* Urgency CTA */}
                 {!showExpiredContent && (
-                  <div className="text-center bg-gradient-to-r from-green-100 to-green-200 p-6 rounded-2xl">
-                    <p className="text-green-800 font-semibold mb-4">
+                  <div className="text-center bg-gradient-to-r from-amber-100 to-orange-100 p-6 rounded-2xl">
+                    <p className="text-slate-800 font-semibold mb-4 text-lg">
                       ⏰ Erbjudandet löper ut om {timeLeft.days} dagar, {timeLeft.hours} timmar och {timeLeft.minutes} minuter
                     </p>
                     <Button 
-                      className="bg-coral hover:bg-coral/90 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display"
+                      className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display"
                       onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
-                      aria-describedby="offer-expires"
                     >
                       Säkra din plats nu – 50% rabatt
-                      <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
+                      <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
-                    <p id="offer-expires" className="text-sm text-green-600 mt-2">
+                    <p className="text-sm text-slate-600 mt-2">
                       Använd koden <strong>TACK50</strong> i kassan
                     </p>
                   </div>
@@ -219,118 +327,16 @@ const HemligPage = () => {
           </div>
         </section>
 
-        {/* Section 4: Sales CTA inspired by FinalCTA but with hemlig copy */}
-        <section className="py-20 px-4 relative overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-50/95 via-coral/5 to-green-100/90 z-10"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-green-100/40 via-transparent to-green-50/20 z-10"></div>
-          </div>
-
-          <div className="max-w-4xl mx-auto text-center relative z-20">
-            <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border border-white/50">
-              <div className="mb-8">
-                <div className="text-4xl mb-4">🌟✨🌻</div>
-                <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800 font-display">
-                  Redo för din bästa sommar någonsin?
-                </h2>
-                <p className="text-xl text-green-700 mb-8 font-text">
-                  Som tack för att du var med på föreläsningen får du:
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-4 text-left mb-8">
-                {[
-                  "50% rabatt – endast för föreläsningsdeltagare",
-                  "60 träningspass som fungerar var du än är",
-                  "50+ somriga recept utan förbud",
-                  "Träning som blir gjord – även på semestern",
-                  "Allt samlat i vår app – enkelt och överskådligt",
-                  "Ett tydligt upplägg med struktur och pepp"
-                ].map((benefit, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <CheckCircle className="text-coral flex-shrink-0 mt-1" size={20} />
-                    <span className="text-green-800 font-medium">{benefit}</span>
-                  </div>
-                ))}
-              </div>
-
-              {!showExpiredContent && (
-                <div className="space-y-4">
-                  <Button 
-                    className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 w-full md:w-auto"
-                    onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
-                  >
-                    Säkra din plats – 50% rabatt med TACK50
-                  </Button>
-                  
-                  <p className="text-sm text-green-600 mt-4 opacity-80 font-text">
-                    ⏰ Erbjudandet löper ut om {timeLeft.days} dagar, {timeLeft.hours} timmar
-                  </p>
-                </div>
-              )}
-
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 text-coral opacity-60">
-                <Heart className="animate-float" size={24} />
-              </div>
-              <div className="absolute -bottom-4 -left-4 text-green-600 opacity-60">
-                <Sparkles className="animate-float" size={20} style={{ animationDelay: '1s' }} />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 5: Känner du igen dig? */}
-        <section className="py-16 px-6" role="region" aria-labelledby="recognition-heading">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-green-200">
-              <h2 id="recognition-heading" className="text-3xl font-bold text-green-800 mb-8 font-display text-center">
-                Känner du igen dig i något av detta?
-              </h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start gap-4 p-4 bg-green-50 rounded-xl">
-                  <div className="text-coral text-2xl" aria-hidden="true">😰</div>
-                  <p className="text-green-800 font-text">
-                    Du är rädd att allt ditt resultat från våren rinner ut i sanden i sommar
-                  </p>
-                </div>
-                
-                <div className="flex items-start gap-4 p-4 bg-green-50 rounded-xl">
-                  <div className="text-coral text-2xl" aria-hidden="true">🍦</div>
-                  <p className="text-green-800 font-text">
-                    Du vill njuta av glass, grill och ledighet – men utan att känna att du sviker dig själv
-                  </p>
-                </div>
-                
-                <div className="flex items-start gap-4 p-4 bg-green-50 rounded-xl">
-                  <div className="text-coral text-2xl" aria-hidden="true">💪</div>
-                  <p className="text-green-800 font-text">
-                    Du har tränat – men vet att rutinerna lätt försvinner när vardagen pausas
-                  </p>
-                </div>
-                
-                <div className="flex items-start gap-4 p-4 bg-green-50 rounded-xl">
-                  <div className="text-coral text-2xl" aria-hidden="true">😤</div>
-                  <p className="text-green-800 font-text">
-                    Du orkar inte fler "kom igång i augusti"-försök
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 6: Charlottes resa */}
-        <section className="py-16 px-6" role="region" aria-labelledby="charlotte-heading">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-gradient-to-r from-purple/10 to-coral/10 rounded-2xl p-8 border border-purple/20">
-              <h2 id="charlotte-heading" className="text-3xl font-bold text-green-800 mb-6 font-display flex items-center gap-3">
-                <span className="text-3xl" aria-hidden="true">🙋‍♀️</span>
+        {/* Section 6: Authority - Charlottes resa */}
+        <section className="py-16 px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-3xl p-10 border-2 border-purple-200">
+              <h2 className="text-3xl font-bold text-slate-800 mb-6 font-display flex items-center gap-3">
+                <span className="text-3xl">🙋‍♀️</span>
                 Charlottes resa – Bakgrunden till Sommarboosten
               </h2>
               
-              <div className="space-y-4 text-green-800 font-text leading-relaxed">
+              <div className="space-y-4 text-slate-700 font-text leading-relaxed text-lg">
                 <p>
                   Jag är inte någon perfekt hälsoguru. Jag är fyrbarnsmamma, mitt i livet, med full kalender och vardagskaos.
                 </p>
@@ -339,230 +345,186 @@ const HemligPage = () => {
                   Under många år körde jag all in på våren – och rasade ur allt på sommaren.
                   Det är där Sommarboosten föddes: ur behovet av något som faktiskt fungerar även under den årstid då vi annars brukar släppa taget.
                 </p>
+                
+                <div className="bg-white rounded-xl p-6 border border-purple-200">
+                  <p className="font-semibold text-slate-800">
+                    "Jag skapade Sommarboosten för att ge dig verktygen jag önskat att jag hade haft – så att du slipper samma berg-och-dalbana som jag genomlevde."
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 7: Vad är Sommarboosten? */}
-        <section className="py-16 px-6" role="region" aria-labelledby="sommarboosten-heading">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-green-200">
-              <h2 id="sommarboosten-heading" className="text-3xl font-bold text-green-800 mb-6 font-display text-center">
-                Din sommar – starkare, enklare och mer balanserad
-              </h2>
-              
-              <p className="text-lg text-green-700 text-center mb-8 font-text">
-                Sommarboosten är ett sommarprogram för dig som vill fortsätta ta hand om dig – utan att offra livets goda.
-              </p>
-              
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-bold text-green-800 font-display">💪 60 träningspass</h3>
-                    <p className="text-sm text-green-700">styrka, puls, yoga, stretch</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-bold text-green-800 font-display">🍓 50+ somriga recept</h3>
-                    <p className="text-sm text-green-700">näringsrikt men utan förbud</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-bold text-green-800 font-display">🏖️ Träning som fungerar var du än är</h3>
-                    <p className="text-sm text-green-700">hemma, i stugan, på stranden</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-bold text-green-800 font-display">📱 Allt samlat i vår app</h3>
-                    <p className="text-sm text-green-700">enkelt och överskådligt</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3 md:col-span-2">
-                  <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-bold text-green-800 font-display">🎯 Ett tydligt upplägg</h3>
-                    <p className="text-sm text-green-700">med struktur och pepp</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <p className="text-sm text-green-600 font-text">
-                  Vill du läsa mer om upplägget? <a href="https://sommarboosten.se" className="underline hover:no-underline" target="_blank" rel="noopener noreferrer">Läs mer på sommarboosten.se</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 8: Vad Sommarboosten inte är */}
-        <section className="py-16 px-6" role="region" aria-labelledby="not-sommarboosten-heading">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-gradient-to-r from-coral/10 to-orange/10 rounded-2xl p-8 border border-coral/20">
-              <h2 id="not-sommarboosten-heading" className="text-3xl font-bold text-green-800 mb-6 font-display flex items-center gap-3">
-                <span className="text-3xl" aria-hidden="true">❌</span>
+        {/* Section 7: What it's NOT - Objection Handling */}
+        <section className="py-16 px-6 bg-gradient-to-r from-slate-50 to-gray-50">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-3xl p-10 shadow-2xl">
+              <h2 className="text-4xl font-bold text-slate-800 mb-8 font-display flex items-center gap-3">
+                <span className="text-3xl">❌</span>
                 Det här är inte ett quick fix – men det fungerar
               </h2>
               
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="flex items-center gap-3">
-                  <XCircle className="w-5 h-5 text-coral" aria-hidden="true" />
-                  <span className="text-green-800 font-text">Det är inte en diet</span>
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
+                  <XCircle className="w-6 h-6 text-slate-500" />
+                  <span className="text-slate-700 font-text font-medium">Det är inte en diet</span>
                 </div>
                 
-                <div className="flex items-center gap-3">
-                  <XCircle className="w-5 h-5 text-coral" aria-hidden="true" />
-                  <span className="text-green-800 font-text">Du räknar inte kalorier</span>
+                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
+                  <XCircle className="w-6 h-6 text-slate-500" />
+                  <span className="text-slate-700 font-text font-medium">Du räknar inte kalorier</span>
                 </div>
                 
-                <div className="flex items-center gap-3">
-                  <XCircle className="w-5 h-5 text-coral" aria-hidden="true" />
-                  <span className="text-green-800 font-text">Du behöver inte gymkort</span>
+                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
+                  <XCircle className="w-6 h-6 text-slate-500" />
+                  <span className="text-slate-700 font-text font-medium">Du behöver inte gymkort</span>
                 </div>
                 
-                <div className="flex items-center gap-3">
-                  <XCircle className="w-5 h-5 text-coral" aria-hidden="true" />
-                  <span className="text-green-800 font-text">Du behöver inte vara "duktig"</span>
+                <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
+                  <XCircle className="w-6 h-6 text-slate-500" />
+                  <span className="text-slate-700 font-text font-medium">Du behöver inte vara "duktig"</span>
                 </div>
               </div>
               
-              <p className="text-center text-green-800 font-text mt-6 text-lg">
-                Du behöver bara vilja ta hand om dig själv
-              </p>
+              <div className="text-center bg-gradient-to-r from-indigo-100 to-purple-100 p-8 rounded-2xl">
+                <p className="text-slate-800 font-text text-xl font-semibold mb-4">
+                  Du behöver bara vilja ta hand om dig själv
+                </p>
+                <p className="text-slate-600 font-text">
+                  Och vara redo att investera i din hälsa och välmående denna sommar.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Section 9: Buy Button + Discount Code OR Expired Content */}
-        <section className="py-16 px-6" role="region" aria-labelledby="purchase-heading">
-          <div className="max-w-3xl mx-auto">
-            {showExpiredContent ? (
-              // Section 8: Expired content
-              <div className="bg-gray-100 rounded-2xl p-8 border border-gray-300 text-center">
-                <XCircle className="w-16 h-16 text-gray-500 mx-auto mb-6" aria-hidden="true" />
-                <h2 id="purchase-heading" className="text-3xl font-bold text-gray-700 mb-6 font-display">
-                  ❌ Erbjudandet har löpt ut
+        {/* Section 8: Final CTA with Pricing */}
+        <section className="py-20 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-100 via-orange-50 to-yellow-100"></div>
+
+          <div className="max-w-4xl mx-auto text-center relative z-20">
+            <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-amber-200">
+              <div className="mb-8">
+                <div className="text-4xl mb-4">🌟✨🌻</div>
+                <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-800 font-display">
+                  Redo att investera i din bästa sommar?
                 </h2>
-                <p className="text-gray-600 font-text mb-4">
-                  Den här sidan stängdes 13 juni kl. 23:59.
-                </p>
-                <p className="text-gray-600 font-text">
-                  Du är alltid välkommen att läsa mer på <a href="https://sommarboosten.se" className="text-green-600 underline hover:no-underline" target="_blank" rel="noopener noreferrer">sommarboosten.se</a>
-                </p>
               </div>
-            ) : (
-              // Section 7: Buy button and discount
-              <div className="bg-gradient-to-r from-green-100 to-green-200 rounded-2xl p-8 border border-green-300 text-center">
-                <h2 id="purchase-heading" className="text-3xl font-bold text-green-800 mb-6 font-display flex items-center justify-center gap-3">
-                  <span className="text-3xl" aria-hidden="true">🟢</span>
-                  Säkra din plats – med 50 % rabatt
-                </h2>
-                
-                <div className="bg-white rounded-xl p-6 mb-8 shadow-md">
-                  <p className="text-green-800 font-text leading-relaxed mb-4">
-                    Som tack för att du var med på föreläsningen får du en exklusiv rabatt.
-                  </p>
-                  
-                  <div className="bg-coral/10 border border-coral/20 rounded-lg p-4 mb-6">
-                    <p className="text-green-800 font-text">
-                      Använd koden <span className="font-bold text-coral text-lg">TACK50</span> i kassan så får du 50 % direktavdrag.
-                    </p>
-                    <p className="text-sm text-green-700 mt-2">
-                      <strong>⚠️ Viktigt:</strong> Erbjudandet gäller i max 48 timmar från att du klickar in – eller tills 15 juni kl. 23:59. Detta är din chans att göra en positiv förändring för din hälsa och välmående.
-                    </p>
+
+              {/* Pricing Section */}
+              <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 mb-8 border-2 border-amber-200">
+                <div className="flex items-center justify-center gap-6 mb-6">
+                  <div className="text-center">
+                    <div className="text-sm text-slate-500 mb-1">Ordinarie pris:</div>
+                    <div className="text-3xl font-bold text-slate-400 line-through">1 695 kr</div>
                   </div>
-                  
-                  <Button 
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display"
-                    onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
-                    aria-describedby="purchase-info"
-                  >
-                    Gå vidare till köp – använd koden TACK50
-                  </Button>
-                  
-                  <p id="purchase-info" className="text-sm text-green-600 font-text mt-4">
-                    Du kommer till vår betalningssida via Stripe. Rabattkoden skriver du in manuellt i kassan: <span className="font-bold">TACK50</span>
-                  </p>
+                  <div className="text-5xl text-orange-500">→</div>
+                  <div className="text-center">
+                    <div className="text-sm text-slate-500 mb-1">Ditt pris idag:</div>
+                    <div className="text-5xl font-black text-orange-600">847,50 kr</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <span className="bg-orange-500 text-white px-6 py-3 rounded-full font-bold text-xl">50% RABATT</span>
+                  <span className="bg-red-500 text-white px-6 py-3 rounded-full font-bold text-xl">48h KVAR</span>
                 </div>
               </div>
-            )}
+
+              <div className="grid md:grid-cols-3 gap-4 text-left mb-8">
+                {[
+                  "50% rabatt – endast för dig",
+                  "60 träningspass för hela sommaren",
+                  "50+ somriga recept utan förbud",
+                  "Träning som fungerar överallt",
+                  "Allt samlat i vår app",
+                  "Tydligt upplägg med struktur"
+                ].map((benefit, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <CheckCircle className="text-orange-500 flex-shrink-0 mt-1" size={20} />
+                    <span className="text-slate-700 font-medium">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+
+              {showExpiredContent ? (
+                <div className="bg-slate-100 rounded-2xl p-8 border border-slate-300 text-center">
+                  <XCircle className="w-16 h-16 text-slate-500 mx-auto mb-6" />
+                  <h3 className="text-2xl font-bold text-slate-700 mb-4">Erbjudandet har löpt ut</h3>
+                  <p className="text-slate-600 font-text">
+                    Du är alltid välkommen att läsa mer på <a href="https://sommarboosten.se" className="text-indigo-600 underline hover:no-underline" target="_blank" rel="noopener noreferrer">sommarboosten.se</a>
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <Button 
+                    className="bg-orange-500 hover:bg-orange-600 text-white font-bold text-xl px-12 py-6 w-full md:w-auto rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
+                  >
+                    Säkra din plats – 50% rabatt med TACK50
+                    <ArrowRight className="ml-3 w-6 h-6" />
+                  </Button>
+                  
+                  <p className="text-sm text-slate-600 mt-4 font-text">
+                    ⏰ <strong>Endast {timeLeft.days} dagar, {timeLeft.hours} timmar kvar</strong> på detta exklusiva erbjudande
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
-        {/* Section 10: Links and Newsletter Reminder */}
-        <section className="py-16 px-6 bg-gradient-to-br from-green-600 to-green-700 text-white" role="region" aria-labelledby="additional-info-heading">
+        {/* Section 9: Links and Final Reminder */}
+        <section className="py-16 px-6 bg-gradient-to-br from-slate-600 to-slate-700 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-              <h2 id="additional-info-heading" className="text-2xl font-bold mb-6 font-display">
+              <h2 className="text-2xl font-bold mb-6 font-display">
                 Vill du läsa mer först?
               </h2>
               
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div className="bg-white/5 rounded-xl p-6">
                   <h3 className="text-xl font-semibold mb-3 font-display">🏠 Utforska vår hemsida</h3>
-                  <p className="text-green-100 mb-4 font-text">
+                  <p className="text-slate-200 mb-4 font-text">
                     Läs mer om våra program, artiklar och Charlotte bakom Sommarboosten.
                   </p>
                   <a 
                     href="/" 
-                    className="inline-flex items-center text-white hover:text-green-200 transition-colors font-semibold underline hover:no-underline"
+                    className="inline-flex items-center text-white hover:text-amber-200 transition-colors font-semibold underline hover:no-underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     Besök startsidan
-                    <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+                    <ArrowRight className="ml-2 w-4 h-4" />
                   </a>
                 </div>
                 
                 <div className="bg-white/5 rounded-xl p-6">
                   <h3 className="text-xl font-semibold mb-3 font-display">🌟 Sund & Stark</h3>
-                  <p className="text-green-100 mb-4 font-text">
+                  <p className="text-slate-200 mb-4 font-text">
                     Upptäck fler program och resurser för en hållbar hälsa.
                   </p>
                   <a 
                     href="https://sundochstark.se" 
-                    className="inline-flex items-center text-white hover:text-green-200 transition-colors font-semibold underline hover:no-underline"
+                    className="inline-flex items-center text-white hover:text-amber-200 transition-colors font-semibold underline hover:no-underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     Besök sundochstark.se
-                    <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+                    <ArrowRight className="ml-2 w-4 h-4" />
                   </a>
                 </div>
               </div>
 
-              {/* Newsletter Reminder */}
-              <div className="bg-white/10 border border-white/20 rounded-xl p-6">
-                <h3 className="text-xl font-semibold mb-3 font-display">📧 Håll dig uppdaterad</h3>
-                <p className="text-green-100 mb-4 font-text">
-                  Prenumerera på vårt nyhetsbrev för tips, inspiration och information om kommande program. 
-                  <strong className="text-white"> Kom ihåg att detta specialerbjudande löper ut snart!</strong>
+              <div className="bg-amber-500/20 border border-amber-400/30 rounded-xl p-6">
+                <h3 className="text-xl font-semibold mb-3 font-display">⚡ Sista chansen</h3>
+                <p className="text-slate-100 mb-4 font-text">
+                  Kom ihåg att detta specialerbjudande med <strong>50% rabatt</strong> löper ut snart! 
+                  Ta steget nu medan du har chansen – din framtida jag kommer att tacka dig.
                 </p>
-                <p className="text-sm text-green-200 font-text">
-                  ⏰ Erbjudandet med 50% rabatt är endast tillgängligt i begränsad tid. Detta är din chans att investera i din hälsa och välmående inför sommaren.
-                </p>
-              </div>
-
-              {/* Final reminder */}
-              <div className="mt-8 p-6 bg-coral/20 border border-coral/30 rounded-xl">
-                <p className="text-white font-semibold text-lg mb-2">
-                  🎯 Varför vänta på en bättre tid?
-                </p>
-                <p className="text-green-100 font-text">
-                  Sommarboosten kommer att ge dig verktyg, motivation och gemenskap för en fantastisk sommar. 
-                  Ta steget nu medan erbjudandet gäller – din framtida jag kommer att tacka dig!
+                <p className="text-sm text-amber-200 font-text">
+                  🎯 Varför vänta på en bättre tid när den perfekta tiden är nu?
                 </p>
               </div>
             </div>
