@@ -15,7 +15,7 @@ const QuizPage = () => {
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6 font-display">
-              Vilken hälsoresan passar dig bäst?
+              Vi guidar dig till rätt hälsoresa – baserat på dig.
             </h1>
             <p className="text-lg text-green-700 max-w-2xl mx-auto font-text">
               Svara på 6 snabba frågor så matchar vi dig med din perfekta väg framåt.
