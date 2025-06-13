@@ -4,6 +4,7 @@ import { Clock, CheckCircle, XCircle, Play, ArrowRight, Timer, Gift, Heart, Spar
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { pushToDataLayer, handleEmailSubmit } from '@/utils/pushToDataLayer';
 
 const HemligPage = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -58,6 +59,9 @@ const HemligPage = () => {
     console.log('Submitting email:', email);
 
     try {
+      // Track email submission with GTM
+      await handleEmailSubmit(email);
+
       // Insert into sb_home_page_leads table
       const { data, error } = await supabase
         .from('sb_home_page_leads')
@@ -93,6 +97,11 @@ const HemligPage = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleBuyButtonClick = (source: string) => {
+    pushToDataLayer("buyButton", { source });
+    window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank');
   };
 
   return (
@@ -194,7 +203,7 @@ const HemligPage = () => {
                   
                   <Button 
                     className="relative overflow-hidden bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-base md:text-lg px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 w-full group"
-                    onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
+                    onClick={() => handleBuyButtonClick('hero_cta')}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
                     <span className="relative flex items-center justify-center gap-2">
@@ -441,7 +450,7 @@ const HemligPage = () => {
                     
                     <Button 
                       className="relative overflow-hidden bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 w-full group"
-                      onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
+                      onClick={() => handleBuyButtonClick('urgency_section')}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
                       <span className="relative flex items-center justify-center gap-2">
@@ -451,7 +460,6 @@ const HemligPage = () => {
                     </Button>
                   </div>
                 )}
-              </div>
             </div>
           </div>
         </section>
@@ -600,7 +608,7 @@ const HemligPage = () => {
                   
                   <Button 
                     className="relative overflow-hidden bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 w-full rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group"
-                    onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
+                    onClick={() => handleBuyButtonClick('final_cta')}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
                     <span className="relative flex items-center justify-center gap-3">
