@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { pushToDataLayer } from '@/utils/pushToDataLayer';
+import { logPageView } from '@/utils/facebookEvents';
 import { HemligTimer } from '@/components/hemlig/HemligTimer';
 import { HemligHero } from '@/components/hemlig/HemligHero';
 import { HemligVideo } from '@/components/hemlig/HemligVideo';
@@ -41,6 +41,9 @@ const HemligPage = () => {
 
     updateTimer();
     const timer = setInterval(updateTimer, 1000);
+    
+    // Log page view for Facebook CAPI
+    logPageView();
     
     return () => clearInterval(timer);
   }, []);

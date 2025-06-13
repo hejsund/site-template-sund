@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { handleEmailSubmit as trackEmailSubmit } from '@/utils/pushToDataLayer';
+import { logLead } from '@/utils/facebookEvents';
 
 export const HemligEmailSignup: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -20,6 +20,9 @@ export const HemligEmailSignup: React.FC = () => {
     try {
       // Track email submission with GTM
       await trackEmailSubmit(email);
+
+      // Log Facebook CAPI lead event
+      await logLead(email, 'hemlig_email_signup');
 
       // Insert into sb_home_page_leads table
       const { data, error } = await supabase

@@ -237,6 +237,33 @@ export type Database = {
         }
         Relationships: []
       }
+      sb_meta_event_log: {
+        Row: {
+          email_hash: string | null
+          event_data: Json | null
+          event_type: string
+          id: string
+          status: string | null
+          timestamp: string | null
+        }
+        Insert: {
+          email_hash?: string | null
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          status?: string | null
+          timestamp?: string | null
+        }
+        Update: {
+          email_hash?: string | null
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          status?: string | null
+          timestamp?: string | null
+        }
+        Relationships: []
+      }
       sb_quiz_leads: {
         Row: {
           age: string | null
