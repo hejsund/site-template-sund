@@ -24,6 +24,21 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     console.log('Starting Airtable sync process...');
 
+    // Parse request body to check if this is a scheduled sync
+    let requestBody: any = {};
+    try {
+      if (req.body) {
+        requestBody = await req.json();
+      }
+    } catch (e) {
+      console.log('No request body or invalid JSON, continuing with manual sync');
+    }
+
+    const isScheduledSync = requestBody?.scheduled === true;
+    const syncSource = requestBody?.source || (isScheduledSync ? 'scheduled' : 'manual');
+
+    console.log(`Sync type: ${isScheduledSync ? 'Scheduled' : 'Manual'} (source: ${syncSource})`);
+
     // Initialize Supabase client
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
@@ -38,12 +53,24 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error('Airtable API key not found');
     }
 
+    // For scheduled syncs, only get records from the last 10 minutes to avoid duplicates
+    // For manual syncs, get all records
+    const timeFilter = isScheduledSync 
+      ? new Date(Date.now() - 10 * 60 * 1000).toISOString() // Last 10 minutes
+      : null;
+
     console.log('Fetching data from sb_home_page_leads...');
-    // Fetch data from sb_home_page_leads
-    const { data: homePageLeads, error: homePageError } = await supabase
+    let homePageQuery = supabase
       .from('sb_home_page_leads')
-      .select('email, source')
+      .select('email, source, created_at')
       .order('created_at', { ascending: false });
+
+    if (timeFilter) {
+      homePageQuery = homePageQuery.gte('created_at', timeFilter);
+      console.log(`Filtering home page leads since: ${timeFilter}`);
+    }
+
+    const { data: homePageLeads, error: homePageError } = await homePageQuery;
 
     if (homePageError) {
       console.error('Error fetching home page leads:', homePageError);
@@ -51,11 +78,17 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     console.log('Fetching data from sb_quiz_leads...');
-    // Fetch data from sb_quiz_leads
-    const { data: quizLeads, error: quizError } = await supabase
+    let quizQuery = supabase
       .from('sb_quiz_leads')
-      .select('email, source')
+      .select('email, source, created_at')
       .order('created_at', { ascending: false });
+
+    if (timeFilter) {
+      quizQuery = quizQuery.gte('created_at', timeFilter);
+      console.log(`Filtering quiz leads since: ${timeFilter}`);
+    }
+
+    const { data: quizLeads, error: quizError } = await quizQuery;
 
     if (quizError) {
       console.error('Error fetching quiz leads:', quizError);
@@ -71,7 +104,32 @@ const handler = async (req: Request): Promise<Response> => {
       return acc;
     }, [] as typeof allLeads);
 
-    console.log(`Found ${uniqueLeads.length} unique leads to sync`);
+    console.log(`Found ${uniqueLeads.length} unique leads to sync (${allLeads.length} total, ${homePageLeads?.length || 0} home page, ${quizLeads?.length || 0} quiz)`);
+
+    if (uniqueLeads.length === 0) {
+      const result = {
+        success: true,
+        message: `No new leads to sync (${syncSource})`,
+        stats: {
+          totalLeads: 0,
+          syncedCount: 0,
+          errorCount: 0,
+          homePageLeadsCount: homePageLeads?.length || 0,
+          quizLeadsCount: quizLeads?.length || 0,
+          syncTimestamp: new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Stockholm' }),
+          syncType: syncSource
+        }
+      };
+
+      console.log('No leads to sync:', result);
+      return new Response(JSON.stringify(result), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          ...corsHeaders,
+        },
+      });
+    }
 
     // Prepare records for Airtable with detailed timestamp
     const currentTimestamp = new Date().toLocaleString('sv-SE', { 
@@ -88,7 +146,7 @@ const handler = async (req: Request): Promise<Response> => {
       fields: {
         Email: lead.email,
         Source: lead.source || 'unknown',
-        Date: `Manual Sync - ${currentTimestamp}`
+        Date: `${isScheduledSync ? 'Auto-Sync' : 'Manual Sync'} - ${currentTimestamp}`
       }
     }));
 
@@ -137,14 +195,15 @@ const handler = async (req: Request): Promise<Response> => {
 
     const result = {
       success: true,
-      message: `Sync completed: ${syncedCount} records synced successfully at ${currentTimestamp}`,
+      message: `Sync completed: ${syncedCount} records synced successfully at ${currentTimestamp} (${syncSource})`,
       stats: {
         totalLeads: uniqueLeads.length,
         syncedCount,
         errorCount,
         homePageLeadsCount: homePageLeads?.length || 0,
         quizLeadsCount: quizLeads?.length || 0,
-        syncTimestamp: currentTimestamp
+        syncTimestamp: currentTimestamp,
+        syncType: syncSource
       }
     };
 

@@ -1,7 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
-import { RealtimeChannel } from "https://esm.sh/@supabase/realtime-js@2.11.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -9,15 +8,17 @@ const corsHeaders = {
 };
 
 const SYNC_FUNCTION_URL = `https://ttidnpncifqtetnhcdhq.supabase.co/functions/v1/realtime-airtable-sync`;
-const HEALTH_CHECK_INTERVAL = 30000; // Check every 30 seconds
-const CONNECTION_TIMEOUT = 60000; // Consider stale after 1 minute
+const HEALTH_CHECK_INTERVAL = 60000; // Check every 60 seconds (less frequent)
+const MAX_RECONNECT_ATTEMPTS = 3;
+const RECONNECT_DELAY = 30000; // 30 seconds between reconnect attempts
 
-let channel: RealtimeChannel | null = null;
 let supabase: any = null;
 let isConnected = false;
 let lastHeartbeat = Date.now();
 let startTime = Date.now();
 let healthCheckTimer: number | null = null;
+let reconnectAttempts = 0;
+let isShuttingDown = false;
 
 const initializeSupabase = () => {
   if (!supabase) {
@@ -30,36 +31,29 @@ const initializeSupabase = () => {
 };
 
 const startListener = async () => {
-  console.log("=== Starting database notification listener ===");
+  if (isShuttingDown) {
+    console.log("Not starting listener - shutting down");
+    return;
+  }
+
+  console.log("=== Starting simplified database notification listener ===");
+  console.log(`Reconnect attempt: ${reconnectAttempts + 1}/${MAX_RECONNECT_ATTEMPTS}`);
   
   try {
     const client = initializeSupabase();
     
-    // Clean up existing channel if it exists
-    if (channel) {
-      console.log("Cleaning up existing channel...");
-      await channel.unsubscribe();
-      channel = null;
-    }
-
-    // Create a new Realtime channel
-    channel = client.channel('db-notifications-' + Date.now())
+    // Create a simpler channel setup
+    const channelName = 'db-leads-' + Date.now();
+    console.log(`Creating channel: ${channelName}`);
+    
+    const channel = client.channel(channelName)
       .on('postgres_changes', {
         event: 'INSERT',
         schema: 'public',
         table: 'sb_quiz_leads',
       }, async (payload) => {
         console.log('=== Quiz lead notification received ===');
-        console.log('Payload:', JSON.stringify(payload, null, 2));
-        
-        const notificationData = {
-          table: 'sb_quiz_leads',
-          operation: payload.eventType,
-          record_id: payload.new.id,
-          email: payload.new.email
-        };
-        
-        await triggerSync(notificationData);
+        await handleLeadNotification('sb_quiz_leads', payload);
       })
       .on('postgres_changes', {
         event: 'INSERT',
@@ -67,61 +61,78 @@ const startListener = async () => {
         table: 'sb_home_page_leads',
       }, async (payload) => {
         console.log('=== Home page lead notification received ===');
-        console.log('Payload:', JSON.stringify(payload, null, 2));
-        
-        const notificationData = {
-          table: 'sb_home_page_leads',
-          operation: payload.eventType,
-          record_id: payload.new.id,
-          email: payload.new.email
-        };
-        
-        await triggerSync(notificationData);
-      })
-      .subscribe((status) => {
-        console.log(`=== Subscription status changed: ${status} ===`);
+        await handleLeadNotification('sb_home_page_leads', payload);
+      });
+
+    // Subscribe with timeout
+    const subscribePromise = new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        reject(new Error('Subscription timeout'));
+      }, 10000); // 10 second timeout
+
+      channel.subscribe((status) => {
+        clearTimeout(timeout);
+        console.log(`=== Subscription status: ${status} ===`);
         
         if (status === 'SUBSCRIBED') {
           isConnected = true;
           lastHeartbeat = Date.now();
+          reconnectAttempts = 0; // Reset on successful connection
           console.log('Successfully connected to real-time notifications');
           
-          // Start health check timer if not already running
+          // Start health check timer
           if (!healthCheckTimer) {
             healthCheckTimer = setInterval(checkHealth, HEALTH_CHECK_INTERVAL);
           }
+          
+          resolve(status);
         } else if (status === 'CLOSED' || status === 'CHANNEL_ERROR') {
           isConnected = false;
-          console.log(`Connection ${status} - will attempt to reconnect`);
-          
-          // Attempt to reconnect after a delay
-          setTimeout(() => {
-            if (!isConnected) {
-              console.log('Attempting to reconnect...');
-              startListener();
-            }
-          }, 5000);
+          console.log(`Connection ${status}`);
+          reject(new Error(`Connection ${status}`));
         }
       });
+    });
 
-    console.log('Listener setup completed');
+    await subscribePromise;
+    console.log('Listener setup completed successfully');
     
   } catch (error) {
     console.error('Error starting listener:', error);
     isConnected = false;
+    reconnectAttempts++;
     
-    // Retry after a delay
-    setTimeout(() => {
-      console.log('Retrying listener setup...');
-      startListener();
-    }, 10000);
+    if (reconnectAttempts < MAX_RECONNECT_ATTEMPTS && !isShuttingDown) {
+      console.log(`Will retry in ${RECONNECT_DELAY}ms (attempt ${reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS})`);
+      setTimeout(() => {
+        if (!isShuttingDown) {
+          startListener();
+        }
+      }, RECONNECT_DELAY);
+    } else {
+      console.log('Max reconnect attempts reached or shutting down - giving up on real-time sync');
+      console.log('Cron job will handle syncing every 5 minutes as backup');
+    }
   }
 };
 
-const triggerSync = async (data: any) => {
+const handleLeadNotification = async (table: string, payload: any) => {
   try {
-    console.log(`=== Triggering sync for: ${data.email} ===`);
-    console.log('Sync data:', JSON.stringify(data, null, 2));
+    console.log(`Processing ${table} notification:`, JSON.stringify(payload, null, 2));
+    
+    const notificationData = {
+      table,
+      operation: payload.eventType,
+      record_id: payload.new?.id,
+      email: payload.new?.email
+    };
+    
+    if (!notificationData.record_id || !notificationData.email) {
+      console.error('Invalid notification data - missing record_id or email');
+      return;
+    }
+    
+    console.log(`Triggering real-time sync for: ${notificationData.email}`);
     
     const response = await fetch(SYNC_FUNCTION_URL, {
       method: 'POST',
@@ -129,51 +140,51 @@ const triggerSync = async (data: any) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${Deno.env.get('SUPABASE_ANON_KEY')}`
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(notificationData),
     });
 
-    const result = await response.json();
-    
     if (response.ok) {
-      console.log('=== Sync completed successfully ===');
-      console.log('Result:', JSON.stringify(result, null, 2));
+      const result = await response.json();
+      console.log('Real-time sync completed successfully:', result.message);
     } else {
-      console.error('=== Sync failed ===');
-      console.error('Status:', response.status);
-      console.error('Result:', JSON.stringify(result, null, 2));
+      const errorText = await response.text();
+      console.error('Real-time sync failed:', response.status, errorText);
     }
     
-    return result;
   } catch (error) {
-    console.error('=== Error triggering sync ===');
-    console.error('Error details:', error);
-    return { success: false, error: error.message };
+    console.error('Error handling lead notification:', error);
   }
 };
 
 const checkHealth = () => {
+  if (isShuttingDown) return;
+  
   const now = Date.now();
   const timeSinceLastHeartbeat = now - lastHeartbeat;
   const uptime = now - startTime;
   
-  console.log(`=== Health Check ===`);
-  console.log(`Connected: ${isConnected}`);
-  console.log(`Time since last heartbeat: ${timeSinceLastHeartbeat}ms`);
-  console.log(`Uptime: ${uptime}ms`);
+  console.log(`=== Health Check (uptime: ${Math.round(uptime/1000)}s) ===`);
+  console.log(`Connected: ${isConnected}, Last heartbeat: ${Math.round(timeSinceLastHeartbeat/1000)}s ago`);
   
-  // If we haven't received a heartbeat in a while and we think we're connected
-  if (isConnected && timeSinceLastHeartbeat > CONNECTION_TIMEOUT) {
-    console.log('=== Connection appears stale, reconnecting ===');
+  // More lenient timeout - only reconnect if really stale
+  if (isConnected && timeSinceLastHeartbeat > 120000) { // 2 minutes
+    console.log('=== Connection appears very stale, will attempt reconnect ===');
     isConnected = false;
-    
-    if (channel) {
-      channel.unsubscribe();
-      channel = null;
-    }
-    
+    reconnectAttempts = 0; // Reset attempts for health check reconnects
     startListener();
   }
 };
+
+// Handle shutdown gracefully
+addEventListener('beforeunload', () => {
+  console.log('=== Listener service shutting down ===');
+  isShuttingDown = true;
+  
+  if (healthCheckTimer) {
+    clearInterval(healthCheckTimer);
+    healthCheckTimer = null;
+  }
+});
 
 // Handler for the edge function
 const handler = async (req: Request): Promise<Response> => {
@@ -194,6 +205,7 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     if (action === 'start') {
       console.log('=== Manual start requested ===');
+      reconnectAttempts = 0; // Reset attempts on manual start
       await startListener();
       
       return new Response(JSON.stringify({
@@ -202,7 +214,8 @@ const handler = async (req: Request): Promise<Response> => {
         status: {
           isConnected,
           lastHeartbeat: new Date(lastHeartbeat).toISOString(),
-          uptime: Date.now() - startTime
+          uptime: Date.now() - startTime,
+          reconnectAttempts
         }
       }), {
         status: 200,
@@ -217,7 +230,9 @@ const handler = async (req: Request): Promise<Response> => {
         status: {
           isConnected,
           lastHeartbeat: new Date(lastHeartbeat).toISOString(),
-          uptime: Date.now() - startTime
+          uptime: Date.now() - startTime,
+          reconnectAttempts,
+          maxReconnectAttempts: MAX_RECONNECT_ATTEMPTS
         }
       }), {
         status: 200,
@@ -228,17 +243,19 @@ const handler = async (req: Request): Promise<Response> => {
       });
     } else {
       // Default: start the listener if it's not already running
-      if (!isConnected) {
+      if (!isConnected && reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
         await startListener();
       }
       
       return new Response(JSON.stringify({
         success: true,
-        message: 'Listener service is running',
+        message: isConnected ? 'Listener service is running' : 'Listener service failed to connect (cron backup active)',
         status: {
           isConnected,
           lastHeartbeat: new Date(lastHeartbeat).toISOString(),
-          uptime: Date.now() - startTime
+          uptime: Date.now() - startTime,
+          reconnectAttempts,
+          backupCronActive: true
         }
       }), {
         status: 200,
@@ -256,7 +273,8 @@ const handler = async (req: Request): Promise<Response> => {
       JSON.stringify({ 
         success: false, 
         error: error.message,
-        details: error.toString()
+        details: error.toString(),
+        backupCronActive: true
       }),
       {
         status: 500,
@@ -270,7 +288,7 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 // Start the listener when the function is first initialized
-console.log('=== Initializing listener service ===');
+console.log('=== Initializing listener service with cron backup ===');
 startListener();
 
 serve(handler);

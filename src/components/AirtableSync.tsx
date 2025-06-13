@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, RefreshCw, CheckCircle, AlertCircle, Clock, Zap, WifiOff, Wifi } from 'lucide-react';
+import { Loader2, RefreshCw, CheckCircle, AlertCircle, Clock, Zap, WifiOff, Wifi, Timer } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -17,6 +17,7 @@ interface SyncResult {
     errorCount: number;
     homePageLeadsCount: number;
     quizLeadsCount: number;
+    syncType?: string;
   };
 }
 
@@ -24,6 +25,9 @@ interface ListenerStatus {
   isConnected: boolean;
   lastHeartbeat: string;
   uptime: number;
+  reconnectAttempts?: number;
+  maxReconnectAttempts?: number;
+  backupCronActive?: boolean;
 }
 
 export const AirtableSync = () => {
@@ -37,10 +41,10 @@ export const AirtableSync = () => {
   useEffect(() => {
     checkListenerStatus();
     
-    // Check status every 30 seconds
+    // Check status every 60 seconds (less frequent)
     const statusInterval = setInterval(() => {
       checkListenerStatus();
-    }, 30000);
+    }, 60000);
     
     return () => clearInterval(statusInterval);
   }, []);
@@ -80,10 +84,10 @@ export const AirtableSync = () => {
 
       if (error) {
         console.error('Error starting listener:', error);
-        toast.error('Failed to start event-driven sync');
+        toast.error('Failed to start real-time sync');
       } else {
         console.log('Listener started:', data);
-        toast.success('Event-driven sync started successfully');
+        toast.success('Real-time sync started successfully');
         // Update status immediately
         setListenerStatus(data.status);
       }
@@ -170,7 +174,7 @@ export const AirtableSync = () => {
       return {
         icon: <WifiOff className="w-3 h-3 mr-1" />,
         text: "Disconnected",
-        className: "bg-red-100 text-red-800 border-red-300"
+        className: "bg-yellow-100 text-yellow-800 border-yellow-300"
       };
     }
   };
@@ -179,16 +183,50 @@ export const AirtableSync = () => {
 
   return (
     <div className="space-y-6">
-      {/* Event-Driven Sync Status */}
+      {/* Automatic Sync Status - Now Primary */}
+      <Card className="w-full max-w-2xl mx-auto border-blue-200 bg-blue-50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-blue-800">
+            <Timer className="w-5 h-5 text-blue-600" />
+            Automatic Sync (Every 5 Minutes)
+          </CardTitle>
+          <CardDescription className="text-blue-700">
+            Primary sync method: Runs automatically every 5 minutes to ensure all leads are synced to Airtable.
+            This is reliable and catches any leads that might be missed by real-time sync.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300">
+                <Clock className="w-3 h-3 mr-1" />
+                Active (5min intervals)
+              </Badge>
+              <div className="text-sm text-blue-600">
+                Next sync: Within 5 minutes of any new lead
+              </div>
+            </div>
+            
+            <div className="text-xs text-blue-600 space-y-1">
+              <p>• Automatically syncs new leads every 5 minutes</p>
+              <p>• Only syncs leads from the last 10 minutes to avoid duplicates</p>
+              <p>• Reliable and doesn't depend on real-time connections</p>
+              <p>• Acts as primary sync method and backup for real-time sync</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Real-time Sync Status - Now Secondary */}
       <Card className="w-full max-w-2xl mx-auto border-green-200 bg-green-50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-green-800">
             <Zap className="w-5 h-5 text-green-600" />
-            Event-Driven Sync (Real-time)
+            Real-time Sync (Instant)
           </CardTitle>
           <CardDescription className="text-green-700">
-            New leads are automatically synced to Airtable in real-time when they are added to the database.
-            Sync typically happens within 1-2 minutes.
+            Bonus feature: Attempts to sync leads instantly when they are added. 
+            If this fails, the 5-minute automatic sync will catch them.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -201,9 +239,15 @@ export const AirtableSync = () => {
                 </Badge>
                 
                 {listenerStatus && listenerStatus.isConnected && (
-                  <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-300">
+                  <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
                     <Clock className="w-3 h-3 mr-1" />
                     Uptime: {formatUptime(listenerStatus.uptime)}
+                  </Badge>
+                )}
+
+                {listenerStatus && !listenerStatus.isConnected && listenerStatus.reconnectAttempts !== undefined && (
+                  <Badge variant="outline" className="bg-yellow-100 text-yellow-800 border-yellow-300">
+                    Retries: {listenerStatus.reconnectAttempts}/{listenerStatus.maxReconnectAttempts || 3}
                   </Badge>
                 )}
 
@@ -241,17 +285,17 @@ export const AirtableSync = () => {
                     disabled={isCheckingStatus}
                   >
                     <Zap className="w-3 h-3 mr-1" />
-                    Start Sync
+                    Start Real-time
                   </Button>
                 )}
               </div>
             </div>
             
-            <div className="text-xs text-muted-foreground space-y-1">
-              <p>• New leads are synced automatically when added to either table</p>
-              <p>• Database triggers notify the sync service which sends data to Airtable</p>
-              <p>• Expected delay: 1-2 minutes for new records to appear in Airtable</p>
-              <p>• Use "Check Status" to verify the connection is active</p>
+            <div className="text-xs text-green-600 space-y-1">
+              <p>• Attempts instant sync when new leads are added</p>
+              <p>• Provides faster syncing when working (under 1 minute)</p>
+              <p>• If disconnected, 5-minute sync ensures no leads are missed</p>
+              <p>• Optional feature - automatic sync is the main method</p>
             </div>
           </div>
         </CardContent>
@@ -265,7 +309,7 @@ export const AirtableSync = () => {
             Manual Sync
           </CardTitle>
           <CardDescription>
-            Trigger an immediate sync of lead data from Supabase to Airtable. This will transfer email and source information from both home page and quiz leads.
+            Trigger an immediate sync of all lead data from Supabase to Airtable for testing or immediate needs.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -334,15 +378,20 @@ export const AirtableSync = () => {
                       Errors: {syncResult.stats.errorCount}
                     </Badge>
                   )}
+                  {syncResult.stats.syncType && (
+                    <Badge variant="outline">
+                      Type: {syncResult.stats.syncType}
+                    </Badge>
+                  )}
                 </div>
               )}
             </div>
           )}
 
           <div className="text-xs text-muted-foreground space-y-1">
-            <p>• Real-time event-driven sync for new leads (1-2 min delay)</p>
-            <p>• Manual sync for immediate on-demand control</p>
-            <p>• Records include detailed timestamps to track sync timing</p>
+            <p>• <strong>Primary:</strong> Automatic sync every 5 minutes (reliable)</p>
+            <p>• <strong>Bonus:</strong> Real-time sync when possible (instant)</p>
+            <p>• <strong>Manual:</strong> On-demand sync for testing and immediate needs</p>
           </div>
         </CardContent>
       </Card>
