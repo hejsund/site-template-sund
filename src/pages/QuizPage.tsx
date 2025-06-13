@@ -1,7 +1,6 @@
 
 import { useEffect } from 'react';
 import { Quiz } from '@/components/Quiz';
-import { FooterSection } from '@/components/FooterSection';
 
 const QuizPage = () => {
   useEffect(() => {
@@ -26,7 +25,6 @@ const QuizPage = () => {
           <Quiz />
         </div>
       </div>
-      <FooterSection />
     </div>
   );
 };
