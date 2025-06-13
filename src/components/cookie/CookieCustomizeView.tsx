@@ -71,6 +71,7 @@ export const CookieCustomizeView: React.FC<CookieCustomizeViewProps> = ({
               <Switch 
                 checked={marketingCookies} 
                 onCheckedChange={onMarketingChange}
+                className="opacity-50"
               />
             </div>
           </div>
@@ -85,6 +86,7 @@ export const CookieCustomizeView: React.FC<CookieCustomizeViewProps> = ({
               <Switch 
                 checked={analyticsCookies} 
                 onCheckedChange={onAnalyticsChange}
+                className="opacity-50"
               />
             </div>
           </div>

@@ -14,8 +14,8 @@ export const CookieConsentModal: React.FC<CookieConsentModalProps> = ({
   onClose 
 }) => {
   const [showCustomize, setShowCustomize] = useState(false);
-  const [marketingCookies, setMarketingCookies] = useState(false);
-  const [analyticsCookies, setAnalyticsCookies] = useState(false);
+  const [marketingCookies, setMarketingCookies] = useState(true);
+  const [analyticsCookies, setAnalyticsCookies] = useState(true);
   const { updateConsent } = useCookieConsent();
 
   const handleCustomize = () => {
