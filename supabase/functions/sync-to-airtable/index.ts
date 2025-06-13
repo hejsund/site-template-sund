@@ -11,6 +11,7 @@ interface AirtableRecord {
   fields: {
     Email: string;
     Source: string;
+    Date: string;
   };
 }
 
@@ -72,11 +73,13 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Found ${uniqueLeads.length} unique leads to sync`);
 
-    // Prepare records for Airtable
+    // Prepare records for Airtable with current date
+    const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
     const airtableRecords: AirtableRecord[] = uniqueLeads.map(lead => ({
       fields: {
         Email: lead.email,
-        Source: lead.source || 'unknown'
+        Source: lead.source || 'unknown',
+        Date: currentDate
       }
     }));
 
@@ -125,13 +128,14 @@ const handler = async (req: Request): Promise<Response> => {
 
     const result = {
       success: true,
-      message: `Sync completed: ${syncedCount} records synced successfully`,
+      message: `Sync completed: ${syncedCount} records synced successfully with date ${currentDate}`,
       stats: {
         totalLeads: uniqueLeads.length,
         syncedCount,
         errorCount,
         homePageLeadsCount: homePageLeads?.length || 0,
-        quizLeadsCount: quizLeads?.length || 0
+        quizLeadsCount: quizLeads?.length || 0,
+        syncDate: currentDate
       }
     };
 

@@ -11,6 +11,7 @@ interface AirtableRecord {
   fields: {
     Email: string;
     Source: string;
+    Date: string;
   };
 }
 
@@ -101,11 +102,13 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Preparing to sync lead: ${recordData.email} from ${source}`);
 
-    // Prepare record for Airtable
+    // Prepare record for Airtable with current date
+    const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
     const airtableRecord: AirtableRecord = {
       fields: {
         Email: recordData.email,
-        Source: source
+        Source: source,
+        Date: currentDate
       }
     };
 
@@ -147,7 +150,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const successResponse = {
       success: true,
-      message: `Successfully synced lead: ${recordData.email} to Airtable`,
+      message: `Successfully synced lead: ${recordData.email} to Airtable with date ${currentDate}`,
       record: result.records[0].id,
       airtableResponse: result
     };
