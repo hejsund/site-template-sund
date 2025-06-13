@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Clock, CheckCircle, XCircle, Play, ArrowRight, Timer, Gift } from 'lucide-react';
+import { Clock, CheckCircle, XCircle, Play, ArrowRight, Timer, Gift, Heart, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HemligPage = () => {
@@ -51,13 +50,114 @@ const HemligPage = () => {
       </div>
       
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-        {/* Section 1: Hero - Video + Countdown */}
+        {/* Section 1: Hero with Early Buy Button */}
         <section className="py-20 px-6" role="main">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-black text-green-800 mb-8 font-display leading-tight">
               Tack för att du var med – det här är bara för dig som sett föreläsningen eller visat intresse.
             </h1>
             
+            {/* Early Buy Button */}
+            {!showExpiredContent && (
+              <div className="bg-gradient-to-r from-coral/10 to-green-100 rounded-2xl p-8 mb-12 border border-coral/20">
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <Gift className="w-8 h-8 text-coral" aria-hidden="true" />
+                  <h2 className="text-2xl font-bold text-green-800 font-display">Exklusivt erbjudande – 50% rabatt</h2>
+                </div>
+                <p className="text-green-700 font-text mb-6 text-lg">
+                  Som tack för att du var med på föreläsningen får du denna begränsade rabatt
+                </p>
+                <Button 
+                  className="bg-coral hover:bg-coral/90 text-white font-bold text-xl px-10 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4"
+                  onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
+                >
+                  Säkra din plats nu – 50% rabatt
+                  <ArrowRight className="ml-2 w-6 h-6" aria-hidden="true" />
+                </Button>
+                <p className="text-sm text-green-600 font-semibold">
+                  Använd koden <span className="text-coral font-bold">TACK50</span> i kassan
+                </p>
+              </div>
+            )}
+
+            <div className="bg-coral/10 border border-coral/20 rounded-xl p-6" role="note">
+              <p className="text-green-800 font-text leading-relaxed">
+                Det här är en personlig länk. Sidan är inte publik och kommer att stängas när nedräkningen når noll. 
+                Erbjudandet gäller i 48 timmar från att du kom hit – eller tills 15 juni kl. 23:59, vad som än kommer först.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 2: Vad händer om du väntar? - MOVED TO TOP */}
+        <section className="py-20 px-6 bg-gradient-to-r from-orange-50 to-coral/10" role="region" aria-labelledby="waiting-heading">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-3xl p-10 shadow-2xl border-l-8 border-coral relative overflow-hidden">
+              {/* Background decoration */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-coral/10 rounded-full -mr-16 -mt-16 opacity-50"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-100 rounded-full -ml-12 -mb-12 opacity-50"></div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="bg-coral text-white rounded-full p-4">
+                    <Timer className="w-8 h-8" aria-hidden="true" />
+                  </div>
+                  <h2 id="waiting-heading" className="text-4xl font-black text-green-800 font-display">
+                    Vad händer om du väntar?
+                  </h2>
+                </div>
+                
+                <div className="space-y-6 mb-8">
+                  <div className="bg-orange-50 border-l-4 border-orange-300 p-6 rounded-r-xl">
+                    <p className="text-orange-800 font-text leading-relaxed text-lg">
+                      <strong>Sanningen?</strong> Det är lätt att tänka "jag gör det senare" – men just sommaren är den period då små val får störst effekt.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-coral/10 border-l-4 border-coral/50 p-6 rounded-r-xl">
+                    <p className="text-green-800 font-text leading-relaxed text-lg">
+                      <strong>Varför nu?</strong> Sommarboosten är byggt för att fungera även när rutinerna är lösa – just då det brukar vara som svårast.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-gradient-to-r from-coral to-green-600 text-white p-8 rounded-2xl text-center">
+                    <Gift className="w-12 h-12 mx-auto mb-4" aria-hidden="true" />
+                    <p className="font-bold text-xl mb-2">
+                      Det här är din chans att ta ett steg
+                    </p>
+                    <p className="text-lg opacity-90">
+                      Ett rimligt, hållbart och effektivt steg – innan sommaren drar igång.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Urgency CTA */}
+                {!showExpiredContent && (
+                  <div className="text-center bg-gradient-to-r from-green-100 to-green-200 p-6 rounded-2xl">
+                    <p className="text-green-800 font-semibold mb-4">
+                      ⏰ Erbjudandet löper ut om {timeLeft.days} dagar, {timeLeft.hours} timmar och {timeLeft.minutes} minuter
+                    </p>
+                    <Button 
+                      className="bg-coral hover:bg-coral/90 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display"
+                      onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
+                      aria-describedby="offer-expires"
+                    >
+                      Säkra din plats nu – 50% rabatt
+                      <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
+                    </Button>
+                    <p id="offer-expires" className="text-sm text-green-600 mt-2">
+                      Använd koden <strong>TACK50</strong> i kassan
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 3: Video + Countdown */}
+        <section className="py-16 px-6" role="region">
+          <div className="max-w-3xl mx-auto text-center">
             {/* Video Section */}
             <div className="mb-12">
               {showExpiredContent ? (
@@ -116,81 +216,71 @@ const HemligPage = () => {
                 </div>
               </div>
             )}
-
-            <div className="bg-coral/10 border border-coral/20 rounded-xl p-6" role="note">
-              <p className="text-green-800 font-text leading-relaxed">
-                Det här är en personlig länk. Sidan är inte publik och kommer att stängas när nedräkningen når noll. 
-                Erbjudandet gäller i 48 timmar från att du kom hit – eller tills 15 juni kl. 23:59, vad som än kommer först.
-              </p>
-            </div>
           </div>
         </section>
 
-        {/* Section 2: Vad händer om du väntar? - IMPROVED DESIGN */}
-        <section className="py-20 px-6 bg-gradient-to-r from-red-50 to-orange-50" role="region" aria-labelledby="waiting-heading">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-3xl p-10 shadow-2xl border-l-8 border-red-500 relative overflow-hidden">
-              {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-red-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-100 rounded-full -ml-12 -mb-12 opacity-50"></div>
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="bg-red-500 text-white rounded-full p-4">
-                    <Timer className="w-8 h-8" aria-hidden="true" />
-                  </div>
-                  <h2 id="waiting-heading" className="text-4xl font-black text-red-700 font-display">
-                    Vad händer om du väntar?
-                  </h2>
-                </div>
-                
-                <div className="space-y-6 mb-8">
-                  <div className="bg-red-50 border-l-4 border-red-300 p-6 rounded-r-xl">
-                    <p className="text-red-800 font-text leading-relaxed text-lg">
-                      <strong>Sanningen?</strong> Det är lätt att tänka "jag gör det senare" – men just sommaren är den period då små val får störst effekt.
-                    </p>
-                  </div>
-                  
-                  <div className="bg-orange-50 border-l-4 border-orange-300 p-6 rounded-r-xl">
-                    <p className="text-orange-800 font-text leading-relaxed text-lg">
-                      <strong>Varför nu?</strong> Sommarboosten är byggt för att fungera även när rutinerna är lösa – just då det brukar vara som svårast.
-                    </p>
-                  </div>
-                  
-                  <div className="bg-gradient-to-r from-red-600 to-orange-600 text-white p-8 rounded-2xl text-center">
-                    <Gift className="w-12 h-12 mx-auto mb-4" aria-hidden="true" />
-                    <p className="font-bold text-xl mb-2">
-                      Det här är din chans att ta ett steg
-                    </p>
-                    <p className="text-lg opacity-90">
-                      Ett rimligt, hållbart och effektivt steg – innan sommaren drar igång.
-                    </p>
-                  </div>
-                </div>
+        {/* Section 4: Sales CTA inspired by FinalCTA but with hemlig copy */}
+        <section className="py-20 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-50/95 via-coral/5 to-green-100/90 z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-green-100/40 via-transparent to-green-50/20 z-10"></div>
+          </div>
 
-                {/* Urgency CTA */}
-                <div className="text-center bg-gradient-to-r from-green-100 to-green-200 p-6 rounded-2xl">
-                  <p className="text-green-800 font-semibold mb-4">
-                    ⏰ Erbjudandet löper ut om {timeLeft.days} dagar, {timeLeft.hours} timmar och {timeLeft.minutes} minuter
-                  </p>
+          <div className="max-w-4xl mx-auto text-center relative z-20">
+            <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border border-white/50">
+              <div className="mb-8">
+                <div className="text-4xl mb-4">🌟✨🌻</div>
+                <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800 font-display">
+                  Redo för din bästa sommar någonsin?
+                </h2>
+                <p className="text-xl text-green-700 mb-8 font-text">
+                  Som tack för att du var med på föreläsningen får du:
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4 text-left mb-8">
+                {[
+                  "50% rabatt – endast för föreläsningsdeltagare",
+                  "60 träningspass som fungerar var du än är",
+                  "50+ somriga recept utan förbud",
+                  "Träning som blir gjord – även på semestern",
+                  "Allt samlat i vår app – enkelt och överskådligt",
+                  "Ett tydligt upplägg med struktur och pepp"
+                ].map((benefit, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <CheckCircle className="text-coral flex-shrink-0 mt-1" size={20} />
+                    <span className="text-green-800 font-medium">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+
+              {!showExpiredContent && (
+                <div className="space-y-4">
                   <Button 
-                    className="bg-coral hover:bg-coral/90 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display"
+                    className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 w-full md:w-auto"
                     onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
-                    aria-describedby="offer-expires"
                   >
-                    Säkra din plats nu – 50% rabatt
-                    <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
+                    Säkra din plats – 50% rabatt med TACK50
                   </Button>
-                  <p id="offer-expires" className="text-sm text-green-600 mt-2">
-                    Använd koden <strong>TACK50</strong> i kassan
+                  
+                  <p className="text-sm text-green-600 mt-4 opacity-80 font-text">
+                    ⏰ Erbjudandet löper ut om {timeLeft.days} dagar, {timeLeft.hours} timmar
                   </p>
                 </div>
+              )}
+
+              {/* Floating elements */}
+              <div className="absolute -top-4 -right-4 text-coral opacity-60">
+                <Heart className="animate-float" size={24} />
+              </div>
+              <div className="absolute -bottom-4 -left-4 text-green-600 opacity-60">
+                <Sparkles className="animate-float" size={20} style={{ animationDelay: '1s' }} />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 3: Känner du igen dig? */}
+        {/* Section 5: Känner du igen dig? */}
         <section className="py-16 px-6" role="region" aria-labelledby="recognition-heading">
           <div className="max-w-3xl mx-auto">
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-green-200">
@@ -231,7 +321,7 @@ const HemligPage = () => {
           </div>
         </section>
 
-        {/* Section 4: Charlottes resa */}
+        {/* Section 6: Charlottes resa */}
         <section className="py-16 px-6" role="region" aria-labelledby="charlotte-heading">
           <div className="max-w-3xl mx-auto">
             <div className="bg-gradient-to-r from-purple/10 to-coral/10 rounded-2xl p-8 border border-purple/20">
@@ -254,7 +344,7 @@ const HemligPage = () => {
           </div>
         </section>
 
-        {/* Section 5: Vad är Sommarboosten? */}
+        {/* Section 7: Vad är Sommarboosten? */}
         <section className="py-16 px-6" role="region" aria-labelledby="sommarboosten-heading">
           <div className="max-w-3xl mx-auto">
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-green-200">
@@ -317,7 +407,7 @@ const HemligPage = () => {
           </div>
         </section>
 
-        {/* Section 6: Vad Sommarboosten inte är */}
+        {/* Section 8: Vad Sommarboosten inte är */}
         <section className="py-16 px-6" role="region" aria-labelledby="not-sommarboosten-heading">
           <div className="max-w-3xl mx-auto">
             <div className="bg-gradient-to-r from-coral/10 to-orange/10 rounded-2xl p-8 border border-coral/20">
@@ -355,7 +445,7 @@ const HemligPage = () => {
           </div>
         </section>
 
-        {/* Section 7: Buy Button + Discount Code OR Section 8: Expired Content */}
+        {/* Section 9: Buy Button + Discount Code OR Expired Content */}
         <section className="py-16 px-6" role="region" aria-labelledby="purchase-heading">
           <div className="max-w-3xl mx-auto">
             {showExpiredContent ? (
@@ -411,7 +501,7 @@ const HemligPage = () => {
           </div>
         </section>
 
-        {/* NEW SECTION: Links and Newsletter Reminder */}
+        {/* Section 10: Links and Newsletter Reminder */}
         <section className="py-16 px-6 bg-gradient-to-br from-green-600 to-green-700 text-white" role="region" aria-labelledby="additional-info-heading">
           <div className="max-w-4xl mx-auto text-center">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
