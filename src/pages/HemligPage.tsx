@@ -22,8 +22,9 @@ const HemligPage = () => {
   });
 
   useEffect(() => {
-    // Set target date to June 15, 2025 at 23:59
-    const targetDate = new Date('2025-06-15T23:59:00').getTime();
+    // Set target date to June 15, 2025 at 23:59 Swedish time (CEST)
+    // Convert to UTC by subtracting 2 hours (CEST is UTC+2 in summer)
+    const targetDate = new Date('2025-06-15T21:59:00Z').getTime(); // 23:59 CEST = 21:59 UTC
     
     const updateTimer = () => {
       const now = new Date().getTime();
@@ -47,9 +48,9 @@ const HemligPage = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Check if current date is June 14 or later
+  // Check if current date is after June 15, 2025 23:59 Swedish time
   const currentDate = new Date();
-  const cutoffDate = new Date('2025-06-14T00:00:00');
+  const cutoffDate = new Date('2025-06-15T21:59:00Z'); // 23:59 CEST = 21:59 UTC
   const showExpiredContent = currentDate >= cutoffDate;
 
   // Calculate total remaining hours for dynamic display
