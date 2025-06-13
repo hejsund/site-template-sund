@@ -73,13 +73,22 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Found ${uniqueLeads.length} unique leads to sync`);
 
-    // Prepare records for Airtable with current date
-    const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    // Prepare records for Airtable with detailed timestamp
+    const currentTimestamp = new Date().toLocaleString('sv-SE', { 
+      timeZone: 'Europe/Stockholm',
+      year: 'numeric',
+      month: '2-digit', 
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }); // Format: YYYY-MM-DD HH:mm:ss (Swedish format)
+    
     const airtableRecords: AirtableRecord[] = uniqueLeads.map(lead => ({
       fields: {
         Email: lead.email,
         Source: lead.source || 'unknown',
-        Date: currentDate
+        Date: `Manual Sync - ${currentTimestamp}`
       }
     }));
 
@@ -128,14 +137,14 @@ const handler = async (req: Request): Promise<Response> => {
 
     const result = {
       success: true,
-      message: `Sync completed: ${syncedCount} records synced successfully with date ${currentDate}`,
+      message: `Sync completed: ${syncedCount} records synced successfully at ${currentTimestamp}`,
       stats: {
         totalLeads: uniqueLeads.length,
         syncedCount,
         errorCount,
         homePageLeadsCount: homePageLeads?.length || 0,
         quizLeadsCount: quizLeads?.length || 0,
-        syncDate: currentDate
+        syncTimestamp: currentTimestamp
       }
     };
 

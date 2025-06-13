@@ -102,13 +102,22 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Preparing to sync lead: ${recordData.email} from ${source}`);
 
-    // Prepare record for Airtable with current date
-    const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    // Prepare record for Airtable with detailed timestamp
+    const currentTimestamp = new Date().toLocaleString('sv-SE', { 
+      timeZone: 'Europe/Stockholm',
+      year: 'numeric',
+      month: '2-digit', 
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }); // Format: YYYY-MM-DD HH:mm:ss (Swedish format)
+    
     const airtableRecord: AirtableRecord = {
       fields: {
         Email: recordData.email,
         Source: source,
-        Date: currentDate
+        Date: `Real-time - ${currentTimestamp}`
       }
     };
 
@@ -150,7 +159,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const successResponse = {
       success: true,
-      message: `Successfully synced lead: ${recordData.email} to Airtable with date ${currentDate}`,
+      message: `Successfully synced lead: ${recordData.email} to Airtable at ${currentTimestamp}`,
       record: result.records[0].id,
       airtableResponse: result
     };
