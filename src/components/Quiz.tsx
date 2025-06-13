@@ -8,6 +8,8 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { pushToDataLayer, handleEmailSubmit } from '@/utils/pushToDataLayer';
+import { logLead } from '@/utils/facebookEvents';
+import { warmupListenerService } from '@/utils/listenerWarmup';
 
 interface Question {
   id: number;
@@ -100,6 +102,8 @@ export const Quiz = () => {
   // Track quiz begin when component mounts
   useEffect(() => {
     pushToDataLayer("quizBegin");
+    // Warm up listener service when component mounts
+    warmupListenerService();
   }, []);
 
   const handleAnswer = (questionId: number, optionId: string) => {
@@ -203,10 +207,17 @@ export const Quiz = () => {
     if (!userData.email || isSubmitting) return;
 
     setIsSubmitting(true);
+    console.log('Submitting email from quiz');
+    
+    // Warm up listener service before submitting lead
+    await warmupListenerService();
     
     try {
       // Track email submission with hashing
       await handleEmailSubmit(userData.email);
+
+      // Log Facebook CAPI lead event
+      await logLead(userData.email, 'quiz_email_signup', 'Quiz Email Signup');
       
       const recommendation = getRecommendation();
       
@@ -214,7 +225,7 @@ export const Quiz = () => {
       const { error } = await supabase
         .from('sb_quiz_leads')
         .insert({
-          email: userData.email,
+          email: userData.email.trim(),
           age: userData.age,
           gender: userData.gender,
           quiz_score: score,

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
@@ -9,6 +8,8 @@ import { Calendar, Clock, Users, Trophy, Smartphone } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { FooterSection } from '@/components/FooterSection';
+import { handleEmailSubmit as trackEmailSubmit } from '@/utils/pushToDataLayer';
+import { logLead } from '@/utils/facebookEvents';
 import { warmupListenerService } from '@/utils/listenerWarmup';
 
 const ProgramYearPage = () => {
@@ -38,11 +39,17 @@ const ProgramYearPage = () => {
     await warmupListenerService();
     
     try {
+      // Track email submission with GTM (email is hashed in this function)
+      await trackEmailSubmit(email);
+
+      // Log Facebook CAPI lead event
+      await logLead(email, 'program_year_email_signup', `Program Year ${programYear} Email Signup`);
+
       // Save email to Supabase
       const { data, error } = await supabase
         .from('sb_home_page_leads')
         .insert({
-          email: email,
+          email: email.trim(),
           source: `program_year_${programYear}`,
           user_agent: navigator.userAgent,
         })

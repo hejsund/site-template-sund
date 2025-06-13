@@ -1,16 +1,24 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Heart, Sparkles, Dumbbell, Sun, Waves } from 'lucide-react';
 import { toast } from 'sonner';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
 import { supabase } from '@/integrations/supabase/client';
+import { handleEmailSubmit as trackEmailSubmit } from '@/utils/pushToDataLayer';
+import { logLead } from '@/utils/facebookEvents';
+import { warmupListenerService } from '@/utils/listenerWarmup';
 
 export const Hero = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { currentPhase } = useTimePhase();
+
+  // Warm up listener service when component mounts
+  useEffect(() => {
+    warmupListenerService();
+  }, []);
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,15 +27,23 @@ export const Hero = () => {
     setIsSubmitting(true);
     console.log('Submitting email signup from hero section');
     
+    // Warm up listener service before submitting lead
+    await warmupListenerService();
+    
     try {
+      // Track email submission with GTM (email is hashed in this function)
+      await trackEmailSubmit(email);
+
+      // Log Facebook CAPI lead event
+      await logLead(email, 'hero_email_signup', 'Hero Section Email Signup');
+
       // Save email to Supabase
       const { data, error } = await supabase
         .from('sb_home_page_leads')
         .insert({
-          email: email,
-          ip_address: null, // Could be added with additional logic
+          email: email.trim(),
+          source: 'hero_section',
           user_agent: navigator.userAgent,
-          source: 'hero_section'
         })
         .select()
         .single();
