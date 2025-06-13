@@ -72,7 +72,7 @@ const HemligPage = () => {
               {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
             </div>
             <div className="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">
-              50% RABATT - Endast 48h kvar!
+              50% RABATT – Endast {timeLeft.hours}h kvar!
             </div>
           </div>
         </div>
@@ -87,13 +87,13 @@ const HemligPage = () => {
             </h1>
             
             <p className="text-xl md:text-2xl text-green-700 mb-8 font-text leading-relaxed max-w-3xl mx-auto">
-              Det här är bara för dig som sett föreläsningen eller visat intresse för Sommarboosten på vår lista
+              Det här är bara för dig som sett föreläsningen eller vill se den i efterhand. Föreläsningen hittar du längre ner på sidan. Som utlovat så får du 50% rabatt på vårt sommar-program och det är precis vad föreläsningen handlar om.
             </p>
 
             {/* Early Read More Link */}
             <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 mb-12">
               <p className="text-green-800 font-text leading-relaxed mb-4">
-                <strong>Vill du läsa mer först?</strong> Du hittar all information om Sommarboosten på vår hemsida.
+                <strong>Vill du läsa mer om Sommarboosten?</strong> Du hittar all information på vår hemsida.
               </p>
               <a 
                 href="https://sommarboosten.se" 
@@ -136,17 +136,18 @@ const HemligPage = () => {
                       <span className="bg-green-600 text-white px-4 py-2 rounded-full font-bold text-xl">50% RABATT</span>
                     </div>
                     <p className="text-green-800 font-semibold text-center">
-                      Gäller endast i <span className="font-black">48 timmar</span> från att du klickade dig hit
+                      Gäller endast i <span className="font-black">{timeLeft.hours} timmar</span> från att du klickade dig hit
                     </p>
                   </div>
                 </div>
                 
                 <Button 
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-4 md:py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4 w-full md:w-auto"
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold text-base md:text-xl px-4 md:px-12 py-4 md:py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4 w-full md:w-auto"
                   onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                 >
-                  <span className="text-center">
-                    Säkra din plats nu – 50% rabatt
+                  <span className="text-center leading-tight">
+                    Säkra din plats nu<br className="md:hidden" />
+                    <span className="hidden md:inline"> – </span>50% rabatt
                   </span>
                   <ArrowRight className="ml-3 w-6 h-6 flex-shrink-0" />
                 </Button>
@@ -159,7 +160,7 @@ const HemligPage = () => {
             <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6">
               <p className="text-green-800 font-text leading-relaxed">
                 <strong>Viktigt:</strong> Den här sidan är personlig och stängs när nedräkningen når noll. 
-                Erbjudandet gäller max 48 timmar från att du kom hit – eller tills 15 juni kl. 23:59.
+                Erbjudandet gäller max {timeLeft.hours} timmar från att du kom hit – eller tills 15 juni kl. 23:59.
               </p>
             </div>
           </div>
@@ -230,7 +231,7 @@ const HemligPage = () => {
                 <div className="flex items-start gap-4 p-6 bg-green-50 rounded-2xl border border-green-200">
                   <div className="text-3xl">😤</div>
                   <p className="text-green-800 font-text font-medium">
-                    Du orkar inte fler "kom igång i augusti"-försök
+                    Du vill inte fler "program" som inte fungerar
                   </p>
                 </div>
               </div>
@@ -384,11 +385,12 @@ const HemligPage = () => {
                       ⏰ Erbjudandet löper ut om <span className="whitespace-nowrap">{timeLeft.days} dagar</span>, <span className="whitespace-nowrap">{timeLeft.hours} timmar</span> och <span className="whitespace-nowrap">{timeLeft.minutes} minuter</span>
                     </p>
                     <Button 
-                      className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full md:w-auto"
+                      className="bg-green-600 hover:bg-green-700 text-white font-bold text-base md:text-lg px-4 md:px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full md:w-auto"
                       onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                     >
-                      <span className="text-center">
-                        Säkra din plats nu – 50% rabatt
+                      <span className="text-center leading-tight">
+                        Säkra din plats nu<br className="md:hidden" />
+                        <span className="hidden md:inline"> – </span>50% rabatt
                       </span>
                       <ArrowRight className="ml-2 w-5 h-5 flex-shrink-0" />
                     </Button>
@@ -507,7 +509,7 @@ const HemligPage = () => {
                 
                 <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
                   <span className="bg-green-600 text-white px-6 py-3 rounded-full font-bold text-xl">50% RABATT</span>
-                  <span className="bg-red-600 text-white px-6 py-3 rounded-full font-bold text-xl whitespace-nowrap">48h KVAR</span>
+                  <span className="bg-red-600 text-white px-6 py-3 rounded-full font-bold text-xl whitespace-nowrap">{timeLeft.hours}h KVAR</span>
                 </div>
               </div>
 
@@ -538,11 +540,12 @@ const HemligPage = () => {
               ) : (
                 <div className="space-y-4">
                   <Button 
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-4 md:py-6 w-full md:w-auto rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    className="bg-green-600 hover:bg-green-700 text-white font-bold text-base md:text-xl px-4 md:px-12 py-4 md:py-6 w-full md:w-auto rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                     onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                   >
-                    <span className="text-center">
-                      Säkra din plats – 50% rabatt med TACK50
+                    <span className="text-center leading-tight">
+                      Säkra din plats<br className="md:hidden" />
+                      <span className="hidden md:inline"> – </span>50% rabatt med TACK50
                     </span>
                     <ArrowRight className="ml-3 w-6 h-6 flex-shrink-0" />
                   </Button>
@@ -560,13 +563,13 @@ const HemligPage = () => {
         <section className="py-16 px-6 bg-gradient-to-br from-green-700 to-green-800 text-white">
           <div className="max-w-4xl mx-auto text-center">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-              <h2 className="text-2xl font-bold mb-6 font-display">
+              <h2 className="text-2xl font-bold mb-6 font-display text-white">
                 Vill du läsa mer först?
               </h2>
               
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div className="bg-white/5 rounded-xl p-6">
-                  <h3 className="text-xl font-semibold mb-3 font-display">🏠 Utforska vår hemsida</h3>
+                  <h3 className="text-xl font-semibold mb-3 font-display text-white">🏠 Utforska vår hemsida</h3>
                   <p className="text-green-200 mb-4 font-text">
                     Läs mer om våra program, artiklar och Charlotte bakom Sommarboosten.
                   </p>
@@ -582,7 +585,7 @@ const HemligPage = () => {
                 </div>
                 
                 <div className="bg-white/5 rounded-xl p-6">
-                  <h3 className="text-xl font-semibold mb-3 font-display">🌟 Sund & Stark</h3>
+                  <h3 className="text-xl font-semibold mb-3 font-display text-white">🌟 Sund & Stark</h3>
                   <p className="text-green-200 mb-4 font-text">
                     Upptäck fler program och resurser för en hållbar hälsa.
                   </p>
@@ -599,7 +602,7 @@ const HemligPage = () => {
               </div>
 
               <div className="bg-green-600/30 border border-green-500/30 rounded-xl p-6">
-                <h3 className="text-xl font-semibold mb-3 font-display">⚡ Sista chansen</h3>
+                <h3 className="text-xl font-semibold mb-3 font-display text-white">⚡ Sista chansen</h3>
                 <p className="text-green-100 mb-4 font-text">
                   Kom ihåg att detta specialerbjudande med <strong>50% rabatt</strong> löper ut snart! 
                   Ta steget nu medan du har chansen – din framtida jag kommer att tacka dig.
