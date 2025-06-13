@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { Clock, CheckCircle, XCircle, Play, ArrowRight, Timer, Gift, Heart, Sparkles, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { pushToDataLayer, handleEmailSubmit } from '@/utils/pushToDataLayer';
+import { pushToDataLayer, handleEmailSubmit as trackEmailSubmit } from '@/utils/pushToDataLayer';
 
 const HemligPage = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -60,7 +59,7 @@ const HemligPage = () => {
 
     try {
       // Track email submission with GTM
-      await handleEmailSubmit(email);
+      await trackEmailSubmit(email);
 
       // Insert into sb_home_page_leads table
       const { data, error } = await supabase
@@ -460,6 +459,7 @@ const HemligPage = () => {
                     </Button>
                   </div>
                 )}
+              </div>
             </div>
           </div>
         </section>
