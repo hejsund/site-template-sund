@@ -92,13 +92,12 @@ export const CookieCustomizeView: React.FC<CookieCustomizeViewProps> = ({
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 justify-end">
-        <Button
-          variant="outline"
+        <button
           onClick={onDenyAll}
-          className="order-2 sm:order-1"
+          className="order-2 sm:order-1 text-gray-600 font-medium px-6 py-3 rounded-xl hover:bg-gray-50 transition-colors"
         >
           Neka alla
-        </Button>
+        </button>
         <Button
           onClick={onSaveSettings}
           className="bg-green-600 hover:bg-green-700 order-1 sm:order-2"

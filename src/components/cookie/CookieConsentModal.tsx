@@ -22,10 +22,14 @@ export const CookieConsentModal: React.FC<CookieConsentModalProps> = ({
     setShowCustomize(true);
   };
 
-  const handleDenyAll = () => {
-    setMarketingCookies(false);
-    setAnalyticsCookies(false);
-    updateConsent('custom', { marketingCookies: false, analyticsCookies: false });
+  const handleSmartDenyAll = () => {
+    // If all toggles are off, deny all cookies
+    // If at least one toggle is on, approve all cookies
+    if (!marketingCookies && !analyticsCookies) {
+      updateConsent('denied');
+    } else {
+      updateConsent('granted');
+    }
     onClose();
   };
 
@@ -54,7 +58,7 @@ export const CookieConsentModal: React.FC<CookieConsentModalProps> = ({
           analyticsCookies={analyticsCookies}
           onMarketingChange={setMarketingCookies}
           onAnalyticsChange={setAnalyticsCookies}
-          onDenyAll={handleDenyAll}
+          onDenyAll={handleSmartDenyAll}
           onSaveSettings={handleSaveCustom}
           onBack={handleBackToMain}
         />
