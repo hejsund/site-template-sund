@@ -12,6 +12,15 @@ export const CookieMainView: React.FC<CookieMainViewProps> = ({
 }) => {
   return (
     <div className="text-center">
+      {/* Logo */}
+      <div className="mb-6 flex justify-center">
+        <img 
+          src="/lovable-uploads/67cd34f1-1979-42e6-b2da-6f8f6f298078.png" 
+          alt="Sommarboosten" 
+          className="h-12 w-auto sm:h-16 md:h-20"
+        />
+      </div>
+      
       <h2 className="text-2xl md:text-3xl font-bold text-green-800 mb-6 font-display">
         Vi använder cookies 🍪
       </h2>
