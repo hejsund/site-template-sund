@@ -37,19 +37,19 @@ const handler = async (req: Request): Promise<Response> => {
     // Validate required environment variables
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    const airtableApiKey = Deno.env.get('SB_AIRTABLE_LOVABLE');
+    const airtableApiKey = Deno.env.get('SB_AIRTABLE_LOVABLE_2');  // Updated to use new secret
     
     console.log('Environment check:');
     console.log('- SUPABASE_URL:', supabaseUrl ? 'Present' : 'Missing');
     console.log('- SUPABASE_SERVICE_ROLE_KEY:', supabaseServiceKey ? 'Present' : 'Missing');
-    console.log('- SB_AIRTABLE_LOVABLE:', airtableApiKey ? 'Present' : 'Missing');
+    console.log('- SB_AIRTABLE_LOVABLE_2:', airtableApiKey ? 'Present' : 'Missing');  // Updated to use new secret
 
     if (!supabaseUrl || !supabaseServiceKey) {
       throw new Error('Missing Supabase configuration');
     }
 
     if (!airtableApiKey) {
-      throw new Error('Airtable API key not found - please check SB_AIRTABLE_LOVABLE secret');
+      throw new Error('Airtable API key not found - please check SB_AIRTABLE_LOVABLE_2 secret');  // Updated error message
     }
 
     // Initialize Supabase client
