@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -44,11 +45,13 @@ const AppContent = () => {
 
   // Track page views on URL changes
   useEffect(() => {
-    // Track GTM page view (GA4 will be set up in GTM)
-    pushToDataLayer("page_view", {
-      page_location: window.location.href,
+    // Track page view with the exact format requested
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'page_view',
       page_path: window.location.pathname,
-      page_title: document.title,
+      page_url: window.location.href,
+      referrer: document.referrer
     });
 
     // Track Facebook CAPI page view for all pages
