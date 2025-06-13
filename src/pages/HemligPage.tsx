@@ -144,18 +144,24 @@ const HemligPage = () => {
                   </div>
                 </div>
                 
-                <Button 
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold text-base md:text-lg lg:text-xl px-4 md:px-6 lg:px-12 py-3 md:py-4 lg:py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4 w-full"
-                  onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
-                >
-                  <span className="text-center leading-tight">
-                    Säkra din plats nu – 50% rabatt
-                  </span>
-                  <ArrowRight className="ml-2 md:ml-3 w-5 md:w-6 h-5 md:h-6 flex-shrink-0" />
-                </Button>
-                <p className="text-sm text-green-700 font-semibold">
-                  Använd koden <span className="text-green-800 font-bold bg-green-100 px-2 py-1 rounded">TACK50</span> i kassan
-                </p>
+                {/* Mobile-optimized CTA */}
+                <div className="space-y-3">
+                  <div className="text-center">
+                    <p className="text-green-800 font-bold text-lg md:text-xl mb-2">🎯 Säkra din plats med 50% rabatt</p>
+                    <p className="text-green-700 text-sm md:text-base">Använd koden <span className="bg-green-100 px-2 py-1 rounded font-bold">TACK50</span> i kassan</p>
+                  </div>
+                  
+                  <Button 
+                    className="relative overflow-hidden bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-base md:text-lg px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 w-full group"
+                    onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                    <span className="relative flex items-center justify-center gap-2">
+                      Köp nu – 50% rabatt
+                      <ArrowRight className="w-5 md:w-6 h-5 md:h-6" />
+                    </span>
+                  </Button>
+                </div>
               </div>
             )}
 
@@ -382,22 +388,24 @@ const HemligPage = () => {
                 </div>
 
                 {!showExpiredContent && (
-                  <div className="text-center bg-gradient-to-r from-green-100 to-green-200 p-6 rounded-2xl">
-                    <p className="text-green-800 font-semibold mb-4 text-lg">
-                      ⏰ Erbjudandet löper ut om <span className="whitespace-nowrap">{timeLeft.days} dagar</span>, <span className="whitespace-nowrap">{timeLeft.hours} timmar</span> och <span className="whitespace-nowrap">{timeLeft.minutes} minuter</span>
-                    </p>
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <p className="text-green-800 font-bold text-xl mb-2">⏰ Ta steget nu – rabatt-koden TACK50 ger dig 50% rabatt</p>
+                      <p className="text-green-700 text-base mb-4">
+                        Erbjudandet löper ut om <span className="whitespace-nowrap font-bold">{timeLeft.days} dagar</span>, <span className="whitespace-nowrap font-bold">{timeLeft.hours} timmar</span> och <span className="whitespace-nowrap font-bold">{timeLeft.minutes} minuter</span>
+                      </p>
+                    </div>
+                    
                     <Button 
-                      className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-6 md:px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full"
+                      className="relative overflow-hidden bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 w-full group"
                       onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                     >
-                      <span className="text-center leading-tight">
-                        Säkra din plats nu – 50% rabatt
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                      <span className="relative flex items-center justify-center gap-2">
+                        Säkra din plats nu
+                        <ArrowRight className="w-5 md:w-6 h-5 md:h-6" />
                       </span>
-                      <ArrowRight className="ml-2 w-5 h-5 flex-shrink-0" />
                     </Button>
-                    <p className="text-sm text-green-700 mt-2">
-                      Använd koden <strong>TACK50</strong> i kassan
-                    </p>
                   </div>
                 )}
               </div>
@@ -540,19 +548,23 @@ const HemligPage = () => {
                 </div>
               ) : (
                 <div className="space-y-4">
+                  <div className="text-center mb-4">
+                    <p className="text-green-800 font-bold text-lg md:text-xl mb-2">💳 Använd rabatt-koden TACK50 för 50% rabatt</p>
+                    <p className="text-green-700 text-sm md:text-base">
+                      ⏰ <strong>Endast <span className="whitespace-nowrap">{timeLeft.days} dagar</span>, <span className="whitespace-nowrap">{timeLeft.hours} timmar</span> kvar</strong> på detta exklusiva erbjudande
+                    </p>
+                  </div>
+                  
                   <Button 
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 w-full rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    className="relative overflow-hidden bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 w-full rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group"
                     onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                   >
-                    <span className="text-center leading-tight">
-                      Säkra din plats – 50% rabatt med TACK50
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                    <span className="relative flex items-center justify-center gap-3">
+                      Säkra din plats – 50% rabatt
+                      <ArrowRight className="w-6 h-6 flex-shrink-0" />
                     </span>
-                    <ArrowRight className="ml-3 w-6 h-6 flex-shrink-0" />
                   </Button>
-                  
-                  <p className="text-sm text-green-700 mt-4 font-text">
-                    ⏰ <strong>Endast <span className="whitespace-nowrap">{timeLeft.days} dagar</span>, <span className="whitespace-nowrap">{timeLeft.hours} timmar</span> kvar</strong> på detta exklusiva erbjudande
-                  </p>
                 </div>
               )}
             </div>
