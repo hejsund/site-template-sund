@@ -111,47 +111,47 @@ const HemligPage = () => {
 
             {/* Immediate Pricing Offer */}
             {!showExpiredContent && (
-              <div className="bg-gradient-to-r from-green-100 to-green-200 rounded-3xl p-8 mb-12 border-2 border-green-300 shadow-xl">
+              <div className="bg-gradient-to-r from-green-100 to-green-200 rounded-3xl p-6 md:p-8 mb-12 border-2 border-green-300 shadow-xl">
                 <div className="flex items-center justify-center gap-3 mb-6">
-                  <Gift className="w-10 h-10 text-green-700" />
-                  <h2 className="text-3xl font-black text-green-800 font-display">Exklusivt erbjudande</h2>
+                  <Gift className="w-8 md:w-10 h-8 md:h-10 text-green-700" />
+                  <h2 className="text-2xl md:text-3xl font-black text-green-800 font-display">Exklusivt erbjudande</h2>
                 </div>
                 
-                <div className="bg-white rounded-2xl p-6 mb-6 shadow-lg">
-                  <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
+                <div className="bg-white rounded-2xl p-4 md:p-6 mb-6 shadow-lg">
+                  <div className="flex flex-row items-center justify-center gap-2 md:gap-4 mb-4">
                     <div className="text-center">
-                      <div className="text-sm text-slate-500 mb-1">Ordinarie pris:</div>
-                      <div className="text-2xl font-bold text-slate-400 line-through whitespace-nowrap">
+                      <div className="text-xs md:text-sm text-slate-500 mb-1">Ordinarie pris:</div>
+                      <div className="text-lg md:text-2xl font-bold text-slate-400 line-through whitespace-nowrap">
                         1 695 kr
                       </div>
                     </div>
-                    <div className="text-4xl text-green-600">→</div>
+                    <div className="text-2xl md:text-4xl text-green-600">→</div>
                     <div className="text-center">
-                      <div className="text-sm text-slate-500 mb-1">Ditt pris:</div>
-                      <div className="text-4xl font-black text-red-500 whitespace-nowrap">
+                      <div className="text-xs md:text-sm text-slate-500 mb-1">Ditt pris:</div>
+                      <div className="text-2xl md:text-4xl font-black text-red-500 whitespace-nowrap">
                         847,50 kr
                       </div>
                     </div>
                   </div>
                   
-                  <div className="bg-green-100 rounded-xl p-4 mb-4">
+                  <div className="bg-green-100 rounded-xl p-3 md:p-4 mb-4">
                     <div className="flex items-center justify-center gap-2 mb-2">
-                      <span className="bg-green-600 text-white px-4 py-2 rounded-full font-bold text-xl">50% RABATT</span>
+                      <span className="bg-green-600 text-white px-3 md:px-4 py-1 md:py-2 rounded-full font-bold text-base md:text-xl">50% RABATT</span>
                     </div>
-                    <p className="text-green-800 font-semibold text-center">
+                    <p className="text-green-800 font-semibold text-center text-sm md:text-base">
                       Gäller endast i <span className="font-black">{totalRemainingHours} timmar</span> från att du klickade dig hit
                     </p>
                   </div>
                 </div>
                 
                 <Button 
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4 w-full"
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold text-base md:text-lg lg:text-xl px-4 md:px-6 lg:px-12 py-3 md:py-4 lg:py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4 w-full"
                   onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                 >
                   <span className="text-center leading-tight">
                     Säkra din plats nu – 50% rabatt
                   </span>
-                  <ArrowRight className="ml-3 w-6 h-6 flex-shrink-0" />
+                  <ArrowRight className="ml-2 md:ml-3 w-5 md:w-6 h-5 md:h-6 flex-shrink-0" />
                 </Button>
                 <p className="text-sm text-green-700 font-semibold">
                   Använd koden <span className="text-green-800 font-bold bg-green-100 px-2 py-1 rounded">TACK50</span> i kassan
@@ -491,26 +491,26 @@ const HemligPage = () => {
               </div>
 
               {/* Pricing Section */}
-              <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl p-6 md:p-8 mb-8 border-2 border-green-300">
-                <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-6">
+              <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl p-4 md:p-6 lg:p-8 mb-8 border-2 border-green-300">
+                <div className="flex flex-row items-center justify-center gap-2 md:gap-4 lg:gap-6 mb-6">
                   <div className="text-center">
-                    <div className="text-sm text-slate-500 mb-1">Ordinarie pris:</div>
-                    <div className="text-2xl md:text-3xl font-bold text-slate-400 line-through whitespace-nowrap">
+                    <div className="text-xs md:text-sm text-slate-500 mb-1">Ordinarie pris:</div>
+                    <div className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-400 line-through whitespace-nowrap">
                       1 695 kr
                     </div>
                   </div>
-                  <div className="text-4xl md:text-5xl text-green-600">→</div>
+                  <div className="text-3xl md:text-4xl lg:text-5xl text-green-600">→</div>
                   <div className="text-center">
-                    <div className="text-sm text-slate-500 mb-1">Ditt pris idag:</div>
-                    <div className="text-3xl md:text-5xl font-black text-red-500 whitespace-nowrap">
+                    <div className="text-xs md:text-sm text-slate-500 mb-1">Ditt pris idag:</div>
+                    <div className="text-2xl md:text-3xl lg:text-5xl font-black text-red-500 whitespace-nowrap">
                       847,50 kr
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 mb-4">
-                  <span className="bg-green-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-lg md:text-xl">50% RABATT</span>
-                  <span className="bg-red-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-lg md:text-xl whitespace-nowrap">{totalRemainingHours}h KVAR</span>
+                <div className="flex flex-row items-center justify-center gap-2 md:gap-3 lg:gap-4 mb-4">
+                  <span className="bg-green-600 text-white px-3 md:px-4 lg:px-6 py-1 md:py-2 lg:py-3 rounded-full font-bold text-sm md:text-lg lg:text-xl">50% RABATT</span>
+                  <span className="bg-red-600 text-white px-3 md:px-4 lg:px-6 py-1 md:py-2 lg:py-3 rounded-full font-bold text-sm md:text-lg lg:text-xl whitespace-nowrap">{totalRemainingHours}h KVAR</span>
                 </div>
               </div>
 
