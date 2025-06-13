@@ -44,6 +44,9 @@ const HemligPage = () => {
   const cutoffDate = new Date('2025-06-14T00:00:00');
   const showExpiredContent = currentDate >= cutoffDate;
 
+  // Calculate total remaining hours for dynamic display
+  const totalRemainingHours = timeLeft.days * 24 + timeLeft.hours;
+
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Email submitted:', email);
@@ -72,7 +75,7 @@ const HemligPage = () => {
               {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
             </div>
             <div className="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">
-              50% RABATT – Endast {timeLeft.hours}h kvar!
+              50% RABATT – Endast {totalRemainingHours}h kvar!
             </div>
           </div>
         </div>
@@ -136,18 +139,17 @@ const HemligPage = () => {
                       <span className="bg-green-600 text-white px-4 py-2 rounded-full font-bold text-xl">50% RABATT</span>
                     </div>
                     <p className="text-green-800 font-semibold text-center">
-                      Gäller endast i <span className="font-black">{timeLeft.hours} timmar</span> från att du klickade dig hit
+                      Gäller endast i <span className="font-black">{totalRemainingHours} timmar</span> från att du klickade dig hit
                     </p>
                   </div>
                 </div>
                 
                 <Button 
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold text-base md:text-xl px-4 md:px-12 py-4 md:py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4 w-full md:w-auto"
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display mb-4 w-full"
                   onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                 >
                   <span className="text-center leading-tight">
-                    Säkra din plats nu<br className="md:hidden" />
-                    <span className="hidden md:inline"> – </span>50% rabatt
+                    Säkra din plats nu – 50% rabatt
                   </span>
                   <ArrowRight className="ml-3 w-6 h-6 flex-shrink-0" />
                 </Button>
@@ -160,7 +162,7 @@ const HemligPage = () => {
             <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6">
               <p className="text-green-800 font-text leading-relaxed">
                 <strong>Viktigt:</strong> Den här sidan är personlig och stängs när nedräkningen når noll. 
-                Erbjudandet gäller max {timeLeft.hours} timmar från att du kom hit – eller tills 15 juni kl. 23:59.
+                Erbjudandet gäller max {totalRemainingHours} timmar från att du kom hit – eller tills 15 juni kl. 23:59.
               </p>
             </div>
           </div>
@@ -313,7 +315,7 @@ const HemligPage = () => {
               </p>
               
               <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="email"
                     value={email}
@@ -324,7 +326,7 @@ const HemligPage = () => {
                   />
                   <Button 
                     type="submit"
-                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold"
+                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold w-full sm:w-auto"
                   >
                     Påminn mig
                   </Button>
@@ -385,12 +387,11 @@ const HemligPage = () => {
                       ⏰ Erbjudandet löper ut om <span className="whitespace-nowrap">{timeLeft.days} dagar</span>, <span className="whitespace-nowrap">{timeLeft.hours} timmar</span> och <span className="whitespace-nowrap">{timeLeft.minutes} minuter</span>
                     </p>
                     <Button 
-                      className="bg-green-600 hover:bg-green-700 text-white font-bold text-base md:text-lg px-4 md:px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full md:w-auto"
+                      className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-6 md:px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-display w-full"
                       onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                     >
                       <span className="text-center leading-tight">
-                        Säkra din plats nu<br className="md:hidden" />
-                        <span className="hidden md:inline"> – </span>50% rabatt
+                        Säkra din plats nu – 50% rabatt
                       </span>
                       <ArrowRight className="ml-2 w-5 h-5 flex-shrink-0" />
                     </Button>
@@ -481,39 +482,39 @@ const HemligPage = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-green-100 via-green-50 to-green-200"></div>
 
           <div className="max-w-4xl mx-auto text-center relative z-20">
-            <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-green-300">
+            <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 md:p-12 shadow-2xl border-2 border-green-300">
               <div className="mb-8">
                 <div className="text-4xl mb-4">🌟✨🌻</div>
-                <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800 font-display">
+                <h2 className="text-3xl md:text-5xl font-black mb-6 text-green-800 font-display">
                   Redo att investera i din bästa sommar?
                 </h2>
               </div>
 
               {/* Pricing Section */}
-              <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl p-8 mb-8 border-2 border-green-300">
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-6">
+              <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl p-6 md:p-8 mb-8 border-2 border-green-300">
+                <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-6">
                   <div className="text-center">
                     <div className="text-sm text-slate-500 mb-1">Ordinarie pris:</div>
-                    <div className="text-3xl font-bold text-slate-400 line-through whitespace-nowrap">
+                    <div className="text-2xl md:text-3xl font-bold text-slate-400 line-through whitespace-nowrap">
                       1 695 kr
                     </div>
                   </div>
-                  <div className="text-5xl text-green-600">→</div>
+                  <div className="text-4xl md:text-5xl text-green-600">→</div>
                   <div className="text-center">
                     <div className="text-sm text-slate-500 mb-1">Ditt pris idag:</div>
-                    <div className="text-4xl md:text-5xl font-black text-red-500 whitespace-nowrap">
+                    <div className="text-3xl md:text-5xl font-black text-red-500 whitespace-nowrap">
                       847,50 kr
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-4">
-                  <span className="bg-green-600 text-white px-6 py-3 rounded-full font-bold text-xl">50% RABATT</span>
-                  <span className="bg-red-600 text-white px-6 py-3 rounded-full font-bold text-xl whitespace-nowrap">{timeLeft.hours}h KVAR</span>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 mb-4">
+                  <span className="bg-green-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-lg md:text-xl">50% RABATT</span>
+                  <span className="bg-red-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-lg md:text-xl whitespace-nowrap">{totalRemainingHours}h KVAR</span>
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-4 text-left mb-8">
+              <div className="grid md:grid-cols-3 gap-3 md:gap-4 text-left mb-8">
                 {[
                   "50% rabatt – endast för dig",
                   "60 träningspass för hela sommaren",
@@ -524,15 +525,15 @@ const HemligPage = () => {
                 ].map((benefit, index) => (
                   <div key={index} className="flex items-start space-x-3">
                     <CheckCircle className="text-green-600 flex-shrink-0 mt-1" size={20} />
-                    <span className="text-green-800 font-medium">{benefit}</span>
+                    <span className="text-green-800 font-medium text-sm md:text-base">{benefit}</span>
                   </div>
                 ))}
               </div>
 
               {showExpiredContent ? (
-                <div className="bg-slate-100 rounded-2xl p-8 border border-slate-300 text-center">
-                  <XCircle className="w-16 h-16 text-slate-500 mx-auto mb-6" />
-                  <h3 className="text-2xl font-bold text-slate-700 mb-4">Erbjudandet har löpt ut</h3>
+                <div className="bg-slate-100 rounded-2xl p-6 md:p-8 border border-slate-300 text-center">
+                  <XCircle className="w-12 md:w-16 h-12 md:h-16 text-slate-500 mx-auto mb-4 md:mb-6" />
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-700 mb-4">Erbjudandet har löpt ut</h3>
                   <p className="text-slate-600 font-text">
                     Du är alltid välkommen att läsa mer på <a href="https://sommarboosten.se" className="text-green-600 underline hover:no-underline" target="_blank" rel="noopener noreferrer">sommarboosten.se</a>
                   </p>
@@ -540,12 +541,11 @@ const HemligPage = () => {
               ) : (
                 <div className="space-y-4">
                   <Button 
-                    className="bg-green-600 hover:bg-green-700 text-white font-bold text-base md:text-xl px-4 md:px-12 py-4 md:py-6 w-full md:w-auto rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg md:text-xl px-6 md:px-12 py-4 md:py-6 w-full rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                     onClick={() => window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank')}
                   >
                     <span className="text-center leading-tight">
-                      Säkra din plats<br className="md:hidden" />
-                      <span className="hidden md:inline"> – </span>50% rabatt med TACK50
+                      Säkra din plats – 50% rabatt med TACK50
                     </span>
                     <ArrowRight className="ml-3 w-6 h-6 flex-shrink-0" />
                   </Button>
