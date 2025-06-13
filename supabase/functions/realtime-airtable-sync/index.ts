@@ -21,30 +21,47 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    console.log('Starting realtime Airtable sync process...');
+    console.log('=== Realtime Airtable Sync Function Started ===');
+    console.log('Request method:', req.method);
+    console.log('Request headers:', Object.fromEntries(req.headers.entries()));
 
     // Parse the request body to get the notification data
-    const { table, operation, record_id, email } = await req.json();
+    const requestBody = await req.json();
+    console.log('Request body received:', requestBody);
     
-    console.log(`Received notification: ${operation} on ${table} for record ${record_id} with email ${email}`);
+    const { table, operation, record_id, email } = requestBody;
+    
+    console.log(`Processing notification: ${operation} on ${table} for record ${record_id} with email ${email}`);
 
-    // Initialize Supabase client
-    const supabase = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
-
+    // Validate required environment variables
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     const airtableApiKey = Deno.env.get('SB_AIRTABLE_LOVABLE');
-    const baseId = 'appV23udxU8dqgM5V';
-    const tableId = 'tblO1QW2WKJZAwmBX';
+    
+    console.log('Environment check:');
+    console.log('- SUPABASE_URL:', supabaseUrl ? 'Present' : 'Missing');
+    console.log('- SUPABASE_SERVICE_ROLE_KEY:', supabaseServiceKey ? 'Present' : 'Missing');
+    console.log('- SB_AIRTABLE_LOVABLE:', airtableApiKey ? 'Present' : 'Missing');
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error('Missing Supabase configuration');
+    }
 
     if (!airtableApiKey) {
-      throw new Error('Airtable API key not found');
+      throw new Error('Airtable API key not found - please check SB_AIRTABLE_LOVABLE secret');
     }
+
+    // Initialize Supabase client
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    const baseId = 'appV23udxU8dqgM5V';
+    const tableId = 'tblO1QW2WKJZAwmBX';
 
     // Fetch the specific record that was just inserted
     let recordData;
     let source = 'unknown';
+
+    console.log(`Fetching record data for ${table} with ID ${record_id}`);
 
     if (table === 'sb_quiz_leads') {
       const { data, error } = await supabase
@@ -55,10 +72,11 @@ const handler = async (req: Request): Promise<Response> => {
       
       if (error) {
         console.error('Error fetching quiz lead:', error);
-        throw error;
+        throw new Error(`Failed to fetch quiz lead: ${error.message}`);
       }
       recordData = data;
       source = data?.source || 'quiz';
+      console.log('Quiz lead data fetched:', recordData);
     } else if (table === 'sb_home_page_leads') {
       const { data, error } = await supabase
         .from('sb_home_page_leads')
@@ -68,19 +86,20 @@ const handler = async (req: Request): Promise<Response> => {
       
       if (error) {
         console.error('Error fetching home page lead:', error);
-        throw error;
+        throw new Error(`Failed to fetch home page lead: ${error.message}`);
       }
       recordData = data;
       source = data?.source || 'home_page';
+      console.log('Home page lead data fetched:', recordData);
     } else {
       throw new Error(`Unknown table: ${table}`);
     }
 
     if (!recordData) {
-      throw new Error('Record not found');
+      throw new Error('Record not found in database');
     }
 
-    console.log(`Syncing lead: ${recordData.email} from ${source}`);
+    console.log(`Preparing to sync lead: ${recordData.email} from ${source}`);
 
     // Prepare record for Airtable
     const airtableRecord: AirtableRecord = {
@@ -90,33 +109,53 @@ const handler = async (req: Request): Promise<Response> => {
       }
     };
 
+    console.log('Airtable record payload:', JSON.stringify(airtableRecord, null, 2));
+
     // Sync to Airtable
-    const response = await fetch(`https://api.airtable.com/v0/${baseId}/${tableId}`, {
+    const airtableUrl = `https://api.airtable.com/v0/${baseId}/${tableId}`;
+    console.log('Sending request to Airtable URL:', airtableUrl);
+
+    const airtableRequestBody = {
+      records: [airtableRecord],
+      typecast: true
+    };
+
+    console.log('Airtable request body:', JSON.stringify(airtableRequestBody, null, 2));
+
+    const response = await fetch(airtableUrl, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${airtableApiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        records: [airtableRecord],
-        typecast: true
-      }),
+      body: JSON.stringify(airtableRequestBody),
     });
 
+    console.log('Airtable response status:', response.status);
+    console.log('Airtable response headers:', Object.fromEntries(response.headers.entries()));
+
+    const responseText = await response.text();
+    console.log('Airtable response body:', responseText);
+
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`Airtable API error:`, errorText);
-      throw new Error(`Airtable API error: ${errorText}`);
+      console.error(`Airtable API error (${response.status}):`, responseText);
+      throw new Error(`Airtable API error (${response.status}): ${responseText}`);
     }
 
-    const result = await response.json();
-    console.log(`Successfully synced record to Airtable: ${recordData.email}`);
+    const result = JSON.parse(responseText);
+    console.log(`Successfully synced record to Airtable:`, result);
 
-    return new Response(JSON.stringify({
+    const successResponse = {
       success: true,
       message: `Successfully synced lead: ${recordData.email} to Airtable`,
-      record: result.records[0].id
-    }), {
+      record: result.records[0].id,
+      airtableResponse: result
+    };
+
+    console.log('=== Sync completed successfully ===');
+    console.log('Final response:', successResponse);
+
+    return new Response(JSON.stringify(successResponse), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
@@ -125,13 +164,21 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
   } catch (error: any) {
-    console.error('Error in realtime-airtable-sync function:', error);
+    console.error('=== Error in realtime-airtable-sync function ===');
+    console.error('Error details:', error);
+    console.error('Error stack:', error.stack);
+    
+    const errorResponse = { 
+      success: false, 
+      error: error.message,
+      details: error.toString(),
+      timestamp: new Date().toISOString()
+    };
+
+    console.log('Error response:', errorResponse);
+
     return new Response(
-      JSON.stringify({ 
-        success: false, 
-        error: error.message,
-        details: error.toString()
-      }),
+      JSON.stringify(errorResponse),
       {
         status: 500,
         headers: { 

@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, TestTube, CheckCircle, AlertTriangle, Mail } from 'lucide-react';
+import { Loader2, TestTube, CheckCircle, AlertTriangle, Mail, Bug, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -22,10 +22,75 @@ export const AirtableSyncTest = () => {
   const [testEmail, setTestEmail] = useState('');
   const [isTestingQuiz, setIsTestingQuiz] = useState(false);
   const [isTestingHomePage, setIsTestingHomePage] = useState(false);
+  const [isTestingSync, setIsTestingSync] = useState(false);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
 
   const addTestResult = (result: TestResult) => {
     setTestResults(prev => [result, ...prev].slice(0, 10)); // Keep last 10 results
+  };
+
+  const testDirectSync = async () => {
+    if (!testEmail) {
+      toast.error('Please enter a test email address');
+      return;
+    }
+
+    setIsTestingSync(true);
+    console.log('Testing direct sync for email:', testEmail);
+
+    try {
+      // Call the realtime sync function directly with test data
+      const { data, error } = await supabase.functions.invoke('realtime-airtable-sync', {
+        body: {
+          table: 'sb_quiz_leads',
+          operation: 'INSERT',
+          record_id: 'test-direct-sync',
+          email: testEmail
+        }
+      });
+
+      if (error) {
+        console.error('Error in direct sync test:', error);
+        addTestResult({
+          success: false,
+          message: `Direct sync test failed: ${error.message}`,
+          timestamp: new Date().toISOString(),
+          source: 'direct_sync',
+          email: testEmail
+        });
+        toast.error('Direct sync test failed');
+        return;
+      }
+
+      console.log('Direct sync test response:', data);
+      
+      addTestResult({
+        success: data?.success || false,
+        message: data?.message || 'Direct sync test completed',
+        timestamp: new Date().toISOString(),
+        source: 'direct_sync',
+        email: testEmail
+      });
+
+      if (data?.success) {
+        toast.success('Direct sync test successful! Check Airtable.');
+      } else {
+        toast.error(`Direct sync failed: ${data?.error || 'Unknown error'}`);
+      }
+      
+    } catch (error: any) {
+      console.error('Error in direct sync test:', error);
+      addTestResult({
+        success: false,
+        message: `Direct sync test error: ${error.message}`,
+        timestamp: new Date().toISOString(),
+        source: 'direct_sync',
+        email: testEmail
+      });
+      toast.error('Direct sync test failed');
+    } finally {
+      setIsTestingSync(false);
+    }
   };
 
   const testQuizLeadSync = async () => {
@@ -47,8 +112,10 @@ export const AirtableSyncTest = () => {
         quiz_answers: { 1: 'a', 2: 'a', 3: 'a' },
         recommendation_type: 'perfect_match',
         source: 'quiz_test',
-        user_agent: 'Airtable Sync Test'
+        user_agent: 'Airtable Sync Test - ' + new Date().toISOString()
       };
+
+      console.log('Inserting quiz test data:', testData);
 
       const { data, error } = await supabase
         .from('sb_quiz_leads')
@@ -69,18 +136,18 @@ export const AirtableSyncTest = () => {
         return;
       }
 
-      console.log('Quiz test lead inserted:', data);
+      console.log('Quiz test lead inserted successfully:', data);
       
       addTestResult({
         success: true,
-        message: 'Quiz lead inserted successfully - should trigger Airtable sync',
+        message: 'Quiz lead inserted successfully - Real-time sync should trigger automatically',
         recordId: data.id,
         timestamp: new Date().toISOString(),
         source: 'quiz',
         email: testEmail
       });
 
-      toast.success('Quiz test lead created! Check Airtable in a few moments.');
+      toast.success('Quiz test lead created! Real-time sync should trigger. Check Airtable in 30-60 seconds.');
       
     } catch (error: any) {
       console.error('Error in quiz lead test:', error);
@@ -111,8 +178,10 @@ export const AirtableSyncTest = () => {
       const testData = {
         email: testEmail,
         source: 'home_page_test',
-        user_agent: 'Airtable Sync Test'
+        user_agent: 'Airtable Sync Test - ' + new Date().toISOString()
       };
+
+      console.log('Inserting home page test data:', testData);
 
       const { data, error } = await supabase
         .from('sb_home_page_leads')
@@ -133,18 +202,18 @@ export const AirtableSyncTest = () => {
         return;
       }
 
-      console.log('Home page test lead inserted:', data);
+      console.log('Home page test lead inserted successfully:', data);
       
       addTestResult({
         success: true,
-        message: 'Home page lead inserted successfully - should trigger Airtable sync',
+        message: 'Home page lead inserted successfully - Real-time sync should trigger automatically',
         recordId: data.id,
         timestamp: new Date().toISOString(),
         source: 'home_page',
         email: testEmail
       });
 
-      toast.success('Home page test lead created! Check Airtable in a few moments.');
+      toast.success('Home page test lead created! Real-time sync should trigger. Check Airtable in 30-60 seconds.');
       
     } catch (error: any) {
       console.error('Error in home page lead test:', error);
@@ -192,11 +261,11 @@ export const AirtableSyncTest = () => {
             />
           </div>
 
-          <div className="flex gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <Button
               onClick={testQuizLeadSync}
               disabled={isTestingQuiz || !testEmail}
-              className="flex-1"
+              className="w-full"
               variant="outline"
             >
               {isTestingQuiz ? (
@@ -207,7 +276,7 @@ export const AirtableSyncTest = () => {
               ) : (
                 <>
                   <Mail className="w-4 h-4 mr-2" />
-                  Test Quiz Lead Sync
+                  Test Quiz Lead
                 </>
               )}
             </Button>
@@ -215,7 +284,7 @@ export const AirtableSyncTest = () => {
             <Button
               onClick={testHomePageLeadSync}
               disabled={isTestingHomePage || !testEmail}
-              className="flex-1"
+              className="w-full"
               variant="outline"
             >
               {isTestingHomePage ? (
@@ -226,15 +295,35 @@ export const AirtableSyncTest = () => {
               ) : (
                 <>
                   <Mail className="w-4 h-4 mr-2" />
-                  Test Home Page Lead Sync
+                  Test Home Page Lead
+                </>
+              )}
+            </Button>
+
+            <Button
+              onClick={testDirectSync}
+              disabled={isTestingSync || !testEmail}
+              className="w-full"
+              variant="default"
+            >
+              {isTestingSync ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Testing Direct...
+                </>
+              ) : (
+                <>
+                  <Bug className="w-4 h-4 mr-2" />
+                  Test Direct Sync
                 </>
               )}
             </Button>
           </div>
 
           <div className="text-xs text-blue-600 space-y-1">
-            <p>• Each test creates a real database entry</p>
-            <p>• Real-time sync should trigger automatically</p>
+            <p>• <strong>Quiz/Home Page Lead:</strong> Creates real database entry and triggers real-time sync</p>
+            <p>• <strong>Direct Sync:</strong> Tests the sync function directly without database insertion</p>
+            <p>• Real-time sync should trigger automatically within seconds</p>
             <p>• Check your Airtable base for the synced records</p>
             <p>• Use a unique email to easily identify test records</p>
           </div>
@@ -250,6 +339,7 @@ export const AirtableSyncTest = () => {
                 <Badge variant="outline">{testResults.length}</Badge>
               </CardTitle>
               <Button onClick={clearResults} variant="ghost" size="sm">
+                <RefreshCw className="w-3 h-3 mr-1" />
                 Clear Results
               </Button>
             </div>
@@ -305,14 +395,14 @@ export const AirtableSyncTest = () => {
 
       <Card className="w-full max-w-2xl mx-auto border-yellow-200 bg-yellow-50">
         <CardHeader>
-          <CardTitle className="text-yellow-800">Testing Instructions</CardTitle>
+          <CardTitle className="text-yellow-800">Debugging Tips</CardTitle>
         </CardHeader>
         <CardContent className="text-yellow-700 space-y-2 text-sm">
-          <p><strong>1.</strong> Enter a unique test email address above</p>
-          <p><strong>2.</strong> Click either "Test Quiz Lead Sync" or "Test Home Page Lead Sync"</p>
-          <p><strong>3.</strong> Wait for the success message confirming the record was inserted</p>
-          <p><strong>4.</strong> Check your Airtable base within 1-2 minutes for the synced record</p>
-          <p><strong>5.</strong> Verify the email and source appear correctly in Airtable</p>
+          <p><strong>1.</strong> Try the "Test Direct Sync" first to verify the sync function works</p>
+          <p><strong>2.</strong> If direct sync works but real-time doesn't, the issue is with the listener service</p>
+          <p><strong>3.</strong> Check the browser console for any error messages during testing</p>
+          <p><strong>4.</strong> Verify your Airtable base ID and table ID are correct in the sync function</p>
+          <p><strong>5.</strong> Make sure the SB_AIRTABLE_LOVABLE secret is properly configured</p>
           <p className="text-yellow-600 font-medium">
             ⚠️ Note: These tests create real database entries. Use test emails to avoid confusion.
           </p>
