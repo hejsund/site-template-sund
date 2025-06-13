@@ -12,12 +12,9 @@ const CookieBanner: React.FC = () => {
     const alreadyConsented = localStorage.getItem('cookie_consent');
     const excludedPath = window.location.pathname === '/hemlig';
 
-    // TEST MODE: Show banner every session on all pages (remove this before launch)
-    // Comment out the next line and uncomment the line after for production
-    setShowBanner(true);
-    // if (!alreadyConsented && !excludedPath && !shouldHideBanner()) {
-    //   setShowBanner(true);
-    // }
+    if (!alreadyConsented && !excludedPath && !shouldHideBanner()) {
+      setShowBanner(true);
+    }
   }, []);
 
   const handleAcceptAll = () => {
