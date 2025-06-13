@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,12 +38,47 @@ export const AirtableSyncTest = () => {
     console.log('Testing direct sync for email:', testEmail);
 
     try {
-      // Call the realtime sync function directly with test data
+      // First, create a real test record in the quiz leads table to use for the direct sync test
+      const testData = {
+        email: testEmail,
+        age: '26-35 år',
+        gender: 'Direct Sync Test User',
+        quiz_score: 10,
+        quiz_answers: { 1: 'a', 2: 'b', 3: 'c' },
+        recommendation_type: 'direct_sync_test',
+        source: 'direct_sync_test',
+        user_agent: 'Direct Sync Test - ' + new Date().toISOString()
+      };
+
+      console.log('Creating test record for direct sync:', testData);
+
+      const { data: testRecord, error: insertError } = await supabase
+        .from('sb_quiz_leads')
+        .insert(testData)
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error('Error creating test record for direct sync:', insertError);
+        addTestResult({
+          success: false,
+          message: `Failed to create test record: ${insertError.message}`,
+          timestamp: new Date().toISOString(),
+          source: 'direct_sync',
+          email: testEmail
+        });
+        toast.error('Failed to create test record for direct sync');
+        return;
+      }
+
+      console.log('Test record created, now testing direct sync with ID:', testRecord.id);
+
+      // Now call the realtime sync function directly with the real record ID
       const { data, error } = await supabase.functions.invoke('realtime-airtable-sync', {
         body: {
           table: 'sb_quiz_leads',
           operation: 'INSERT',
-          record_id: 'test-direct-sync',
+          record_id: testRecord.id,
           email: testEmail
         }
       });
@@ -67,6 +101,7 @@ export const AirtableSyncTest = () => {
       addTestResult({
         success: data?.success || false,
         message: data?.message || 'Direct sync test completed',
+        recordId: testRecord.id,
         timestamp: new Date().toISOString(),
         source: 'direct_sync',
         email: testEmail
@@ -322,7 +357,7 @@ export const AirtableSyncTest = () => {
 
           <div className="text-xs text-blue-600 space-y-1">
             <p>• <strong>Quiz/Home Page Lead:</strong> Creates real database entry and triggers real-time sync</p>
-            <p>• <strong>Direct Sync:</strong> Tests the sync function directly without database insertion</p>
+            <p>• <strong>Direct Sync:</strong> Creates a test record and calls the sync function directly</p>
             <p>• Real-time sync should trigger automatically within seconds</p>
             <p>• Check your Airtable base for the synced records</p>
             <p>• Use a unique email to easily identify test records</p>
