@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, CheckCircle, XCircle, Play, ArrowRight, Timer, Gift, Heart, Sparkles, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 const HemligPage = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -12,6 +14,7 @@ const HemligPage = () => {
   });
   const [isExpired, setIsExpired] = useState(false);
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     // Set target date to June 15, 2025 at 23:59
@@ -47,11 +50,49 @@ const HemligPage = () => {
   // Calculate total remaining hours for dynamic display
   const totalRemainingHours = timeLeft.days * 24 + timeLeft.hours;
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Email submitted:', email);
-    // Add email submission logic here
-    setEmail('');
+    if (!email.trim()) return;
+
+    setIsSubmitting(true);
+    console.log('Submitting email:', email);
+
+    try {
+      // Insert into sb_home_page_leads table
+      const { data, error } = await supabase
+        .from('sb_home_page_leads')
+        .insert([
+          {
+            email: email.trim(),
+            source: 'hemlig_page',
+            user_agent: navigator.userAgent,
+          }
+        ])
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Error inserting lead:', error);
+        toast.error('Det gick inte att skicka din e-post. Försök igen.');
+        return;
+      }
+
+      console.log('Lead inserted successfully:', data);
+
+      // Show success message
+      toast.success('Tack! Vi skickar dig en påminnelse innan erbjudandet löper ut.', {
+        duration: 5000,
+      });
+
+      // Clear the email field
+      setEmail('');
+
+    } catch (error: any) {
+      console.error('Error submitting email:', error);
+      toast.error('Ett oväntat fel inträffade. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -329,12 +370,14 @@ const HemligPage = () => {
                     placeholder="Din e-postadress"
                     className="flex-1 px-4 py-3 rounded-xl border border-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
+                    disabled={isSubmitting}
                   />
                   <Button 
                     type="submit"
-                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold w-full sm:w-auto"
+                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold w-full sm:w-auto disabled:opacity-50"
+                    disabled={isSubmitting}
                   >
-                    Påminn mig
+                    {isSubmitting ? 'Skickar...' : 'Påminn mig'}
                   </Button>
                 </div>
               </form>
