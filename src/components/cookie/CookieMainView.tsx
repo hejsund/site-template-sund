@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface CookieMainViewProps {
@@ -13,7 +14,7 @@ export const CookieMainView: React.FC<CookieMainViewProps> = ({
     <div className="text-center">
       {/* Logo */}
       <div className="mb-6">
-        <h1 className="text-green-800 font-display font-bold text-3xl sm:text-4xl md:text-5xl">
+        <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl bg-gradient-to-r from-green-800 to-green-600 bg-clip-text text-transparent">
           Sommarboosten
         </h1>
       </div>
