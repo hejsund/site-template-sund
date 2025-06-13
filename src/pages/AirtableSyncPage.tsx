@@ -1,6 +1,8 @@
 
 import { AirtableSync } from '@/components/AirtableSync';
+import { AirtableSyncTest } from '@/components/AirtableSyncTest';
 import { FooterSection } from '@/components/FooterSection';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const AirtableSyncPage = () => {
   return (
@@ -12,11 +14,24 @@ const AirtableSyncPage = () => {
               Airtable Integration
             </h1>
             <p className="text-lg text-green-700 max-w-2xl mx-auto font-text">
-              Sync your lead data from Supabase to Airtable with one click.
+              Sync your lead data from Supabase to Airtable and test the functionality.
             </p>
           </div>
           
-          <AirtableSync />
+          <Tabs defaultValue="management" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-8">
+              <TabsTrigger value="management">Sync Management</TabsTrigger>
+              <TabsTrigger value="testing">Test Sync</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="management">
+              <AirtableSync />
+            </TabsContent>
+            
+            <TabsContent value="testing">
+              <AirtableSyncTest />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
       <FooterSection />
