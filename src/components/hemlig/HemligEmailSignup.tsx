@@ -22,16 +22,16 @@ export const HemligEmailSignup: React.FC = () => {
     if (!email.trim()) return;
 
     setIsSubmitting(true);
-    console.log('Submitting email:', email);
+    console.log('Submitting email signup from hemlig page');
 
     // Warm up listener service before submitting lead
     await warmupListenerService();
 
     try {
-      // Track email submission with GTM
+      // Track email submission with GTM (email is hashed in this function)
       await trackEmailSubmit(email);
 
-      // Log Facebook CAPI lead event with specific content name
+      // Log Facebook CAPI lead event with specific content name (email is hashed in this function)
       await logLead(email, 'hemlig_email_signup', 'Hemlig Page Email Signup');
 
       // Insert into sb_home_page_leads table
@@ -48,12 +48,12 @@ export const HemligEmailSignup: React.FC = () => {
         .single();
 
       if (error) {
-        console.error('Error inserting lead:', error);
+        console.error('Error inserting lead:', error.message);
         toast.error('Det gick inte att skicka din e-post. Försök igen.');
         return;
       }
 
-      console.log('Lead inserted successfully:', data);
+      console.log('Lead inserted successfully with ID:', data.id);
 
       // Show success message
       toast.success('Tack! Vi skickar dig en påminnelse innan erbjudandet löper ut.', {
@@ -64,7 +64,7 @@ export const HemligEmailSignup: React.FC = () => {
       setEmail('');
 
     } catch (error: any) {
-      console.error('Error submitting email:', error);
+      console.error('Error submitting email:', error.message);
       toast.error('Ett oväntat fel inträffade. Försök igen.');
     } finally {
       setIsSubmitting(false);

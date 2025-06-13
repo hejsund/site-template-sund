@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
@@ -31,26 +32,30 @@ const ProgramYearPage = () => {
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
+    console.log('Submitting email signup from program year page');
     
     // Warm up listener service before submitting lead
     await warmupListenerService();
     
     try {
       // Save email to Supabase
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('sb_home_page_leads')
         .insert({
           email: email,
           source: `program_year_${programYear}`,
           user_agent: navigator.userAgent,
-        });
+        })
+        .select()
+        .single();
 
       if (error) {
-        console.error('Error saving email:', error);
+        console.error('Error saving email:', error.message);
         toast.error('Det uppstod ett fel. Försök igen.');
         return;
       }
 
+      console.log('Lead saved successfully with ID:', data.id);
       toast.success(`Tack! Du kommer att höra från oss snart med mer information om Sommarboosten ${programYear}! 🌟`);
       setEmail('');
     } catch (error) {

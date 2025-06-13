@@ -17,22 +17,28 @@ export const Hero = () => {
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
+    console.log('Submitting email signup from hero section');
     
     try {
       // Save email to Supabase
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('sb_home_page_leads')
         .insert({
           email: email,
           ip_address: null, // Could be added with additional logic
           user_agent: navigator.userAgent,
-        });
+          source: 'hero_section'
+        })
+        .select()
+        .single();
 
       if (error) {
-        console.error('Error saving email:', error);
+        console.error('Error saving email:', error.message);
         toast.error('Det uppstod ett fel. Försök igen.');
         return;
       }
+
+      console.log('Lead saved successfully with ID:', data.id);
 
       // Show success message
       if (currentPhase.isActive) {
