@@ -89,7 +89,71 @@ const HemligPage = () => {
           </div>
         </section>
 
-        {/* Section 2: Vad händer om du väntar? - MOVED TO TOP */}
+        {/* Section 2: Video + Countdown */}
+        <section className="py-16 px-6" role="region">
+          <div className="max-w-3xl mx-auto text-center">
+            {/* Video Section */}
+            <div className="mb-12">
+              {showExpiredContent ? (
+                <div className="aspect-video bg-gray-300 rounded-xl flex items-center justify-center mb-6" role="img" aria-label="Video är inte längre tillgänglig">
+                  <div className="text-center text-gray-600">
+                    <Play className="w-16 h-16 mx-auto mb-4 opacity-50" aria-hidden="true" />
+                    <p className="text-lg font-semibold">🎥 Videon är inte längre tillgänglig.</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="aspect-video rounded-xl overflow-hidden shadow-lg mb-6">
+                  <iframe
+                    src="https://www.youtube.com/embed/ieq8A_WLACo"
+                    title="Exklusiv video för föreläsningsdeltagare"
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              )}
+            </div>
+
+            {/* Countdown Timer */}
+            {!showExpiredContent && (
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-green-200 mb-8" role="timer" aria-live="polite">
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  <Clock className="w-6 h-6 text-green-600" aria-hidden="true" />
+                  <h2 className="text-2xl font-bold text-green-800 font-display">Tid kvar</h2>
+                </div>
+                
+                <div className="grid grid-cols-4 gap-4 mb-6">
+                  <div className="text-center">
+                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.days} dagar kvar`}>
+                      <span className="text-3xl font-bold">{timeLeft.days}</span>
+                    </div>
+                    <span className="text-sm text-green-700 font-semibold">Dagar</span>
+                  </div>
+                  <div className="text-center">
+                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.hours} timmar kvar`}>
+                      <span className="text-3xl font-bold">{timeLeft.hours}</span>
+                    </div>
+                    <span className="text-sm text-green-700 font-semibold">Timer</span>
+                  </div>
+                  <div className="text-center">
+                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.minutes} minuter kvar`}>
+                      <span className="text-3xl font-bold">{timeLeft.minutes}</span>
+                    </div>
+                    <span className="text-sm text-green-700 font-semibold">Minuter</span>
+                  </div>
+                  <div className="text-center">
+                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.seconds} sekunder kvar`}>
+                      <span className="text-3xl font-bold">{timeLeft.seconds}</span>
+                    </div>
+                    <span className="text-sm text-green-700 font-semibold">Sekunder</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Section 3: Vad händer om du väntar? - MOVED BELOW VIDEO */}
         <section className="py-20 px-6 bg-gradient-to-r from-orange-50 to-coral/10" role="region" aria-labelledby="waiting-heading">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-3xl p-10 shadow-2xl border-l-8 border-coral relative overflow-hidden">
@@ -152,70 +216,6 @@ const HemligPage = () => {
                 )}
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Section 3: Video + Countdown */}
-        <section className="py-16 px-6" role="region">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Video Section */}
-            <div className="mb-12">
-              {showExpiredContent ? (
-                <div className="aspect-video bg-gray-300 rounded-xl flex items-center justify-center mb-6" role="img" aria-label="Video är inte längre tillgänglig">
-                  <div className="text-center text-gray-600">
-                    <Play className="w-16 h-16 mx-auto mb-4 opacity-50" aria-hidden="true" />
-                    <p className="text-lg font-semibold">🎥 Videon är inte längre tillgänglig.</p>
-                  </div>
-                </div>
-              ) : (
-                <div className="aspect-video rounded-xl overflow-hidden shadow-lg mb-6">
-                  <iframe
-                    src="https://www.youtube.com/embed/ieq8A_WLACo"
-                    title="Exklusiv video för föreläsningsdeltagare"
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              )}
-            </div>
-
-            {/* Countdown Timer */}
-            {!showExpiredContent && (
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-green-200 mb-8" role="timer" aria-live="polite">
-                <div className="flex items-center justify-center gap-2 mb-6">
-                  <Clock className="w-6 h-6 text-green-600" aria-hidden="true" />
-                  <h2 className="text-2xl font-bold text-green-800 font-display">Tid kvar</h2>
-                </div>
-                
-                <div className="grid grid-cols-4 gap-4 mb-6">
-                  <div className="text-center">
-                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.days} dagar kvar`}>
-                      <span className="text-3xl font-bold">{timeLeft.days}</span>
-                    </div>
-                    <span className="text-sm text-green-700 font-semibold">Dagar</span>
-                  </div>
-                  <div className="text-center">
-                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.hours} timmar kvar`}>
-                      <span className="text-3xl font-bold">{timeLeft.hours}</span>
-                    </div>
-                    <span className="text-sm text-green-700 font-semibold">Timer</span>
-                  </div>
-                  <div className="text-center">
-                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.minutes} minuter kvar`}>
-                      <span className="text-3xl font-bold">{timeLeft.minutes}</span>
-                    </div>
-                    <span className="text-sm text-green-700 font-semibold">Minuter</span>
-                  </div>
-                  <div className="text-center">
-                    <div className="bg-green-600 text-white rounded-xl p-4 mb-2" aria-label={`${timeLeft.seconds} sekunder kvar`}>
-                      <span className="text-3xl font-bold">{timeLeft.seconds}</span>
-                    </div>
-                    <span className="text-sm text-green-700 font-semibold">Sekunder</span>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </section>
 
