@@ -13,13 +13,6 @@ const CookieBanner: React.FC = () => {
     const excludedPath = window.location.pathname === '/hemlig';
     const hideDueToPrivacy = shouldHideBanner();
 
-    console.log('Cookie banner check:', {
-      alreadyConsented: !!alreadyConsented,
-      excludedPath,
-      hideDueToPrivacy,
-      currentPath: window.location.pathname
-    });
-
     // Only show banner if user hasn't consented, not on excluded path, and not hidden due to privacy settings
     if (!alreadyConsented && !excludedPath && !hideDueToPrivacy) {
       setShowBanner(true);
@@ -27,7 +20,6 @@ const CookieBanner: React.FC = () => {
   }, []);
 
   const handleAcceptAll = () => {
-    console.log('User accepted all cookies');
     updateConsent('granted');
     setShowBanner(false);
   };
