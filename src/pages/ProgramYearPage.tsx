@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { Calendar, Clock, Users, Trophy, Smartphone } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { FooterSection } from '@/components/FooterSection';
+import { warmupListenerService } from '@/utils/listenerWarmup';
 
 const ProgramYearPage = () => {
   const { year } = useParams<{ year: string }>();
@@ -20,11 +21,19 @@ const ProgramYearPage = () => {
   const isCurrentYear = programYear === new Date().getFullYear();
   const isPastYear = programYear < new Date().getFullYear();
 
+  // Warm up listener service when user visits the page
+  useEffect(() => {
+    warmupListenerService();
+  }, []);
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
+    
+    // Warm up listener service before submitting lead
+    await warmupListenerService();
     
     try {
       // Save email to Supabase

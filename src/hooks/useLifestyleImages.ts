@@ -1,6 +1,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import { warmupListenerService } from '@/utils/listenerWarmup';
 
 interface LifestyleImage {
   id: string;
@@ -8,21 +9,22 @@ interface LifestyleImage {
   alt: string;
   title: string;
   description: string;
-  display_order: number;
-  tags: string[] | null;
 }
 
 export const useLifestyleImages = () => {
   return useQuery({
     queryKey: ['lifestyle-images'],
-    queryFn: async () => {
-      console.log('Fetching lifestyle images from Supabase...');
+    queryFn: async (): Promise<LifestyleImage[]> => {
+      console.log('Fetching lifestyle images...');
+      
+      // Warm up listener service on any database activity
+      warmupListenerService();
       
       const { data, error } = await supabase
         .from('sb_images')
-        .select('id, src, alt, title, description, display_order, tags')
-        .eq('is_active', true)
+        .select('id, src, alt, title, description')
         .eq('category', 'lifestyle')
+        .eq('is_active', true)
         .order('display_order', { ascending: true });
 
       if (error) {
@@ -30,8 +32,10 @@ export const useLifestyleImages = () => {
         throw error;
       }
 
-      console.log('Successfully fetched lifestyle images:', data);
-      return data as LifestyleImage[];
+      console.log('Fetched lifestyle images:', data?.length || 0);
+      return data || [];
     },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
   });
 };

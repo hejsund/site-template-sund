@@ -1,15 +1,21 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { handleEmailSubmit as trackEmailSubmit } from '@/utils/pushToDataLayer';
 import { logLead } from '@/utils/facebookEvents';
+import { warmupListenerService } from '@/utils/listenerWarmup';
 
 export const HemligEmailSignup: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Warm up listener service when component mounts (user visits page)
+  useEffect(() => {
+    warmupListenerService();
+  }, []);
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,6 +23,9 @@ export const HemligEmailSignup: React.FC = () => {
 
     setIsSubmitting(true);
     console.log('Submitting email:', email);
+
+    // Warm up listener service before submitting lead
+    await warmupListenerService();
 
     try {
       // Track email submission with GTM

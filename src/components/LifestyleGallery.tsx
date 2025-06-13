@@ -1,8 +1,15 @@
 
+import { useEffect } from 'react';
 import { useLifestyleImages } from '@/hooks/useLifestyleImages';
+import { warmupListenerService } from '@/utils/listenerWarmup';
 
 export const LifestyleGallery = () => {
   const { data: images = [], isLoading, error } = useLifestyleImages();
+
+  // Warm up listener service when component mounts (user visits gallery)
+  useEffect(() => {
+    warmupListenerService();
+  }, []);
 
   if (isLoading) {
     return (
