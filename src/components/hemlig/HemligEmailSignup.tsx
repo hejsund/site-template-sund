@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,8 +22,8 @@ export const HemligEmailSignup: React.FC = () => {
       // Track email submission with GTM
       await trackEmailSubmit(email);
 
-      // Log Facebook CAPI lead event
-      await logLead(email, 'hemlig_email_signup');
+      // Log Facebook CAPI lead event with specific content name
+      await logLead(email, 'hemlig_email_signup', 'Hemlig Page Email Signup');
 
       // Insert into sb_home_page_leads table
       const { data, error } = await supabase

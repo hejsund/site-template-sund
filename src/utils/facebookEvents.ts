@@ -50,6 +50,7 @@ export async function logFacebookEvent(
     const eventData = {
       page_location: window.location.href,
       page_title: document.title,
+      page_path: window.location.pathname,
       client_user_agent: navigator.userAgent,
       client_ip_address: clientIP,
       fbp,
@@ -88,10 +89,17 @@ export async function logFacebookEvent(
       if (eventType === 'page_view') {
         window.fbq('track', 'PageView');
       } else if (eventType === 'lead') {
-        window.fbq('track', 'Lead', {
-          content_name: 'Hemlig Page Lead',
+        const leadEventData: any = {
+          content_name: additionalData?.content_name || 'Website Lead',
           source: additionalData?.source || 'unknown'
-        });
+        };
+        
+        // Add page-specific context for hemlig page
+        if (window.location.pathname === '/hemlig') {
+          leadEventData.content_name = 'Hemlig Page Lead';
+        }
+        
+        window.fbq('track', 'Lead', leadEventData);
       }
     }
 
@@ -102,12 +110,15 @@ export async function logFacebookEvent(
   }
 }
 
-// Log page view
+// Log page view - now works for all pages
 export async function logPageView() {
   return await logFacebookEvent('page_view');
 }
 
 // Log lead event
-export async function logLead(email?: string, source?: string) {
-  return await logFacebookEvent('lead', email, { source });
+export async function logLead(email?: string, source?: string, contentName?: string) {
+  return await logFacebookEvent('lead', email, { 
+    source,
+    content_name: contentName 
+  });
 }

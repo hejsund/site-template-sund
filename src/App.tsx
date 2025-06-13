@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { TimePhaseProvider } from "./contexts/TimePhaseContext";
 import { Navigation } from "./components/Navigation";
 import { pushToDataLayer } from "./utils/pushToDataLayer";
+import { logPageView } from "./utils/facebookEvents";
 import Index from "./pages/Index";
 import QuizPage from "./pages/QuizPage";
 import AboutCharlottePage from "./pages/AboutCharlottePage";
@@ -43,11 +44,15 @@ const AppContent = () => {
 
   // Track page views on URL changes
   useEffect(() => {
+    // Track GTM page view (GA4 will be set up in GTM)
     pushToDataLayer("page_view", {
       page_location: window.location.href,
       page_path: window.location.pathname,
       page_title: document.title,
     });
+
+    // Track Facebook CAPI page view for all pages
+    logPageView();
   }, [location]);
 
   return (
