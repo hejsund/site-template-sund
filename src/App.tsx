@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { TimePhaseProvider } from "./contexts/TimePhaseContext";
 import { Navigation } from "./components/Navigation";
+import { pushToDataLayer } from "./utils/pushToDataLayer";
 import Index from "./pages/Index";
 import QuizPage from "./pages/QuizPage";
 import AboutCharlottePage from "./pages/AboutCharlottePage";
@@ -38,6 +40,15 @@ const queryClient = new QueryClient();
 const AppContent = () => {
   const location = useLocation();
   const isHemligPage = location.pathname === '/hemlig';
+
+  // Track page views on URL changes
+  useEffect(() => {
+    pushToDataLayer("page_view", {
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+      page_title: document.title,
+    });
+  }, [location]);
 
   return (
     <>

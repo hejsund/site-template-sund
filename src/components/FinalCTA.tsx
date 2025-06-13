@@ -1,6 +1,8 @@
+
 import { Check, Heart, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { pushToDataLayer } from '@/utils/pushToDataLayer';
 
 export const FinalCTA = () => {
   const benefits = [
@@ -11,6 +13,10 @@ export const FinalCTA = () => {
     "Verktyg för att följa din utveckling",
     "Charlotte ger personlig inspiration i fickan"
   ];
+
+  const handleQuizClick = () => {
+    pushToDataLayer("buyButton", { source: "final_cta" });
+  };
 
   return (
     <section className="py-20 px-4 relative overflow-hidden">
@@ -48,7 +54,7 @@ export const FinalCTA = () => {
           </div>
 
           <div className="space-y-4">
-            <Link to="/quiz">
+            <Link to="/quiz" onClick={handleQuizClick}>
               <Button className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 w-full md:w-auto">
                 Gör vårt quiz och hitta din väg
               </Button>

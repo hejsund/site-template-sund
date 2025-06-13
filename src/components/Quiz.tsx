@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import { pushToDataLayer, handleEmailSubmit } from '@/utils/pushToDataLayer';
 
 interface Question {
   id: number;
@@ -96,9 +97,21 @@ export const Quiz = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Track quiz begin when component mounts
+  useEffect(() => {
+    pushToDataLayer("quizBegin");
+  }, []);
+
   const handleAnswer = (questionId: number, optionId: string) => {
     const option = questions[questionId - 1].options.find(opt => opt.id === optionId);
     if (!option) return;
+
+    // Track quiz step
+    pushToDataLayer(`quizStep_${questionId}`, {
+      question: questions[questionId - 1].question,
+      answer: option.text,
+      score: option.score
+    });
 
     const newAnswers = { ...answers, [questionId]: optionId };
     setAnswers(newAnswers);
@@ -120,6 +133,14 @@ export const Quiz = () => {
       // Reduced delay from 500ms to 150ms for snappier feel
       setTimeout(() => setCurrentQuestion(currentQuestion + 1), 150);
     } else {
+      // Track quiz completion
+      const recommendation = getRecommendation();
+      pushToDataLayer("quizComplete", {
+        quiz_score: score + option.score,
+        quiz_result: recommendation.type,
+        total_questions: questions.length
+      });
+      
       // Reduced delay from 500ms to 200ms
       setTimeout(() => setShowResult(true), 200);
     }
@@ -177,13 +198,16 @@ export const Quiz = () => {
     }
   };
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
+  const handleEmailSubmitForm = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!userData.email || isSubmitting) return;
 
     setIsSubmitting(true);
     
     try {
+      // Track email submission with hashing
+      await handleEmailSubmit(userData.email);
+      
       const recommendation = getRecommendation();
       
       // Save quiz result to Supabase
@@ -232,6 +256,9 @@ export const Quiz = () => {
     setShowResult(false);
     setEmailSubmitted(false);
     setUserData({ email: '', age: '', gender: '' });
+    
+    // Track quiz reset
+    pushToDataLayer("quizReset");
     
     // Scroll to top of page when quiz resets
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -291,7 +318,7 @@ export const Quiz = () => {
                   Med 30% rabatt: 1199 kr
                 </div>
                 
-                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                <form onSubmit={handleEmailSubmitForm} className="space-y-4">
                   <Input
                     type="email"
                     placeholder="Din e-postadress"
@@ -305,6 +332,7 @@ export const Quiz = () => {
                     type="submit" 
                     className="w-full cta-primary text-base sm:text-lg py-4 leading-tight whitespace-nowrap"
                     disabled={isSubmitting}
+                    onClick={() => pushToDataLayer("buyButton", { source: "quiz_result" })}
                   >
                     {isSubmitting ? 'Skickar...' : 'Ja, få rabatt! 🚀'}
                   </Button>
@@ -356,7 +384,7 @@ export const Quiz = () => {
                       Ange din e-post så skickar vi dig mer information om Sommarboosten.
                     </p>
                     
-                    <form onSubmit={handleEmailSubmit} className="space-y-4">
+                    <form onSubmit={handleEmailSubmitForm} className="space-y-4">
                       <Input
                         type="email"
                         placeholder="Din e-postadress"
