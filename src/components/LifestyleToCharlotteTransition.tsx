@@ -16,6 +16,10 @@ export const LifestyleToCharlotteTransition = ({
 }: LifestyleToCharlotteTransitionProps) => {
   const { urgencyText, hasAvailableStarts, daysUntilStart, ctaText } = useDynamicText(testMode, testDate);
 
+  const scrollToHero = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <section className="py-12 sm:py-16 px-4 bg-gradient-to-br from-green-50 via-white to-green-50">
       <div className="max-w-4xl mx-auto text-center">
@@ -44,7 +48,7 @@ export const LifestyleToCharlotteTransition = ({
 
           <div className="space-y-4">
             <Button
-              onClick={onRegistrationClick}
+              onClick={scrollToHero}
               className="cta-warm h-12 w-full sm:w-auto px-8 text-lg group"
             >
               <span className="flex items-center gap-2">

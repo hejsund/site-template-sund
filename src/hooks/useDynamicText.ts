@@ -61,10 +61,7 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
     // Generate dynamic texts
     const getTimerText = () => {
       if (nextAvailableStart) {
-        const registrationCloseDate = nextAvailableStart.bookedAfter;
-        const closeDay = registrationCloseDate.getDate();
-        const closeMonth = registrationCloseDate.toLocaleDateString('sv-SE', { month: 'long' });
-        return `Anmälan stänger ${closeDay} ${closeMonth} 23:59`;
+        return 'Anmälan stänger snart';
       }
       return 'Anmälan har stängt för alla starter';
     };
@@ -81,12 +78,7 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
     };
     
     const getCtaText = () => {
-      if (firstBookedStart && nextAvailableStart) {
-        return 'Anmäl dig till nästa start';
-      } else if (nextAvailableStart) {
-        return 'Anmäl dig nu';
-      }
-      return 'Se alla starter';
+      return 'Se nästa start';
     };
     
     const getStatusText = () => {
@@ -103,9 +95,9 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
 
     const getMainText = () => {
       if (firstBookedStart && nextAvailableStart) {
-        return `Tidigare starter är stängda! Anmäl dig till ${nextAvailableStart.date}`;
+        return 'Anmäl dig till nästa start';
       } else if (nextAvailableStart) {
-        return `Kampanj pågår. Anmäl dig till start ${nextAvailableStart.date}!`;
+        return 'Anmäl dig till nästa start';
       } else if (firstBookedStart) {
         return 'Alla starter är stängda. Kontakta oss för mer info.';
       } else {

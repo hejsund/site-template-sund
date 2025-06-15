@@ -16,7 +16,11 @@ export const FeaturesEndTransition = ({
   onRegistrationClick,
   onQuizClick 
 }: FeaturesEndTransitionProps) => {
-  const { hasAvailableStarts, statusText, nextAvailableStart, ctaText } = useDynamicText(testMode, testDate);
+  const { hasAvailableStarts, statusText, ctaText } = useDynamicText(testMode, testDate);
+
+  const scrollToHero = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <section className="py-16 sm:py-20 px-4 bg-gradient-to-br from-white to-green-50">
@@ -48,11 +52,6 @@ export const FeaturesEndTransition = ({
                 <p className="text-green-100 text-lg mb-2">
                   {statusText}
                 </p>
-                {nextAvailableStart && (
-                  <p className="text-white font-semibold">
-                    Nästa start: {nextAvailableStart.date}
-                  </p>
-                )}
               </div>
             </div>
 
@@ -69,7 +68,7 @@ export const FeaturesEndTransition = ({
               </Button>
               
               <Button
-                onClick={onRegistrationClick}
+                onClick={scrollToHero}
                 className="bg-yellow-400 text-green-900 hover:bg-yellow-300 h-14 text-lg font-bold group"
               >
                 <span className="flex items-center gap-2">
