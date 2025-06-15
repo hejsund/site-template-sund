@@ -4,7 +4,9 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { QuizStartDates } from './QuizStartDates';
 import { QuizEmailForm } from './QuizEmailForm';
+import { HeroTestMode } from '../hero/HeroTestMode';
 import { Recommendation, UserData, QuizProps } from '@/types/quiz';
+import { useState } from 'react';
 
 interface QuizResultProps extends QuizProps {
   recommendation: Recommendation;
@@ -26,9 +28,12 @@ export const QuizResult = ({
   onEmailSubmit,
   onDateCardCTA,
   onReset,
-  testMode,
-  testDate
+  testMode: initialTestMode,
+  testDate: initialTestDate
 }: QuizResultProps) => {
+  const [testMode, setTestMode] = useState(initialTestMode || false);
+  const [testDate, setTestDate] = useState<Date>(initialTestDate || new Date());
+  
   const genderText = 'Hej fina du!';
 
   return (
@@ -36,6 +41,15 @@ export const QuizResult = ({
       <div className="mb-8">
         <Progress value={100} className="h-2" />
       </div>
+      
+      {/* Test Mode Toggle */}
+      <HeroTestMode 
+        testMode={testMode}
+        setTestMode={setTestMode}
+        testDate={testDate}
+        setTestDate={setTestDate}
+      />
+      
       <Card className="p-8">
         <div className="text-center mb-8">
           <div className="text-4xl mb-4">{recommendation.recommended ? '🎉' : '🤔'}</div>

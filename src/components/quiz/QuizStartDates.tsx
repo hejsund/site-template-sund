@@ -1,5 +1,4 @@
-
-import { Calendar, Users, ExternalLink } from 'lucide-react';
+import { Calendar, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface StartDate {
@@ -161,14 +160,13 @@ export const QuizStartDates = ({ testMode = false, testDate, onDateCardCTA }: Qu
                   </span>
                 </div>
 
-                {/* CTA Button with external link icon */}
+                {/* CTA Button without external link icon */}
                 <Button
                   onClick={() => onDateCardCTA(startDate.stripeLink)}
                   disabled={isFullyBooked}
-                  className={`w-full text-xs h-8 ${buttonStyles} flex items-center justify-center gap-1`}
+                  className={`w-full text-xs h-8 ${buttonStyles}`}
                 >
                   {buttonText}
-                  {!isFullyBooked && <ExternalLink className="w-3 h-3" />}
                 </Button>
               </div>
             </div>
@@ -178,7 +176,7 @@ export const QuizStartDates = ({ testMode = false, testDate, onDateCardCTA }: Qu
       
       <div className="text-center mt-6">
         <p className="text-xs sm:text-sm text-green-600 font-text opacity-80">
-          🌟 Alla starter inkluderar samma fantastiska innehåll · Välj det datum som passar dig bäst
+          🌟 Alla starters inkluderar samma fantastiska innehåll · Välj det datum som passar dig bäst
         </p>
       </div>
     </div>
