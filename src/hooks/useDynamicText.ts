@@ -44,12 +44,12 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
   return useMemo(() => {
     const currentDate = testMode && testDate ? testDate : new Date();
     
-    // Find next available start
+    // Find next available start (registration still open AND start date hasn't passed)
     const nextAvailableStart = startDates.find(start => 
-      currentDate < start.bookedAfter
+      currentDate < start.bookedAfter && currentDate <= start.fullDate
     );
     
-    // Find first start that's already booked
+    // Find first start that's already booked (registration closed)
     const firstBookedStart = startDates.find(start => 
       currentDate >= start.bookedAfter
     );
@@ -61,18 +61,21 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
     // Generate dynamic texts
     const getTimerText = () => {
       if (nextAvailableStart) {
-        return `Första start stänger ${nextAvailableStart.date.split(' ')[0]} ${nextAvailableStart.date.split(' ')[1]} 23:59`;
+        const registrationCloseDate = nextAvailableStart.bookedAfter;
+        const closeDay = registrationCloseDate.getDate();
+        const closeMonth = registrationCloseDate.toLocaleDateString('sv-SE', { month: 'long' });
+        return `Anmälan stänger ${closeDay} ${closeMonth} 23:59`;
       }
       return 'Anmälan har stängt för alla starter';
     };
     
     const getUrgencyText = () => {
       if (daysUntilStart <= 7 && nextAvailableStart) {
-        return `⚡ Första starten börjar om ${daysUntilStart} dagar - säkra din plats nu!`;
+        return `⚡ Starten börjar om ${daysUntilStart} dagar - säkra din plats nu!`;
       } else if (nextAvailableStart) {
-        return `🌟 Första starten den ${nextAvailableStart.date} - anmäl dig nu`;
+        return `🌟 Nästa start den ${nextAvailableStart.date} - anmäl dig nu`;
       } else if (firstBookedStart) {
-        return `🔥 Första starten är fullbokad - anmäl dig till nästa start`;
+        return `🔥 Alla starter är fullbokade - kontakta oss för mer info`;
       }
       return '✨ Anmälan pågår - säkra din plats';
     };
@@ -81,20 +84,21 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
       if (firstBookedStart && nextAvailableStart) {
         return 'Anmäl dig till nästa start';
       } else if (nextAvailableStart) {
-        return 'Anmäl dig till första starten';
+        return 'Anmäl dig nu';
       }
       return 'Se alla starter';
     };
     
     const getStatusText = () => {
-      if (daysUntilStart <= 3 && nextAvailableStart) {
+      if (!nextAvailableStart) {
+        return 'Alla starter fullbokade';
+      } else if (daysUntilStart <= 3) {
         return 'Sista chansen!';
-      } else if (daysUntilStart <= 7 && nextAvailableStart) {
+      } else if (daysUntilStart <= 7) {
         return 'Börjar snart';
-      } else if (nextAvailableStart) {
+      } else {
         return 'Anmälan öppen';
       }
-      return 'Kontakta oss';
     };
 
     return {
