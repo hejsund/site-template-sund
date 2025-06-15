@@ -70,7 +70,7 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
       if (daysUntilStart <= 7 && nextAvailableStart) {
         return `⚡ Starten börjar om ${daysUntilStart} dagar - säkra din plats nu!`;
       } else if (nextAvailableStart) {
-        return `🌟 Nästa start den ${nextAvailableStart.date} - anmäl dig nu`;
+        return `🌟 Lediga platser kvar - anmäl dig nu`;
       } else if (firstBookedStart) {
         return `🔥 Alla starter är fullbokade - kontakta oss för mer info`;
       }
