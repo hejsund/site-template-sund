@@ -16,15 +16,22 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
     seconds: 0
   });
 
-  const { timerText, hasAvailableStarts, statusText } = useDynamicText(testMode, testDate);
+  const { timerText, hasAvailableStarts, statusText, nextAvailableStart, firstBookedStart } = useDynamicText(testMode, testDate);
 
   useEffect(() => {
-    // Set target date to June 22, 2025 at 23:59 Swedish time (CEST)
-    // Convert to UTC by subtracting 2 hours (CEST is UTC+2 in summer)
-    const targetDate = new Date('2025-06-22T21:59:00Z').getTime(); // 23:59 CEST = 21:59 UTC
-    
     const updateTimer = () => {
-      const now = new Date().getTime();
+      const currentDate = testMode && testDate ? testDate : new Date();
+      let targetDate: number;
+
+      if (nextAvailableStart) {
+        // Timer counts down to when the next available start closes for registration
+        targetDate = nextAvailableStart.bookedAfter.getTime();
+      } else {
+        // Fallback to original date if no starts available
+        targetDate = new Date('2025-06-22T21:59:00Z').getTime();
+      }
+      
+      const now = currentDate.getTime();
       const difference = targetDate - now;
       
       if (difference > 0) {
@@ -34,6 +41,13 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
           minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((difference % (1000 * 60)) / 1000)
         });
+      } else {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        });
       }
     };
 
@@ -41,19 +55,23 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
     const timer = setInterval(updateTimer, 1000);
     
     return () => clearInterval(timer);
-  }, []);
+  }, [testMode, testDate, nextAvailableStart]);
 
-  // Check if current date is after June 22, 2025 23:59 Swedish time
+  // Check if we should show the timer at all
   const currentDate = testMode && testDate ? testDate : new Date();
-  const cutoffDate = new Date('2025-06-22T21:59:00Z'); // 23:59 CEST = 21:59 UTC
-  const showExpiredContent = currentDate >= cutoffDate;
+  const finalCutoffDate = new Date('2025-07-21T21:59:00Z'); // After last start closes
+  const showExpiredContent = currentDate >= finalCutoffDate;
 
   if (showExpiredContent && !testMode) return null;
 
-  // Dynamic main text based on availability
+  // Dynamic main text based on availability and booking status
   const getMainText = () => {
-    if (hasAvailableStarts) {
-      return 'Kampanj pågår. Anmälan har öppnat!';
+    if (firstBookedStart && nextAvailableStart) {
+      return `Första starten är stängd! Anmäl dig till ${nextAvailableStart.date}`;
+    } else if (hasAvailableStarts && nextAvailableStart) {
+      return `Kampanj pågår. Anmäl dig till start ${nextAvailableStart.date}!`;
+    } else if (firstBookedStart) {
+      return 'Alla starter är stängda. Kontakta oss för mer info.';
     } else {
       return 'Kampanj avslutad. Anmälan stängd.';
     }
