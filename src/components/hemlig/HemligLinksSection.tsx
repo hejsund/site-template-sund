@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 
 interface HemligLinksSectionProps {
   totalRemainingHours: number;
@@ -28,7 +28,7 @@ export const HemligLinksSection: React.FC<HemligLinksSectionProps> = ({ totalRem
                 rel="noopener noreferrer"
               >
                 Besök startsidan
-                <ArrowRight className="ml-2 w-4 h-4" />
+                <ExternalLink className="ml-2 w-4 h-4" />
               </a>
             </div>
             
@@ -44,7 +44,7 @@ export const HemligLinksSection: React.FC<HemligLinksSectionProps> = ({ totalRem
                 rel="noopener noreferrer"
               >
                 Besök sundochstark.se
-                <ArrowRight className="ml-2 w-4 h-4" />
+                <ExternalLink className="ml-2 w-4 h-4" />
               </a>
             </div>
           </div>

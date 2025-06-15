@@ -24,6 +24,11 @@ interface UserData {
   gender: string;
 }
 
+interface QuizProps {
+  testMode?: boolean;
+  testDate?: Date;
+}
+
 const questions: Question[] = [
   {
     id: 1,
@@ -86,7 +91,7 @@ const questions: Question[] = [
   }
 ];
 
-export const Quiz = () => {
+export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [score, setScore] = useState(0);
@@ -321,7 +326,11 @@ export const Quiz = () => {
 
             {/* Add start dates component for recommended users */}
             {recommendation.recommended && !emailSubmitted && (
-              <QuizStartDates onDateCardCTA={handleDateCardCTA} />
+              <QuizStartDates 
+                testMode={testMode} 
+                testDate={testDate} 
+                onDateCardCTA={handleDateCardCTA} 
+              />
             )}
 
             {recommendation.recommended && !emailSubmitted && (
@@ -374,6 +383,20 @@ export const Quiz = () => {
                     <li>📊 Känn att du blir starkare</li>
                     <li>💬 Inspo med Charlotte när du behöver stöd</li>
                   </ul>
+                </div>
+
+                {/* Email notification section */}
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                  <h4 className="text-lg font-semibold text-blue-800 mb-3 font-display">📧 Viktigt att veta:</h4>
+                  <p className="text-sm text-blue-700 mb-3">
+                    En unik köplänk med din 30% rabattkod skickas till din e-post inom kort.
+                  </p>
+                  <p className="text-sm text-blue-700">
+                    Har du inte fått din rabattkod? Mejla oss på{' '}
+                    <a href="mailto:hej@sundochstark.se" className="font-semibold underline hover:no-underline">
+                      hej@sundochstark.se
+                    </a>
+                  </p>
                 </div>
                 
                 <p className="text-sm text-green-600 opacity-80 font-text">
