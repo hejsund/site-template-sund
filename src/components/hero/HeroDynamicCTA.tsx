@@ -23,7 +23,7 @@ export const HeroDynamicCTA = ({
   const getVariantStyles = () => {
     switch (variant) {
       case 'urgent':
-        return 'bg-red-600 hover:bg-red-700 text-white animate-pulse';
+        return 'bg-red-600 hover:bg-red-700 text-white';
       case 'secondary':
         return 'bg-green-100 hover:bg-green-200 text-green-800 border-2 border-green-300';
       default:

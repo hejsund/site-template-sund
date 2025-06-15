@@ -92,13 +92,16 @@ export const Hero = () => {
 
           {/* CTA 1: Primary call-to-action - TOP of hero section */}
           {/* Connected to test timer: YES - shows urgency based on dynamic text */}
-          <HeroDynamicCTA 
-            testMode={testMode}
-            testDate={testDate}
-            onRegistrationClick={handleRegistrationClick}
-            variant="urgent"
-            className="mb-8"
-          />
+          {/* Hide when test mode is active */}
+          {!testMode && (
+            <HeroDynamicCTA 
+              testMode={testMode}
+              testDate={testDate}
+              onRegistrationClick={handleRegistrationClick}
+              variant="urgent"
+              className="mb-8"
+            />
+          )}
 
           {/* Start dates section with individual CTA buttons */}
           <HeroStartDates 
