@@ -1,5 +1,6 @@
 
 import { Calendar, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface StartDate {
   date: string;
@@ -8,38 +9,44 @@ interface StartDate {
   bookedAfter: Date;
 }
 
-export const HeroStartDates = () => {
+interface HeroStartDatesProps {
+  testMode?: boolean;
+  testDate?: Date;
+  onDateCardCTA: () => void;
+}
+
+export const HeroStartDates = ({ testMode = false, testDate, onDateCardCTA }: HeroStartDatesProps) => {
   // START DATES CONFIGURATION WITH AUTOMATIC BOOKING STATUS
-  // This section controls the start dates and their booking status based on current date
   const startDates: StartDate[] = [
     {
       date: '30 juni',
       week: 'v.27',
       fullDate: new Date('2025-06-30'),
-      bookedAfter: new Date('2025-06-23') // Marks as fully booked starting June 23rd
+      bookedAfter: new Date('2025-06-23')
     },
     {
       date: '7 juli',
       week: 'v.28',
       fullDate: new Date('2025-07-07'),
-      bookedAfter: new Date('2025-06-30') // Marks as fully booked starting June 30th
+      bookedAfter: new Date('2025-06-30')
     },
     {
       date: '14 juli',
       week: 'v.29',
       fullDate: new Date('2025-07-14'),
-      bookedAfter: new Date('2025-07-07') // Marks as fully booked starting July 7th
+      bookedAfter: new Date('2025-07-07')
     },
     {
       date: '21 juli',
       week: 'v.30',
       fullDate: new Date('2025-07-21'),
-      bookedAfter: new Date('2025-07-14') // Marks as fully booked starting July 14th
+      bookedAfter: new Date('2025-07-14')
     }
   ];
 
-  // Check which dates should be marked as fully booked based on current date
-  const currentDate = new Date();
+  // Use test date if in test mode, otherwise use current date
+  const currentDate = testMode && testDate ? testDate : new Date();
+  
   const getBookingStatus = (startDate: StartDate) => {
     return currentDate >= startDate.bookedAfter ? 'fully-booked' : 'available';
   };
@@ -83,19 +90,32 @@ export const HeroStartDates = () => {
                 <div className="text-lg sm:text-xl font-bold text-green-800 mb-1 font-display">
                   {startDate.date}
                 </div>
-                <div className="text-sm text-green-600 mb-2 font-text">
+                <div className="text-sm text-green-600 mb-3 font-text">
                   ({startDate.week})
                 </div>
                 
                 {isFullyBooked ? (
-                  <div className="text-xs text-gray-600 font-text">
+                  <div className="text-xs text-gray-600 font-text mb-3">
                     Denna start är full
                   </div>
                 ) : (
-                  <div className="text-xs text-green-700 font-semibold font-text">
+                  <div className="text-xs text-green-700 font-semibold font-text mb-3">
                     Platser kvar!
                   </div>
                 )}
+
+                {/* CTA Button */}
+                <Button
+                  onClick={onDateCardCTA}
+                  disabled={isFullyBooked}
+                  className={`w-full text-xs h-8 ${
+                    isFullyBooked 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-green-600 hover:bg-green-700 text-white'
+                  }`}
+                >
+                  {isFullyBooked ? 'Fullt' : 'Ta plats'}
+                </Button>
               </div>
             </div>
           );
