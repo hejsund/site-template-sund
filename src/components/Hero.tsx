@@ -3,29 +3,25 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
 import { warmupListenerService } from '@/utils/listenerWarmup';
+import { useDynamicText } from '@/hooks/useDynamicText';
 import { HeroAnimatedElements } from './hero/HeroAnimatedElements';
 import { HeroStartDates } from './hero/HeroStartDates';
 import { HeroCTAButtons } from './hero/HeroCTAButtons';
 import { HeroTestMode } from './hero/HeroTestMode';
+import { HeroDynamicCTA } from './hero/HeroDynamicCTA';
 
 export const Hero = () => {
   const navigate = useNavigate();
   const { currentPhase } = useTimePhase();
   const [testMode, setTestMode] = useState(false);
   const [testDate, setTestDate] = useState<Date>(new Date());
+  
+  const { statusText, hasAvailableStarts } = useDynamicText(testMode, testDate);
 
   // Warm up listener service when component mounts
   useEffect(() => {
     warmupListenerService();
   }, []);
-
-  /* 
-  ==========================================
-  PRE-LAUNCH HERO VERSION - SAVED FOR LATER
-  ==========================================
-  This is the original hero section that can be re-activated when needed.
-  To restore: uncomment this section and comment out the launch version below.
-  */
 
   const handleQuizClick = () => {
     navigate('/quiz');
@@ -69,7 +65,9 @@ export const Hero = () => {
               </span>
               <span className="text-gradient block -mt-1 sm:-mt-2 md:-mt-4 leading-none">
                 <span className="block text-[clamp(2.5rem,10vw,6rem)] sm:text-6xl md:text-8xl">Sommarboosten</span>
-                <span className="block text-2xl sm:text-3xl md:text-4xl mt-1 sm:mt-2 text-green-700 font-bold">Anmälan är öppen!</span>
+                <span className="block text-2xl sm:text-3xl md:text-4xl mt-1 sm:mt-2 text-green-700 font-bold">
+                  {hasAvailableStarts ? 'Anmälan är öppen!' : 'Kontakta oss för mer info'}
+                </span>
               </span>
             </div>
           </div>
@@ -80,7 +78,7 @@ export const Hero = () => {
               Säkra din plats innan första starten! 6 veckor med träning, näring och glädje som passar dig och ditt liv.
             </p>
             <p className="text-sm sm:text-base text-green-600 mt-3 sm:mt-4 opacity-90 font-text">
-              ☀️ Anmälan är öppen · Begränsade platser · Första start snart 🌊
+              ☀️ {statusText} · Begränsade platser · {hasAvailableStarts ? 'Anmäl dig nu' : 'Kontakta oss'} 🌊
             </p>
           </div>
 
@@ -92,6 +90,15 @@ export const Hero = () => {
             setTestDate={setTestDate}
           />
 
+          {/* First Dynamic CTA - Urgent placement */}
+          <HeroDynamicCTA 
+            testMode={testMode}
+            testDate={testDate}
+            onRegistrationClick={handleRegistrationClick}
+            variant="urgent"
+            className="mb-6"
+          />
+
           {/* Start dates section with CTA buttons */}
           <HeroStartDates 
             testMode={testMode}
@@ -99,10 +106,28 @@ export const Hero = () => {
             onDateCardCTA={handleDateCardCTA}
           />
 
+          {/* Second Dynamic CTA - After dates */}
+          <HeroDynamicCTA 
+            testMode={testMode}
+            testDate={testDate}
+            onRegistrationClick={handleRegistrationClick}
+            variant="secondary"
+            className="mb-6"
+          />
+
           {/* Main CTA buttons */}
           <HeroCTAButtons 
             onQuizClick={handleQuizClick}
             onRegistrationClick={handleRegistrationClick}
+          />
+
+          {/* Third Dynamic CTA - Final push */}
+          <HeroDynamicCTA 
+            testMode={testMode}
+            testDate={testDate}
+            onRegistrationClick={handleRegistrationClick}
+            variant="primary"
+            className="mt-6"
           />
 
           {/* Mobile-optimized scroll indicator */}

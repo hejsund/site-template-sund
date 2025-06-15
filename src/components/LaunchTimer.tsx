@@ -1,14 +1,22 @@
 
 import React, { useState, useEffect } from 'react';
 import { Timer, Calendar } from 'lucide-react';
+import { useDynamicText } from '@/hooks/useDynamicText';
 
-export const LaunchTimer = () => {
+interface LaunchTimerProps {
+  testMode?: boolean;
+  testDate?: Date;
+}
+
+export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
+
+  const { timerText, hasAvailableStarts } = useDynamicText(testMode, testDate);
 
   useEffect(() => {
     // Set target date to June 22, 2025 at 23:59 Swedish time (CEST)
@@ -40,7 +48,7 @@ export const LaunchTimer = () => {
   const cutoffDate = new Date('2025-06-22T21:59:00Z'); // 23:59 CEST = 21:59 UTC
   const showExpiredContent = currentDate >= cutoffDate;
 
-  if (showExpiredContent) return null;
+  if (showExpiredContent && !testMode) return null;
 
   return (
     <div className="sticky top-0 z-[60] bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 shadow-lg">
@@ -55,7 +63,7 @@ export const LaunchTimer = () => {
           {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
         </div>
         <div className="text-xs md:text-sm bg-white/20 px-3 py-1 rounded-full">
-          Första start stänger 22 juni 23:59
+          {timerText}
         </div>
       </div>
     </div>
