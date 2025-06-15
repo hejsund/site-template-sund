@@ -18,6 +18,10 @@ export const FinalCTA = () => {
     pushToDataLayer("buyButton", { source: "final_cta" });
   };
 
+  const handleRegistrationClick = () => {
+    window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank');
+  };
+
   return (
     <section className="py-20 px-4 relative overflow-hidden">
       {/* Enhanced background with better mobile optimization */}
@@ -36,11 +40,20 @@ export const FinalCTA = () => {
         <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border border-white/50">
           <div className="mb-8">
             <div className="text-4xl mb-4">🌟✨🌻</div>
+            {/* UPDATED HEADING - FOCUSED ON REGISTRATION BEING OPEN */}
             <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800 font-display">
-              Redo att skapa din bästa sommar någonsin? 🌟
+              Säkra din plats innan första starten! 🌟
             </h2>
+            {/* ORIGINAL HEADING (SAVED FOR REFERENCE):
+            Redo att skapa din bästa sommar någonsin? 🌟
+            */}
+            
             <p className="text-xl text-green-700 mb-8 font-text">
+              {/* UPDATED COPY - FOCUSED ON WHAT THEY GET WHEN THEY REGISTER */}
+              När du säkrar din plats får du:
+              {/* ORIGINAL COPY (SAVED FOR REFERENCE):
               När vi öppnar dörrarna får du:
+              */}
             </p>
           </div>
 
@@ -56,12 +69,27 @@ export const FinalCTA = () => {
           <div className="space-y-4">
             <Link to="/quiz" onClick={handleQuizClick}>
               <Button className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 w-full md:w-auto">
+                {/* UPDATED CTA TEXT - FOCUSED ON TAKING ACTION NOW */}
+                Gör vårt quiz och säkra din plats
+                {/* ORIGINAL CTA TEXT (SAVED FOR REFERENCE):
                 Gör vårt quiz och hitta din väg
+                */}
               </Button>
             </Link>
             
+            <Button 
+              className="bg-primary hover:bg-primary/90 text-white font-semibold text-lg px-8 py-4 w-full md:w-auto ml-0 md:ml-4 mt-4 md:mt-0"
+              onClick={handleRegistrationClick}
+            >
+              Anmäl dig direkt
+            </Button>
+            
             <p className="text-sm text-green-600 mt-4 opacity-80 font-text">
+              {/* UPDATED MESSAGING - URGENCY FOCUSED */}
+              🌺 Begränsade platser · Säkra din plats idag 🌺
+              {/* ORIGINAL MESSAGING (SAVED FOR REFERENCE):
               🌺 Ingen stress, inga måsten – bara glädje och utveckling 🌺
+              */}
             </p>
           </div>
 

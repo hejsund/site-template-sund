@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Heart, Sparkles, Dumbbell, Sun, Waves, Calendar, ArrowRight } from 'lucide-react';
+import { Heart, Sparkles, Dumbbell, Sun, Waves, Calendar, ArrowRight, Users } from 'lucide-react';
 import { toast } from 'sonner';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -150,6 +150,41 @@ export const Hero = () => {
     window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank');
   };
 
+  // START DATES CONFIGURATION WITH AUTOMATIC BOOKING STATUS
+  // This section controls the start dates and their booking status based on current date
+  const startDates = [
+    {
+      date: '30 juni',
+      week: 'v.27',
+      fullDate: new Date('2025-06-30'),
+      bookedAfter: new Date('2025-06-23') // Marks as fully booked starting June 23rd
+    },
+    {
+      date: '7 juli',
+      week: 'v.28',
+      fullDate: new Date('2025-07-07'),
+      bookedAfter: new Date('2025-06-30') // Marks as fully booked starting June 30th
+    },
+    {
+      date: '14 juli',
+      week: 'v.29',
+      fullDate: new Date('2025-07-14'),
+      bookedAfter: new Date('2025-07-07') // Marks as fully booked starting July 7th
+    },
+    {
+      date: '21 juli',
+      week: 'v.30',
+      fullDate: new Date('2025-07-21'),
+      bookedAfter: new Date('2025-07-14') // Marks as fully booked starting July 14th
+    }
+  ];
+
+  // Check which dates should be marked as fully booked based on current date
+  const currentDate = new Date();
+  const getBookingStatus = (startDate: typeof startDates[0]) => {
+    return currentDate >= startDate.bookedAfter ? 'fully-booked' : 'available';
+  };
+
   return (
     <section className="min-h-screen gradient-green flex items-center justify-center px-3 sm:px-4 py-16 sm:py-20 relative overflow-hidden">
       {/* Enhanced summer background with better mobile positioning */}
@@ -189,51 +224,92 @@ export const Hero = () => {
               <span className="text-gradient block -mt-1 sm:-mt-2 md:-mt-4 leading-none">
                 <span className="block text-[clamp(2.5rem,10vw,6rem)] sm:text-6xl md:text-8xl">Sommarboosten</span>
                 <span className="block text-2xl sm:text-3xl md:text-4xl mt-1 sm:mt-2 text-green-700 font-bold">Anmälan är öppen!</span>
-              </span>
-            </div>
-          </div>
-          
-          {/* Launch version subtitle */}
-          <div className="mb-6 sm:mb-10 md:mb-12">
-            <p className="text-base sm:text-lg md:text-2xl text-green-600 max-w-3xl mx-auto leading-relaxed font-text font-medium px-2">
-              {/* OLD TEXT - COMMENTED FOR EASY RESTORATION: */}
-              {/* {currentPhase.description} */}
-              Gör denna sommar till din bästa någonsin! 6 veckor med träning, näring och glädje som passar dig och ditt liv.
-            </p>
-            <p className="text-sm sm:text-base text-green-600 mt-3 sm:mt-4 opacity-90 font-text">
-              ☀️ Träning som känns som lek · Näring utan förbud · Support varje dag 🌊
-            </p>
-          </div>
-
-          {/* Start dates information */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl max-w-lg sm:max-w-2xl mx-auto mb-6 sm:mb-8 border border-white/50">
-            <div className="text-center mb-4">
-              <Calendar className="w-8 h-8 text-green-600 mx-auto mb-2" />
-              <h3 className="text-lg sm:text-xl font-bold text-green-600 mb-3 font-display">
-                Årets starter är:
-              </h3>
-              <div className="space-y-2 text-green-700 font-text text-sm sm:text-base">
-                <div className="flex items-center justify-center gap-2">
-                  <span>📍</span>
-                  <span className="font-semibold">30 juni</span>
-                </div>
-                <div className="flex items-center justify-center gap-2">
-                  <span>📍</span>
-                  <span className="font-semibold">7 juli</span>
-                </div>
-                <div className="flex items-center justify-center gap-2">
-                  <span>📍</span>
-                  <span className="font-semibold">14 juli</span>
-                </div>
-                <div className="flex items-center justify-center gap-2">
-                  <span>📍</span>
-                  <span className="font-semibold">21 juli</span>
-                </div>
               </div>
             </div>
           </div>
+          
+          {/* Launch version subtitle - Updated CTAs focused on registration being open */}
+          <div className="mb-6 sm:mb-10 md:mb-12">
+            <p className="text-base sm:text-lg md:text-2xl text-green-600 max-w-3xl mx-auto leading-relaxed font-text font-medium px-2">
+              {/* ORIGINAL COPY (SAVED FOR REFERENCE):
+              {currentPhase.description}
+              Gör denna sommar till din bästa någonsin! 6 veckor med träning, näring och glädje som passar dig och ditt liv.
+              */}
+              
+              {/* UPDATED COPY - FOCUSED ON REGISTRATION BEING OPEN */}
+              Säkra din plats innan första starten! 6 veckor med träning, näring och glädje som passar dig och ditt liv.
+            </p>
+            <p className="text-sm sm:text-base text-green-600 mt-3 sm:mt-4 opacity-90 font-text">
+              ☀️ Anmälan är öppen · Begränsade platser · Första start snart 🌊
+            </p>
+          </div>
 
-          {/* Launch CTAs */}
+          {/* IMPROVED START DATES SECTION - Four individual boxes with week numbers and booking status */}
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl max-w-4xl mx-auto mb-6 sm:mb-8 border border-white/50">
+            <div className="text-center mb-6">
+              <Calendar className="w-8 h-8 text-green-600 mx-auto mb-3" />
+              <h3 className="text-lg sm:text-xl font-bold text-green-600 mb-2 font-display">
+                Välj din startdag - Anmälan pågår nu!
+              </h3>
+              <p className="text-sm text-green-700 opacity-80 font-text">
+                Säkra din plats innan det blir fullt
+              </p>
+            </div>
+            
+            {/* Four individual start date boxes */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {startDates.map((startDate, index) => {
+                const bookingStatus = getBookingStatus(startDate);
+                const isFullyBooked = bookingStatus === 'fully-booked';
+                
+                return (
+                  <div 
+                    key={index}
+                    className={`relative rounded-xl p-4 border-2 transition-all duration-200 ${
+                      isFullyBooked 
+                        ? 'bg-gray-100 border-gray-300 opacity-75' 
+                        : 'bg-gradient-to-br from-green-50 to-green-100 border-green-200 hover:border-green-300 hover:shadow-lg'
+                    }`}
+                  >
+                    {/* Fully booked badge */}
+                    {isFullyBooked && (
+                      <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
+                        <Users className="w-3 h-3" />
+                        FULLT
+                      </div>
+                    )}
+                    
+                    <div className="text-center">
+                      <div className="text-lg sm:text-xl font-bold text-green-800 mb-1 font-display">
+                        {startDate.date}
+                      </div>
+                      <div className="text-sm text-green-600 mb-2 font-text">
+                        ({startDate.week})
+                      </div>
+                      
+                      {isFullyBooked ? (
+                        <div className="text-xs text-gray-600 font-text">
+                          Denna start är full
+                        </div>
+                      ) : (
+                        <div className="text-xs text-green-700 font-semibold font-text">
+                          Platser kvar!
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            
+            <div className="mt-4 text-center">
+              <p className="text-xs sm:text-sm text-green-600 font-text opacity-80">
+                🌟 Alla starter inkluderar samma fantastiska innehåll · Välj det datum som passar dig bäst
+              </p>
+            </div>
+          </div>
+
+          {/* UPDATED CTAs - Focused on registration being open and securing spots */}
           <div className="space-y-4 max-w-lg mx-auto">
             <Button 
               className="cta-primary h-12 sm:h-14 w-full text-sm sm:text-lg px-6 sm:px-8 rounded-xl"
@@ -247,7 +323,7 @@ export const Hero = () => {
               onClick={handleRegistrationClick}
             >
               <span className="flex items-center justify-center gap-2">
-                Gå till anmälan
+                Säkra din plats nu
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </Button>

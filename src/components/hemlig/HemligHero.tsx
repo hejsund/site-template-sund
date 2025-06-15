@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -30,7 +31,11 @@ export const HemligHero: React.FC<HemligHeroProps> = ({
 
         <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 mb-12">
           <p className="text-green-800 font-text leading-relaxed mb-4">
+            {/* UPDATED MESSAGING - FOCUSED ON REGISTRATION BEING OPEN */}
+            <strong>Anmälan är nu öppen!</strong> Du hittar all information och kan säkra din plats på vår hemsida.
+            {/* ORIGINAL MESSAGING (SAVED FOR REFERENCE):
             <strong>Vill du läsa mer om Sommarboosten?</strong> Du hittar all information på vår hemsida.
+            */}
             {/* FUTURE UPDATE: "Anmälan är nu öppen! Läs mer och anmäl dig på vår hemsida." */}
           </p>
           <a 
@@ -39,7 +44,10 @@ export const HemligHero: React.FC<HemligHeroProps> = ({
             target="_blank"
             rel="noopener noreferrer"
           >
+            Säkra din plats på sommarboosten.se
+            {/* ORIGINAL LINK TEXT (SAVED FOR REFERENCE):
             Läs mer på sommarboosten.se
+            */}
             <ArrowRight className="ml-2 w-4 h-4" />
           </a>
         </div>
@@ -73,7 +81,11 @@ export const HemligHero: React.FC<HemligHeroProps> = ({
                   <span className="bg-green-600 text-white px-3 md:px-4 py-1 md:py-2 rounded-full font-bold text-base md:text-xl">50% RABATT</span>
                 </div>
                 <p className="text-green-800 font-semibold text-center text-sm md:text-base">
+                  {/* UPDATED URGENCY MESSAGING */}
+                  Säkra din plats med rabatt i <span className="font-black">{totalRemainingHours} timmar</span>
+                  {/* ORIGINAL MESSAGING (SAVED FOR REFERENCE):
                   Gäller endast i <span className="font-black">{totalRemainingHours} timmar</span> från att du klickade dig hit
+                  */}
                 </p>
               </div>
             </div>
@@ -90,7 +102,11 @@ export const HemligHero: React.FC<HemligHeroProps> = ({
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
                 <span className="relative flex items-center justify-center gap-2">
+                  {/* UPDATED CTA TEXT - FOCUSED ON SECURING SPOT */}
+                  Säkra din plats – 50% rabatt
+                  {/* ORIGINAL CTA TEXT (SAVED FOR REFERENCE):
                   Köp nu – 50% rabatt
+                  */}
                   <ArrowRight className="w-5 md:w-6 h-5 md:h-6" />
                 </span>
               </Button>
