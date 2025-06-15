@@ -43,7 +43,7 @@ export const LaunchTimer = () => {
   if (showExpiredContent) return null;
 
   return (
-    <div className="sticky top-0 z-50 bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 shadow-lg">
+    <div className="sticky top-0 z-[60] bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 shadow-lg">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
         <div className="flex items-center gap-2">
           <Calendar className="w-5 h-5" />

@@ -50,7 +50,7 @@ export const Navigation = () => {
   ];
 
   return (
-    <nav className="bg-white/95 backdrop-blur-sm border-b border-green-200 sticky top-0 z-50">
+    <nav className="bg-white/95 backdrop-blur-sm border-b border-green-200 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Updated Logo - Text only */}
@@ -72,7 +72,7 @@ export const Navigation = () => {
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-green-100 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-green-100 py-2 z-[70] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   {menu.items.map((item) => (
                     <Link
                       key={item.name}
@@ -111,7 +111,7 @@ export const Navigation = () => {
         {isOpen && (
           <div 
             id="mobile-menu"
-            className="md:hidden border-t border-green-200 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto"
+            className="md:hidden border-t border-green-200 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto z-[70]"
             role="navigation"
             aria-label="Huvudmeny"
           >
