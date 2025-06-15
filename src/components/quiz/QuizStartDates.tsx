@@ -11,10 +11,12 @@ interface StartDate {
 }
 
 interface QuizStartDatesProps {
+  testMode?: boolean;
+  testDate?: Date;
   onDateCardCTA: (stripeLink: string) => void;
 }
 
-export const QuizStartDates = ({ onDateCardCTA }: QuizStartDatesProps) => {
+export const QuizStartDates = ({ testMode = false, testDate, onDateCardCTA }: QuizStartDatesProps) => {
   // TODO: In future pre-launch phases, this component should be displayed instead of direct purchase links
   // Currently showing for launch phase with direct purchase functionality
   
@@ -50,11 +52,53 @@ export const QuizStartDates = ({ onDateCardCTA }: QuizStartDatesProps) => {
     }
   ];
 
-  // Use current date for booking status (no test mode in quiz)
-  const currentDate = new Date();
+  // Use test date if in test mode, otherwise use current date
+  const currentDate = testMode && testDate ? testDate : new Date();
   
   const getBookingStatus = (startDate: StartDate) => {
-    return currentDate >= startDate.bookedAfter ? 'fully-booked' : 'available';
+    // Check if registration is closed OR start date has passed
+    if (currentDate >= startDate.bookedAfter || currentDate >= startDate.fullDate) {
+      return 'fully-booked';
+    }
+    
+    const daysUntilBooked = Math.ceil((startDate.bookedAfter.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
+    
+    if (daysUntilBooked <= 3) {
+      return 'limited-spots';
+    } else {
+      return 'available';
+    }
+  };
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'fully-booked':
+        return 'Denna start är full';
+      case 'limited-spots':
+        return 'Begränsat antal kvar';
+      default:
+        return 'Platser kvar';
+    }
+  };
+
+  const getButtonText = (status: string) => {
+    switch (status) {
+      case 'fully-booked':
+        return 'Fullt';
+      default:
+        return 'Välj denna start';
+    }
+  };
+
+  const getButtonStyles = (status: string) => {
+    switch (status) {
+      case 'fully-booked':
+        return 'bg-gray-400 cursor-not-allowed';
+      case 'limited-spots':
+        return 'bg-yellow-600 hover:bg-yellow-700 text-white';
+      default:
+        return 'bg-green-600 hover:bg-green-700 text-white';
+    }
   };
 
   return (
@@ -74,6 +118,9 @@ export const QuizStartDates = ({ onDateCardCTA }: QuizStartDatesProps) => {
         {startDates.map((startDate, index) => {
           const bookingStatus = getBookingStatus(startDate);
           const isFullyBooked = bookingStatus === 'fully-booked';
+          const statusText = getStatusText(bookingStatus);
+          const buttonText = getButtonText(bookingStatus);
+          const buttonStyles = getButtonStyles(bookingStatus);
           
           return (
             <div 
@@ -81,6 +128,8 @@ export const QuizStartDates = ({ onDateCardCTA }: QuizStartDatesProps) => {
               className={`relative rounded-xl p-4 border-2 transition-all duration-200 ${
                 isFullyBooked 
                   ? 'bg-gray-100 border-gray-300 opacity-75' 
+                  : bookingStatus === 'limited-spots'
+                  ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200 hover:border-yellow-300 hover:shadow-lg'
                   : 'bg-gradient-to-br from-green-50 to-green-100 border-green-200 hover:border-green-300 hover:shadow-lg'
               }`}
             >
@@ -100,27 +149,25 @@ export const QuizStartDates = ({ onDateCardCTA }: QuizStartDatesProps) => {
                   ({startDate.week})
                 </div>
                 
-                {isFullyBooked ? (
-                  <div className="text-xs text-gray-600 font-text mb-3">
-                    Denna start är full
-                  </div>
-                ) : (
-                  <div className="text-xs text-green-700 font-semibold font-text mb-3">
-                    Platser kvar!
-                  </div>
-                )}
+                <div className="text-xs font-semibold font-text mb-3 min-h-[2rem] flex items-center justify-center">
+                  <span className={`${
+                    isFullyBooked 
+                      ? 'text-gray-600' 
+                      : bookingStatus === 'limited-spots'
+                      ? 'text-yellow-700'
+                      : 'text-green-700'
+                  }`}>
+                    {statusText}
+                  </span>
+                </div>
 
                 {/* CTA Button */}
                 <Button
                   onClick={() => onDateCardCTA(startDate.stripeLink)}
                   disabled={isFullyBooked}
-                  className={`w-full text-xs h-8 ${
-                    isFullyBooked 
-                      ? 'bg-gray-400 cursor-not-allowed' 
-                      : 'bg-green-600 hover:bg-green-700 text-white'
-                  }`}
+                  className={`w-full text-xs h-8 ${buttonStyles}`}
                 >
-                  {isFullyBooked ? 'Fullt' : 'Välj denna start'}
+                  {buttonText}
                 </Button>
               </div>
             </div>

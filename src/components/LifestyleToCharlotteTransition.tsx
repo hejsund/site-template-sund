@@ -14,7 +14,7 @@ export const LifestyleToCharlotteTransition = ({
   testDate, 
   onRegistrationClick 
 }: LifestyleToCharlotteTransitionProps) => {
-  const { urgencyText, hasAvailableStarts, daysUntilStart } = useDynamicText(testMode, testDate);
+  const { urgencyText, hasAvailableStarts, daysUntilStart, ctaText } = useDynamicText(testMode, testDate);
 
   return (
     <section className="py-12 sm:py-16 px-4 bg-gradient-to-br from-green-50 via-white to-green-50">
@@ -48,7 +48,7 @@ export const LifestyleToCharlotteTransition = ({
               className="cta-warm h-12 w-full sm:w-auto px-8 text-lg group"
             >
               <span className="flex items-center gap-2">
-                {hasAvailableStarts ? 'Säkra din plats nu' : 'Läs mer om programmet'}
+                {ctaText}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </Button>

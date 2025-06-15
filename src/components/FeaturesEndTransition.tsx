@@ -16,7 +16,7 @@ export const FeaturesEndTransition = ({
   onRegistrationClick,
   onQuizClick 
 }: FeaturesEndTransitionProps) => {
-  const { hasAvailableStarts, statusText, nextAvailableStart } = useDynamicText(testMode, testDate);
+  const { hasAvailableStarts, statusText, nextAvailableStart, ctaText } = useDynamicText(testMode, testDate);
 
   return (
     <section className="py-16 sm:py-20 px-4 bg-gradient-to-br from-white to-green-50">
@@ -73,7 +73,7 @@ export const FeaturesEndTransition = ({
                 className="bg-yellow-400 text-green-900 hover:bg-yellow-300 h-14 text-lg font-bold group"
               >
                 <span className="flex items-center gap-2">
-                  {hasAvailableStarts ? 'Säkra din plats' : 'Läs mer'}
+                  {ctaText}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>
