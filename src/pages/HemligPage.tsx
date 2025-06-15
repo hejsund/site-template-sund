@@ -12,8 +12,12 @@ import { HemligAuthoritySection } from '@/components/hemlig/HemligAuthoritySecti
 import { HemligObjectionSection } from '@/components/hemlig/HemligObjectionSection';
 import { HemligFinalCTA } from '@/components/hemlig/HemligFinalCTA';
 import { HemligLinksSection } from '@/components/hemlig/HemligLinksSection';
+import { HeroTestMode } from '@/components/hero/HeroTestMode';
 
 const HemligPage = () => {
+  const [testMode, setTestMode] = useState(false);
+  const [testDate, setTestDate] = useState<Date>(new Date());
+  
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -28,7 +32,8 @@ const HemligPage = () => {
     const targetDate = new Date('2025-06-15T21:59:00Z').getTime(); // 23:59 CEST = 21:59 UTC
     
     const updateTimer = () => {
-      const now = new Date().getTime();
+      const currentDate = testMode && testDate ? testDate : new Date();
+      const now = currentDate.getTime();
       const difference = targetDate - now;
       
       if (difference > 0) {
@@ -37,6 +42,13 @@ const HemligPage = () => {
           hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
           minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      } else {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
         });
       }
     };
@@ -47,11 +59,11 @@ const HemligPage = () => {
     // Note: Page view tracking is now handled globally in App.tsx
     
     return () => clearInterval(timer);
-  }, []);
+  }, [testMode, testDate]);
 
   // Check if current date is after June 15, 2025 23:59 Swedish time
   // TODO: On Monday, this page should be hidden/redirected as the hemlig offer expires
-  const currentDate = new Date();
+  const currentDate = testMode && testDate ? testDate : new Date();
   const cutoffDate = new Date('2025-06-15T21:59:00Z'); // 23:59 CEST = 21:59 UTC
   const showExpiredContent = currentDate >= cutoffDate;
 
@@ -74,6 +86,14 @@ const HemligPage = () => {
       <div style={{ display: 'none' }}>
         <meta name="robots" content="noindex, nofollow" />
       </div>
+      
+      {/* Test Mode Toggle */}
+      <HeroTestMode 
+        testMode={testMode}
+        setTestMode={setTestMode}
+        testDate={testDate}
+        setTestDate={setTestDate}
+      />
       
       <HemligTimer 
         timeLeft={timeLeft}
