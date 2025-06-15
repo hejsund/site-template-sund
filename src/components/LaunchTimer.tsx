@@ -16,7 +16,7 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
     seconds: 0
   });
 
-  const { timerText, hasAvailableStarts } = useDynamicText(testMode, testDate);
+  const { timerText, hasAvailableStarts, statusText } = useDynamicText(testMode, testDate);
 
   useEffect(() => {
     // Set target date to June 22, 2025 at 23:59 Swedish time (CEST)
@@ -44,11 +44,20 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
   }, []);
 
   // Check if current date is after June 22, 2025 23:59 Swedish time
-  const currentDate = new Date();
+  const currentDate = testMode && testDate ? testDate : new Date();
   const cutoffDate = new Date('2025-06-22T21:59:00Z'); // 23:59 CEST = 21:59 UTC
   const showExpiredContent = currentDate >= cutoffDate;
 
   if (showExpiredContent && !testMode) return null;
+
+  // Dynamic main text based on availability
+  const getMainText = () => {
+    if (hasAvailableStarts) {
+      return 'Kampanj pågår. Anmälan har öppnat!';
+    } else {
+      return 'Kampanj avslutad. Anmälan stängd.';
+    }
+  };
 
   return (
     <div className="sticky top-0 z-[60] bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 shadow-lg">
@@ -56,7 +65,7 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
         <div className="flex items-center gap-2">
           <Calendar className="w-5 h-5" />
           <span className="font-bold text-sm md:text-base text-center">
-            Kampanj pågår. Anmälan har öppnat!
+            {getMainText()}
           </span>
         </div>
         <div className="font-bold text-sm md:text-base">
