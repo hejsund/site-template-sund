@@ -86,7 +86,7 @@ export const QuizStartDates = ({ testMode = false, testDate, onDateCardCTA }: Qu
       case 'fully-booked':
         return 'Fullt';
       default:
-        return 'Välj denna start';
+        return 'Välj';
     }
   };
 
@@ -175,20 +175,7 @@ export const QuizStartDates = ({ testMode = false, testDate, onDateCardCTA }: Qu
         })}
       </div>
       
-      <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
-        <h4 className="text-sm font-semibold text-blue-800 mb-2">📧 Viktigt att veta:</h4>
-        <p className="text-xs text-blue-700 mb-2">
-          En unik köplänk med din 30% rabattkod skickas till din e-post inom kort.
-        </p>
-        <p className="text-xs text-blue-700">
-          Har du inte fått din rabattkod? Mejla oss på{' '}
-          <a href="mailto:hej@sundochstark.se" className="font-semibold underline">
-            hej@sundochstark.se
-          </a>
-        </p>
-      </div>
-      
-      <div className="mt-4 text-center">
+      <div className="text-center mt-6">
         <p className="text-xs sm:text-sm text-green-600 font-text opacity-80">
           🌟 Alla starter inkluderar samma fantastiska innehåll · Välj det datum som passar dig bäst
         </p>
