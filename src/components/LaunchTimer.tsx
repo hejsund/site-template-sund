@@ -23,13 +23,11 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
       const currentDate = testMode && testDate ? testDate : new Date();
       let targetDate: number;
 
-      if (nextAvailableStart) {
-        // Timer counts down to when the next available start closes for registration
-        targetDate = nextAvailableStart.bookedAfter.getTime();
-      } else {
-        // Fallback to original date if no starts available
-        targetDate = new Date('2025-06-22T21:59:00Z').getTime();
-      }
+      // Set target date to 7 days from now
+      const sevenDaysFromNow = new Date();
+      sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
+      sevenDaysFromNow.setHours(21, 59, 0, 0); // Set to 21:59 UTC (23:59 CEST)
+      targetDate = sevenDaysFromNow.getTime();
       
       const now = currentDate.getTime();
       const difference = targetDate - now;
