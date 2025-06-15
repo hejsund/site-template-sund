@@ -16,7 +16,7 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
     seconds: 0
   });
 
-  const { timerText, hasAvailableStarts, statusText, nextAvailableStart, firstBookedStart } = useDynamicText(testMode, testDate);
+  const { timerText, hasAvailableStarts, statusText, nextAvailableStart, firstBookedStart, mainText } = useDynamicText(testMode, testDate);
 
   useEffect(() => {
     const updateTimer = () => {
@@ -64,26 +64,13 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
 
   if (showExpiredContent && !testMode) return null;
 
-  // Dynamic main text based on availability and booking status
-  const getMainText = () => {
-    if (firstBookedStart && nextAvailableStart) {
-      return `Första starten är stängd! Anmäl dig till ${nextAvailableStart.date}`;
-    } else if (hasAvailableStarts && nextAvailableStart) {
-      return `Kampanj pågår. Anmäl dig till start ${nextAvailableStart.date}!`;
-    } else if (firstBookedStart) {
-      return 'Alla starter är stängda. Kontakta oss för mer info.';
-    } else {
-      return 'Kampanj avslutad. Anmälan stängd.';
-    }
-  };
-
   return (
     <div className="sticky top-0 z-[60] bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 shadow-lg">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
         <div className="flex items-center gap-2">
           <Calendar className="w-5 h-5" />
           <span className="font-bold text-sm md:text-base text-center">
-            {getMainText()}
+            {mainText}
           </span>
         </div>
         <div className="font-bold text-sm md:text-base">

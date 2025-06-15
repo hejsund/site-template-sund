@@ -53,11 +53,14 @@ export const HeroStartDates = ({ testMode = false, testDate, onDateCardCTA }: He
   const currentDate = testMode && testDate ? testDate : new Date();
   
   const getBookingStatus = (startDate: StartDate) => {
+    // Check if registration is closed OR start date has passed
+    if (currentDate >= startDate.bookedAfter || currentDate >= startDate.fullDate) {
+      return 'fully-booked';
+    }
+    
     const daysUntilBooked = Math.ceil((startDate.bookedAfter.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
     
-    if (currentDate >= startDate.bookedAfter) {
-      return 'fully-booked';
-    } else if (daysUntilBooked <= 3) {
+    if (daysUntilBooked <= 3) {
       return 'limited-spots';
     } else {
       return 'available';

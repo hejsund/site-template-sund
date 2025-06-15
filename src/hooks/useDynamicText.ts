@@ -44,18 +44,18 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
   return useMemo(() => {
     const currentDate = testMode && testDate ? testDate : new Date();
     
-    // Find next available start (registration still open AND start date hasn't passed)
+    // Find next available start (registration still open AND start date is in the future)
     const nextAvailableStart = startDates.find(start => 
-      currentDate < start.bookedAfter && currentDate <= start.fullDate
+      currentDate < start.bookedAfter && currentDate < start.fullDate
     );
     
-    // Find first start that's already booked (registration closed)
+    // Find first start that's already booked (registration closed OR start date has passed)
     const firstBookedStart = startDates.find(start => 
-      currentDate >= start.bookedAfter
+      currentDate >= start.bookedAfter || currentDate >= start.fullDate
     );
     
     // Calculate days until next start
-    const nextStartDate = nextAvailableStart ? nextAvailableStart.fullDate : startDates[0].fullDate;
+    const nextStartDate = nextAvailableStart ? nextAvailableStart.fullDate : startDates[startDates.length - 1].fullDate;
     const daysUntilStart = Math.ceil((nextStartDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
     
     // Generate dynamic texts
@@ -101,11 +101,24 @@ export const useDynamicText = (testMode: boolean = false, testDate?: Date) => {
       }
     };
 
+    const getMainText = () => {
+      if (firstBookedStart && nextAvailableStart) {
+        return `Tidigare starter är stängda! Anmäl dig till ${nextAvailableStart.date}`;
+      } else if (nextAvailableStart) {
+        return `Kampanj pågår. Anmäl dig till start ${nextAvailableStart.date}!`;
+      } else if (firstBookedStart) {
+        return 'Alla starter är stängda. Kontakta oss för mer info.';
+      } else {
+        return 'Kampanj avslutad. Anmälan stängd.';
+      }
+    };
+
     return {
       timerText: getTimerText(),
       urgencyText: getUrgencyText(),
       ctaText: getCtaText(),
       statusText: getStatusText(),
+      mainText: getMainText(),
       nextAvailableStart,
       firstBookedStart,
       daysUntilStart,
