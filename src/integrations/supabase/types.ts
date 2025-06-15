@@ -312,6 +312,186 @@ export type Database = {
         }
         Relationships: []
       }
+      "tona-articles": {
+        Row: {
+          author: string | null
+          category: string
+          content: string
+          created_at: string | null
+          excerpt: string
+          featured: boolean | null
+          featured_image_url: string | null
+          id: string
+          meta_description: string | null
+          meta_title: string | null
+          published: boolean | null
+          read_time: string
+          slug: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author?: string | null
+          category: string
+          content: string
+          created_at?: string | null
+          excerpt: string
+          featured?: boolean | null
+          featured_image_url?: string | null
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          published?: boolean | null
+          read_time: string
+          slug: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author?: string | null
+          category?: string
+          content?: string
+          created_at?: string | null
+          excerpt?: string
+          featured?: boolean | null
+          featured_image_url?: string | null
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          published?: boolean | null
+          read_time?: string
+          slug?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      "tona-contact-submissions": {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          message: string
+          name: string
+          responded: boolean | null
+          source_page: string | null
+          subject: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          message: string
+          name: string
+          responded?: boolean | null
+          source_page?: string | null
+          subject?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          responded?: boolean | null
+          source_page?: string | null
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      "tona-newsletter-subscribers": {
+        Row: {
+          active: boolean | null
+          email: string
+          id: string
+          name: string | null
+          preferences: Json | null
+          source: string | null
+          subscribed_at: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          email: string
+          id?: string
+          name?: string | null
+          preferences?: Json | null
+          source?: string | null
+          subscribed_at?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          email?: string
+          id?: string
+          name?: string | null
+          preferences?: Json | null
+          source?: string | null
+          subscribed_at?: string | null
+        }
+        Relationships: []
+      }
+      "tona-quiz-responses": {
+        Row: {
+          answers: Json
+          created_at: string | null
+          email: string | null
+          follow_up_consent: boolean | null
+          id: string
+          result_profile: string
+          session_id: string | null
+        }
+        Insert: {
+          answers: Json
+          created_at?: string | null
+          email?: string | null
+          follow_up_consent?: boolean | null
+          id?: string
+          result_profile: string
+          session_id?: string | null
+        }
+        Update: {
+          answers?: Json
+          created_at?: string | null
+          email?: string | null
+          follow_up_consent?: boolean | null
+          id?: string
+          result_profile?: string
+          session_id?: string | null
+        }
+        Relationships: []
+      }
+      "tona-testimonials": {
+        Row: {
+          approved: boolean | null
+          author_context: string | null
+          author_name: string
+          created_at: string | null
+          featured: boolean | null
+          id: string
+          program: string | null
+          quote: string
+        }
+        Insert: {
+          approved?: boolean | null
+          author_context?: string | null
+          author_name: string
+          created_at?: string | null
+          featured?: boolean | null
+          id?: string
+          program?: string | null
+          quote: string
+        }
+        Update: {
+          approved?: boolean | null
+          author_context?: string | null
+          author_name?: string
+          created_at?: string | null
+          featured?: boolean | null
+          id?: string
+          program?: string | null
+          quote?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

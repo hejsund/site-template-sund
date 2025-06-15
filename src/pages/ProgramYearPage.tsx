@@ -63,7 +63,14 @@ const ProgramYearPage = () => {
       }
 
       console.log('Lead saved successfully with ID:', data.id);
-      toast.success(`Tack! Du kommer att höra från oss snart med mer information om Sommarboosten ${programYear}! 🌟`);
+      
+      // UPDATED SUCCESS MESSAGE - OLD: "Tack! Du kommer att höra från oss snart med mer information om Sommarboosten"
+      // NEW LAUNCH TEXT:
+      toast.success(`Anmälan är öppen! Välkommen till Sommarboosten ${programYear}! 🌟`);
+      // FUTURE TEXT OPTIONS (COMMENTED):
+      // toast.success(`Anmälan har stängd! Håll utkik efter nästa års Sommarboosten! 🌟`);
+      // toast.success(`Nu pågår Sommarboosten. Det finns fortfarande möjlighet att anmäla sig! 🌟`);
+      
       setEmail('');
     } catch (error) {
       console.error('Error:', error);
@@ -117,10 +124,21 @@ const ProgramYearPage = () => {
           )}
           
           <p className="text-xl text-green-700 max-w-3xl mx-auto mb-8 font-text">
-            {isCurrentYear 
+            {/* OLD TEXT - COMMENTED FOR EASY RESTORATION: */}
+            {/* {isCurrentYear 
               ? `${currentPhase.description} Gör denna ${currentPhase.seasonText} till din bästa någonsin!`
               : `Planera för sommaren ${programYear} och gör den till din bästa någonsin!`
+            } */}
+            
+            {/* NEW LAUNCH TEXT: */}
+            {isCurrentYear 
+              ? `Anmälan är öppen! Gör denna sommar till din bästa någonsin med 6 veckor av träning, näring och glädje!`
+              : `Anmälan är öppen för sommaren ${programYear}! Gör den till din bästa någonsin!`
             }
+            
+            {/* FUTURE TEXT OPTIONS (COMMENTED): */}
+            {/* Anmälan har stängd! Håll utkik efter nästa års program. */}
+            {/* Nu pågår Sommarboosten. Det finns fortfarande möjlighet att anmäla sig! */}
           </p>
 
           {/* Email signup form */}
@@ -141,7 +159,11 @@ const ProgramYearPage = () => {
                   className="cta-primary h-12 flex-1 text-lg rounded-xl"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Skickar...' : 'Påminn mig'}
+                  {/* OLD TEXT: {isSubmitting ? 'Skickar...' : 'Påminn mig'} */}
+                  {/* NEW LAUNCH TEXT: */}
+                  {isSubmitting ? 'Skickar...' : 'Anmäl dig'}
+                  {/* FUTURE TEXT OPTIONS (COMMENTED): */}
+                  {/* {isSubmitting ? 'Skickar...' : 'Få info om nästa år'} */}
                 </Button>
                 <Button 
                   type="button" 

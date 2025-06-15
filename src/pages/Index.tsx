@@ -1,4 +1,5 @@
 
+import { LaunchTimer } from '@/components/LaunchTimer';
 import { Hero } from '@/components/Hero';
 import { CharlotteIntro } from '@/components/CharlotteIntro';
 import { LifestyleGallery } from '@/components/LifestyleGallery';
@@ -12,6 +13,7 @@ import { FooterSection } from '@/components/FooterSection';
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <LaunchTimer />
       <Hero />
       <CharlotteIntro />
       <LifestyleGallery />

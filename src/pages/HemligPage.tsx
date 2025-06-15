@@ -24,6 +24,7 @@ const HemligPage = () => {
   useEffect(() => {
     // Set target date to June 15, 2025 at 23:59 Swedish time (CEST)
     // Convert to UTC by subtracting 2 hours (CEST is UTC+2 in summer)
+    // NOTE: This page should be CLOSED/HIDDEN on Monday - add redirect or hide content
     const targetDate = new Date('2025-06-15T21:59:00Z').getTime(); // 23:59 CEST = 21:59 UTC
     
     const updateTimer = () => {
@@ -49,9 +50,15 @@ const HemligPage = () => {
   }, []);
 
   // Check if current date is after June 15, 2025 23:59 Swedish time
+  // TODO: On Monday, this page should be hidden/redirected as the hemlig offer expires
   const currentDate = new Date();
   const cutoffDate = new Date('2025-06-15T21:59:00Z'); // 23:59 CEST = 21:59 UTC
   const showExpiredContent = currentDate >= cutoffDate;
+
+  // TODO FOR MONDAY: Add redirect or show "offer expired" message
+  // if (showExpiredContent) {
+  //   return <div>Erbjudandet har löpt ut</div>;
+  // }
 
   // Calculate total remaining hours for dynamic display
   const totalRemainingHours = timeLeft.days * 24 + timeLeft.hours;

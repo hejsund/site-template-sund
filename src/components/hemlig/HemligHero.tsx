@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,12 +21,17 @@ export const HemligHero: React.FC<HemligHeroProps> = ({
         </h1>
         
         <p className="text-xl md:text-2xl text-green-700 mb-8 font-text leading-relaxed max-w-3xl mx-auto">
+          {/* OLD TEXT - KEEPING FOR HEMLIG PAGE: */}
           Det här är bara för dig som sett föreläsningen eller vill se den i efterhand. Föreläsningen hittar du längre ner på sidan. Som utlovat så får du 50% rabatt på vårt sommar-program och det är precis vad föreläsningen handlar om.
+          
+          {/* NOTE: When main launch happens, consider updating this text to: */}
+          {/* "Anmälan är nu öppen för alla! Du som var med på föreläsningen får fortfarande din 50% rabatt." */}
         </p>
 
         <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 mb-12">
           <p className="text-green-800 font-text leading-relaxed mb-4">
             <strong>Vill du läsa mer om Sommarboosten?</strong> Du hittar all information på vår hemsida.
+            {/* FUTURE UPDATE: "Anmälan är nu öppen! Läs mer och anmäl dig på vår hemsida." */}
           </p>
           <a 
             href="https://sommarboosten.se" 
@@ -98,6 +102,8 @@ export const HemligHero: React.FC<HemligHeroProps> = ({
           <p className="text-green-800 font-text leading-relaxed">
             <strong>Viktigt:</strong> Den här sidan är personlig och stängs när nedräkningen når noll. 
             Erbjudandet gäller max {totalRemainingHours} timmar från att du kom hit – eller tills 15 juni kl. 23:59.
+            {/* NOTE FOR MONDAY: This entire hemlig page should be closed/hidden */}
+            {/* FUTURE TEXT: "Detta specialerbjudande har löpt ut. Anmälan är nu öppen för alla på ordinarie pris." */}
           </p>
         </div>
       </div>
