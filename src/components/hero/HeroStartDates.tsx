@@ -7,6 +7,7 @@ interface StartDate {
   week: string;
   fullDate: Date;
   bookedAfter: Date;
+  stripeLink: string;
 }
 
 interface HeroStartDatesProps {
@@ -16,31 +17,35 @@ interface HeroStartDatesProps {
 }
 
 export const HeroStartDates = ({ testMode = false, testDate, onDateCardCTA }: HeroStartDatesProps) => {
-  // START DATES CONFIGURATION WITH AUTOMATIC BOOKING STATUS
+  // START DATES CONFIGURATION WITH AUTOMATIC BOOKING STATUS AND STRIPE LINKS
   const startDates: StartDate[] = [
     {
       date: '30 juni',
       week: 'v.27',
       fullDate: new Date('2025-06-30'),
-      bookedAfter: new Date('2025-06-23')
+      bookedAfter: new Date('2025-06-23'),
+      stripeLink: 'https://buy.stripe.com/4gM8wQe4ngdMaF4bTjasg0b'
     },
     {
       date: '7 juli',
       week: 'v.28',
       fullDate: new Date('2025-07-07'),
-      bookedAfter: new Date('2025-06-30')
+      bookedAfter: new Date('2025-06-30'),
+      stripeLink: 'https://buy.stripe.com/fZu5kEbWf7HgeVk6yZasg0f'
     },
     {
       date: '14 juli',
       week: 'v.29',
       fullDate: new Date('2025-07-14'),
-      bookedAfter: new Date('2025-07-07')
+      bookedAfter: new Date('2025-07-07'),
+      stripeLink: 'https://buy.stripe.com/cNi8wQ3pJ8LkcNcf5vasg0g'
     },
     {
       date: '21 juli',
       week: 'v.30',
       fullDate: new Date('2025-07-21'),
-      bookedAfter: new Date('2025-07-14')
+      bookedAfter: new Date('2025-07-14'),
+      stripeLink: 'https://buy.stripe.com/8x27sMf8r6DcbJ82iJasg0h'
     }
   ];
 
@@ -49,6 +54,10 @@ export const HeroStartDates = ({ testMode = false, testDate, onDateCardCTA }: He
   
   const getBookingStatus = (startDate: StartDate) => {
     return currentDate >= startDate.bookedAfter ? 'fully-booked' : 'available';
+  };
+
+  const handleDateCardCTA = (stripeLink: string) => {
+    window.open(stripeLink, '_blank');
   };
 
   return (
@@ -106,7 +115,7 @@ export const HeroStartDates = ({ testMode = false, testDate, onDateCardCTA }: He
 
                 {/* CTA Button */}
                 <Button
-                  onClick={onDateCardCTA}
+                  onClick={() => handleDateCardCTA(startDate.stripeLink)}
                   disabled={isFullyBooked}
                   className={`w-full text-xs h-8 ${
                     isFullyBooked 
