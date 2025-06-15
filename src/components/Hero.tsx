@@ -224,7 +224,7 @@ export const Hero = () => {
               <span className="text-gradient block -mt-1 sm:-mt-2 md:-mt-4 leading-none">
                 <span className="block text-[clamp(2.5rem,10vw,6rem)] sm:text-6xl md:text-8xl">Sommarboosten</span>
                 <span className="block text-2xl sm:text-3xl md:text-4xl mt-1 sm:mt-2 text-green-700 font-bold">Anmälan är öppen!</span>
-              </div>
+              </span>
             </div>
           </div>
           
