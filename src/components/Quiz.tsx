@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { pushToDataLayer, handleEmailSubmit } from '@/utils/pushToDataLayer';
 import { logLead } from '@/utils/facebookEvents';
 import { warmupListenerService } from '@/utils/listenerWarmup';
+import { QuizStartDates } from './quiz/QuizStartDates';
 
 interface Question {
   id: number;
@@ -277,6 +278,10 @@ export const Quiz = () => {
 
   const progress = showResult ? 100 : ((currentQuestion + 1) / questions.length) * 100;
 
+  const handleDateCardCTA = (stripeLink: string) => {
+    window.open(stripeLink, '_blank');
+  };
+
   if (showResult) {
     const recommendation = getRecommendation();
     const genderText = 'Hej fina du!';
@@ -313,6 +318,11 @@ export const Quiz = () => {
                 {recommendation.program}
               </p>
             </div>
+
+            {/* Add start dates component for recommended users */}
+            {recommendation.recommended && !emailSubmitted && (
+              <QuizStartDates onDateCardCTA={handleDateCardCTA} />
+            )}
 
             {recommendation.recommended && !emailSubmitted && (
               <div className="bg-coral-50 rounded-xl p-6 mb-6">

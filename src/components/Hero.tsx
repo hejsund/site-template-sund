@@ -90,44 +90,38 @@ export const Hero = () => {
             setTestDate={setTestDate}
           />
 
-          {/* First Dynamic CTA - Urgent placement */}
+          {/* CTA 1: Primary call-to-action - TOP of hero section */}
+          {/* Connected to test timer: YES - shows urgency based on dynamic text */}
           <HeroDynamicCTA 
             testMode={testMode}
             testDate={testDate}
             onRegistrationClick={handleRegistrationClick}
             variant="urgent"
-            className="mb-6"
+            className="mb-8"
           />
 
-          {/* Start dates section with CTA buttons */}
+          {/* Start dates section with individual CTA buttons */}
           <HeroStartDates 
             testMode={testMode}
             testDate={testDate}
             onDateCardCTA={handleDateCardCTA}
           />
 
-          {/* Second Dynamic CTA - After dates */}
+          {/* CTA 2: Secondary action - AFTER showing start dates */}
+          {/* Connected to test timer: YES - adapts based on availability */}
           <HeroDynamicCTA 
             testMode={testMode}
             testDate={testDate}
             onRegistrationClick={handleRegistrationClick}
             variant="secondary"
-            className="mb-6"
+            className="mb-8"
           />
 
-          {/* Main CTA buttons */}
+          {/* CTA 3: Main action buttons - MIDDLE of content */}
+          {/* Connected to test timer: NO - these are static quiz and registration buttons */}
           <HeroCTAButtons 
             onQuizClick={handleQuizClick}
             onRegistrationClick={handleRegistrationClick}
-          />
-
-          {/* Third Dynamic CTA - Final push */}
-          <HeroDynamicCTA 
-            testMode={testMode}
-            testDate={testDate}
-            onRegistrationClick={handleRegistrationClick}
-            variant="primary"
-            className="mt-6"
           />
 
           {/* Mobile-optimized scroll indicator */}
