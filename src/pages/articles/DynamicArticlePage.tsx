@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, User, Mail } from 'lucide-react';
@@ -203,22 +204,20 @@ const DynamicArticlePage = () => {
         </div>
       </section>
 
-      {/* Email Signup - Only show if article has email signup fields */}
-      {(article.email_signup_title || article.email_signup_description) && (
-        <section className="py-16 px-3 sm:px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white border-2 border-green-200 p-6 sm:p-8 rounded-2xl shadow-lg">
-              <div className="flex items-center gap-3 mb-4">
-                <Mail className="w-6 h-6 text-green-600" />
-                <h3 className="text-xl sm:text-2xl font-black font-display text-green-800">
-                  {article.email_signup_title || 'Få våra bästa tips!'}
-                </h3>
-              </div>
-              <p className="text-sm sm:text-base mb-6 text-green-700 font-text">
-                {article.email_signup_description || 'Praktiska tips för hälsosam näring utan dåligt samvete.'}
-              </p>
-              
-              <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto space-y-3 sm:space-y-0 sm:flex sm:gap-3">
+      {/* Email Signup - Always show with default or custom content */}
+      <section className="py-16 px-3 sm:px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-green-100 to-green-200 rounded-3xl p-10 border-2 border-green-300 text-center">
+            <Mail className="w-12 h-12 text-green-700 mx-auto mb-6" />
+            <h2 className="text-3xl font-bold text-green-800 mb-6 font-display">
+              {article.email_signup_title || 'Få fler tips inom kost! ⭐'}
+            </h2>
+            <p className="text-lg text-green-700 mb-8 font-text">
+              {article.email_signup_description || 'Få praktiska råd och inspiration direkt i din inkorg.'}
+            </p>
+            
+            <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Input
                   type="email"
                   placeholder="Din e-postadress..."
@@ -233,13 +232,37 @@ const DynamicArticlePage = () => {
                   className="bg-green-600 text-white hover:bg-green-700 h-12 w-full sm:w-auto text-sm sm:text-base px-6 rounded-xl font-semibold"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Skickar...' : (article.email_signup_button_text || 'Skicka tips! 📧')}
+                  {isSubmitting ? 'Skickar...' : (article.email_signup_button_text || 'Skicka!')}
                 </Button>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
+
+      {/* CTA Section - Always show */}
+      <section className="py-16 px-3 sm:px-4 bg-gradient-to-r from-primary/5 to-coral/5">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-6 text-primary font-display">
+            Redo att ta nästa steg? ⭐
+          </h2>
+          <p className="text-base sm:text-lg mb-8 text-green-700 font-text">
+            Ta vårt quiz och få personliga rekommendationer för din hälsoresa.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/quiz">
+              <Button className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
+                Ta vårt quiz
+              </Button>
+            </Link>
+            <Link to="/om-sommarboosten">
+              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
+                Läs om Sommarboosten
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
