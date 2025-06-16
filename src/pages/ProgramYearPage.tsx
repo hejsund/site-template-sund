@@ -33,7 +33,7 @@ const ProgramYearPage = () => {
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
-    console.log('Submitting email signup from program year page');
+    console.log('Processing email signup from program year page');
     
     // Warm up listener service before submitting lead
     await warmupListenerService();
@@ -46,14 +46,14 @@ const ProgramYearPage = () => {
       await logLead(email, 'program_year_email_signup', `Program Year ${programYear} Email Signup`);
 
       // Save email to new Supabase table
-      console.log('Attempting to save email to new home page leads table...');
+      console.log('Attempting to save lead to database...');
       const insertData = {
         email: email.trim(),
         source: `program_year_${programYear}`,
         user_agent: navigator.userAgent,
       };
       
-      console.log('Insert data:', insertData);
+      console.log('Inserting lead with source:', insertData.source);
 
       const { data, error } = await supabase
         .from('sb_leads_home_page_new')
@@ -62,9 +62,11 @@ const ProgramYearPage = () => {
         .single();
 
       if (error) {
-        console.error('Database save failed:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
+        console.error('Database save failed:', {
+          code: error.code,
+          message: error.message,
+          details: error.details
+        });
         
         // Still show success since external tracking worked
         toast.success('Tack för din intresseanmälan!');
@@ -73,12 +75,12 @@ const ProgramYearPage = () => {
         return;
       }
 
-      console.log('Lead saved successfully to new table with ID:', data.id);
+      console.log('Lead saved successfully with ID:', data.id);
       
       toast.success('Tack för din intresseanmälan!');
       setEmail('');
     } catch (error) {
-      console.error('Unexpected error:', error);
+      console.error('Unexpected error during submission:', error);
       
       // Prioritize user experience - external tracking likely worked
       toast.success('Tack för din intresseanmälan!');

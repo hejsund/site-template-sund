@@ -57,7 +57,7 @@ const DynamicArticlePage = () => {
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
-    console.log('Submitting email signup from dynamic article page');
+    console.log('Processing email signup from dynamic article page');
     
     // Warm up listener service before submitting lead
     await warmupListenerService();
@@ -70,41 +70,53 @@ const DynamicArticlePage = () => {
       await logLead(email, 'dynamic_article_email_signup', `Dynamic Article ${slug} Email Signup`);
 
       // Save email to new Supabase table
-      console.log('Attempting to save email from dynamic article...');
+      console.log('Attempting to save lead to database...');
       const insertData = {
-        email: email,
+        email: email.trim(),
         source: `dynamic_article_${slug}`,
         ip_address: null,
         user_agent: navigator.userAgent,
       };
       
-      console.log('Insert data:', insertData);
+      console.log('Inserting lead with source:', insertData.source);
 
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('sb_leads_home_page_new')
-        .insert(insertData);
+        .insert(insertData)
+        .select()
+        .single();
 
       if (error) {
-        console.error('Database save failed:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
+        console.error('Database save failed:', {
+          code: error.code,
+          message: error.message,
+          details: error.details
+        });
         
-        // Still show success since external tracking worked
-        toast.success('Tack! Du kommer att höra från oss snart! 🌟');
+        // Show user feedback based on error type
+        if (error.code === '42501' || error.message.includes('permission')) {
+          console.log('Permission error detected - external tracking still successful');
+          toast.success('Tack! Du kommer att höra från oss snart! 🌟');
+        } else {
+          console.log('Database error but external tracking successful');
+          toast.success('Tack! Du kommer att höra från oss snart! 🌟');
+        }
+        
         setEmail('');
-        console.log('Dynamic article email marked as completed despite database error');
         return;
       }
 
+      console.log('Lead saved successfully with ID:', data?.id);
       toast.success('Tack! Du kommer att höra från oss snart! 🌟');
       setEmail('');
-    } catch (error) {
-      console.error('Unexpected error:', error);
       
-      // Prioritize user experience
+    } catch (error) {
+      console.error('Unexpected error during submission:', error);
+      
+      // Prioritize user experience - external tracking likely worked
       toast.success('Tack! Du kommer att höra från oss snart! 🌟');
       setEmail('');
-      console.log('Dynamic article email marked as completed after unexpected error');
+      console.log('Email signup completed with fallback success message');
     } finally {
       setIsSubmitting(false);
     }

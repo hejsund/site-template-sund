@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
@@ -73,7 +74,7 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
     if (!userData.email || isSubmitting) return;
 
     setIsSubmitting(true);
-    console.log('Submitting email from quiz');
+    console.log('Processing quiz email submission');
     
     // Warm up listener service before submitting lead
     await warmupListenerService();
@@ -88,7 +89,7 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
       const recommendation = getRecommendation(score, flags, answers);
       
       // Save quiz result to new Supabase table
-      console.log('Attempting to save quiz result to new database table...');
+      console.log('Attempting to save quiz result to database...');
       const insertData = {
         email: userData.email.trim(),
         age: userData.age,
@@ -100,7 +101,7 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
         source: 'quiz'
       };
       
-      console.log('Insert data prepared:', insertData);
+      console.log('Inserting quiz lead with recommendation:', recommendation.type);
       
       const { data, error } = await supabase
         .from('sb_leads_quiz_new')
@@ -109,9 +110,11 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
         .single();
 
       if (error) {
-        console.error('Database save failed with error:', error);
-        console.error('Error code:', error.code);
-        console.error('Error message:', error.message);
+        console.error('Database save failed:', {
+          code: error.code,
+          message: error.message,
+          details: error.details
+        });
         
         // Still mark as submitted since the lead tracking worked
         // The external tracking (GTM + Facebook) is more important than local storage
@@ -127,7 +130,7 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
         return;
       }
 
-      console.log('Quiz results saved successfully to new database with ID:', data?.id);
+      console.log('Quiz results saved successfully with ID:', data?.id);
       setEmailSubmitted(true);
       
       if (recommendation.recommended) {
