@@ -68,7 +68,7 @@ const ProgramYearPage = () => {
         if (error.code === '42501' || error.message.includes('_crypto_aead_det_decrypt')) {
           console.log('Encryption permission error - marking as submitted anyway');
           // Still show success since the lead tracking worked
-          toast.success(`Anmälan är öppen! Välkommen till Sommarboosten ${programYear}! 🌟`);
+          toast.success('Tack för din intresseanmälan!');
           setEmail('');
           console.log('Email signup marked as completed despite database error');
           return;
@@ -80,12 +80,8 @@ const ProgramYearPage = () => {
 
       console.log('Lead saved successfully with ID:', data.id);
       
-      // UPDATED SUCCESS MESSAGE - OLD: "Tack! Du kommer att höra från oss snart med mer information om Sommarboosten"
-      // NEW LAUNCH TEXT:
-      toast.success(`Anmälan är öppen! Välkommen till Sommarboosten ${programYear}! 🌟`);
-      // FUTURE TEXT OPTIONS (COMMENTED):
-      // toast.success(`Anmälan har stängd! Håll utkik efter nästa års Sommarboosten! 🌟`);
-      // toast.success(`Nu pågår Sommarboosten. Det finns fortfarande möjlighet att anmäla sig! 🌟`);
+      // UPDATED SUCCESS MESSAGE
+      toast.success('Tack för din intresseanmälan!');
       
       setEmail('');
     } catch (error) {
