@@ -14,6 +14,8 @@ interface QuizEmailFormProps {
   isSubmitting: boolean;
   onSubmit: (e: React.FormEvent) => void;
   isRecommended: boolean;
+  answers: Record<number, string>;
+  score: number;
 }
 
 export const QuizEmailForm = ({ 
@@ -21,7 +23,9 @@ export const QuizEmailForm = ({
   setUserData, 
   isSubmitting, 
   onSubmit, 
-  isRecommended 
+  isRecommended,
+  answers,
+  score
 }: QuizEmailFormProps) => {
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,8 +49,8 @@ export const QuizEmailForm = ({
           user_agent: navigator.userAgent,
           age: userData.age,
           gender: userData.gender,
-          quiz_answers: userData.answers,
-          quiz_score: userData.score,
+          quiz_answers: answers,
+          quiz_score: score,
           recommendation_type: isRecommended ? 'recommended' : 'not_recommended'
         })
         .select()
