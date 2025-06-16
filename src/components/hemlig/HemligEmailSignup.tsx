@@ -22,72 +22,38 @@ export const HemligEmailSignup: React.FC = () => {
     if (!email.trim()) return;
 
     setIsSubmitting(true);
-    console.log('=== HEMLIG EMAIL SUBMISSION ===');
-    console.log('Email:', email);
-    console.log('Source: hemlig_page');
-    console.log('Timestamp:', new Date().toISOString());
+    console.log('Submitting email signup from hemlig page');
+
+    // Warm up listener service before submitting lead
+    await warmupListenerService();
 
     try {
-      console.log('=== STEP 1: Database Insert (Priority) ===');
-      
-      // First priority: Save to database - this MUST work
+      // Track email submission with GTM (email is hashed in this function)
+      await trackEmailSubmit(email);
+
+      // Log Facebook CAPI lead event with specific content name (email is hashed in this function)
+      await logLead(email, 'hemlig_email_signup', 'Hemlig Page Email Signup');
+
+      // Insert into sb_home_page_leads table
       const { data, error } = await supabase
         .from('sb_home_page_leads')
-        .insert({
-          email: email.trim(),
-          source: 'hemlig_page',
-          user_agent: navigator.userAgent,
-        })
+        .insert([
+          {
+            email: email.trim(),
+            source: 'hemlig_page',
+            user_agent: navigator.userAgent,
+          }
+        ])
         .select()
         .single();
 
       if (error) {
-        console.error('=== DATABASE INSERT FAILED ===');
-        console.error('Error details:', error);
-        
-        if (error.message.includes('permission denied')) {
-          toast.error('Behörighetsproblem i databasen. Kontakta support.');
-        } else if (error.message.includes('duplicate key')) {
-          toast.error('E-postadressen är redan registrerad.');
-        } else {
-          toast.error(`Databasfel: ${error.message}`);
-        }
+        console.error('Error inserting lead:', error.message);
+        toast.error('Det gick inte att skicka din e-post. Försök igen.');
         return;
       }
 
-      console.log('=== DATABASE INSERT SUCCESS ===');
-      console.log('Lead saved with ID:', data.id);
-
-      // Now try real-time Airtable sync (non-blocking)
-      console.log('=== STEP 2: Real-time Airtable Sync ===');
-      try {
-        const { data: syncResponse, error: syncError } = await supabase.functions.invoke('realtime-airtable-sync', {
-          body: {
-            table: 'sb_home_page_leads',
-            operation: 'INSERT',
-            record_id: data.id,
-            email: email.trim()
-          }
-        });
-        
-        if (syncError) {
-          console.error('Real-time sync failed:', syncError);
-        } else {
-          console.log('Real-time sync successful:', syncResponse);
-        }
-      } catch (syncError) {
-        console.error('Real-time sync error:', syncError);
-      }
-
-      // Track with GTM and Facebook (non-blocking)
-      console.log('=== STEP 3: External Tracking ===');
-      try {
-        await trackEmailSubmit(email);
-        await logLead(email, 'hemlig_email_signup', 'Hemlig Page Email Signup');
-        console.log('External tracking completed successfully');
-      } catch (trackingError) {
-        console.error('Tracking error (non-critical):', trackingError);
-      }
+      console.log('Lead inserted successfully with ID:', data.id);
 
       // Show success message
       toast.success('Tack! Vi skickar dig en påminnelse innan erbjudandet löper ut.', {
@@ -96,11 +62,9 @@ export const HemligEmailSignup: React.FC = () => {
 
       // Clear the email field
       setEmail('');
-      console.log('=== HEMLIG EMAIL SUBMISSION COMPLETED ===');
 
     } catch (error: any) {
-      console.error('=== UNEXPECTED ERROR ===');
-      console.error('Error details:', error);
+      console.error('Error submitting email:', error.message);
       toast.error('Ett oväntat fel inträffade. Försök igen.');
     } finally {
       setIsSubmitting(false);

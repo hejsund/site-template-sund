@@ -161,8 +161,6 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
         onReset={resetQuiz}
         testMode={testMode}
         testDate={testDate}
-        answers={answers}
-        score={score}
       />
     );
   }

@@ -33,15 +33,19 @@ const ProgramYearPage = () => {
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
-    console.log('=== STARTING EMAIL SUBMISSION ===');
-    console.log('Email:', email);
-    console.log('Source:', `program_year_${programYear}`);
-    console.log('Timestamp:', new Date().toISOString());
+    console.log('Submitting email signup from program year page');
+    
+    // Warm up listener service before submitting lead
+    await warmupListenerService();
     
     try {
-      console.log('=== STEP 1: Database Insert (Priority) ===');
-      
-      // First priority: Save to database - this MUST work
+      // Track email submission with GTM (email is hashed in this function)
+      await trackEmailSubmit(email);
+
+      // Log Facebook CAPI lead event
+      await logLead(email, 'program_year_email_signup', `Program Year ${programYear} Email Signup`);
+
+      // Save email to Supabase
       const { data, error } = await supabase
         .from('sb_home_page_leads')
         .insert({
@@ -53,87 +57,26 @@ const ProgramYearPage = () => {
         .single();
 
       if (error) {
-        console.error('=== DATABASE INSERT FAILED ===');
-        console.error('Error details:', error);
-        console.error('Error message:', error.message);
-        console.error('Error code:', error.code);
-        console.error('Error hint:', error.hint);
-        console.error('Error details:', error.details);
-        
-        // Show specific error message based on error type
-        if (error.message.includes('permission denied')) {
-          toast.error('Behörighetsproblem i databasen. Kontakta support.');
-        } else if (error.message.includes('violates')) {
-          toast.error('Datavalidering misslyckades. Kontakta support.');
-        } else if (error.message.includes('duplicate key')) {
-          toast.error('E-postadressen är redan registrerad.');
-        } else {
-          toast.error(`Databasfel: ${error.message}`);
-        }
+        console.error('Error saving email:', error.message);
+        toast.error('Det uppstod ett fel. Försök igen.');
         return;
       }
 
-      console.log('=== DATABASE INSERT SUCCESS ===');
-      console.log('Lead saved with ID:', data.id);
+      console.log('Lead saved successfully with ID:', data.id);
       
-      // Now try real-time Airtable sync (non-blocking)
-      console.log('=== STEP 2: Real-time Airtable Sync ===');
-      try {
-        const { data: syncResponse, error: syncError } = await supabase.functions.invoke('realtime-airtable-sync', {
-          body: {
-            table: 'sb_home_page_leads',
-            operation: 'INSERT',
-            record_id: data.id,
-            email: email.trim()
-          }
-        });
-        
-        if (syncError) {
-          console.error('Real-time sync failed:', syncError);
-        } else {
-          console.log('Real-time sync successful:', syncResponse);
-        }
-      } catch (syncError) {
-        console.error('Real-time sync error:', syncError);
-        // Don't fail the whole process if sync fails
-      }
-
-      // Track with GTM and Facebook (non-blocking)
-      console.log('=== STEP 3: External Tracking ===');
-      try {
-        // Track email submission with GTM (email is hashed in this function)
-        await trackEmailSubmit(email);
-        console.log('GTM tracking completed successfully');
-
-        // Log Facebook CAPI lead event
-        await logLead(email, 'program_year_email_signup', `Program Year ${programYear} Email Signup`);
-        console.log('Facebook CAPI completed successfully');
-      } catch (trackingError) {
-        console.error('Tracking error (non-critical):', trackingError);
-        // Don't fail the process if tracking fails
-      }
-
-      // Success! Show user feedback
+      // UPDATED SUCCESS MESSAGE - OLD: "Tack! Du kommer att höra från oss snart med mer information om Sommarboosten"
+      // NEW LAUNCH TEXT:
       toast.success(`Anmälan är öppen! Välkommen till Sommarboosten ${programYear}! 🌟`);
+      // FUTURE TEXT OPTIONS (COMMENTED):
+      // toast.success(`Anmälan har stängd! Håll utkik efter nästa års Sommarboosten! 🌟`);
+      // toast.success(`Nu pågår Sommarboosten. Det finns fortfarande möjlighet att anmäla sig! 🌟`);
+      
       setEmail('');
-      console.log('=== EMAIL SUBMISSION COMPLETED SUCCESSFULLY ===');
-      
     } catch (error) {
-      console.error('=== UNEXPECTED ERROR ===');
-      console.error('Error type:', typeof error);
-      console.error('Error object:', error);
-      console.error('Error message:', error instanceof Error ? error.message : 'Unknown error');
-      console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
-      
-      // Show helpful error message
-      if (error instanceof Error) {
-        toast.error(`Oväntat fel: ${error.message}`);
-      } else {
-        toast.error('Ett oväntat fel uppstod. Försök igen eller kontakta support.');
-      }
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
     } finally {
       setIsSubmitting(false);
-      console.log('=== EMAIL SUBMISSION PROCESS FINISHED ===');
     }
   };
 
@@ -181,10 +124,21 @@ const ProgramYearPage = () => {
           )}
           
           <p className="text-xl text-green-700 max-w-3xl mx-auto mb-8 font-text">
+            {/* OLD TEXT - COMMENTED FOR EASY RESTORATION: */}
+            {/* {isCurrentYear 
+              ? `${currentPhase.description} Gör denna ${currentPhase.seasonText} till din bästa någonsin!`
+              : `Planera för sommaren ${programYear} och gör den till din bästa någonsin!`
+            } */}
+            
+            {/* NEW LAUNCH TEXT: */}
             {isCurrentYear 
               ? `Anmälan är öppen! Gör denna sommar till din bästa någonsin med 6 veckor av träning, näring och glädje!`
               : `Anmälan är öppen för sommaren ${programYear}! Gör den till din bästa någonsin!`
             }
+            
+            {/* FUTURE TEXT OPTIONS (COMMENTED): */}
+            {/* Anmälan har stängd! Håll utkik efter nästa års program. */}
+            {/* Nu pågår Sommarboosten. Det finns fortfarande möjlighet att anmäla sig! */}
           </p>
 
           {/* Email signup form */}
@@ -205,7 +159,11 @@ const ProgramYearPage = () => {
                   className="cta-primary h-12 flex-1 text-lg rounded-xl"
                   disabled={isSubmitting}
                 >
+                  {/* OLD TEXT: {isSubmitting ? 'Skickar...' : 'Påminn mig'} */}
+                  {/* NEW LAUNCH TEXT: */}
                   {isSubmitting ? 'Skickar...' : 'Anmäl dig'}
+                  {/* FUTURE TEXT OPTIONS (COMMENTED): */}
+                  {/* {isSubmitting ? 'Skickar...' : 'Få info om nästa år'} */}
                 </Button>
                 <Button 
                   type="button" 
