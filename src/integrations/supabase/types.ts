@@ -169,6 +169,7 @@ export type Database = {
           id: string
           ip_address: unknown | null
           source: string | null
+          synced_at: string | null
           updated_at: string
           user_agent: string | null
           year: number
@@ -179,6 +180,7 @@ export type Database = {
           id?: string
           ip_address?: unknown | null
           source?: string | null
+          synced_at?: string | null
           updated_at?: string
           user_agent?: string | null
           year?: number
@@ -189,6 +191,7 @@ export type Database = {
           id?: string
           ip_address?: unknown | null
           source?: string | null
+          synced_at?: string | null
           updated_at?: string
           user_agent?: string | null
           year?: number
@@ -276,6 +279,7 @@ export type Database = {
           quiz_score: number | null
           recommendation_type: string | null
           source: string | null
+          synced_at: string | null
           updated_at: string
           user_agent: string | null
           year: number
@@ -291,6 +295,7 @@ export type Database = {
           quiz_score?: number | null
           recommendation_type?: string | null
           source?: string | null
+          synced_at?: string | null
           updated_at?: string
           user_agent?: string | null
           year?: number
@@ -306,6 +311,7 @@ export type Database = {
           quiz_score?: number | null
           recommendation_type?: string | null
           source?: string | null
+          synced_at?: string | null
           updated_at?: string
           user_agent?: string | null
           year?: number
@@ -497,7 +503,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      sync_airtable_nightly: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
