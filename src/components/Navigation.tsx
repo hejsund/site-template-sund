@@ -50,7 +50,7 @@ export const Navigation = () => {
   ];
 
   return (
-    <nav className="bg-white/95 backdrop-blur-sm border-b border-green-200 sticky top-0 z-40">
+    <nav className="bg-white/95 backdrop-blur-sm border-b border-green-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Updated Logo - Text only */}
@@ -60,7 +60,7 @@ export const Navigation = () => {
             </span>
           </Link>
 
-          {/* Desktop Menu with improved dropdown behavior */}
+          {/* Desktop Menu with improved dropdown behavior and higher z-index */}
           <div className="hidden md:flex items-center space-x-8">
             {menuItems.map((menu) => (
               <div
@@ -72,7 +72,7 @@ export const Navigation = () => {
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-green-100 py-2 z-[70] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-green-100 py-2 z-[80] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   {menu.items.map((item) => (
                     <Link
                       key={item.name}
@@ -107,13 +107,14 @@ export const Navigation = () => {
           </button>
         </div>
 
-        {/* Mobile Menu with improved accessibility */}
+        {/* Mobile Menu with improved z-index and spacing to account for timer */}
         {isOpen && (
           <div 
             id="mobile-menu"
-            className="md:hidden border-t border-green-200 py-4 max-h-[calc(100vh-4rem)] overflow-y-auto z-[70]"
+            className="md:hidden border-t border-green-200 py-4 max-h-[calc(100vh-8rem)] overflow-y-auto z-[70] bg-white/95 backdrop-blur-sm"
             role="navigation"
             aria-label="Huvudmeny"
+            style={{ marginTop: '4rem' }} // Add space for timer banner
           >
             <div className="space-y-6 pb-4">
               {menuItems.map((menu, index) => (
