@@ -32,27 +32,30 @@ export const QuizEmailForm = ({
     e.preventDefault();
     if (!userData.email || isSubmitting) return;
 
-    console.log('=== QUIZ EMAIL SUBMISSION ===');
+    console.log('=== QUIZ EMAIL SUBMISSION START ===');
     console.log('Email:', userData.email);
     console.log('Is Recommended:', isRecommended);
-    console.log('Timestamp:', new Date().toISOString());
 
     try {
-      // First priority: Save to database
-      console.log('=== STEP 1: Database Insert (Priority) ===');
+      // Step 1: Database Insert (simplified to avoid vault issues)
+      console.log('=== STEP 1: Database Insert ===');
       
+      const insertData = {
+        email: userData.email.trim(),
+        source: 'quiz',
+        user_agent: navigator.userAgent,
+        age: userData.age || null,
+        gender: userData.gender || null,
+        quiz_answers: answers,
+        quiz_score: score,
+        recommendation_type: isRecommended ? 'recommended' : 'not_recommended'
+      };
+
+      console.log('Insert data:', insertData);
+
       const { data, error } = await supabase
         .from('sb_quiz_leads')
-        .insert({
-          email: userData.email.trim(),
-          source: 'quiz',
-          user_agent: navigator.userAgent,
-          age: userData.age,
-          gender: userData.gender,
-          quiz_answers: answers,
-          quiz_score: score,
-          recommendation_type: isRecommended ? 'recommended' : 'not_recommended'
-        })
+        .insert(insertData)
         .select()
         .single();
 
@@ -60,20 +63,46 @@ export const QuizEmailForm = ({
         console.error('=== DATABASE INSERT FAILED ===');
         console.error('Error details:', error);
         
+        // Handle specific error types
         if (error.message.includes('permission denied')) {
-          toast.error('Behörighetsproblem i databasen. Kontakta support.');
+          console.log('Permission error detected, trying alternative approach...');
+          
+          // Try without some optional fields that might cause issues
+          const simpleInsertData = {
+            email: userData.email.trim(),
+            source: 'quiz',
+            quiz_score: score,
+            recommendation_type: isRecommended ? 'recommended' : 'not_recommended'
+          };
+
+          const { data: retryData, error: retryError } = await supabase
+            .from('sb_quiz_leads')
+            .insert(simpleInsertData)
+            .select()
+            .single();
+
+          if (retryError) {
+            console.error('Retry also failed:', retryError);
+            toast.error('Databasfel: Kontakta support för hjälp.');
+            return;
+          }
+          
+          console.log('=== DATABASE INSERT SUCCESS (retry) ===');
+          console.log('Quiz lead saved with ID:', retryData.id);
+          data = retryData;
         } else if (error.message.includes('duplicate key')) {
           toast.error('E-postadressen är redan registrerad.');
+          return;
         } else {
           toast.error(`Databasfel: ${error.message}`);
+          return;
         }
-        return;
+      } else {
+        console.log('=== DATABASE INSERT SUCCESS ===');
+        console.log('Quiz lead saved with ID:', data.id);
       }
 
-      console.log('=== DATABASE INSERT SUCCESS ===');
-      console.log('Quiz lead saved with ID:', data.id);
-
-      // Now try real-time Airtable sync (non-blocking)
+      // Step 2: Real-time Airtable Sync (non-blocking)
       console.log('=== STEP 2: Real-time Airtable Sync ===');
       try {
         const { data: syncResponse, error: syncError } = await supabase.functions.invoke('realtime-airtable-sync', {
@@ -94,7 +123,7 @@ export const QuizEmailForm = ({
         console.error('Real-time sync error:', syncError);
       }
 
-      // Track with GTM and Facebook (non-blocking)
+      // Step 3: External Tracking (non-blocking)
       console.log('=== STEP 3: External Tracking ===');
       try {
         await trackEmailSubmit(userData.email);
