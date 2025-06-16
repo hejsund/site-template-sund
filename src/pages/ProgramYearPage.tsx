@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTimePhase } from '@/contexts/TimePhaseContext';
@@ -33,18 +34,27 @@ const ProgramYearPage = () => {
     if (!email || isSubmitting) return;
 
     setIsSubmitting(true);
-    console.log('Submitting email signup from program year page');
+    console.log('=== STARTING EMAIL SUBMISSION ===');
+    console.log('Email:', email);
+    console.log('Source:', `program_year_${programYear}`);
     
     // Warm up listener service before submitting lead
     await warmupListenerService();
     
     try {
+      console.log('=== STEP 1: GTM Tracking ===');
       // Track email submission with GTM (email is hashed in this function)
       await trackEmailSubmit(email);
+      console.log('GTM tracking completed successfully');
 
+      console.log('=== STEP 2: Facebook CAPI ===');
       // Log Facebook CAPI lead event
       await logLead(email, 'program_year_email_signup', `Program Year ${programYear} Email Signup`);
+      console.log('Facebook CAPI completed successfully');
 
+      console.log('=== STEP 3: Supabase Insert ===');
+      console.log('Attempting to insert into sb_home_page_leads...');
+      
       // Save email to Supabase
       const { data, error } = await supabase
         .from('sb_home_page_leads')
@@ -57,12 +67,26 @@ const ProgramYearPage = () => {
         .single();
 
       if (error) {
-        console.error('Error saving email:', error.message);
-        toast.error('Det uppstod ett fel. Försök igen.');
+        console.error('=== SUPABASE ERROR ===');
+        console.error('Error details:', error);
+        console.error('Error message:', error.message);
+        console.error('Error code:', error.code);
+        console.error('Error hint:', error.hint);
+        console.error('Error details:', error.details);
+        
+        // Show more specific error message
+        if (error.message.includes('permission denied')) {
+          toast.error('Behörighetsproblem i databasen. Kontakta support.');
+        } else if (error.message.includes('violates')) {
+          toast.error('Datavalidering misslyckades. Kontakta support.');
+        } else {
+          toast.error(`Databasfel: ${error.message}`);
+        }
         return;
       }
 
-      console.log('Lead saved successfully with ID:', data.id);
+      console.log('=== SUPABASE SUCCESS ===');
+      console.log('Lead saved successfully with data:', data);
       
       // UPDATED SUCCESS MESSAGE - OLD: "Tack! Du kommer att höra från oss snart med mer information om Sommarboosten"
       // NEW LAUNCH TEXT:
@@ -72,11 +96,24 @@ const ProgramYearPage = () => {
       // toast.success(`Nu pågår Sommarboosten. Det finns fortfarande möjlighet att anmäla sig! 🌟`);
       
       setEmail('');
+      console.log('=== EMAIL SUBMISSION COMPLETED SUCCESSFULLY ===');
+      
     } catch (error) {
-      console.error('Error:', error);
-      toast.error('Det uppstod ett fel. Försök igen.');
+      console.error('=== UNEXPECTED ERROR ===');
+      console.error('Error type:', typeof error);
+      console.error('Error object:', error);
+      console.error('Error message:', error instanceof Error ? error.message : 'Unknown error');
+      console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+      
+      // Show more helpful error message
+      if (error instanceof Error) {
+        toast.error(`Oväntat fel: ${error.message}`);
+      } else {
+        toast.error('Ett oväntat fel uppstod. Försök igen eller kontakta support.');
+      }
     } finally {
       setIsSubmitting(false);
+      console.log('=== EMAIL SUBMISSION PROCESS FINISHED ===');
     }
   };
 
