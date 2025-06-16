@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, User, Mail } from 'lucide-react';
@@ -70,7 +69,7 @@ const DynamicArticlePage = () => {
       // Log Facebook CAPI lead event
       await logLead(email, 'dynamic_article_email_signup', `Dynamic Article ${slug} Email Signup`);
 
-      // Save email to Supabase without encryption
+      // Save email to new Supabase table
       console.log('Attempting to save email from dynamic article...');
       const insertData = {
         email: email,
@@ -82,7 +81,7 @@ const DynamicArticlePage = () => {
       console.log('Insert data:', insertData);
 
       const { error } = await supabase
-        .from('sb_home_page_leads')
+        .from('sb_leads_home_page_new')
         .insert(insertData);
 
       if (error) {

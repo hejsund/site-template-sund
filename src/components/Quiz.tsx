@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
@@ -88,8 +87,8 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
       
       const recommendation = getRecommendation(score, flags, answers);
       
-      // Save quiz result to Supabase - using plain email without encryption
-      console.log('Attempting to save quiz result to database...');
+      // Save quiz result to new Supabase table
+      console.log('Attempting to save quiz result to new database table...');
       const insertData = {
         email: userData.email.trim(),
         age: userData.age,
@@ -104,7 +103,7 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
       console.log('Insert data prepared:', insertData);
       
       const { data, error } = await supabase
-        .from('sb_quiz_leads')
+        .from('sb_leads_quiz_new')
         .insert(insertData)
         .select()
         .single();
@@ -128,7 +127,7 @@ export const Quiz = ({ testMode = false, testDate }: QuizProps = {}) => {
         return;
       }
 
-      console.log('Quiz results saved successfully to database with ID:', data?.id);
+      console.log('Quiz results saved successfully to new database with ID:', data?.id);
       setEmailSubmitted(true);
       
       if (recommendation.recommended) {

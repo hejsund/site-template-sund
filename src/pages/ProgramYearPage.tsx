@@ -45,8 +45,8 @@ const ProgramYearPage = () => {
       // Log Facebook CAPI lead event
       await logLead(email, 'program_year_email_signup', `Program Year ${programYear} Email Signup`);
 
-      // Save email to Supabase without encryption
-      console.log('Attempting to save email to home page leads...');
+      // Save email to new Supabase table
+      console.log('Attempting to save email to new home page leads table...');
       const insertData = {
         email: email.trim(),
         source: `program_year_${programYear}`,
@@ -56,7 +56,7 @@ const ProgramYearPage = () => {
       console.log('Insert data:', insertData);
 
       const { data, error } = await supabase
-        .from('sb_home_page_leads')
+        .from('sb_leads_home_page_new')
         .insert(insertData)
         .select()
         .single();
@@ -73,7 +73,7 @@ const ProgramYearPage = () => {
         return;
       }
 
-      console.log('Lead saved successfully with ID:', data.id);
+      console.log('Lead saved successfully to new table with ID:', data.id);
       
       toast.success('Tack för din intresseanmälan!');
       setEmail('');
