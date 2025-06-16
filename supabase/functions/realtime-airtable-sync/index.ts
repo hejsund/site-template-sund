@@ -24,7 +24,6 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     console.log('=== Realtime Airtable Sync Function Started ===');
     console.log('Request method:', req.method);
-    console.log('Request headers:', Object.fromEntries(req.headers.entries()));
 
     // Parse the request body to get the notification data
     const requestBody = await req.json();
@@ -37,19 +36,19 @@ const handler = async (req: Request): Promise<Response> => {
     // Validate required environment variables
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    const airtableApiKey = Deno.env.get('SB_AIRTABLE_LOVABLE_2');  // Updated to use new secret
+    const airtableApiKey = Deno.env.get('SB_AIRTABLE_LOVABLE_2');
     
     console.log('Environment check:');
     console.log('- SUPABASE_URL:', supabaseUrl ? 'Present' : 'Missing');
     console.log('- SUPABASE_SERVICE_ROLE_KEY:', supabaseServiceKey ? 'Present' : 'Missing');
-    console.log('- SB_AIRTABLE_LOVABLE_2:', airtableApiKey ? 'Present' : 'Missing');  // Updated to use new secret
+    console.log('- SB_AIRTABLE_LOVABLE_2:', airtableApiKey ? 'Present' : 'Missing');
 
     if (!supabaseUrl || !supabaseServiceKey) {
       throw new Error('Missing Supabase configuration');
     }
 
     if (!airtableApiKey) {
-      throw new Error('Airtable API key not found - please check SB_AIRTABLE_LOVABLE_2 secret');  // Updated error message
+      throw new Error('Airtable API key not found - please check SB_AIRTABLE_LOVABLE_2 secret');
     }
 
     // Initialize Supabase client
@@ -144,7 +143,6 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     console.log('Airtable response status:', response.status);
-    console.log('Airtable response headers:', Object.fromEntries(response.headers.entries()));
 
     const responseText = await response.text();
     console.log('Airtable response body:', responseText);
@@ -165,7 +163,6 @@ const handler = async (req: Request): Promise<Response> => {
     };
 
     console.log('=== Sync completed successfully ===');
-    console.log('Final response:', successResponse);
 
     return new Response(JSON.stringify(successResponse), {
       status: 200,
@@ -178,7 +175,6 @@ const handler = async (req: Request): Promise<Response> => {
   } catch (error: any) {
     console.error('=== Error in realtime-airtable-sync function ===');
     console.error('Error details:', error);
-    console.error('Error stack:', error.stack);
     
     const errorResponse = { 
       success: false, 

@@ -45,7 +45,7 @@ const handler = async (req: Request): Promise<Response> => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const airtableApiKey = Deno.env.get('SB_AIRTABLE_LOVABLE_2');  // Updated to use new secret
+    const airtableApiKey = Deno.env.get('SB_AIRTABLE_LOVABLE_2');
     const baseId = 'appV23udxU8dqgM5V';
     const tableId = 'tblO1QW2WKJZAwmBX';
 

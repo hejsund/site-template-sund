@@ -8,7 +8,7 @@ const corsHeaders = {
 };
 
 const SYNC_FUNCTION_URL = `https://ttidnpncifqtetnhcdhq.supabase.co/functions/v1/realtime-airtable-sync`;
-const HEALTH_CHECK_INTERVAL = 60000; // Check every 60 seconds (less frequent)
+const HEALTH_CHECK_INTERVAL = 60000; // Check every 60 seconds
 const MAX_RECONNECT_ATTEMPTS = 3;
 const RECONNECT_DELAY = 30000; // 30 seconds between reconnect attempts
 
@@ -36,13 +36,13 @@ const startListener = async () => {
     return;
   }
 
-  console.log("=== Starting simplified database notification listener ===");
+  console.log("=== Starting database notification listener ===");
   console.log(`Reconnect attempt: ${reconnectAttempts + 1}/${MAX_RECONNECT_ATTEMPTS}`);
   
   try {
     const client = initializeSupabase();
     
-    // Create a simpler channel setup
+    // Create a channel for real-time notifications
     const channelName = 'db-leads-' + Date.now();
     console.log(`Creating channel: ${channelName}`);
     
@@ -111,7 +111,6 @@ const startListener = async () => {
       }, RECONNECT_DELAY);
     } else {
       console.log('Max reconnect attempts reached or shutting down - giving up on real-time sync');
-      console.log('Cron job will handle syncing every 5 minutes as backup');
     }
   }
 };
@@ -168,7 +167,7 @@ const checkHealth = () => {
   
   // More lenient timeout - only reconnect if really stale
   if (isConnected && timeSinceLastHeartbeat > 120000) { // 2 minutes
-    console.log('=== Connection appears very stale, will attempt reconnect ===');
+    console.log('=== Connection appears stale, will attempt reconnect ===');
     isConnected = false;
     reconnectAttempts = 0; // Reset attempts for health check reconnects
     startListener();
@@ -249,13 +248,12 @@ const handler = async (req: Request): Promise<Response> => {
       
       return new Response(JSON.stringify({
         success: true,
-        message: isConnected ? 'Listener service is running' : 'Listener service failed to connect (cron backup active)',
+        message: isConnected ? 'Listener service is running' : 'Listener service failed to connect',
         status: {
           isConnected,
           lastHeartbeat: new Date(lastHeartbeat).toISOString(),
           uptime: Date.now() - startTime,
-          reconnectAttempts,
-          backupCronActive: true
+          reconnectAttempts
         }
       }), {
         status: 200,
@@ -273,8 +271,7 @@ const handler = async (req: Request): Promise<Response> => {
       JSON.stringify({ 
         success: false, 
         error: error.message,
-        details: error.toString(),
-        backupCronActive: true
+        details: error.toString()
       }),
       {
         status: 500,
@@ -288,7 +285,7 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 // Start the listener when the function is first initialized
-console.log('=== Initializing listener service with cron backup ===');
+console.log('=== Initializing listener service ===');
 startListener();
 
 serve(handler);
