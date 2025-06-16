@@ -22,26 +22,39 @@ const DynamicArticlePage = () => {
     setIsSubmitting(true);
     
     try {
-      const { error } = await supabase
+      console.log('Attempting to save email:', email, 'for article:', slug);
+      
+      const { data, error } = await supabase
         .from('sb_home_page_leads')
         .insert({
           email: email,
           source: `article_${slug}`,
           ip_address: null,
           user_agent: navigator.userAgent,
-        });
+        })
+        .select()
+        .single();
 
       if (error) {
-        console.error('Error saving email:', error);
-        toast.error('Det uppstod ett fel. Försök igen.');
+        console.error('Supabase error details:', error);
+        
+        // Visa specifik felmeddelande baserat på feltyp
+        if (error.code === '42501') {
+          toast.error('Tekniskt fel med databas-behörigheter. Vi arbetar på att lösa detta.');
+        } else if (error.code === '23505') {
+          toast.error('Den e-postadressen är redan registrerad.');
+        } else {
+          toast.error('Det uppstod ett fel. Försök igen om en stund.');
+        }
         return;
       }
 
+      console.log('Email saved successfully:', data);
       toast.success('Tack! Du kommer att höra från oss snart! 🌟');
       setEmail('');
     } catch (error) {
-      console.error('Error:', error);
-      toast.error('Det uppstod ett fel. Försök igen.');
+      console.error('Unexpected error:', error);
+      toast.error('Det uppstod ett oväntat fel. Försök igen.');
     } finally {
       setIsSubmitting(false);
     }
