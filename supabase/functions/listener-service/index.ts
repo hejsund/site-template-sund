@@ -50,18 +50,18 @@ const startListener = async () => {
       .on('postgres_changes', {
         event: 'INSERT',
         schema: 'public',
-        table: 'sb_quiz_leads',
+        table: 'sb_leads_quiz_new',
       }, async (payload) => {
         console.log('=== Quiz lead notification received ===');
-        await handleLeadNotification('sb_quiz_leads', payload);
+        await handleLeadNotification('sb_leads_quiz_new', payload);
       })
       .on('postgres_changes', {
         event: 'INSERT',
         schema: 'public',
-        table: 'sb_home_page_leads',
+        table: 'sb_leads_home_page_new',
       }, async (payload) => {
         console.log('=== Home page lead notification received ===');
-        await handleLeadNotification('sb_home_page_leads', payload);
+        await handleLeadNotification('sb_leads_home_page_new', payload);
       });
 
     // Subscribe with timeout

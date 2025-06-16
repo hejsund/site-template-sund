@@ -59,9 +59,9 @@ const handler = async (req: Request): Promise<Response> => {
       ? new Date(Date.now() - 10 * 60 * 1000).toISOString() // Last 10 minutes
       : null;
 
-    console.log('Fetching data from sb_home_page_leads...');
+    console.log('Fetching data from sb_leads_home_page_new...');
     let homePageQuery = supabase
-      .from('sb_home_page_leads')
+      .from('sb_leads_home_page_new')
       .select('email, source, created_at')
       .order('created_at', { ascending: false });
 
@@ -77,9 +77,9 @@ const handler = async (req: Request): Promise<Response> => {
       throw homePageError;
     }
 
-    console.log('Fetching data from sb_quiz_leads...');
+    console.log('Fetching data from sb_leads_quiz_new...');
     let quizQuery = supabase
-      .from('sb_quiz_leads')
+      .from('sb_leads_quiz_new')
       .select('email, source, created_at')
       .order('created_at', { ascending: false });
 

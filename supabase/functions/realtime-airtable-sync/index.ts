@@ -63,9 +63,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log(`Fetching record data for ${table} with ID ${record_id}`);
 
-    if (table === 'sb_quiz_leads') {
+    // Updated to use new tables
+    if (table === 'sb_leads_quiz_new') {
       const { data, error } = await supabase
-        .from('sb_quiz_leads')
+        .from('sb_leads_quiz_new')
         .select('email, source')
         .eq('id', record_id)
         .single();
@@ -77,9 +78,9 @@ const handler = async (req: Request): Promise<Response> => {
       recordData = data;
       source = data?.source || 'quiz';
       console.log('Quiz lead data fetched:', recordData);
-    } else if (table === 'sb_home_page_leads') {
+    } else if (table === 'sb_leads_home_page_new') {
       const { data, error } = await supabase
-        .from('sb_home_page_leads')
+        .from('sb_leads_home_page_new')
         .select('email, source')
         .eq('id', record_id)
         .single();
