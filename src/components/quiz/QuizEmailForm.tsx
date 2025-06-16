@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { UserData } from '@/types/quiz';
@@ -53,11 +52,17 @@ export const QuizEmailForm = ({
 
       console.log('Insert data:', insertData);
 
-      const { data, error } = await supabase
+      let data;
+      let error;
+
+      const result = await supabase
         .from('sb_quiz_leads')
         .insert(insertData)
         .select()
         .single();
+
+      data = result.data;
+      error = result.error;
 
       if (error) {
         console.error('=== DATABASE INSERT FAILED ===');
