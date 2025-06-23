@@ -8,6 +8,14 @@ interface LaunchTimerProps {
   testDate?: Date;
 }
 
+// Predefined Sunday deadlines at 23:59 CEST (21:59 UTC)
+const SUNDAY_DEADLINES = [
+  new Date('2025-06-29T21:59:00Z'), // June 29th, 2025 at 23:59 CEST
+  new Date('2025-07-06T21:59:00Z'), // July 6th, 2025 at 23:59 CEST
+  new Date('2025-07-13T21:59:00Z'), // July 13th, 2025 at 23:59 CEST
+  new Date('2025-07-20T21:59:00Z'), // July 20th, 2025 at 23:59 CEST
+];
+
 export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -16,7 +24,7 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
     seconds: 0
   });
 
-  const [currentTargetDate, setCurrentTargetDate] = useState<Date | null>(null);
+  const [currentDeadlineIndex, setCurrentDeadlineIndex] = useState<number | null>(null);
 
   const { timerText, hasAvailableStarts, statusText, nextAvailableStart, firstBookedStart, mainText } = useDynamicText(testMode, testDate);
 
@@ -30,21 +38,29 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
         return; // Component will be hidden
       }
 
-      let targetDate: number;
-
-      // If we don't have a current target date, or the current target has passed, set a new one
-      if (!currentTargetDate || currentDate >= currentTargetDate) {
-        const sevenDaysFromNow = new Date(currentDate);
-        sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
-        sevenDaysFromNow.setHours(21, 59, 0, 0); // Set to 21:59 UTC (23:59 CEST)
-        setCurrentTargetDate(sevenDaysFromNow);
-        targetDate = sevenDaysFromNow.getTime();
-      } else {
-        targetDate = currentTargetDate.getTime();
-      }
+      // Find the next upcoming Sunday deadline
+      const nextDeadlineIndex = SUNDAY_DEADLINES.findIndex(deadline => currentDate < deadline);
       
+      if (nextDeadlineIndex === -1) {
+        // All deadlines have passed
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        });
+        setCurrentDeadlineIndex(null);
+        return;
+      }
+
+      // Update current deadline index if it has changed
+      if (currentDeadlineIndex !== nextDeadlineIndex) {
+        setCurrentDeadlineIndex(nextDeadlineIndex);
+      }
+
+      const targetDate = SUNDAY_DEADLINES[nextDeadlineIndex];
       const now = currentDate.getTime();
-      const difference = targetDate - now;
+      const difference = targetDate.getTime() - now;
       
       if (difference > 0) {
         setTimeLeft({
@@ -54,15 +70,13 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
           seconds: Math.floor((difference % (1000 * 60)) / 1000)
         });
       } else {
-        // Timer has hit zero - this will trigger a restart on next update
+        // Current deadline has passed, this will trigger finding the next deadline on next update
         setTimeLeft({
           days: 0,
           hours: 0,
           minutes: 0,
           seconds: 0
         });
-        // Reset the target date so it gets recalculated
-        setCurrentTargetDate(null);
       }
     };
 
@@ -70,7 +84,7 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
     const timer = setInterval(updateTimer, 1000);
     
     return () => clearInterval(timer);
-  }, [testMode, testDate, currentTargetDate, nextAvailableStart]);
+  }, [testMode, testDate, currentDeadlineIndex]);
 
   // Check if we should hide the component completely after July 15th
   const currentDate = testMode && testDate ? testDate : new Date();
