@@ -21,7 +21,9 @@ export const useCookieConsent = () => {
       if (window.gtag) {
         window.gtag('consent', 'update', {
           ad_storage: marketingConsent,
-          analytics_storage: analyticsConsent
+          analytics_storage: analyticsConsent,
+          ad_user_data: marketingConsent,
+          ad_personalization: marketingConsent
         });
       }
       
@@ -33,7 +35,9 @@ export const useCookieConsent = () => {
       if (window.gtag) {
         window.gtag('consent', 'update', {
           ad_storage: consent,
-          analytics_storage: consent
+          analytics_storage: consent,
+          ad_user_data: consent,
+          ad_personalization: consent
         });
       }
       

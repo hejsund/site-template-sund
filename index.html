@@ -24,6 +24,60 @@
     <!-- DataLayer Initialization -->
     <script>
       window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      
+      // Initialize consent mode BEFORE GTM loads
+      gtag('consent', 'default', {
+        'ad_storage': 'granted',
+        'analytics_storage': 'granted',
+        'ad_user_data': 'granted',
+        'ad_personalization': 'granted'
+      });
+      
+      // Check if this is Facebook traffic or has Facebook parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmSource = urlParams.get('utm_source');
+      const hasFbp = urlParams.has('fbp');
+      const hasFbc = urlParams.has('fbc');
+      const isFacebookTraffic = utmSource?.toLowerCase() === 'facebook' || hasFbp || hasFbc;
+      
+      // If Facebook traffic, ensure cookies are granted and skip banner
+      if (isFacebookTraffic) {
+        localStorage.setItem('cookie_consent', 'granted');
+        gtag('consent', 'update', {
+          'ad_storage': 'granted',
+          'analytics_storage': 'granted',
+          'ad_user_data': 'granted',
+          'ad_personalization': 'granted'
+        });
+      } else {
+        // For non-Facebook traffic, check existing consent
+        const existingConsent = localStorage.getItem('cookie_consent');
+        if (existingConsent === 'granted') {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'analytics_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted'
+          });
+        } else if (existingConsent === 'denied') {
+          gtag('consent', 'update', {
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied'
+          });
+        } else if (existingConsent === 'custom') {
+          const marketingCookies = localStorage.getItem('marketing_cookies') === 'true';
+          const analyticsCookies = localStorage.getItem('analytics_cookies') === 'true';
+          gtag('consent', 'update', {
+            'ad_storage': marketingCookies ? 'granted' : 'denied',
+            'analytics_storage': analyticsCookies ? 'granted' : 'denied',
+            'ad_user_data': marketingCookies ? 'granted' : 'denied',
+            'ad_personalization': marketingCookies ? 'granted' : 'denied'
+          });
+        }
+      }
     </script>
 
     <!-- Google Tag Manager -->

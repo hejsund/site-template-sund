@@ -13,11 +13,17 @@ const CookieBanner: React.FC = () => {
     const excludedPath = window.location.pathname === '/hemlig';
     const hideDueToPrivacy = shouldHideBanner();
 
+    // Auto-accept cookies for Facebook traffic
+    if (hideDueToPrivacy && !alreadyConsented) {
+      updateConsent('granted');
+      return;
+    }
+
     // Only show banner if user hasn't consented, not on excluded path, and not hidden due to privacy settings
     if (!alreadyConsented && !excludedPath && !hideDueToPrivacy) {
       setShowBanner(true);
     }
-  }, []);
+  }, [updateConsent]);
 
   const handleAcceptAll = () => {
     updateConsent('granted');
