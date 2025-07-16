@@ -35,7 +35,7 @@ const startDates: StartDate[] = [
     date: '21 juli',
     week: 'v.30',
     fullDate: new Date('2025-07-21'),
-    bookedAfter: new Date('2025-07-14'),
+    bookedAfter: new Date('2025-07-17'), // Extended by 3 days from July 14th to July 17th
     stripeLink: 'https://buy.stripe.com/8x27sMf8r6DcbJ82iJasg0h'
   }
 ];

@@ -14,6 +14,7 @@ const SUNDAY_DEADLINES = [
   new Date('2025-07-06T21:59:00Z'), // July 6th, 2025 at 23:59 CEST
   new Date('2025-07-13T21:59:00Z'), // July 13th, 2025 at 23:59 CEST
   new Date('2025-07-20T21:59:00Z'), // July 20th, 2025 at 23:59 CEST
+  new Date('2025-07-27T21:59:00Z'), // July 27th, 2025 at 23:59 CEST - NEW DEADLINE
 ];
 
 export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) => {
@@ -32,8 +33,8 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
     const updateTimer = () => {
       const currentDate = testMode && testDate ? testDate : new Date();
       
-      // Check if we should hide the component completely after July 15th
-      const hideAfterDate = new Date('2025-07-15T23:59:59Z');
+      // Check if we should hide the component completely after July 18th (extended from July 15th)
+      const hideAfterDate = new Date('2025-07-18T23:59:59Z');
       if (currentDate >= hideAfterDate) {
         return; // Component will be hidden
       }
@@ -86,12 +87,12 @@ export const LaunchTimer = ({ testMode = false, testDate }: LaunchTimerProps) =>
     return () => clearInterval(timer);
   }, [testMode, testDate, currentDeadlineIndex]);
 
-  // Check if we should hide the component completely after July 15th
+  // Check if we should hide the component completely after July 18th (extended from July 15th)
   const currentDate = testMode && testDate ? testDate : new Date();
-  const hideAfterDate = new Date('2025-07-15T23:59:59Z');
+  const hideAfterDate = new Date('2025-07-18T23:59:59Z');
   const shouldHideCompletely = currentDate >= hideAfterDate;
 
-  // Hide the timer component completely after July 15th
+  // Hide the timer component completely after July 18th
   if (shouldHideCompletely && !testMode) return null;
 
   return (
