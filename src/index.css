@@ -9,65 +9,65 @@
 
 @layer base {
   :root {
-    --background: 131 57% 96%;
-    --foreground: 155 35% 10%;
+    --background: 40 40% 97%;
+    --foreground: 25 25% 20%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 155 35% 10%;
+    --card: 40 30% 98%;
+    --card-foreground: 25 25% 20%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 155 35% 10%;
+    --popover: 40 30% 98%;
+    --popover-foreground: 25 25% 20%;
 
-    --primary: 155 85% 20%;
+    --primary: 30 30% 45%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 131 30% 90%;
-    --secondary-foreground: 155 35% 10%;
+    --secondary: 35 25% 85%;
+    --secondary-foreground: 25 25% 20%;
 
-    --muted: 131 30% 90%;
-    --muted-foreground: 155 25% 35%;
+    --muted: 35 25% 88%;
+    --muted-foreground: 30 20% 40%;
 
-    --accent: 155 70% 30%;
+    --accent: 10 35% 65%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 131 40% 80%;
-    --input: 131 40% 80%;
-    --ring: 155 85% 20%;
+    --border: 35 20% 80%;
+    --input: 35 20% 80%;
+    --ring: 30 30% 45%;
 
     --radius: 1rem;
 
-    /* Sund & Stark custom colors - improved contrast for WCAG compliance */
-    --green-50: 131 57% 96%;
-    --green-100: 131 50% 90%;
-    --green-200: 131 45% 80%;
-    --green-300: 131 40% 70%;
-    --green-400: 155 50% 45%; /* Improved contrast */
-    --green-500: 155 70% 30%;
-    --green-600: 155 85% 20%;
-    --green-700: 155 85% 15%; /* Darker for better contrast */
-    --green-800: 155 90% 10%; /* Much darker for headlines */
-    
-    /* Enhanced warm accent colors for better text contrast */
-    --coral: 14 85% 60%;
-    --coral-light: 14 75% 80%;
-    --coral-dark: 14 90% 45%;
-    --coral-contrast: 14 95% 95%;
-    --orange: 25 95% 65%;
-    --orange-light: 25 85% 80%;
-    --orange-contrast: 25 100% 98%;
-    --pink: 340 75% 65%;
-    --pink-light: 340 60% 80%;
-    --pink-contrast: 340 85% 95%;
-    --purple: 280 50% 60%;
-    --purple-light: 280 40% 80%;
-    --purple-contrast: 280 70% 95%;
-    
-    /* Neon green for special highlights */
-    --neon-green: 120 100% 40%;
-    --neon-green-light: 120 80% 60%;
+    /* Julkalender 2025 - Warm beige/brown color palette */
+    --green-50: 40 35% 95%;
+    --green-100: 38 30% 90%;
+    --green-200: 36 28% 82%;
+    --green-300: 34 25% 72%;
+    --green-400: 32 25% 62%;
+    --green-500: 30 28% 50%;
+    --green-600: 28 30% 40%;
+    --green-700: 26 28% 30%;
+    --green-800: 25 30% 22%;
+
+    /* Enhanced warm accent colors - dusty rose/mauve tones */
+    --coral: 5 40% 70%;
+    --coral-light: 8 35% 82%;
+    --coral-dark: 2 45% 60%;
+    --coral-contrast: 10 50% 95%;
+    --orange: 25 45% 68%;
+    --orange-light: 28 40% 80%;
+    --orange-contrast: 30 50% 96%;
+    --pink: 345 35% 72%;
+    --pink-light: 348 30% 84%;
+    --pink-contrast: 350 40% 94%;
+    --purple: 280 25% 65%;
+    --purple-light: 285 22% 80%;
+    --purple-contrast: 290 30% 93%;
+
+    /* Soft gold for special highlights */
+    --neon-green: 42 55% 55%;
+    --neon-green-light: 45 50% 70%;
   }
 
   .dark {
