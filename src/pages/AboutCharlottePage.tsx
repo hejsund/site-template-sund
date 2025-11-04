@@ -20,9 +20,9 @@ const AboutCharlottePage = () => {
     
     try {
       const { error } = await supabase
-        .from('sb_home_page_leads')
+        .from('jul_home_page_leads')
         .insert({
-          email: email,
+          email: email.trim(),
           source: 'about_charlotte',
           user_agent: navigator.userAgent,
         });
@@ -53,27 +53,27 @@ const AboutCharlottePage = () => {
             <div className="space-y-8">
               <div>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-primary mb-6 font-display">
-                  Instructor Name
+                  Charlotte Steinwig
                 </h1>
                 <p className="text-xl text-green-700 mb-6 font-text">
-                  Grundare av Program Name och mamma till fyra barn som hjälper familjer hitta balans mellan hälsa och vardagslivets krav.
+                  Mamma till fyra barn som hjälper familjer hitta balans mellan hälsa och vardagslivets krav.
                 </p>
                 <div className="flex items-center space-x-6">
-                  <a 
-                    href="https://instagram.com/sundochstark" 
-                    target="_blank" 
+                  <a
+                    href="https://instagram.com/sundochstark"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
                   >
                     <Instagram className="w-5 h-5" />
-                    <span className="font-medium">@yoursite</span>
+                    <span className="font-medium">@sundochstark</span>
                   </a>
-                  <a 
-                    href="mailto:hej@yoursite.se" 
+                  <a
+                    href="mailto:hej@sundochstark.se"
                     className="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
                   >
                     <Mail className="w-5 h-5" />
-                    <span className="font-medium">Contact Instructor</span>
+                    <span className="font-medium">hej@sundochstark.se</span>
                   </a>
                 </div>
               </div>
@@ -103,24 +103,22 @@ const AboutCharlottePage = () => {
               <div className="flex items-center gap-3 mb-6">
                 <Heart className="text-coral w-8 h-8" />
                 <h2 className="text-3xl font-bold text-primary font-display">
-                  Min resa till hälsa och balans
+                  Varför jag skapade Julkalendern
                 </h2>
               </div>
               <div className="space-y-6 text-green-700 font-text leading-relaxed">
                 <p className="text-lg">
-                  Som mamma till fyra barn vet jag hur utmanande det kan vara att prioritera sin egen hälsa. 
-                  I många år försökte jag hitta den perfekta balansen mellan att vara en närvarande förälder, 
-                  ha en karriär och samtidigt ta hand om mig själv.
+                  Som mamma till fyra barn vet jag hur december kan kännas. Det är en månad fylld av förväntan,
+                  glädje – men också stress, prestationskrav och en känsla av att aldrig riktigt hinna med allt.
                 </p>
                 <p>
-                  Det var efter mitt fjärde barn som jag insåg att jag måste sluta försöka göra allt perfekt 
-                  och istället fokusera på det som verkligen fungerade. Små, enkla vanor som kunde integreras 
-                  i vårt redan packade familjeliv.
+                  I flera år har jag skapat julkalendrar med träning, recept och inspiration. Allt för att ge
+                  energi och struktur i december. Men i år ville jag göra något helt annorlunda.
                 </p>
                 <p>
-                  Program Name föddes ur denna insikt - att hälsa inte behöver vara komplicerat eller 
-                  extremt för att vara effektivt. Det handlar om att hitta glädje i rörelse, njutning i mat 
-                  och balans i vardagen.
+                  Jag har skapat en kalender för själen. Det är 24 ljudspår – små stunder av stillhet och närvaro
+                  där du får vila, hämta hem dig själv och bara ta emot. Ingen planering, inga krav, bara en trygg
+                  plats där du får landa en stund varje dag.
                 </p>
               </div>
             </div>
@@ -217,9 +215,9 @@ const AboutCharlottePage = () => {
                   Vill du komma i kontakt? 🌟
                 </h3>
                 <p className="text-green-700 font-text mb-6">
-                  Anmäl ditt intresse för Program Name eller ställ en fråga direkt till mig!
+                  Anmäl ditt intresse för Julkalendern 2025 eller ställ en fråga direkt till mig!
                 </p>
-                
+
                 <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto space-y-4 sm:flex sm:space-y-0 sm:gap-3">
                   <Input
                     type="email"
@@ -230,8 +228,8 @@ const AboutCharlottePage = () => {
                     required
                     disabled={isSubmitting}
                   />
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="bg-primary hover:bg-primary/90 text-white h-12 w-full sm:w-auto px-6 rounded-xl font-semibold"
                     disabled={isSubmitting}
                   >
@@ -240,9 +238,9 @@ const AboutCharlottePage = () => {
                 </form>
 
                 <div className="mt-6 pt-6 border-t border-green-200">
-                  <Link to="/quiz" className="inline-block">
+                  <Link to="/" className="inline-block">
                     <Button className="bg-coral hover:bg-coral/90 text-white px-8 py-3 rounded-xl font-semibold">
-                      Ta vårt quiz för personlig vägledning
+                      Tillbaka till kalendern
                     </Button>
                   </Link>
                 </div>

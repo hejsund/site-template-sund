@@ -3,40 +3,40 @@ import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    name: "Lina",
-    text: "Tack Instructor Name för att du visar att det kan vara enkelt och kul! Jag njuter mer än någonsin.",
+    name: "Sofia",
+    text: "Jag längtar efter att få en stund varje dag där jag inte behöver prestera eller fixa något. Bara vara.",
     rating: 5,
-    highlight: "Njuter mer än någonsin"
-  },
-  {
-    name: "Anna",
-    text: "Jag älskar att det är helt utan förbud – inga pekpinnar, bara inspiration!",
-    rating: 5,
-    highlight: "Utan förbud"
-  },
-  {
-    name: "Maria",
-    text: "Äntligen ett program som passar mitt schema. 15 minuter på morgonen och jag känner mig som en vinnare hela dagen.",
-    rating: 5,
-    highlight: "Passar mitt schema"
+    highlight: "Längtar efter lugnet"
   },
   {
     name: "Emma",
-    text: "Recepten är så enkla att barnen kan hjälpa till. Vi har aldrig ätit så bra som nu!",
+    text: "December brukar rusa förbi. Den här gången vill jag verkligen vara närvarande och känna efter.",
     rating: 5,
-    highlight: "Hela familjen älskar det"
+    highlight: "Vill sakta ner"
   },
   {
-    name: "Sofie",
-    text: "Jag trodde inte jag var en 'tränings-person', men nu ser jag fram emot mina pass. Instructor Name gör allt så tillgängligt.",
+    name: "Anna",
+    text: "Att det bara är 3-10 minuter känns perfekt. Det kan jag få till, även när dagarna är fullspäckade.",
     rating: 5,
-    highlight: "Ser fram emot träningen"
+    highlight: "Enkelt att få till"
   },
   {
-    name: "Petra",
-    text: "Det är så enkelt att få till träningen med appen – precis som det ska vara!.",
+    name: "Linda",
+    text: "Jag behöver någon som håller mig en stund. Som påminner mig om att jag också är viktig.",
     rating: 5,
-    highlight: "Fantastisk app"
+    highlight: "Behöver bli hållen"
+  },
+  {
+    name: "Maria",
+    text: "Inga krav, inget att förbereda – bara trycka på play. Det är precis vad jag behöver just nu.",
+    rating: 5,
+    highlight: "Utan krav"
+  },
+  {
+    name: "Karin",
+    text: "Att få börja varje decemberdag med något som faktiskt är för mig – vilken gåva det är.",
+    rating: 5,
+    highlight: "En gåva till mig själv"
   }
 ];
 
@@ -46,10 +46,10 @@ export const Testimonials = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800">
-            Vad säger de som redan varit med? 💚
+            Vad längtar du efter? 🌙
           </h2>
           <p className="text-xl text-green-700 max-w-3xl mx-auto">
-            Äkta berättelser från riktiga människor som skapat sin bästa sommar med Company Name.
+            Kanske känner du igen dig i någon av dessa tankar. Du är inte ensam i hur du känner.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ export const Testimonials = () => {
               <div className="mb-4">
                 <div className="flex space-x-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="text-coral fill-current" size={16} />
+                    <Star key={i} className="text-neon-green fill-current" size={16} />
                   ))}
                 </div>
                 
@@ -86,29 +86,18 @@ export const Testimonials = () => {
           ))}
         </div>
 
-        {/* Social proof section with improved contrast */}
+        {/* First launch invitation with WCAG compliant contrast */}
         <div className="mt-16 text-center">
-          <div className="gradient-warm rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white">
+          <div className="bg-green-800 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto text-white">
             <h3 className="text-3xl font-black mb-4 text-white">
-              Över 2 000 personer har redan hittat sin glädje! 🌟
+              Bli en av de första att uppleva kalendern 🌟
             </h3>
             <p className="text-lg text-white/95 mb-6">
-              Bli en del av communityn som stöttar varandra att må bra, ha kul och skapa den sommar de drömmer om.
+              Detta är första året vi kör Julkalender 2025. Gå med på resan mot en mjukare, mer närvarande december – tillsammans med andra som längtar efter samma sak.
             </p>
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-white">98%</div>
-                <div className="text-white/90">Skulle rekommendera</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-white">4.9/5</div>
-                <div className="text-white/90">Genomsnittligt betyg</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-white">2,000+</div>
-                <div className="text-white/90">Nöjda deltagare</div>
-              </div>
-            </div>
+            <p className="text-base text-white/90 italic">
+              24 dagar av stillhet, närvaro och vänlighet mot dig själv.
+            </p>
           </div>
         </div>
       </div>

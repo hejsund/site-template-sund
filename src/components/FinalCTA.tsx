@@ -1,105 +1,128 @@
 
-import { Check, Heart, Sparkles } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 import { pushToDataLayer } from '@/utils/pushToDataLayer';
+import { getLaunchState } from '@/utils/launchPhases';
 
 export const FinalCTA = () => {
-  const benefits = [
-    "15-minuters träningspass som känns som lek",
-    "Snabba och supergoda recept för hela familjen", 
-    "Daglig motivation och pepp direkt i appen",
-    "Tillgång till en fantastisk gemenskap",
-    "Verktyg för att följa din utveckling",
-    "Instructor Name ger personlig inspiration i fickan"
-  ];
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [launchState, setLaunchState] = useState(getLaunchState());
 
-  const handleQuizClick = () => {
-    pushToDataLayer("buyButton", { source: "final_cta" });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLaunchState(getLaunchState());
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('jul_home_page_leads')
+        .insert({
+          email: email.trim(),
+          source: 'final_cta',
+          user_agent: navigator.userAgent,
+        });
+
+      if (error) {
+        console.error('Error saving email:', error);
+        toast.error('Det uppstod ett fel. Försök igen.');
+        return;
+      }
+
+      toast.success('Tack! Vi hör av oss när kalendern öppnar! 🌟');
+      setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Det uppstod ett fel. Försök igen.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleRegistrationClick = () => {
-    window.open('https://buy.stripe.com/6oU3cw1hBbXwaF4e1rasg08', '_blank');
+  const handleBuyClick = () => {
+    pushToDataLayer("buyButton", { source: "final_cta" });
+    window.open('https://buy.stripe.com/bJe6oI0dx0eOaF49Lbasg0a', '_blank');
   };
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden">
-      {/* Enhanced background with better mobile optimization */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-50/95 via-green-100/90 to-green-200/85 z-10"></div>
-        <img 
-          src="/lovable-uploads/7eeaadd6-cfbf-4f28-8d1c-4c9222ab292a.png" 
-          alt="Program Name community" 
-          className="w-full h-full object-cover object-center"
-          style={{ objectPosition: 'center 30%' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-green-100/40 via-transparent to-green-50/20 z-10"></div>
-      </div>
+    <section className="py-20 px-4 bg-green-50/50">
+      <div className="max-w-3xl mx-auto text-center">
+        <div className="mb-8">
+          <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800 font-display">
+            💛 Ge dig själv en mjukare december
+          </h2>
 
-      <div className="max-w-4xl mx-auto text-center relative z-20">
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border border-white/50">
-          <div className="mb-8">
-            <div className="text-4xl mb-4">🌟✨🌻</div>
-            {/* UPDATED HEADING - FOCUSED ON REGISTRATION BEING OPEN */}
-            <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800 font-display">
-              Säkra din plats innan första starten! 🌟
-            </h2>
-            {/* ORIGINAL HEADING (SAVED FOR REFERENCE):
-            Redo att skapa din bästa sommar någonsin? 🌟
-            */}
-            
-            <p className="text-xl text-green-700 mb-8 font-text">
-              {/* UPDATED COPY - FOCUSED ON WHAT THEY GET WHEN THEY REGISTER */}
-              När du säkrar din plats får du:
-              {/* ORIGINAL COPY (SAVED FOR REFERENCE):
-              När vi öppnar dörrarna får du:
-              */}
+          <div className="space-y-6 text-green-700 font-text text-lg leading-relaxed">
+            <p>
+              Tänk om december i år kan få kännas annorlunda. Lite långsammare. Lite mjukare. Lite mer du.
+            </p>
+            <p>
+              Du behöver inte bestämma dig för något stort. Bara ge dig själv den här lilla stunden varje dag – tio minuter som bara är dina.
+            </p>
+            <p className="font-semibold">
+              För att vila. För att känna. För att få andas ut en stund.
             </p>
           </div>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-4 text-left mb-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-start space-x-3">
-                <Check className="text-neon-green flex-shrink-0 mt-1" size={20} />
-                <span className="text-green-800 font-medium">{benefit}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="space-y-4">
-            <Link to="/quiz" onClick={handleQuizClick}>
-              <Button className="bg-coral hover:bg-coral/90 text-white font-semibold text-lg px-8 py-4 w-full md:w-auto">
-                {/* UPDATED CTA TEXT - FOCUSED ON TAKING ACTION NOW */}
-                Gör vårt quiz och säkra din plats
-                {/* ORIGINAL CTA TEXT (SAVED FOR REFERENCE):
-                Gör vårt quiz och hitta din väg
-                */}
+        <div className="space-y-4">
+          {/* Buy button - only show when launch is open */}
+          {launchState.showBuyButton && (
+            <>
+              <Button
+                onClick={handleBuyClick}
+                className="bg-primary hover:bg-primary/90 text-white font-semibold text-xl px-10 py-6 w-full sm:w-auto rounded-xl"
+              >
+                Köp kalendern – 249 kr
               </Button>
-            </Link>
-            
-            <Button 
-              className="bg-primary hover:bg-primary/90 text-white font-semibold text-lg px-8 py-4 w-full md:w-auto ml-0 md:ml-4 mt-4 md:mt-0"
-              onClick={handleRegistrationClick}
-            >
-              Anmäl dig direkt
-            </Button>
-            
-            <p className="text-sm text-green-600 mt-4 opacity-80 font-text">
-              {/* UPDATED MESSAGING - URGENCY FOCUSED */}
-              🌺 Begränsade platser · Säkra din plats idag 🌺
-              {/* ORIGINAL MESSAGING (SAVED FOR REFERENCE):
-              🌺 Ingen stress, inga måsten – bara glädje och utveckling 🌺
-              */}
-            </p>
-          </div>
 
-          {/* Floating elements for extra summer vibes */}
-          <div className="absolute -top-4 -right-4 text-coral opacity-60">
-            <Heart className="animate-float" size={24} />
-          </div>
-          <div className="absolute -bottom-4 -left-4 text-purple opacity-60">
-            <Sparkles className="animate-float" size={20} style={{ animationDelay: '1s' }} />
-          </div>
+              <p className="text-sm text-green-600 font-text">
+                Start 1 december – låt stillheten få bli din decemberrutin.
+              </p>
+
+              <p className="text-xs text-green-600 mt-2">
+                Du kan använda ditt friskvårdsbidrag för köpet
+              </p>
+            </>
+          )}
+
+          {/* Email signup - show in pre-launch */}
+          {launchState.showEmailSignup && !launchState.showBuyButton && (
+            <>
+              <p className="text-base text-green-700 mb-4">
+                Anmäl ditt intresse så hör vi av oss när kalendern öppnar!
+              </p>
+              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <Input
+                  type="email"
+                  placeholder="Din e-postadress..."
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 h-12 rounded-xl border-2 border-green-300"
+                  required
+                  disabled={isSubmitting}
+                />
+                <Button
+                  type="submit"
+                  className="bg-primary hover:bg-primary/90 text-white h-12 px-6 rounded-xl font-semibold"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Skickar...' : 'Anmäl intresse ✨'}
+                </Button>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </section>

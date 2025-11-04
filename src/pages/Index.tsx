@@ -1,6 +1,6 @@
 
 import { Hero } from '@/components/Hero';
-import { Testimonials } from '@/components/Testimonials';
+import { ImageIntroSection } from '@/components/ImageIntroSection';
 import { FAQ } from '@/components/FAQ';
 import { FinalCTA } from '@/components/FinalCTA';
 import { FooterSection } from '@/components/FooterSection';
@@ -9,6 +9,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Hero />
+      <ImageIntroSection />
 
       {/* Problem/Pain Point Section */}
       <section className="py-16 px-4 bg-green-50/50">
@@ -47,7 +48,7 @@ const Index = () => {
             <p className="pt-4 font-semibold">
               Kanske känner du igen dig? Känslan av att december rusar, medan du försöker hinna med livet. Den där tröttheten som smyger sig på när du egentligen bara vill andas, känna doften av granen, höra tystnaden mellan tonerna.
             </p>
-            <p className="italic text-coral">
+            <p className="italic text-green-800 font-semibold">
               Det är just där – i det mellanrummet – den här kalendern vill möta dig.
             </p>
           </div>
@@ -96,7 +97,7 @@ const Index = () => {
             <p>
               Du behöver inte planera eller förbereda något. Du behöver inte ha några förkunskaper. Du behöver bara trycka på play och låta mig hålla dig en liten stund.
             </p>
-            <p className="text-center text-xl font-bold text-coral pt-6">
+            <p className="text-center text-xl font-bold text-green-800 pt-6">
               För du förtjänar att bli hållen.
             </p>
           </div>
@@ -129,7 +130,6 @@ const Index = () => {
         </div>
       </section>
 
-      <Testimonials />
       <FAQ />
       <FinalCTA />
       <FooterSection />

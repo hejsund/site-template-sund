@@ -4,28 +4,36 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const faqs = [
   {
-    question: "Måste jag ha redskap för att träna?",
-    answer: "Nej! Det finns träningspass som kan göras med bara kroppen som motstånd. I programmet ingår även träning med kettlebell, battlerope, miniband och löpning. Utrustningen ingår ej."
+    question: "Vad är en ljudkalender?",
+    answer: "En ljudkalender är precis som en traditionell adventskalender – men istället för choklad eller presenter får du varje dag ett nytt ljudspår. I denna kalender får du 24 guidade aktiveringar för kropp, sinne och hjärta. Varje ljudspår är 3-10 minuter långt."
   },
   {
-    question: "Passar programmet mig som nybörjare?",
-    answer: "Absolut! Program Name är designad för alla nivåer. Det finns träningspass både för dig som är nybörjare och för dig med stor träningsvana. Du bestämmer själv din träningsmängd varje vecka."
+    question: "Hur lång tid tar det varje dag?",
+    answer: "Varje ljudspår är mellan 3-10 minuter. Du behöver inte förbereda något, inte ha några redskap och inte byta om. Bara trycka på play, luta dig tillbaka och ta emot. Perfekt för dig som har en hektisk vardag."
   },
   {
-    question: "Hur mycket tid behöver jag avsätta?",
-    answer: "Du bestämmer själv! Träningspassen varierar från 10-30 minuter. Recepten är snabba och enkla. Många av våra deltagare ägnar 15-20 minuter om dagen åt programmet."
+    question: "När får jag tillgång till kalendern?",
+    answer: "Alla som köper kalendern får tillgång redan fredagen den 29 november, så att du kan landa och bekanta dig med plattformen i lugn och ro innan advent börjar. Första ljudspåret släpps den 1 december."
   },
   {
-    question: "Vad händer om jag missar några dagar?",
-    answer: "Inget problem alls! Det här är inte ett strikt program utan handlar om livsstil och glädje. Du hoppar bara in där du är."
+    question: "Hur lyssnar jag på ljudspåren?",
+    answer: "Efter köpet får du en inloggning till vår plattform där alla ljudspår finns samlade. Du kan lyssna var du vill – i soffan, på promenaden, på väg till jobbet eller innan du somnar. På datorn, mobilen eller surfplattan."
   },
   {
-    question: "Vad kostar programmet?",
-    answer: "Programmet kostar 1 695 kr vilket motsvarar ca 40 kr per dag."
+    question: "Måste jag lyssna varje dag?",
+    answer: "Nej, inget måste här! Du kan lyssna när det passar dig. Ljudspåren kommer att finnas tillgängliga även efter december om du skulle vilja gå tillbaka till något. Detta är ingen prestation – utan en gåva till dig själv."
   },
   {
-    question: "Kan jag träna utomhus?",
-    answer: "Självklart! Många av träningspassen är perfekta för utomhusträning. Vi har pass för park, strand, trädgård – var du än befinner dig. Sommaren är ju till för att vara ute!"
+    question: "Kan jag använda friskvårdsbidrag?",
+    answer: "Ja! Kalendern räknas som 'internetbaserade träningsprogram som yoga' gällande friskvårdsbidrag. Du får ett kvitto efter köpet som du kan använda för att ansöka om friskvårdsbidrag hos din arbetsgivare."
+  },
+  {
+    question: "Hur mycket kostar kalendern?",
+    answer: "Kalendern kostar 249 kr, vilket motsvarar cirka 10 kr per dag för 24 dagars guidade stunder av stillhet och närvaro."
+  },
+  {
+    question: "Vad händer om jag köper efter 27 november?",
+    answer: "Vi tar inte emot köp efter den 27 november. Detta för att vi vill kunna ge alla deltagare en lugn och närvarande start. Vi loggar sedan ut för december för att kunna vara närvarande med våra familjer – precis som vi lär ut i kalendern."
   }
 ];
 
@@ -81,11 +89,11 @@ export const FAQ = () => {
             <p className="text-foreground/70 mb-4">
               Har du andra frågor? Vi älskar att höra från dig!
             </p>
-            <a 
-              href="mailto:hej@yoursite.se" 
+            <a
+              href="mailto:hej@sundochstark.se"
               className="text-primary font-medium hover:text-primary/80 transition-colors"
             >
-              📧 hej@yoursite.se
+              📧 hej@sundochstark.se
             </a>
           </div>
         </div>

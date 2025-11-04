@@ -1,14 +1,32 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { HeroAnimatedElements } from './hero/HeroAnimatedElements';
+import { getLaunchState } from '@/utils/launchPhases';
+import { Countdown } from '@/components/Countdown';
 
 export const Hero = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [launchState, setLaunchState] = useState(getLaunchState());
+
+  // Update launch state every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLaunchState(getLaunchState());
+    }, 60000); // Check every minute
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Check if email is valid
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.(se|com|org|net|edu|gov|mil|info|biz|name|museum|coop|aero|asia|cat|jobs|mobi|tel|travel|xxx|eu|uk|de|fr|es|it|nl|no|dk|fi)$/i;
+    return emailRegex.test(email);
+  };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,62 +83,97 @@ export const Hero = () => {
         <HeroAnimatedElements />
 
         <div className="relative z-10 px-2 sm:px-0">
-          {/* Main heading */}
+          {/* Main heading - Dynamic based on launch phase */}
           <div className="mb-6 sm:mb-8 relative">
             <h1 className="font-black leading-none font-display">
-              <span className="text-gradient block text-[clamp(2.5rem,10vw,5rem)] sm:text-6xl md:text-7xl mb-4">
-                Julkalender 2025
+              <span className="text-green-800 block text-[clamp(2.5rem,10vw,5rem)] sm:text-6xl md:text-7xl mb-4">
+                {launchState.heroHeading}
               </span>
               <span className="block text-xl sm:text-2xl md:text-3xl text-green-700 font-bold">
-                🌿 24 aktiveringar för en mjuk december
+                {launchState.heroSubheading}
               </span>
             </h1>
           </div>
 
-          {/* Subtitle */}
-          <div className="mb-8 sm:mb-12">
-            <p className="text-base sm:text-lg md:text-xl text-green-700 max-w-2xl mx-auto leading-relaxed font-text px-2">
-              En ljudkalender för att sakta ner, landa och känna mer närvaro. 3-10 minuter varje dag – bara tryck på play.
-            </p>
-          </div>
-
-          {/* CTA Section */}
-          <div className="max-w-md mx-auto space-y-4 mb-8">
-            <Button
-              onClick={handleBuyClick}
-              className="w-full bg-primary hover:bg-primary/90 text-white font-semibold text-lg py-6 rounded-xl"
-            >
-              Köp kalendern – 249 kr
-            </Button>
-
-            {/* Email signup */}
-            <div className="text-sm text-green-700 font-text mb-4">
-              eller anmäl ditt intresse för mer information
+          {/* Countdown for last 24 hours */}
+          {launchState.showCountdown && (
+            <div className="mb-8 sm:mb-12">
+              <Countdown />
             </div>
+          )}
 
-            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
-              <Input
-                type="email"
-                placeholder="Din e-postadress..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 h-12 rounded-xl border-2 border-green-300"
-                required
-                disabled={isSubmitting}
-              />
-              <Button
-                type="submit"
-                className="bg-secondary hover:bg-secondary/90 text-green-800 h-12 px-6 rounded-xl font-semibold"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Skickar...' : 'Anmäl intresse ✨'}
-              </Button>
-            </form>
+          {/* Subtitle - Only show in normal phases */}
+          {!launchState.showCountdown && launchState.phase !== 'closed' && (
+            <div className="mb-8 sm:mb-12">
+              <p className="text-base sm:text-lg md:text-xl text-green-700 max-w-2xl mx-auto leading-relaxed font-text px-2">
+                En ljudkalender för att sakta ner, landa och känna mer närvaro. 3-10 minuter varje dag – bara tryck på play.
+              </p>
+            </div>
+          )}
 
-            <p className="text-xs text-green-600 mt-2">
-              Du kan använda ditt friskvårdsbidrag för köpet
-            </p>
-          </div>
+          {/* CTA Section - Dynamic based on launch phase */}
+          {launchState.phase !== 'closed' && (
+            <div className="max-w-md mx-auto space-y-4 mb-8">
+              {/* Buy Button - Only show when open or last-24h */}
+              {launchState.showBuyButton && (
+                <>
+                  <Button
+                    onClick={handleBuyClick}
+                    className="w-full bg-primary hover:bg-primary/90 text-white font-semibold text-lg py-6 rounded-xl"
+                  >
+                    Köp kalendern – 249 kr
+                  </Button>
+                  {launchState.showEmailSignup && (
+                    <div className="text-sm text-green-700 font-text mb-4">
+                      eller anmäl ditt intresse för mer information
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* Email signup - Show in pre-launch and open phases */}
+              {launchState.showEmailSignup && (
+                <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-3">
+                  <Input
+                    type="email"
+                    placeholder="Din e-postadress..."
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="flex-1 h-12 rounded-xl border-2 border-green-300"
+                    required
+                    disabled={isSubmitting}
+                  />
+                  <Button
+                    type="submit"
+                    className={`h-12 px-6 rounded-xl font-semibold transition-colors ${
+                      isValidEmail(email)
+                        ? 'bg-green-800 hover:bg-green-700 text-white'
+                        : 'bg-secondary hover:bg-secondary/90 text-green-800'
+                    }`}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Skickar...' : launchState.ctaText}
+                  </Button>
+                </form>
+              )}
+
+              {/* Friskvård notice - only show when buy button is visible */}
+              {launchState.showBuyButton && (
+                <p className="text-xs text-green-600 mt-2">
+                  Du kan använda ditt friskvårdsbidrag för köpet
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Closed message */}
+          {launchState.phase === 'closed' && (
+            <div className="max-w-md mx-auto mb-8">
+              <p className="text-lg text-green-700 font-text">
+                Tack för intresset! Anmälan är nu stängd för i år. Vi ses igen nästa december! 💛
+              </p>
+            </div>
+          )}
 
           {/* Scroll indicator */}
           <div className="animate-bounce mt-12">

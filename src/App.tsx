@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { TimePhaseProvider } from "./contexts/TimePhaseContext";
 import { Navigation } from "./components/Navigation";
+import { TestModeSelector } from "./components/TestModeSelector";
 import { pushToDataLayer } from "./utils/pushToDataLayer";
 import { logPageView } from "./utils/facebookEvents";
 import CookieBanner from "./components/CookieBanner";
@@ -60,6 +61,7 @@ const AppContent = () => {
 
   return (
     <>
+      <TestModeSelector />
       <CookieBanner />
       {!isHemligPage && <Navigation />}
       <Routes>

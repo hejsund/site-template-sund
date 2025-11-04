@@ -1,12 +1,22 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Calendar, Clock, Users, Trophy, ChevronDown, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { scrollToTop } from '@/utils/scrollToTop';
+import { getLaunchState } from '@/utils/launchPhases';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [launchState, setLaunchState] = useState(getLaunchState());
+
+  // Update launch state every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLaunchState(getLaunchState());
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -45,12 +55,14 @@ export const Navigation = () => {
               </Link>
             ))}
 
-            <Button
-              onClick={() => window.open('https://buy.stripe.com/bJe6oI0dx0eOaF49Lbasg0a', '_blank')}
-              className="bg-primary hover:bg-primary/90 text-white font-semibold text-base"
-            >
-              Köp kalendern - 249 kr
-            </Button>
+            {launchState.showBuyButton && (
+              <Button
+                onClick={() => window.open('https://buy.stripe.com/bJe6oI0dx0eOaF49Lbasg0a', '_blank')}
+                className="bg-primary hover:bg-primary/90 text-white font-semibold text-base"
+              >
+                Köp kalendern - 249 kr
+              </Button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -85,17 +97,19 @@ export const Navigation = () => {
                   <span>{item.name}</span>
                 </Link>
               ))}
-              <div className="px-4 pt-4 border-t border-green-100 mt-4">
-                <Button
-                  onClick={() => {
-                    setIsOpen(false);
-                    window.open('https://buy.stripe.com/bJe6oI0dx0eOaF49Lbasg0a', '_blank');
-                  }}
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold text-base py-3"
-                >
-                  Köp kalendern - 249 kr
-                </Button>
-              </div>
+              {launchState.showBuyButton && (
+                <div className="px-4 pt-4 border-t border-green-100 mt-4">
+                  <Button
+                    onClick={() => {
+                      setIsOpen(false);
+                      window.open('https://buy.stripe.com/bJe6oI0dx0eOaF49Lbasg0a', '_blank');
+                    }}
+                    className="w-full bg-primary hover:bg-primary/90 text-white font-semibold text-base py-3"
+                  >
+                    Köp kalendern - 249 kr
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}

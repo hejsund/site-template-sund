@@ -11,14 +11,13 @@ export const FooterSection = () => {
           {/* Brand Section */}
           <div className="md:col-span-1">
             <h3 className="text-2xl font-black text-white mb-3 font-display">
-              Program Name
+              Julkalendern 2025
             </h3>
             <p className="text-sm text-green-100 mb-4 font-medium">
-              Program Name är ett varumärke från Company Name
+              Ett initiativ från Sund & Stark
             </p>
             <p className="text-green-100 leading-relaxed mb-6 font-text">
-              Vi hjälper dig att bygga hållbara hälsovanor som passar ditt liv. Ingen quick fix, 
-              ingen extrem disciplin - bara verktyg som fungerar på riktigt.
+              24 aktiveringar för en mjuk december. Små stunder av stillhet, närvaro och reflektion – mitt i vardagens virvelvind.
             </p>
             
             {/* Social Links */}
@@ -46,16 +45,13 @@ export const FooterSection = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-4 font-display">Snabblänkar</h4>
+            <h4 className="text-lg font-bold text-white mb-4 font-display">Länkar</h4>
             <nav className="space-y-3">
-              <Link to="/quiz" className="block text-green-200 hover:text-white transition-colors duration-200 font-text">
-                Ta vårt quiz
+              <Link to="/" className="block text-green-200 hover:text-white transition-colors duration-200 font-text">
+                Hem
               </Link>
-              <Link to="/om-program-name" className="block text-green-200 hover:text-white transition-colors duration-200 font-text">
-                Om Program Name
-              </Link>
-              <Link to="/artiklar" className="block text-green-200 hover:text-white transition-colors duration-200 font-text">
-                Våra artiklar
+              <Link to="/om-charlotte" className="block text-green-200 hover:text-white transition-colors duration-200 font-text">
+                Om Charlotte
               </Link>
             </nav>
           </div>
@@ -65,12 +61,12 @@ export const FooterSection = () => {
             <h4 className="text-lg font-bold text-white mb-4 font-display">Kontakt</h4>
             <div className="space-y-3">
               <p className="text-green-100 font-text">Har du frågor?</p>
-              <a 
-                href="mailto:hej@yoursite.se" 
+              <a
+                href="mailto:hej@sundochstark.se"
                 className="inline-flex items-center text-green-200 hover:text-white transition-colors duration-200 font-text"
               >
                 <Mail size={16} className="mr-2" />
-                hej@yoursite.se
+                hej@sundochstark.se
               </a>
             </div>
           </div>
@@ -80,7 +76,7 @@ export const FooterSection = () => {
         <div className="mt-12 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <p className="text-green-200 text-sm font-text">
-              © 2025 Program Name - Company Name. Alla rättigheter förbehållna.
+              © 2025 Julkalendern 2025 - Sund & Stark. Alla rättigheter förbehållna.
             </p>
             <div className="flex space-x-6 text-sm">
               <Link to="/integritetspolicy" className="text-green-200 hover:text-white transition-colors duration-200 font-text">
