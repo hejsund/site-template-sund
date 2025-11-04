@@ -45,7 +45,7 @@ export const HemligUrgencySection: React.FC<HemligUrgencySectionProps> = ({
               
               <div className="bg-green-50 border-l-4 border-green-400 p-6 rounded-r-xl">
                 <p className="text-green-800 font-text leading-relaxed text-lg">
-                  <strong>Varför nu?</strong> Sommarboosten är byggt för att fungera även när rutinerna är lösa – just då det brukar vara som svårast.
+                  <strong>Varför nu?</strong> Program Name är byggt för att fungera även när rutinerna är lösa – just då det brukar vara som svårast.
                 </p>
               </div>
               

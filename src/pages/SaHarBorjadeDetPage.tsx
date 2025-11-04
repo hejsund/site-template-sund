@@ -58,7 +58,7 @@ const SaHarBorjadeDetPage = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="mb-12">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-green-800 mb-6 font-display leading-tight">
-              Vi skapade Sommarboosten
+              Vi skapade Program Name
             </h1>
             <p className="text-xl sm:text-2xl md:text-3xl text-green-700 max-w-3xl mx-auto leading-relaxed font-text mb-8">
               – för din bästa sommar någonsin
@@ -75,7 +75,7 @@ const SaHarBorjadeDetPage = () => {
             <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-white p-1">
               <img 
                 src="/lovable-uploads/67cd34f1-1979-42e6-b2da-6f8f6f298078.png" 
-                alt="Charlotte och hennes partner njuter av en stund tillsammans"
+                alt="Instructor Name och hennes partner njuter av en stund tillsammans"
                 className="w-full h-full object-cover rounded-3xl hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -103,10 +103,10 @@ const SaHarBorjadeDetPage = () => {
           <article className="bg-white rounded-3xl p-8 sm:p-12 md:p-16 shadow-2xl border border-green-200/50">
             
             <div className="prose prose-lg max-w-none">
-              <h2 className="text-3xl sm:text-4xl font-bold text-green-800 mb-8 leading-tight">Hej, jag heter Charlotte och tillsammans med mitt team på Sund & Stark skapade vi Sommarboosten</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-green-800 mb-8 leading-tight">Hej, jag heter Instructor Name och tillsammans med mitt team på Company Name skapade vi Program Name</h2>
               
               <div className="text-lg sm:text-xl text-green-700 font-text leading-relaxed mb-8 p-6 bg-green-50 rounded-2xl border-l-4 border-green-600">
-                Som fyrbarnsmamma och grundare av <strong>Sund & Stark</strong> vet jag hur det känns när sommaren närmar sig och panikens påverkar sätter in. "Ska jag verkligen kunna hålla igång träningen när barnen är hemma?" "Hur ska jag få till hälsosamma vanor när allt är kaos och grillmys?"
+                Som fyrbarnsmamma och grundare av <strong>Company Name</strong> vet jag hur det känns när sommaren närmar sig och panikens påverkar sätter in. "Ska jag verkligen kunna hålla igång träningen när barnen är hemma?" "Hur ska jag få till hälsosamma vanor när allt är kaos och grillmys?"
               </div>
               
               <p className="text-lg leading-relaxed mb-6">
@@ -116,10 +116,10 @@ const SaHarBorjadeDetPage = () => {
               <div className="bg-coral/10 border-l-4 border-coral p-8 my-12 rounded-2xl">
                 <div className="flex items-center gap-4 mb-4">
                   <Heart className="w-8 h-8 text-coral" aria-hidden="true" />
-                  <h3 className="text-2xl font-bold text-coral">Det var då idén om Sommarboosten föddes</h3>
+                  <h3 className="text-2xl font-bold text-coral">Det var då idén om Program Name föddes</h3>
                 </div>
                 <p className="text-coral font-medium font-text text-lg mb-0 leading-relaxed">
-                  Sommarboosten skapades ur en enkel men kraftfull insikt: <strong>Sommaren ska ge dig energi, inte ta den från dig.</strong>
+                  Program Name skapades ur en enkel men kraftfull insikt: <strong>Sommaren ska ge dig energi, inte ta den från dig.</strong>
                 </p>
               </div>
 
@@ -134,7 +134,7 @@ const SaHarBorjadeDetPage = () => {
               </div>
 
               <p className="text-lg leading-relaxed mb-8">
-                Sommarboosten är resultatet av fem års erfarenhet tillsammans med tusentals familjer som alla ville samma sak: att må bra, ha energi och njuta av sommaren utan att känna att de "sabbade" något.
+                Program Name är resultatet av fem års erfarenhet tillsammans med tusentals familjer som alla ville samma sak: att må bra, ha energi och njuta av sommaren utan att känna att de "sabbade" något.
               </p>
 
               <h2 className="flex items-center gap-4 text-green-800 text-3xl font-bold mb-8">
@@ -143,7 +143,7 @@ const SaHarBorjadeDetPage = () => {
               </h2>
 
               <p className="text-lg leading-relaxed mb-6">
-                Som din guide genom Sommarboosten finns jag här av en enkel anledning: <strong className="text-coral">Jag brinner för att hjälpa människor hitta balansen mellan att ha kul och att må bra.</strong>
+                Som din guide genom Program Name finns jag här av en enkel anledning: <strong className="text-coral">Jag brinner för att hjälpa människor hitta balansen mellan att ha kul och att må bra.</strong>
               </p>
 
               <p className="text-lg leading-relaxed mb-8">
@@ -153,7 +153,7 @@ const SaHarBorjadeDetPage = () => {
               <div className="bg-gradient-to-r from-purple-50 to-orange-50 p-8 rounded-2xl my-12 border border-purple-200">
                 <h3 className="text-purple-800 mb-6 flex items-center gap-3 text-xl font-bold">
                   <Users className="w-8 h-8" aria-hidden="true" />
-                  Genom Sommarboosten vill jag:
+                  Genom Program Name vill jag:
                 </h3>
                 <ul className="text-green-700 leading-relaxed space-y-4 text-lg">
                   <li className="flex items-start gap-3">
@@ -186,7 +186,7 @@ const SaHarBorjadeDetPage = () => {
               <div className="space-y-8 mb-12">
                 <div className="bg-primary/5 p-6 rounded-xl border-l-4 border-primary">
                   <p className="text-lg leading-relaxed">
-                    <strong className="text-primary text-xl">Vi skapade originalet.</strong> Sommarboosten var det första dedikerade sommarträningsprogrammet i Sverige, och vi har fem års erfarenhet av att hjälpa människor genom just dessa utmaningar. Idag finns det många som erbjuder liknande program, vilket vi ser som något positivt - fler människor får hjälp att må bra på sommaren.
+                    <strong className="text-primary text-xl">Vi skapade originalet.</strong> Program Name var det första dedikerade sommarträningsprogrammet i Sverige, och vi har fem års erfarenhet av att hjälpa människor genom just dessa utmaningar. Idag finns det många som erbjuder liknande program, vilket vi ser som något positivt - fler människor får hjälp att må bra på sommaren.
                   </p>
                 </div>
 
@@ -212,7 +212,7 @@ const SaHarBorjadeDetPage = () => {
               <h2 className="text-3xl font-bold text-green-800 mb-8">Tillsammans skapar vi din bästa sommar</h2>
               
               <p className="text-lg leading-relaxed mb-6">
-                När du går med i Sommarboosten blir du del av något större än ett träningsprogram. Du blir del av en community av människor som förstår att:
+                När du går med i Program Name blir du del av något större än ett träningsprogram. Du blir del av en community av människor som förstår att:
               </p>
 
               <ul className="text-green-700 space-y-4 text-lg mb-12">
@@ -237,7 +237,7 @@ const SaHarBorjadeDetPage = () => {
               <div className="bg-green-50 p-8 rounded-2xl my-12 border border-green-200">
                 <h3 className="text-green-800 mb-6 text-2xl font-bold">Ett starkt team bakom kulisserna</h3>
                 <p className="text-green-700 leading-relaxed text-lg mb-6">
-                  Tillsammans med mitt team på <strong>Sund & Stark</strong> - och framför allt min partner Rickard som ansvarar för all teknik bakom kulisserna - har vi skapat något som tusentals familjer nu ser fram emot varje år.
+                  Tillsammans med mitt team på <strong>Company Name</strong> - och framför allt min partner Rickard som ansvarar för all teknik bakom kulisserna - har vi skapat något som tusentals familjer nu ser fram emot varje år.
                 </p>
                 <p className="text-green-700 leading-relaxed text-lg">
                   <strong>Våra roller är tydligt uppdelade:</strong> Jag sköter allt som rör träning, coaching och deltagarkontakt, medan Rickard säkerställer att all teknik, plattformar och system fungerar smidigt. Han är den som gör det möjligt för mig att fokusera helt på det jag brinner för - att hjälpa dig nå dina mål.
@@ -258,7 +258,7 @@ const SaHarBorjadeDetPage = () => {
               
               <div className="bg-coral/10 p-8 rounded-2xl my-8 border border-coral/20">
                 <p className="text-coral font-semibold text-xl leading-relaxed mb-4">
-                  Sommarboosten väntar på dig. Och jag kommer vara där hela vägen för att peppa, stötta och påminna dig om hur stark du är.
+                  Program Name väntar på dig. Och jag kommer vara där hela vägen för att peppa, stötta och påminna dig om hur stark du är.
                 </p>
                 <p className="text-green-800 text-2xl font-medium mb-0">
                   Låt oss göra den här sommaren till din bästa någonsin – tillsammans.
@@ -267,9 +267,9 @@ const SaHarBorjadeDetPage = () => {
 
               <div className="text-center my-12 p-8 bg-gradient-to-r from-coral/10 to-purple/10 rounded-2xl border border-coral/20">
                 <p className="italic text-xl text-green-800 mb-3">Kram,</p>
-                <p className="font-bold text-3xl text-primary mb-3">Charlotte</p>
-                <p className="text-lg text-green-600 mt-3">Grundare, Sund & Stark</p>
-                <p className="text-lg text-green-600">Skapare av Sommarboosten</p>
+                <p className="font-bold text-3xl text-primary mb-3">Instructor Name</p>
+                <p className="text-lg text-green-600 mt-3">Grundare, Company Name</p>
+                <p className="text-lg text-green-600">Skapare av Program Name</p>
               </div>
             </div>
           </article>
@@ -323,7 +323,7 @@ const SaHarBorjadeDetPage = () => {
               </Button>
             </Link>
             <p className="text-lg text-green-600 font-text">
-              Eller utforska mer om <Link to="/om-sommarboosten" className="text-green-700 hover:underline font-medium underline-offset-4">Sommarboosten</Link>
+              Eller utforska mer om <Link to="/om-program-name" className="text-green-700 hover:underline font-medium underline-offset-4">Program Name</Link>
             </p>
           </div>
         </div>

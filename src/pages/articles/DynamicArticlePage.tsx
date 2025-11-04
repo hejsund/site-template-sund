@@ -176,7 +176,7 @@ const DynamicArticlePage = () => {
             
             <div className="flex items-center gap-3 mb-8 text-green-700">
               <User className="w-4 h-4" />
-              <span className="text-sm font-medium">Av Sund & Stark Team</span>
+              <span className="text-sm font-medium">Av Company Name Team</span>
             </div>
             
             {article.image_url && (
@@ -255,9 +255,9 @@ const DynamicArticlePage = () => {
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten">
+            <Link to="/om-program-name">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
-                Läs om Sommarboosten
+                Läs om Program Name
               </Button>
             </Link>
           </div>

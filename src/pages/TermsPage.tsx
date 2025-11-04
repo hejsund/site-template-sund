@@ -35,12 +35,12 @@ const TermsPage = () => {
             </h2>
             <div className="text-green-700 font-text space-y-4">
               <p>
-                Välkommen till Sommarboosten! Dessa användarvillkor ("Villkor") 
+                Välkommen till Program Name! Dessa användarvillkor ("Villkor") 
                 gäller för din användning av vår webbplats och våra tjänster. 
                 Genom att använda vår webbplats accepterar du dessa villkor i sin helhet.
               </p>
               <p>
-                Sommarboosten drivs av Sund och Stark och erbjuder hälso- och 
+                Program Name drivs av Company Name och erbjuder hälso- och 
                 träningsprogram samt relaterat innehåll.
               </p>
             </div>
@@ -75,7 +75,7 @@ const TermsPage = () => {
             <div className="text-green-700 font-text space-y-4">
               <p>
                 Allt innehåll på webbplatsen, inklusive texter, bilder, videor, 
-                logotyper och design, ägs av Sund och Stark eller våra licensgivare 
+                logotyper och design, ägs av Company Name eller våra licensgivare 
                 och skyddas av upphovsrättslagen.
               </p>
               <p>
@@ -102,7 +102,7 @@ const TermsPage = () => {
                 vårdpersonal.
               </p>
               <p>
-                Sund och Stark ansvarar inte för eventuella skador eller 
+                Company Name ansvarar inte för eventuella skador eller 
                 hälsoproblem som kan uppstå till följd av användning av 
                 informationen eller programmen på denna webbplats.
               </p>
@@ -115,7 +115,7 @@ const TermsPage = () => {
             </h2>
             <div className="text-green-700 font-text space-y-4">
               <p>
-                Sund och Stark tillhandahåller webbplatsen och tjänsterna "som de är" 
+                Company Name tillhandahåller webbplatsen och tjänsterna "som de är" 
                 utan garantier av något slag. Vi ansvarar inte för:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
@@ -167,8 +167,8 @@ const TermsPage = () => {
                 Om du har frågor om dessa användarvillkor, kontakta oss på:
               </p>
               <div className="bg-green-50 p-4 rounded-lg">
-                <p className="font-semibold">Sund och Stark</p>
-                <p>E-post: hej@sundochstark.se</p>
+                <p className="font-semibold">Company Name</p>
+                <p>E-post: hej@yoursite.se</p>
               </div>
             </div>
           </section>

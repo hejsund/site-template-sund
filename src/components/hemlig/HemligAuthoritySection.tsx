@@ -8,7 +8,7 @@ export const HemligAuthoritySection: React.FC = () => {
         <div className="bg-gradient-to-r from-green-100 to-green-200 rounded-3xl p-10 border-2 border-green-300">
           <h2 className="text-3xl font-bold text-green-800 mb-6 font-display flex items-center gap-3">
             <span className="text-3xl">🙋‍♀️</span>
-            Charlottes resa – Bakgrunden till Sommarboosten
+            Instructor Names resa – Bakgrunden till Program Name
           </h2>
           
           <div className="space-y-4 text-green-800 font-text leading-relaxed text-lg">
@@ -18,12 +18,12 @@ export const HemligAuthoritySection: React.FC = () => {
             
             <p>
               Under många år körde jag all in på våren – och rasade ur allt på sommaren.
-              Det är där Sommarboosten föddes: ur behovet av något som faktiskt fungerar även under den årstid då vi annars brukar släppa taget.
+              Det är där Program Name föddes: ur behovet av något som faktiskt fungerar även under den årstid då vi annars brukar släppa taget.
             </p>
             
             <div className="bg-white rounded-xl p-6 border border-green-300">
               <p className="font-semibold text-green-800">
-                "Jag skapade Sommarboosten för att ge dig verktygen jag önskat att jag hade haft – så att du slipper samma berg-och-dalbana som jag genomlevde."
+                "Jag skapade Program Name för att ge dig verktygen jag önskat att jag hade haft – så att du slipper samma berg-och-dalbana som jag genomlevde."
               </p>
             </div>
           </div>

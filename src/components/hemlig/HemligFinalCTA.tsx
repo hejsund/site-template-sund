@@ -78,7 +78,7 @@ export const HemligFinalCTA: React.FC<HemligFinalCTAProps> = ({
               <XCircle className="w-12 md:w-16 h-12 md:h-16 text-slate-500 mx-auto mb-4 md:mb-6" />
               <h3 className="text-xl md:text-2xl font-bold text-slate-700 mb-4">Erbjudandet har löpt ut</h3>
               <p className="text-slate-600 font-text">
-                Du är alltid välkommen att läsa mer på <a href="https://sommarboosten.se" className="text-green-600 underline hover:no-underline" target="_blank" rel="noopener noreferrer">sommarboosten.se</a>
+                Du är alltid välkommen att läsa mer på <a href="https://program-name.se" className="text-green-600 underline hover:no-underline" target="_blank" rel="noopener noreferrer">program-name.se</a>
               </p>
             </div>
           ) : (

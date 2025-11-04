@@ -105,7 +105,7 @@ const VacationNutritionArticlePage = () => {
             
             <div className="prose prose-lg max-w-none">
               <p className="lead text-green-700 font-text">
-                "Charlotte, måste jag verkligen tänka på maten på semestern också? Jag vill ju bara koppla av!"
+                "Instructor Name, måste jag verkligen tänka på maten på semestern också? Jag vill ju bara koppla av!"
               </p>
               
               <p>
@@ -173,7 +173,7 @@ const VacationNutritionArticlePage = () => {
               <h2>80/20-regeln på semester</h2>
               
               <p>
-                När vi utvecklade semesterkonceptet för Sommarboosten utgick vi från en enkel princip: <strong>80% energi, 20% njutning</strong>.
+                När vi utvecklade semesterkonceptet för Program Name utgick vi från en enkel princip: <strong>80% energi, 20% njutning</strong>.
               </p>
 
               <p>Det betyder:</p>
@@ -266,9 +266,9 @@ const VacationNutritionArticlePage = () => {
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten">
+            <Link to="/om-program-name">
               <Button variant="outline" className="border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white px-8 py-3 rounded-xl font-semibold">
-                Läs mer om Sommarboosten
+                Läs mer om Program Name
               </Button>
             </Link>
           </div>

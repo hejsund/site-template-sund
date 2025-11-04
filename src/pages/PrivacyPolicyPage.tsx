@@ -125,8 +125,8 @@ const PrivacyPolicyPage = () => {
                 rättigheter, kontakta oss på:
               </p>
               <div className="bg-green-50 p-4 rounded-lg">
-                <p className="font-semibold">Sund och Stark</p>
-                <p>E-post: hej@sundochstark.se</p>
+                <p className="font-semibold">Company Name</p>
+                <p>E-post: hej@yoursite.se</p>
               </div>
             </div>
           </section>

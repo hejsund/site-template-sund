@@ -14,10 +14,10 @@ export const SommarboostenArticle = () => {
       <div className="max-w-4xl mx-auto">
         <header className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-black text-primary mb-6 font-display">
-            Sommarboosten - Vårt mest älskade sommarprogram
+            Program Name - Vårt mest älskade sommarprogram
           </h1>
           <p className="text-lg text-green-700 italic font-text">
-            Av Charlotte Steinwig
+            Av Instructor Name
           </p>
         </header>
 
@@ -37,7 +37,7 @@ export const SommarboostenArticle = () => {
           </p>
 
           <p>
-            Det är därför vi skapade Sommarboosten - <strong>sommarens roligaste träningsprogram</strong> och 
+            Det är därför vi skapade Program Name - <strong>sommarens roligaste träningsprogram</strong> och 
             vårt absolut mest populära program någonsin som nu går in på sitt femte år. Ett program som 
             fokuserar på <strong>träningsglädje</strong> och att hitta den där känslan som får dig att 
             längta efter nästa pass istället för att tvinga dig.
@@ -54,7 +54,7 @@ export const SommarboostenArticle = () => {
               När du ser fram emot ditt pass istället för att se det som en plikt.
             </p>
             <p>
-              I Sommarboosten fokuserar vi på att hitta DIN träningsglädje. För vissa är det en lugn yogapass 
+              I Program Name fokuserar vi på att hitta DIN träningsglädje. För vissa är det en lugn yogapass 
               på altanen. För andra är det att dansa loss till 90-talsmusik i vardagsrummet. Och för en tredje 
               kanske det är styrketräning som får en att känna sig som en krigare.
             </p>
@@ -64,21 +64,21 @@ export const SommarboostenArticle = () => {
           </section>
 
           <h2 className="text-3xl font-bold text-primary mb-6 font-display">
-            Varför blir folk så kära i Sommarboosten?
+            Varför blir folk så kära i Program Name?
           </h2>
           <p>
             Enkelt - för att det fungerar i verkligheten. Inte i teorin, inte i någon perfekt värld, utan i 
             ditt riktiga liv med spontana grillkvällar, semesterresor och barn som vill ha glass.
           </p>
           <p>
-            Vi tror inte på att göra radikala förändringar på sommaren. Istället handlar Sommarboosten om att 
+            Vi tror inte på att göra radikala förändringar på sommaren. Istället handlar Program Name om att 
             skapa <strong>goda kostvanor</strong> och fokusera på <strong>träning som blir av</strong> - 
             oavsett var du är eller vad som händer. Folk älskar helt enkelt detta program!
           </p>
 
           <section className="bg-coral/10 rounded-2xl p-8 my-12 border border-coral/20">
             <h2 className="text-3xl font-bold text-primary mb-6 font-display">
-              Vad ingår i Sommarboosten?
+              Vad ingår i Program Name?
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {[
@@ -98,11 +98,11 @@ export const SommarboostenArticle = () => {
           </section>
 
           <h2 className="text-3xl font-bold text-primary mb-6 font-display">
-            Filosofin bakom Sommarboosten
+            Filosofin bakom Program Name
           </h2>
           <p>
             Sommaren ska vara en tid för glädje, avkoppling och njutning. Men det betyder inte att din hälsa 
-            behöver ta semester. Sommarboosten bygger på samma filosofi som genomsyrar allt vi gör på Sund och Stark:
+            behöver ta semester. Program Name bygger på samma filosofi som genomsyrar allt vi gör på Company Name:
           </p>
           <blockquote className="text-2xl font-bold text-center py-8 text-coral italic">
             "Hälsan ska anpassa sig efter ditt liv - inte tvärtom."
@@ -131,7 +131,7 @@ export const SommarboostenArticle = () => {
               det blir ofta ännu mer kaos med aktiviteter, resor och spontana planer.
             </p>
             <p>
-              Men just därför älskar jag Sommarboosten så mycket. Det är skapat av någon (mig!) som lever mitt 
+              Men just därför älskar jag Program Name så mycket. Det är skapat av någon (mig!) som lever mitt 
               i kaoset och förstår att hälsa inte kan vara ännu en sak som stressar.
             </p>
             <p>
@@ -150,22 +150,22 @@ export const SommarboostenArticle = () => {
                   Gör vårt quiz och hitta din väg
                 </Button>
               </Link>
-              <Link to="/om-sommarboosten" onClick={handleLinkClick}>
+              <Link to="/om-program-name" onClick={handleLinkClick}>
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold text-lg px-8 py-4 w-full sm:w-auto">
-                  Läs mer om Sommarboosten
+                  Läs mer om Program Name
                 </Button>
               </Link>
             </div>
             <p className="text-sm text-green-600 mt-6 font-text">
-              Vill du vara första att veta när Sommarboosten öppnar anmälan? 
-              Följ oss på Instagram @sundochstark.se eller anmäl dig till vårt nyhetsbrev.
+              Vill du vara första att veta när Program Name öppnar anmälan? 
+              Följ oss på Instagram @yoursite.se eller anmäl dig till vårt nyhetsbrev.
             </p>
           </div>
 
           <footer className="text-center pt-8 border-t border-green-200">
             <p className="font-text italic">
               Kram,<br />
-              Charlotte
+              Instructor Name
             </p>
           </footer>
         </div>

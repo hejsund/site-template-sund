@@ -46,7 +46,7 @@ export const Features = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black mb-6 text-green-800">
-            Varför väljer tusentals Sommarboosten? 🌟
+            Varför väljer tusentals Program Name? 🌟
           </h2>
           <p className="text-xl text-green-700 max-w-3xl mx-auto">
             Vi har skapat något som verkligen fungerar. Här är vad som gör oss unika.

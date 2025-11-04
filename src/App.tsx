@@ -66,7 +66,7 @@ const AppContent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/om-charlotte" element={<AboutCharlottePage />} />
-        <Route path="/om-sommarboosten" element={<AboutSommarboostenPage />} />
+        <Route path="/om-program-name" element={<AboutSommarboostenPage />} />
         <Route path="/sa-har-borjade-det" element={<SaHarBorjadeDetPage />} />
         <Route path="/tidigare-ar" element={<PreviousYearsPage />} />
         <Route path="/program/:year" element={<ProgramYearPage />} />

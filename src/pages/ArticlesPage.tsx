@@ -200,9 +200,9 @@ const ArticlesPage = () => {
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten" onClick={() => scrollToTop()}>
+            <Link to="/om-program-name" onClick={() => scrollToTop()}>
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white px-6 sm:px-8 py-3 rounded-xl font-semibold text-base sm:text-lg">
-                Läs om Sommarboosten
+                Läs om Program Name
               </Button>
             </Link>
           </div>

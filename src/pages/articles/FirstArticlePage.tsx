@@ -25,18 +25,18 @@ const FirstArticlePage = () => {
             </div>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-primary mb-4 font-display leading-tight">
-              Vi var först med Sommarboosten - och vi är så stolta över det
+              Vi var först med Program Name - och vi är så stolta över det
             </h1>
             
             <div className="flex items-center gap-3 mb-8 text-green-700">
               <User className="w-4 h-4" />
-              <span className="text-sm font-medium">Av Charlotte Steinwig</span>
+              <span className="text-sm font-medium">Av Instructor Name Steinwig</span>
             </div>
             
             <div className="aspect-video mb-8 rounded-2xl overflow-hidden shadow-lg">
               <img 
                 src="/lovable-uploads/f60c9ef3-2146-4344-ba07-04c19de24beb.png" 
-                alt="Charlotte vid strand med handduk"
+                alt="Instructor Name vid strand med handduk"
                 className="w-full h-full object-cover object-center"
               />
             </div>
@@ -54,11 +54,11 @@ const FirstArticlePage = () => {
               </div>
 
               <p>
-                Jag lanserade ett träningsprogram specifikt för sommaren. Folk sa: "Men Charlotte, sommaren är väl för vila? Vem vill träna då?"
+                Jag lanserade ett träningsprogram specifikt för sommaren. Folk sa: "Men Instructor Name, sommaren är väl för vila? Vem vill träna då?"
               </p>
 
               <p>
-                Idag, när jag ser hur många som erbjuder "sommarprogram" och "sommarträning" så kan jag inte låta bli att le. Vi var först. <strong>Sommarboosten var det allra första dedikerade sommarträningsprogrammet i Sverige.</strong>
+                Idag, när jag ser hur många som erbjuder "sommarprogram" och "sommarträning" så kan jag inte låta bli att le. Vi var först. <strong>Program Name var det allra första dedikerade sommarträningsprogrammet i Sverige.</strong>
               </p>
 
               <p>Och jag är så himla stolt över det.</p>
@@ -66,7 +66,7 @@ const FirstArticlePage = () => {
               <section className="bg-gradient-to-br from-orange/10 to-coral/20 rounded-2xl p-8 my-12 shadow-lg border border-orange/20">
                 <h2 className="text-3xl font-bold text-primary mb-6 font-display flex items-center">
                   <Star className="mr-3 text-orange" />
-                  Historien bakom Sommarboosten
+                  Historien bakom Program Name
                 </h2>
                 <p>
                   Det började egentligen med min egen frustration. Som fyrbarnsmamma märkte jag att sommaren alltid blev den tid då allt "gick åt helvete" hälsomässigt.
@@ -116,15 +116,15 @@ const FirstArticlePage = () => {
 
               <section className="bg-gradient-to-br from-coral/10 to-purple/20 rounded-2xl p-8 my-12 border border-coral/20">
                 <h2 className="text-3xl font-bold text-primary mb-6 font-display">
-                  Vad som fortfarande gör Sommarboosten unik
+                  Vad som fortfarande gör Program Name unik
                 </h2>
                 <p>
-                  Men även om jag är glad att andra följer efter, så vet jag att Sommarboosten fortfarande är något alldeles speciellt. För när du har fem års erfarenhet av att hjälpa tusentals människor genom just denna utmaning, så lär du dig saker som andra inte vet än.
+                  Men även om jag är glad att andra följer efter, så vet jag att Program Name fortfarande är något alldeles speciellt. För när du har fem års erfarenhet av att hjälpa tusentals människor genom just denna utmaning, så lär du dig saker som andra inte vet än.
                 </p>
                 
                 <h3 className="text-xl font-bold text-green-800 mt-6 mb-3">Vi började från grunden</h3>
                 <p>
-                  Sommarboosten är inte ett vanligt träningsprogram som "anpassats för sommaren." Det är byggt från grunden för sommarens unika utmaningar: semesterresor, spontana planer, barn hemma från skolan, varmt väder, festivaler, grillkvällar.
+                  Program Name är inte ett vanligt träningsprogram som "anpassats för sommaren." Det är byggt från grunden för sommarens unika utmaningar: semesterresor, spontana planer, barn hemma från skolan, varmt väder, festivaler, grillkvällar.
                 </p>
                 
                 <h3 className="text-xl font-bold text-green-800 mt-6 mb-3">Vi förstår den psykologiska biten</h3>
@@ -141,7 +141,7 @@ const FirstArticlePage = () => {
               <section className="bg-gradient-to-br from-purple/10 to-orange/20 rounded-2xl p-8 my-12 border border-purple/20">
                 <h2 className="text-3xl font-bold text-primary mb-6 font-display flex items-center">
                   <Heart className="mr-3 text-purple" />
-                  Till dig som funderar på Sommarboosten
+                  Till dig som funderar på Program Name
                 </h2>
                 <p>
                   Du behöver inte välja oss för att vi var först. Du ska välja oss för att vi fortfarande är bäst på det vi gör.
@@ -166,7 +166,7 @@ const FirstArticlePage = () => {
                     🏆 ORIGINALET SEDAN 2020 🏆
                   </h2>
                   <p className="mb-6 opacity-90">
-                    Bli en del av det ursprungliga sommarträningsprogrammet och upptäck varför tusentals människor väljer Sommarboosten år efter år.
+                    Bli en del av det ursprungliga sommarträningsprogrammet och upptäck varför tusentals människor väljer Program Name år efter år.
                   </p>
                   <div className="space-y-4">
                     <Link to="/quiz">
@@ -174,9 +174,9 @@ const FirstArticlePage = () => {
                         Gör vårt quiz först
                       </Button>
                     </Link>
-                    <Link to="/om-sommarboosten">
+                    <Link to="/om-program-name">
                       <Button variant="outline" className="border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-xl font-semibold text-lg">
-                        Läs mer om Sommarboosten
+                        Läs mer om Program Name
                       </Button>
                     </Link>
                   </div>
@@ -185,9 +185,9 @@ const FirstArticlePage = () => {
 
               <footer className="text-center pt-8 border-t border-green-200">
                 <p className="font-text italic">
-                  Följ oss på @sundochstark - pionjärerna inom sommarträning sedan 2020.<br />
+                  Följ oss på @yoursite - pionjärerna inom sommarträning sedan 2020.<br />
                   Kram,<br />
-                  Charlotte
+                  Instructor Name
                 </p>
               </footer>
             </div>

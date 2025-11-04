@@ -28,14 +28,14 @@ const HabitsArticlePage = () => {
                 Vanor som håller hela livet
               </h1>
               <p className="text-base md:text-lg text-green-700 italic font-text mb-6 md:mb-8 px-2">
-                Av Charlotte Steinwig
+                Av Instructor Name Steinwig
               </p>
               
               {/* Hero Image with better accessibility */}
               <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-xl md:shadow-2xl mb-6 md:mb-8 mx-2 md:mx-0">
                 <img 
                   src="/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png" 
-                  alt="Charlotte vid vattnet med ett naturligt leende - representation av hållbara vanor och livsstilsförändringar"
+                  alt="Instructor Name vid vattnet med ett naturligt leende - representation av hållbara vanor och livsstilsförändringar"
                   className="w-full h-64 md:h-96 object-cover object-center"
                   style={{ objectPosition: '50% 30%' }}
                 />
@@ -46,7 +46,7 @@ const HabitsArticlePage = () => {
             <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-12">
               <div className="prose prose-lg max-w-none font-text text-green-800 space-y-6 md:space-y-8">
                 <div className="text-lg md:text-xl leading-relaxed">
-                  <p>"Charlotte, jag har börjat om så många gånger. Varför slutar jag alltid efter några veckor?"</p>
+                  <p>"Instructor Name, jag har börjat om så många gånger. Varför slutar jag alltid efter några veckor?"</p>
                 </div>
 
                 <p className="text-base md:text-lg">
@@ -277,9 +277,9 @@ const HabitsArticlePage = () => {
                           Bygg dina vanor i sommar
                         </Button>
                       </Link>
-                      <Link to="/om-sommarboosten">
+                      <Link to="/om-program-name">
                         <Button variant="outline" className="border-coral text-coral hover:bg-coral hover:text-white font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 w-full md:w-auto">
-                          Läs mer om Sommarboosten
+                          Läs mer om Program Name
                         </Button>
                       </Link>
                     </div>
@@ -290,7 +290,7 @@ const HabitsArticlePage = () => {
                   <p className="font-text italic text-green-700 text-base md:text-lg px-2">
                     För vanor är inte något du gör. Vanor är någon du blir.<br /><br />
                     Kram,<br />
-                    Charlotte
+                    Instructor Name
                   </p>
                 </footer>
               </div>

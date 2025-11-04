@@ -42,7 +42,7 @@ export const HemligProblemSection: React.FC = () => {
           
           <div className="text-center bg-gradient-to-r from-green-100 to-green-200 p-6 rounded-2xl">
             <p className="text-lg text-green-800 font-semibold">
-              <strong>Om du nickade ja till något av detta</strong> – då är Sommarboosten skapad för dig.
+              <strong>Om du nickade ja till något av detta</strong> – då är Program Name skapad för dig.
             </p>
           </div>
         </div>

@@ -11,7 +11,7 @@ export const FinalCTA = () => {
     "Daglig motivation och pepp direkt i appen",
     "Tillgång till en fantastisk gemenskap",
     "Verktyg för att följa din utveckling",
-    "Charlotte ger personlig inspiration i fickan"
+    "Instructor Name ger personlig inspiration i fickan"
   ];
 
   const handleQuizClick = () => {
@@ -29,7 +29,7 @@ export const FinalCTA = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-green-50/95 via-green-100/90 to-green-200/85 z-10"></div>
         <img 
           src="/lovable-uploads/7eeaadd6-cfbf-4f28-8d1c-4c9222ab292a.png" 
-          alt="Sommarboosten community" 
+          alt="Program Name community" 
           className="w-full h-full object-cover object-center"
           style={{ objectPosition: 'center 30%' }}
         />

@@ -123,7 +123,7 @@ const ProgramYearPage = () => {
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-black text-primary mb-6 font-display tracking-tight">
-            Sommarboosten {programYear}
+            Program Name {programYear}
           </h1>
           
           {isPastYear && (
@@ -194,7 +194,7 @@ const ProgramYearPage = () => {
         <div className="text-center">
           <div className="bg-white rounded-2xl p-8 shadow-lg max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold text-primary mb-4 font-display">
-              Vad ingår i Sommarboosten {programYear}?
+              Vad ingår i Program Name {programYear}?
             </h2>
             <div className="space-y-4 text-left">
               <div className="flex items-center space-x-3">

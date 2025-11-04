@@ -34,7 +34,7 @@ const Index = () => {
       <LaunchTimer testMode={testMode} testDate={testDate} />
       <Hero />
       <LifestyleGallery />
-      <LifestyleToCharlotteTransition 
+      <LifestyleToCharlotteTransition
         testMode={testMode}
         testDate={testDate}
         onRegistrationClick={handleRegistrationClick}

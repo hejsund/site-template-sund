@@ -4,7 +4,7 @@ import { Star, Quote } from 'lucide-react';
 const testimonials = [
   {
     name: "Lina",
-    text: "Tack Charlotte för att du visar att det kan vara enkelt och kul! Jag njuter mer än någonsin.",
+    text: "Tack Instructor Name för att du visar att det kan vara enkelt och kul! Jag njuter mer än någonsin.",
     rating: 5,
     highlight: "Njuter mer än någonsin"
   },
@@ -28,7 +28,7 @@ const testimonials = [
   },
   {
     name: "Sofie",
-    text: "Jag trodde inte jag var en 'tränings-person', men nu ser jag fram emot mina pass. Charlotte gör allt så tillgängligt.",
+    text: "Jag trodde inte jag var en 'tränings-person', men nu ser jag fram emot mina pass. Instructor Name gör allt så tillgängligt.",
     rating: 5,
     highlight: "Ser fram emot träningen"
   },
@@ -49,7 +49,7 @@ export const Testimonials = () => {
             Vad säger de som redan varit med? 💚
           </h2>
           <p className="text-xl text-green-700 max-w-3xl mx-auto">
-            Äkta berättelser från riktiga människor som skapat sin bästa sommar med Sund & Stark.
+            Äkta berättelser från riktiga människor som skapat sin bästa sommar med Company Name.
           </p>
         </div>
 

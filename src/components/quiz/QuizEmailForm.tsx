@@ -64,7 +64,7 @@ export const QuizEmailForm = ({
         Vill du ändå ha mer information om programmet?
       </h3>
       <p className="text-blue-700 mb-4">
-        Ange din e-post så skickar vi dig mer information om Sommarboosten.
+        Ange din e-post så skickar vi dig mer information om Program Name.
       </p>
       
       <form onSubmit={onSubmit} className="space-y-4">

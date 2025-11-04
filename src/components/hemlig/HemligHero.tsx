@@ -34,19 +34,19 @@ export const HemligHero: React.FC<HemligHeroProps> = ({
             {/* UPDATED MESSAGING - FOCUSED ON REGISTRATION BEING OPEN */}
             <strong>Anmälan är nu öppen!</strong> Du hittar all information och kan säkra din plats på vår hemsida.
             {/* ORIGINAL MESSAGING (SAVED FOR REFERENCE):
-            <strong>Vill du läsa mer om Sommarboosten?</strong> Du hittar all information på vår hemsida.
+            <strong>Vill du läsa mer om Program Name?</strong> Du hittar all information på vår hemsida.
             */}
             {/* FUTURE UPDATE: "Anmälan är nu öppen! Läs mer och anmäl dig på vår hemsida." */}
           </p>
           <a 
-            href="https://sommarboosten.se" 
+            href="https://program-name.se" 
             className="inline-flex items-center text-green-700 hover:text-green-800 transition-colors font-semibold underline hover:no-underline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Säkra din plats på sommarboosten.se
+            Säkra din plats på program-name.se
             {/* ORIGINAL LINK TEXT (SAVED FOR REFERENCE):
-            Läs mer på sommarboosten.se
+            Läs mer på program-name.se
             */}
             <ArrowRight className="ml-2 w-4 h-4" />
           </a>

@@ -9,7 +9,7 @@ const faqs = [
   },
   {
     question: "Passar programmet mig som nybörjare?",
-    answer: "Absolut! Sommarboosten är designad för alla nivåer. Det finns träningspass både för dig som är nybörjare och för dig med stor träningsvana. Du bestämmer själv din träningsmängd varje vecka."
+    answer: "Absolut! Program Name är designad för alla nivåer. Det finns träningspass både för dig som är nybörjare och för dig med stor träningsvana. Du bestämmer själv din träningsmängd varje vecka."
   },
   {
     question: "Hur mycket tid behöver jag avsätta?",
@@ -82,10 +82,10 @@ export const FAQ = () => {
               Har du andra frågor? Vi älskar att höra från dig!
             </p>
             <a 
-              href="mailto:hej@sundochstark.se" 
+              href="mailto:hej@yoursite.se" 
               className="text-primary font-medium hover:text-primary/80 transition-colors"
             >
-              📧 hej@sundochstark.se
+              📧 hej@yoursite.se
             </a>
           </div>
         </div>

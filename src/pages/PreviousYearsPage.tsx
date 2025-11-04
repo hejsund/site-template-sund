@@ -13,7 +13,7 @@ const PreviousYearsPage = () => {
     return {
       rating: 4.8 + (Math.random() * 0.2),
       highlights: [
-        `${year === currentYear ? 'Pågående' : 'Genomförd'} Sommarboosten`,
+        `${year === currentYear ? 'Pågående' : 'Genomförd'} Program Name`,
         'Nya roliga recept varje vecka',
         'Fokus på hållbara vanor',
         'Inspiration och stöd'
@@ -26,11 +26,11 @@ const PreviousYearsPage = () => {
       <div className="max-w-6xl mx-auto px-6 py-20">
         <div className="text-center mb-20">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-primary mb-8 font-display">
-            Tidigare års Sommarboosten
+            Tidigare års Program Name
           </h1>
           <p className="text-xl text-green-700 max-w-3xl mx-auto font-text leading-relaxed">
             Se hur programmet har utvecklats genom åren. 
-            Varje år blir Sommarboosten bättre baserat på deltagarnas feedback!
+            Varje år blir Program Name bättre baserat på deltagarnas feedback!
           </p>
         </div>
 
@@ -46,7 +46,7 @@ const PreviousYearsPage = () => {
                     <Calendar className="w-8 h-8 text-white" />
                   </div>
                   <h2 className="text-2xl font-bold text-primary mb-3 font-display">
-                    Sommarboosten {year}
+                    Program Name {year}
                   </h2>
                   {isCurrent && (
                     <span className="bg-coral text-white px-3 py-1 rounded-full text-sm font-medium">

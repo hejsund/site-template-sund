@@ -59,7 +59,7 @@ export const LifestyleToCharlotteTransition = ({
             
             <p className="text-sm text-green-600 opacity-80">
               <Clock className="w-4 h-4 inline mr-1" />
-              Läs mer om Charlotte och hennes expertis nedan
+              Läs mer om Instructor Name och hennes expertis nedan
             </p>
           </div>
         </div>

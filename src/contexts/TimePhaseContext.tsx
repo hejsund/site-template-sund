@@ -53,7 +53,7 @@ export const TimePhaseProvider: React.FC<{ children: ReactNode }> = ({ children 
       return {
         phase: 'registration-open',
         year,
-        title: `Sommarboosten ${year}`,
+        title: `Program Name ${year}`,
         description: 'Anmälan pågår nu!',
         ctaText: 'Anmäl dig nu',
         seasonText: season,
@@ -65,7 +65,7 @@ export const TimePhaseProvider: React.FC<{ children: ReactNode }> = ({ children 
       return {
         phase: 'registration-closed',
         year,
-        title: `Sommarboosten ${year}`,
+        title: `Program Name ${year}`,
         description: 'Anmälan är stängd - programmet pågår',
         ctaText: 'Se nästa års program',
         seasonText: season,
@@ -77,7 +77,7 @@ export const TimePhaseProvider: React.FC<{ children: ReactNode }> = ({ children 
       return {
         phase: 'collect-interest',
         year: year + 1,
-        title: `Sommarboosten ${year + 1}`,
+        title: `Program Name ${year + 1}`,
         description: `Anmäl ditt intresse för ${year + 1}`,
         ctaText: 'Anmäl intresse',
         seasonText: season,
@@ -90,7 +90,7 @@ export const TimePhaseProvider: React.FC<{ children: ReactNode }> = ({ children 
         return {
           phase: 'watch-out',
           year,
-          title: `Sommarboosten ${year}`,
+          title: `Program Name ${year}`,
           description: 'Håll utkik - anmälan öppnar snart!',
           ctaText: 'Påminn mig',
           seasonText: season,
@@ -100,7 +100,7 @@ export const TimePhaseProvider: React.FC<{ children: ReactNode }> = ({ children 
         return {
           phase: 'opening-soon',
           year,
-          title: `Sommarboosten ${year}`,
+          title: `Program Name ${year}`,
           description: 'Anmälan öppnar snart!',
           ctaText: 'Påminn mig',
           seasonText: season,
@@ -112,7 +112,7 @@ export const TimePhaseProvider: React.FC<{ children: ReactNode }> = ({ children 
     return {
       phase: 'collect-email',
       year,
-      title: `Sommarboosten ${year}`,
+      title: `Program Name ${year}`,
       description: `Gör denna ${season} till din bästa någonsin!`,
       ctaText: 'Säkra din plats',
       seasonText: season,

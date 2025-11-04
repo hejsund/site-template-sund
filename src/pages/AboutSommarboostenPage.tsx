@@ -23,7 +23,7 @@ const AboutSommarboostenPage = () => {
         .from('sb_home_page_leads')
         .insert({
           email: email,
-          source: 'about_sommarboosten',
+          source: 'about_program-name',
           ip_address: null,
           user_agent: navigator.userAgent,
         });
@@ -58,7 +58,7 @@ const AboutSommarboostenPage = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="mb-8">
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-gradient mb-6 font-display leading-tight">
-              Vad är Sommarboosten?
+              Vad är Program Name?
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-green-700 max-w-3xl mx-auto leading-relaxed font-text mb-8">
               En 6-veckors resa mot en sundare, starkare och gladare version av dig själv. 
@@ -82,7 +82,7 @@ const AboutSommarboostenPage = () => {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-green-700 leading-relaxed font-text mb-6">
-                Sommarboosten är inte bara ett träningsprogram – det är en komplett livsstilsförändring 
+                Program Name är inte bara ett träningsprogram – det är en komplett livsstilsförändring 
                 som gör hälsa till en naturlig del av din vardag. Under 6 veckor får du verktyg, 
                 inspiration och stöd för att skapa varaktiga vanor som håller hela året.
               </p>
@@ -98,7 +98,7 @@ const AboutSommarboostenPage = () => {
               <div className="flex items-center gap-3 mb-6">
                 <Target className="text-purple w-8 h-8" />
                 <h2 className="text-2xl sm:text-3xl font-black text-gradient font-display">
-                  Vad ingår i Sommarboosten?
+                  Vad ingår i Program Name?
                 </h2>
               </div>
               
@@ -142,7 +142,7 @@ const AboutSommarboostenPage = () => {
                     <h3 className="text-lg font-bold text-orange font-display">Personlig coaching</h3>
                   </div>
                   <p className="text-sm text-green-700 font-text leading-relaxed">
-                    Veckovis guidning från Charlotte med tips, motivation och svar på 
+                    Veckovis guidning från Instructor Name med tips, motivation och svar på 
                     dina frågor. Du är aldrig ensam på din resa.
                   </p>
                 </div>
@@ -159,7 +159,7 @@ const AboutSommarboostenPage = () => {
               </div>
               <div className="bg-gradient-to-r from-coral/10 via-purple/10 to-orange/15 p-6 sm:p-8 rounded-2xl border border-coral/30">
                 <p className="text-base sm:text-lg text-green-700 leading-relaxed font-text mb-6">
-                  Vi tror på att hälsa ska vara lustfyllt, inte krångligt. Sommarboosten bygger på enkla, 
+                  Vi tror på att hälsa ska vara lustfyllt, inte krångligt. Program Name bygger på enkla, 
                   hållbara vanor som passar in i ditt verkliga liv. Inga extremer, inga omöjliga mål – 
                   bara små steg som leder till stora förändringar.
                 </p>
@@ -220,7 +220,7 @@ const AboutSommarboostenPage = () => {
                   Redo att börja din resa? 🌟
                 </h3>
                 <p className="text-sm sm:text-base mb-6 text-green-700 font-text">
-                  Anmäl ditt intresse så hör vi av oss när nästa Sommarboosten startar!
+                  Anmäl ditt intresse så hör vi av oss när nästa Program Name startar!
                 </p>
                 
                 <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto space-y-3 sm:space-y-0 sm:flex sm:gap-3">

@@ -8,7 +8,7 @@ export const HemligSolutionSection: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-3xl p-10 shadow-2xl">
           <h2 className="text-4xl font-bold text-green-800 mb-8 font-display text-center">
-            Din lösning: Sommarboosten
+            Din lösning: Program Name
           </h2>
           
           <p className="text-xl text-green-700 text-center mb-10 font-text leading-relaxed">
@@ -51,7 +51,7 @@ export const HemligSolutionSection: React.FC = () => {
           
           <div className="text-center">
             <p className="text-green-700 font-text mb-6">
-              Vill du läsa mer om upplägget? <a href="https://sommarboosten.se" className="text-green-600 underline hover:no-underline font-semibold" target="_blank" rel="noopener noreferrer">Läs mer på sommarboosten.se</a>
+              Vill du läsa mer om upplägget? <a href="https://program-name.se" className="text-green-600 underline hover:no-underline font-semibold" target="_blank" rel="noopener noreferrer">Läs mer på program-name.se</a>
             </p>
           </div>
         </div>

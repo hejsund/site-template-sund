@@ -19,7 +19,7 @@ export const HemligLinksSection: React.FC<HemligLinksSectionProps> = ({ totalRem
             <div className="bg-white/5 rounded-xl p-6">
               <h3 className="text-xl font-semibold mb-3 font-display text-white">🏠 Utforska vår hemsida</h3>
               <p className="text-green-200 mb-4 font-text">
-                Läs mer om våra program, artiklar och Charlotte bakom Sommarboosten.
+                Läs mer om våra program, artiklar och Instructor Name bakom Program Name.
               </p>
               <a 
                 href="/" 
@@ -33,7 +33,7 @@ export const HemligLinksSection: React.FC<HemligLinksSectionProps> = ({ totalRem
             </div>
             
             <div className="bg-white/5 rounded-xl p-6">
-              <h3 className="text-xl font-semibold mb-3 font-display text-white">🌟 Sund & Stark</h3>
+              <h3 className="text-xl font-semibold mb-3 font-display text-white">🌟 Company Name</h3>
               <p className="text-green-200 mb-4 font-text">
                 Upptäck fler program och resurser för en hållbar hälsa.
               </p>

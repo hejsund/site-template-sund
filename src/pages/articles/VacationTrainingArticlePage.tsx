@@ -105,7 +105,7 @@ const VacationTrainingArticlePage = () => {
             
             <div className="prose prose-lg max-w-none">
               <p className="lead text-green-700 font-text">
-                "Men Charlotte, jag ska väl inte träna på semestern? Det är ju min lediga tid!"
+                "Men Instructor Name, jag ska väl inte träna på semestern? Det är ju min lediga tid!"
               </p>
               
               <p>
@@ -170,7 +170,7 @@ const VacationTrainingArticlePage = () => {
                 </div>
               </div>
 
-              <h2>Filosofin bakom Sommarboosten-semesterträning</h2>
+              <h2>Filosofin bakom Program Name-semesterträning</h2>
               
               <p>
                 När vi utvecklade semesterkonceptet utgick vi från en enkel fråga: <strong>Vad är det minsta du kan göra för att komma hem och känna dig stark, energisk och glad?</strong>
@@ -269,9 +269,9 @@ const VacationTrainingArticlePage = () => {
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten">
+            <Link to="/om-program-name">
               <Button variant="outline" className="border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white px-8 py-3 rounded-xl font-semibold">
-                Läs mer om Sommarboosten
+                Läs mer om Program Name
               </Button>
             </Link>
           </div>

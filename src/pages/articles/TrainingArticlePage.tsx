@@ -37,14 +37,14 @@ const TrainingArticlePage = () => {
               Sommarträning som du faktiskt längtar efter
             </h1>
             <p className="text-lg text-green-700 italic font-text mb-8">
-              Av Charlotte Steinwig
+              Av Instructor Name Steinwig
             </p>
             
             {/* Hero Image */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-8 aspect-[5/4]">
               <img 
                 src="/lovable-uploads/b421d335-bc7b-4b5b-8e07-edd16ebbb404.png" 
-                alt="Charlotte tränar utomhus med ett stort leende - sommarglädje och träning"
+                alt="Instructor Name tränar utomhus med ett stort leende - sommarglädje och träning"
                 className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -53,7 +53,7 @@ const TrainingArticlePage = () => {
 
           <div className="prose prose-lg max-w-none font-text text-green-800 space-y-8">
             <div className="text-xl leading-relaxed">
-              <p>"Men Charlotte, hur ska jag få till träningen i sommar när jag inte har tillgång till gymmet?"</p>
+              <p>"Men Instructor Name, hur ska jag få till träningen i sommar när jag inte har tillgång till gymmet?"</p>
             </div>
 
             <p className="text-lg leading-relaxed">
@@ -96,7 +96,7 @@ const TrainingArticlePage = () => {
                 <div className="aspect-[5/4] mb-4">
                   <img 
                     src="/lovable-uploads/c5f0a385-0490-44d7-abc2-0aede77986a4.png" 
-                    alt="Charlotte ler vid vattnet - naturlig sommarglädje och energi"
+                    alt="Instructor Name ler vid vattnet - naturlig sommarglädje och energi"
                     className="w-full h-full object-cover object-top rounded-xl"
                   />
                 </div>
@@ -110,7 +110,7 @@ const TrainingArticlePage = () => {
                 <div className="aspect-[5/4] mb-4">
                   <img 
                     src="/lovable-uploads/fa62a6e9-56ca-4997-8b40-17604a32e215.png" 
-                    alt="Charlotte hemma i vardagen - träning som passar in i livet"
+                    alt="Instructor Name hemma i vardagen - träning som passar in i livet"
                     className="w-full h-full object-cover object-top rounded-xl"
                   />
                 </div>
@@ -202,9 +202,9 @@ const TrainingArticlePage = () => {
                     Ta vårt quiz - hitta din väg
                   </Button>
                 </Link>
-                <Link to="/om-sommarboosten">
+                <Link to="/om-program-name">
                   <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold text-lg px-8 py-4">
-                    Läs mer om Sommarboosten
+                    Läs mer om Program Name
                   </Button>
                 </Link>
               </div>
@@ -213,7 +213,7 @@ const TrainingArticlePage = () => {
             <footer className="text-center pt-8 border-t border-green-200">
               <p className="font-text italic text-green-700">
                 Kram,<br />
-                Charlotte
+                Instructor Name
               </p>
             </footer>
           </div>

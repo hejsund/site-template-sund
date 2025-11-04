@@ -35,7 +35,7 @@ export const VideoModal = ({ isOpen, onClose }: VideoModalProps) => {
                 className="absolute top-0 left-0 w-full h-full border-none"
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
                 allowFullScreen
-                title="Charlotte välkomnar dig till Sommarboosten"
+                title="Instructor Name välkomnar dig till Program Name"
               />
             </div>
           </div>

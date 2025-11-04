@@ -78,7 +78,7 @@ const NutritionArticlePage = () => {
               Sommarmys utan dåligt samvete
             </h1>
             <p className="text-lg text-green-700 italic font-text mb-8">
-              Av Charlotte Steinwig
+              Av Instructor Name Steinwig
             </p>
             
             {/* Hero Image */}
@@ -94,7 +94,7 @@ const NutritionArticlePage = () => {
 
           <div className="prose prose-lg max-w-none font-text text-green-800 space-y-8">
             <div className="text-xl leading-relaxed">
-              <p>"Charlotte, kan jag verkligen äta glass med barnen varje dag på semestern och ändå må bra?"</p>
+              <p>"Instructor Name, kan jag verkligen äta glass med barnen varje dag på semestern och ändå må bra?"</p>
               <p><strong>Ja. Du kan.</strong></p>
             </div>
 
@@ -191,7 +191,7 @@ const NutritionArticlePage = () => {
                 Inga förbud - så funkar det på riktigt
               </h2>
               <p className="text-lg mb-6">
-                "Men Charlotte, om jag inte förbjuder mig saker så äter jag bara skräpmat..."
+                "Men Instructor Name, om jag inte förbjuder mig saker så äter jag bara skräpmat..."
               </p>
               <p className="mb-6">
                 Jag hör dig. Och jag förstår din rädsla. Men här är det som är sant: <strong>Förbud skapar begär.</strong>
@@ -259,7 +259,7 @@ const NutritionArticlePage = () => {
                   Här är hemligheten: Hälsosam mat behöver inte smaka som kartong.
                 </h3>
                 <p className="text-center text-green-700">
-                  När jag säger "över 50 smarriga sommarrecept" i Sommarboosten så menar jag verkligen smarriga. 
+                  När jag säger "över 50 smarriga sommarrecept" i Program Name så menar jag verkligen smarriga. 
                   Mat som barnen äter utan protester, du längtar efter att laga, och gästerna blir imponerade av.
                 </p>
               </div>
@@ -282,9 +282,9 @@ const NutritionArticlePage = () => {
                     Upptäck din matglädje
                   </Button>
                 </Link>
-                <Link to="/om-sommarboosten">
+                <Link to="/om-program-name">
                   <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold text-lg px-8 py-4">
-                    Läs mer om Sommarboosten
+                    Läs mer om Program Name
                   </Button>
                 </Link>
               </div>
@@ -293,7 +293,7 @@ const NutritionArticlePage = () => {
             <footer className="text-center pt-8 border-t border-green-200">
               <p className="font-text italic text-green-700">
                 Kram,<br />
-                Charlotte
+                Instructor Name
               </p>
             </footer>
           </div>

@@ -15,7 +15,7 @@ export const CookieMainView: React.FC<CookieMainViewProps> = ({
       {/* Logo */}
       <div className="mb-6">
         <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl bg-gradient-to-r from-green-800 to-green-600 bg-clip-text text-transparent">
-          Sommarboosten
+          Program Name
         </h1>
       </div>
       

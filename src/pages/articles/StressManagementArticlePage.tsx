@@ -91,7 +91,7 @@ const StressManagementArticlePage = () => {
             
             <div className="prose prose-lg prose-green max-w-none">
               <p className="text-xl text-green-700 font-text font-medium mb-8 italic border-l-4 border-indigo-400 pl-6 bg-indigo-50 p-6 rounded-lg">
-                "Men Charlotte, jag blir ju mer stressad av att träna på semestern! Jag ska väl slappa av?"
+                "Men Instructor Name, jag blir ju mer stressad av att träna på semestern! Jag ska väl slappa av?"
               </p>
               
               <p className="text-lg mb-6 leading-relaxed">
@@ -307,9 +307,9 @@ const StressManagementArticlePage = () => {
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten">
+            <Link to="/om-program-name">
               <Button variant="outline" className="border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors">
-                Läs mer om Sommarboosten
+                Läs mer om Program Name
               </Button>
             </Link>
           </div>

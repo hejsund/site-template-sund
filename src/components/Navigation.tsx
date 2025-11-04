@@ -20,7 +20,7 @@ export const Navigation = () => {
     {
       title: 'Program',
       items: [
-        { name: `Sommarboosten ${currentYear}`, href: `/program/${currentYear}`, icon: Trophy },
+        { name: `Program Name ${currentYear}`, href: `/program/${currentYear}`, icon: Trophy },
         { name: 'Tidigare år', href: '/tidigare-ar', icon: Calendar },
       ]
     },
@@ -42,8 +42,8 @@ export const Navigation = () => {
     {
       title: 'Om oss',
       items: [
-        { name: 'Om Sommarboosten', href: '/om-sommarboosten', icon: Users },
-        { name: 'Charlotte Steinwig', href: '/om-charlotte', icon: Users },
+        { name: 'Om Program Name', href: '/om-program-name', icon: Users },
+        { name: 'Instructor Name', href: '/om-charlotte', icon: Users },
         { name: 'Så här började det', href: '/sa-har-borjade-det', icon: Clock },
       ]
     }
@@ -56,7 +56,7 @@ export const Navigation = () => {
           {/* Updated Logo - Text only */}
           <Link to="/" className="flex items-center space-x-2" onClick={handleLinkClick}>
             <span className="font-display font-black text-green-800 text-xl tracking-tight">
-              Sommarboosten
+              Program Name
             </span>
           </Link>
 

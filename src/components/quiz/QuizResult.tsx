@@ -108,7 +108,7 @@ export const QuizResult = ({
                   <li>📱 Alla pass direkt i mobilen</li>
                   <li>⏰ Påminnelser som faktiskt motiverar</li>
                   <li>📊 Känn att du blir starkare</li>
-                  <li>💬 Inspo med Charlotte när du behöver stöd</li>
+                  <li>💬 Inspo med Instructor Name när du behöver stöd</li>
                 </ul>
               </div>
 
@@ -120,8 +120,8 @@ export const QuizResult = ({
                 </p>
                 <p className="text-sm text-blue-700">
                   Har du inte fått din rabattkod? Mejla oss på{' '}
-                  <a href="mailto:hej@sundochstark.se" className="font-semibold underline hover:no-underline">
-                    hej@sundochstark.se
+                  <a href="mailto:hej@yoursite.se" className="font-semibold underline hover:no-underline">
+                    hej@yoursite.se
                   </a>
                 </p>
               </div>

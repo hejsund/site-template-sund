@@ -53,10 +53,10 @@ const AboutCharlottePage = () => {
             <div className="space-y-8">
               <div>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-primary mb-6 font-display">
-                  Charlotte Steinwig
+                  Instructor Name
                 </h1>
                 <p className="text-xl text-green-700 mb-6 font-text">
-                  Grundare av Sommarboosten och mamma till fyra barn som hjälper familjer hitta balans mellan hälsa och vardagslivets krav.
+                  Grundare av Program Name och mamma till fyra barn som hjälper familjer hitta balans mellan hälsa och vardagslivets krav.
                 </p>
                 <div className="flex items-center space-x-6">
                   <a 
@@ -66,14 +66,14 @@ const AboutCharlottePage = () => {
                     className="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
                   >
                     <Instagram className="w-5 h-5" />
-                    <span className="font-medium">@sundochstark</span>
+                    <span className="font-medium">@yoursite</span>
                   </a>
                   <a 
-                    href="mailto:hej@sundochstark.se" 
+                    href="mailto:hej@yoursite.se" 
                     className="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
                   >
                     <Mail className="w-5 h-5" />
-                    <span className="font-medium">Kontakta Charlotte</span>
+                    <span className="font-medium">Contact Instructor</span>
                   </a>
                 </div>
               </div>
@@ -82,9 +82,9 @@ const AboutCharlottePage = () => {
             {/* Image */}
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/lovable-uploads/6bb7e8eb-6f49-4320-b6f0-0eff7cd5f49a.png" 
-                  alt="Charlotte Steinwig"
+                <img
+                  src="/lovable-uploads/6bb7e8eb-6f49-4320-b6f0-0eff7cd5f49a.png"
+                  alt="Instructor Name"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -118,7 +118,7 @@ const AboutCharlottePage = () => {
                   i vårt redan packade familjeliv.
                 </p>
                 <p>
-                  Sommarboosten föddes ur denna insikt - att hälsa inte behöver vara komplicerat eller 
+                  Program Name föddes ur denna insikt - att hälsa inte behöver vara komplicerat eller 
                   extremt för att vara effektivt. Det handlar om att hitta glädje i rörelse, njutning i mat 
                   och balans i vardagen.
                 </p>
@@ -217,7 +217,7 @@ const AboutCharlottePage = () => {
                   Vill du komma i kontakt? 🌟
                 </h3>
                 <p className="text-green-700 font-text mb-6">
-                  Anmäl ditt intresse för Sommarboosten eller ställ en fråga direkt till mig!
+                  Anmäl ditt intresse för Program Name eller ställ en fråga direkt till mig!
                 </p>
                 
                 <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto space-y-4 sm:flex sm:space-y-0 sm:gap-3">

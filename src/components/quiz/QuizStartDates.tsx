@@ -109,7 +109,7 @@ export const QuizStartDates = ({ testMode = false, testDate, onDateCardCTA }: Qu
           Välj din startdag - Perfekt matchning! 🎯
         </h3>
         <p className="text-sm text-green-700 opacity-80 font-text">
-          Baserat på dina svar passar du perfekt för Sommarboosten
+          Baserat på dina svar passar du perfekt för Program Name
         </p>
       </div>
       

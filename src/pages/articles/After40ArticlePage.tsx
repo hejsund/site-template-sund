@@ -63,7 +63,7 @@ const After40ArticlePage = () => {
             
             <div className="prose prose-lg max-w-none">
               <p className="lead text-green-700 font-text">
-                "Men Charlotte, är det inte för sent för mig att börja? Jag fyller snart 45 och har aldrig varit sportig..."
+                "Men Instructor Name, är det inte för sent för mig att börja? Jag fyller snart 45 och har aldrig varit sportig..."
               </p>
               
               <p>
@@ -71,7 +71,7 @@ const After40ArticlePage = () => {
               </p>
               
               <p>
-                Som 40+ själv och grundare av Sund och Stark har jag inte bara levt den här resan själv - jag har hjälpt hundratals kvinnor och män över 40 att upptäcka att deras bästa tid faktiskt kan komma NU.
+                Som 40+ själv och grundare av Company Name har jag inte bara levt den här resan själv - jag har hjälpt hundratals kvinnor och män över 40 att upptäcka att deras bästa tid faktiskt kan komma NU.
               </p>
 
               <div className="bg-red-50 border-l-4 border-red-400 p-6 my-8 rounded-lg">
@@ -280,9 +280,9 @@ const After40ArticlePage = () => {
                 Ta vårt quiz
               </Button>
             </Link>
-            <Link to="/om-sommarboosten">
+            <Link to="/om-program-name">
               <Button variant="outline" className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3 rounded-xl font-semibold">
-                Läs mer om Sommarboosten
+                Läs mer om Program Name
               </Button>
             </Link>
           </div>

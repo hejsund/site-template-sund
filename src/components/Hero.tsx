@@ -41,9 +41,9 @@ export const Hero = () => {
       {/* Enhanced summer background with better mobile positioning */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-green-50/90 via-green-100/85 to-green-200/80 z-10"></div>
-        <img 
-          src="/lovable-uploads/c2e01a19-6725-4264-b55c-620731d63025.png" 
-          alt="Sommarboosten lifestyle" 
+        <img
+          src="/lovable-uploads/c2e01a19-6725-4264-b55c-620731d63025.png"
+          alt="Program lifestyle background"
           className="w-full h-full object-cover object-center sm:object-center"
           style={{ objectPosition: 'center 20%' }}
         />
@@ -58,15 +58,15 @@ export const Hero = () => {
         <div className="relative z-10 px-2 sm:px-0">
           {/* Mobile-optimized main heading with responsive text sizing */}
           <div className="mb-6 sm:mb-8 relative">
-            <h1 className="sr-only">Sommarboosten {currentPhase.year}</h1>
+            <h1 className="sr-only">Program Name {currentPhase.year}</h1>
             <div className="font-black leading-none font-display" aria-hidden="true">
               <span className="text-2xl sm:text-3xl md:text-5xl text-green-600 font-semibold opacity-90 block tracking-widest animate-jumpingBounce pb-3 sm:pb-6 md:pb-8">
                 {currentPhase.year}
               </span>
               <span className="text-gradient block -mt-1 sm:-mt-2 md:-mt-4 leading-none">
-                <span className="block text-[clamp(2.5rem,10vw,6rem)] sm:text-6xl md:text-8xl">Sommarboosten</span>
+                <span className="block text-[clamp(2.5rem,10vw,6rem)] sm:text-6xl md:text-8xl">Program Name</span>
                 <span className="block text-2xl sm:text-3xl md:text-4xl mt-1 sm:mt-2 text-green-700 font-bold">
-                  {hasAvailableStarts ? 'Anmälan är öppen!' : 'Kontakta oss för mer info'}
+                  {hasAvailableStarts ? 'Registration is Open!' : 'Contact us for more info'}
                 </span>
               </span>
             </div>
@@ -75,10 +75,10 @@ export const Hero = () => {
           {/* Launch version subtitle */}
           <div className="mb-6 sm:mb-10 md:mb-12">
             <p className="text-base sm:text-lg md:text-2xl text-green-600 max-w-3xl mx-auto leading-relaxed font-text font-medium px-2">
-              Säkra din plats innan första starten! 6 veckor med träning, näring och glädje som passar dig och ditt liv.
+              Secure your spot before the first start! Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </p>
             <p className="text-sm sm:text-base text-green-600 mt-3 sm:mt-4 opacity-90 font-text">
-              ☀️ {statusText} · Begränsade platser · {hasAvailableStarts ? 'Anmäl dig nu' : 'Kontakta oss'} 🌊
+              ☀️ {statusText} · Limited spots · {hasAvailableStarts ? 'Register now' : 'Contact us'} 🌊
             </p>
           </div>
 
